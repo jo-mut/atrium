@@ -1,0 +1,58 @@
+.landing-page {
+  background-image: url("assets/images/landing-pg-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+
+  .landing-page-color {
+    background-color: rgba(0, 0, 0, 0.94);
+    width: 100%;
+    height: 100vh;
+
+    .gallery-name {
+      color: whitesmoke;
+      text-align: center;
+      padding-top: 15%;
+
+      #atrium {
+        font-size: 4em;
+        margin: 0;
+        font-family: 'Fondamento', cursive;
+      }
+
+      #artz {
+        font-size: 2em;
+        font-family: 'Fondamento', cursive;
+        font-style: bold;
+      }
+
+      .guest {
+        margin-right: 1em;
+        border-radius: 2em;
+        border: solid 2px whitesmoke;
+        background: transparent;
+        color: whitesmoke;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        font-family: 'Fondamento', cursive;
+        font-style: bolder;
+      }
+
+      .sign-in {
+        background-color: white;
+        color: black;
+        margin-left: 1em;
+        border-radius: 2em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        font-family: 'Fondamento', cursive;
+        font-style: bolder;
+      }
+    }
+  }
+}

@@ -92,9 +92,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/font-awesome/scss/font-awesome.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           }
         },
         "lint": {
@@ -123,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "atrium-artz"
+    }
+  },
+  "defaultProject": "atrium-artz",
+  "cli": {
+    "analytics": "d084e70e-119e-474c-83fe-ac7d6716b03c"
+  }
 }

@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+// @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'assets/atrium-styles/atrium-theme';
+@import "~bootstrap/dist/css/bootstrap.css";
+@import 'assets/atrium-styles/body';
+@import 'assets/atrium-styles/home';
+@import 'assets/atrium-styles/main-content';
+@import 'assets/atrium-styles/create';
+@import 'assets/atrium-styles/progress';
+@import 'assets/atrium-styles/navbar';
+@import 'assets/atrium-styles/sidebar';
+@import 'assets/atrium-styles/global';
+@import 'assets/atrium-styles/archives';
+@import 'assets/atrium-styles/sign-in';
+

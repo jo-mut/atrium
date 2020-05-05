@@ -1,0 +1,25 @@
+.custom-navbar {
+    background-color: black;
+    #navbar {
+        background-color: black;
+        color: white;
+        .navbar-toggler {
+            color: white;
+        }
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
+        }
+        li a {
+            color: white;
+        }
+        li a:hover {
+            color: yellow;
+        }
+        .dropdown-menu {
+            max-width: 300px;
+            overflow: hidden;
+        }
+    }
+}

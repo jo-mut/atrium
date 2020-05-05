@@ -1,0 +1,15 @@
+#sidebar {
+    color: white
+    a {
+        color: yellow;
+    }
+    li a:hover {
+        color: yellow;
+    }
+    li:hover {
+        background: yellow;
+    }
+    .sidebar-title {
+        height: 4em;
+    }
+}

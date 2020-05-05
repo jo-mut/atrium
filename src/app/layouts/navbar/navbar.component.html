@@ -1,0 +1,23 @@
+<div class="custom-navbar">
+  <nav class="navbar navbar-expand-sm navbar-dark d-flex flex-row" id="navbar">
+    <p class="active-sidebar-link ml-3"></p>
+    <i class="fa fa-bars mr-3 navbar-toggler d-lg-none" data-toggle="collapse" data-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></i>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['gallery']">Gallery</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['archives']">Archives</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['artists']">Artists</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['sign-in']">Create</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

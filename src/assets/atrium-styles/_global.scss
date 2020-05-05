@@ -1,0 +1,45 @@
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+    background: white;
+    color: white;
+    height: 100%;
+    min-height: 100vh;
+    .sidebar-wrapper {
+        background-color: black;
+        min-height: 100vh;
+        max-height: 100vh;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 11;
+        width: 260px;
+    }
+    .main-panel {
+        width: 100%;
+        flex-grow: 1;
+        // margin-left: 260px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Reversing the behavior of the sidebar:
+    it'll be rotated vertically and off canvas by default,
+    collapsing in on toggle button click with removal of
+    the vertical rotation. */
+    .sidebar-wrapper {
+        margin-left: -260px;
+        transform: rotateY(100deg);
+    }
+    #main-panel {
+        margin-left: 0px;
+        // transform: rotateY(360deg);
+    }
+    #sidebar.active {
+        margin-left: 0;
+        transform: none;
+    }
+}
