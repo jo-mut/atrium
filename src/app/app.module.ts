@@ -13,11 +13,11 @@ import { MainRoutingModule } from './module/main/main-routing.module';
 import { DndDirective } from './dnd.directive';
 import { DbOperationsService } from './services/db-operations.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     DndDirective,
+  
     
   ],
   imports: [

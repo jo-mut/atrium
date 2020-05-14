@@ -5,6 +5,7 @@ export class ArtWork {
     description: string;
     url: string;
     status: string;
+    userId: string;
     width: string;
     height: string;
     updatedAt: string;

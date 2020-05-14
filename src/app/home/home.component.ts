@@ -15,11 +15,11 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToGallery() {
-    this.router.navigateByUrl('/sign-in')
+    this.router.navigateByUrl('/main/exhibitions')
   }
 
   navigateToRegistration() {
-    this.router.navigateByUrl('/sigin-in')
+    this.router.navigateByUrl('auth/sign-in')
   }
 
 

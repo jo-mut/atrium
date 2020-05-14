@@ -29,7 +29,7 @@
 
       .guest {
         margin-right: 1em;
-        border-radius: 2em;
+        border-radius: 1.5em;
         border: solid 2px whitesmoke;
         background: transparent;
         color: whitesmoke;
@@ -41,11 +41,11 @@
         font-style: bolder;
       }
 
-      .sign-in {
+      .redirect-to-sign-in {
         background-color: white;
         color: black;
         margin-left: 1em;
-        border-radius: 2em;
+        border-radius: 1.5em;
         padding-top: 0.5em;
         padding-bottom: 0.5em;
         padding-left: 1em;

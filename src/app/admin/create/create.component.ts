@@ -3,6 +3,7 @@ import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { Observable } from 'rxjs';
 import { ArtWork } from 'src/app/models/artwork';
 import { Upload } from 'src/app/models/upload';
+import { QuerySnapshot, DocumentData } from '@angular/fire/firestore/interfaces';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class CreateComponent implements OnInit {
   files: File[] = [];
   artwork: ArtWork = null;
   uploads: Upload[] = [];
+  artworks: ArtWork[] = [];
 
   constructor(private dbOperations: DbOperationsService) {}
 
@@ -69,14 +71,17 @@ export class CreateComponent implements OnInit {
    * @param files (Files List)
    */
   prepareFilesList(files: File[]) {
-    for (let i = 0; i < files.length; i++) {
-     this.files.push(files[i]);
-    //  this.startUpload(files[i]);
-     console.log(files[i]);
+    for(let file of files) {
+      this.dbOperations.uploadImages(file);
+      let snapshot = this.dbOperations.latestUplaod.percentage;
+      let upload = this.dbOperations.latestUplaod;
+      let work = this.dbOperations.latestArtWork;
+      while(this.isActive(snapshot.percentage)) {
+        this.uploads.push(upload);
+        this.artworks.push(work);
+      }
+
     }
-
-    this.startUpload(files);
-
 
   }
 
@@ -96,13 +101,39 @@ export class CreateComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
-  startUpload(files: File[]) {
-    this.uploads.push(this.dbOperations.uploadImages(files)); 
+  startUpload(file: File) {
+    this.uploads.push(this.dbOperations.uploadImages(file)) 
   }
 
   isActive(snapshot) {
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 
+
+   // Get a list of archived artwork
+   private getArchivedArtWorks() {
+    let artWork = new ArtWork();
+    this.dbOperations.getArchivedArtWorks().get()
+    .toPromise().then((querySnapshot: QuerySnapshot<DocumentData>) => {
+        if (!querySnapshot.empty) {
+          for (const doc of querySnapshot.docs) {
+            artWork.description = doc.data().description;
+            artWork.id = doc.data().id;
+            artWork.title = doc.data().title;
+            artWork.url = doc.data().url;
+            artWork.type = doc.data().type;
+            artWork.createdAt = doc.data().createdAt;
+            artWork.updatedAt = doc.data().updatedAt;
+            artWork.height = doc.data().height;
+            artWork.width = doc.data().width;
+            artWork.status = doc.data().status;   
+            artWork.status = doc.data().status;   
+            this.artworks.push(artWork);    
+          }
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+  }
 
 }

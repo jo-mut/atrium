@@ -4,22 +4,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from 'src/app/auth/forgot-password/forgot-password.component';
 import { SignUpComponent } from 'src/app/auth/sign-up/sign-up.component';
 import { HomeComponent } from 'src/app/home/home.component';
-import { GalleryComponent } from 'src/app/gallery/gallery.component';
 import { FormsModule } from '@angular/forms';
+import { SignInComponent } from 'src/app/auth/sign-in/sign-in.component';
+import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'home', component: HomeComponent,  outlet: 'children'},
-    // {path: 'sign-in', component: SignInComponent},
-    {path: 'guest', component: GalleryComponent,  outlet: 'children'},
-    {path: 'sign-up', component: SignUpComponent,  outlet: 'children'},
-    {path: 'forgot-password', component: ForgotPasswordComponent,  outlet: 'children'}
+    {path: 'home', component: HomeComponent},
+    {path: 'sign-in', component: SignInComponent},
+    {path: 'sign-up', component: SignUpComponent},
+    {path: 'forgot-password', component: ForgotPasswordComponent}
 
 ];
 
 @NgModule({
     imports: [CommonModule, RouterModule.forChild(routes), FormsModule],
-    declarations: [HomeComponent, ForgotPasswordComponent, SignUpComponent],
-    exports: [HomeComponent, ForgotPasswordComponent , SignUpComponent],
+    declarations: [AuthComponent, HomeComponent, ForgotPasswordComponent, SignUpComponent, SignInComponent],
+    exports: [AuthComponent, HomeComponent, ForgotPasswordComponent , SignUpComponent, SignInComponent],
 })
 export class AuthRoutingModule{}

@@ -7,11 +7,11 @@
 
           </div>
           <div class="col-md-3">
-            <div appDnd (fileDropped)="onFileDropped($event)">
+            <!-- <div appDnd (fileDropped)="onFileDropped($event)">
               <input type="file" #fileDropRef id="fileDropRef" multiple
                 (change)="fileBrowseHandler($event.target.files)" />
-            </div>
-            <button class="btn">Upload Artworks</button>
+            </div> -->
+            <button for="#fileDropRef" class="btn">Upload Artworks</button>
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@
                       {{upload?.lastmodified}}
                     </td>
                     <td *ngIf="upload.percentage | async as pct">
-                      <progress class="progress is-info" [value]="pct" max="100"></progress> {{ pct | number }}%
+                      <span><progress class="progress is-info" [value]="pct" max="100"></progress><small> {{ pct | number }}%</small></span>
                     </td>
                   </tr>
                 </tbody>
