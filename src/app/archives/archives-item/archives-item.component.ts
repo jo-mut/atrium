@@ -7,13 +7,13 @@ import { ArtWork } from 'src/app/models/artwork';
   styleUrls: ['./archives-item.component.scss']
 })
 export class ArchivesItemComponent implements OnInit {
-  @Input() public artwork: ArtWork;
-  image: any;
+  @Input() work: ArtWork;
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit(): void {
-    console.log(this.artwork.url + ' artwork url')
+    console.log({...this.work} + 'work')
   }
 
 }

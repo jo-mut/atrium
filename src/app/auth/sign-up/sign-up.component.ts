@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { stringify } from 'querystring';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +13,7 @@ export class SignUpComponent implements OnInit {
   user = new User();
   password: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     
@@ -24,6 +25,7 @@ export class SignUpComponent implements OnInit {
       up and returns promise */
       this.authService.sendVerificationMail();
       this.authService.setUserData(this.getUserData());
+      this.navigateToGallery();      
     }).catch(error => {
       window.alert(error.message)
     });
@@ -33,5 +35,9 @@ export class SignUpComponent implements OnInit {
     return this.user;
   }
 
+  navigateToGallery() {
+    this.router.navigateByUrl('/main/exhibitions')
+  }
 
+  
 }

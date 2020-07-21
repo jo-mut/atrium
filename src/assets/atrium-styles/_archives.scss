@@ -1,6 +1,13 @@
 .artwork-item {
-    .artwork-image {
+    color: black;
+    .card {
         width: 100%;
-        height: 100%;
+        height: 12em;
+        border-radius: 1em;
+        .artwork-image {
+            width: 100%;
+            height: 12em;
+            border-radius: 1em;            
+        }
     }
 }

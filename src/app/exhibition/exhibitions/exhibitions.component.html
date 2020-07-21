@@ -1,1 +1,7 @@
-<p>exhibitions works!</p>
+<div class="container exhibitions pb-3">
+    <div class="row">
+      <app-exhibition-item *ngFor="let exhibition of exhibitions"
+        [exhibition]="exhibition"  (click)="getSelectedArtwork(exhibition.id)"></app-exhibition-item>
+    </div>
+  </div>
+  

@@ -13,4 +13,33 @@
 @import 'assets/atrium-styles/archives';
 @import 'assets/atrium-styles/sign-in';
 @import 'assets/atrium-styles/sign-up';
+@import 'assets/atrium-styles/exhibition';
+@import 'assets/atrium-styles/dashboard';
+
+  mat-dialog-container#modal-component {
+        border: 3px solid yellow;
+        border-radius: 1em;
+        background-color: white;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width:none !important;
+    }
+
+    .modal-dialog-full-width {
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width:none !important;
+
+  }
+
+  .modal-content-full-width  {
+      height: auto !important;
+      min-height: 100% !important;
+      border-radius: 0 !important;
+      background-color: #ececec !important 
+  }
 

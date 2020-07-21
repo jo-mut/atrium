@@ -1,3 +1,16 @@
+.create-exhibition {
+  .card {
+    border-radius: 1em;
+    width: 100%;
+    height: 12em;
+    .exhibition-item {
+      border-radius: 1em;
+      width: 100%;
+      height: 12em;
+    }
+  }
+}
+
 .create {
   border-radius: 10px;
   max-height: 100vh;

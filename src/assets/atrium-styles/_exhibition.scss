@@ -1,0 +1,91 @@
+.exhibition {
+  .main-exhibition {
+    border-radius: 1em;
+    width: 100%;
+    height: 24em;
+    .card {
+      height: 24em;
+      img{
+        height: 24em;
+      }
+    }
+  }
+
+  .card {
+    border-radius: 1em;
+    width: 100%;
+
+    .exhibition-image {
+      border-radius: 1em;
+      width: 100%;
+    }
+  }
+
+  .more-artworks {
+    .card {
+      border-radius: 0.5em;
+      width: 100%;
+      height: 12em;
+      .more-exhibition-images {
+        border-radius: 0.5em;
+        width: 100%;
+        height: 12em;
+      }
+    }
+  }
+
+  // .artwork-info {
+  //   color: black;
+
+  //   img {
+  //     width: 50px;
+  //     height: 50px;
+  //     border-radius: 50px;
+
+  //   }
+
+  //   .profile-name {
+  //     font-size: 1.5em;
+  //   }
+
+  //   .profile-details {
+  //       background-color: red;
+  //       p{
+  //           background-color: green;
+  //       }
+  //   }
+
+  //   .artwork-details {
+  //     .artwork-title {
+  //       font-size: 2em;
+  //     }
+  //   }
+  // }
+}
+
+
+.exhibition-details {
+  .card {
+    border-radius: 1em;
+    width: 100%;
+    height: 12em;
+    .exhibition-item {
+      border-radius: 1em;
+      width: 100%;
+      border: 0px;
+      height: 12em;
+
+    }
+  }
+}
+
+.exhibition-view {
+  .card{
+    border-radius: 1em;
+    width: 100%;
+    img {
+      border-radius: 1em;
+      width: 100%;
+    }
+  }
+}

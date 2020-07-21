@@ -14,16 +14,19 @@ export class AuthService {
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public router: Router,  
+    public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
-    ) { }
+  ) { }
 
-    // Sign in with email/password
+  navigateByUrl() {
+    this.router.navigateByUrl('/main/exhibitions')
+  }
+  // Sign in with email/password
   signIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['gallery']);
+          this.navigateByUrl();
         });
       }).catch((error) => {
         window.alert(error.message)
@@ -34,9 +37,9 @@ export class AuthService {
   signUp(email, password) {
     return new Promise<any>((resolve, reject) => {
       return this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then((result) => {     
-      }).catch((error) => {
-      })
+        .then((result) => {
+        }).catch((error) => {
+        })
     })
   }
 
@@ -51,11 +54,11 @@ export class AuthService {
   // Reset Forggot password
   forgotPassword(passwordResetEmail) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
-    .then(() => {
-      window.alert('Password reset email sent, check your inbox.');
-    }).catch((error) => {
-      window.alert(error)
-    })
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      }).catch((error) => {
+        window.alert(error)
+      })
   }
 
   // Returns true when user is looged in and email is verified
@@ -72,14 +75,14 @@ export class AuthService {
   // Auth logic to run auth providers
   authLogin(provider) {
     return this.afAuth.signInWithPopup(provider)
-    .then((result) => {
-       this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+      .then((result) => {
+        this.ngZone.run(() => {
+          // this.router.navigate(['/main/exhibitions']);
         })
-      this.setUserData(result.user);
-    }).catch((error) => {
-      window.alert(error)
-    })
+        this.setUserData(result.user);
+      }).catch((error) => {
+        window.alert(error)
+      })
   }
 
   /* Setting up user data when sign in with username/password, 

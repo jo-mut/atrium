@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CreateModalComponent } from 'src/app/admin/create-modal/create-modal.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   private hidden: boolean = false
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private matDialog: MatDialog)  { }
 
   ngOnInit(): void {
   }
@@ -26,5 +28,15 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/sign-in')
   }
 
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "40%";
+    dialogConfig.width = "60%";
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(CreateModalComponent, dialogConfig);
+  }
 
 }

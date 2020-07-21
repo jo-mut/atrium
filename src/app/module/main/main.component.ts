@@ -17,11 +17,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
   
-    // this.navigateToGallery();
-  }
-
-  navigateToGallery() {
-    this.router.navigateByUrl('/gallery');
   }
 
 }

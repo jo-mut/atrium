@@ -1,0 +1,16 @@
+.dashboard {
+    .card {
+        border-radius: 1em;
+        color: black;
+        width: 100%;
+        height: 300px;
+    }
+
+    .module-desc {
+        text-align: center;
+        color: black;
+        .module-title {
+            font-size: 2em;
+        }
+    }
+}

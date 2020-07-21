@@ -1,5 +1,5 @@
 <div class="sign-up">
-  <div class="container-fluid p-0">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-8 p-0">
         <div class="arts-diplay">
@@ -14,17 +14,16 @@
               <input type="text" class="formControl" placeholder="Email" [(ngModel)]="user.email" required>
             </div>
             <div class="formGroup mt-3">
-              <input type="password" class="formControl" placeholder="Username" [(ngModel)]="user.username" required>
+              <input type="text" class="formControl" placeholder="Username" [(ngModel)]="user.username" required>
             </div>
             <div class="formGroup mt-3">
               <input type="password" class="formControl" placeholder="Password" [(ngModel)]="password" required>
             </div>
             <div class="formGroup mt-3">
-              <input type="password" class="formControl" placeholder="Role" [(ngModel)]="user.role" required>
+              <input type="text" class="formControl" placeholder="Role" [(ngModel)]="user.role" required>
             </div>
             <div class="formGroup mt-3 p-1">
-              <button (click)="signUp(user.email, password)"><span class="redirect" [routerLink]="['main/exhibitions']">Sign
-                    Up</span></button>
+              <button (click)="signUp(user.email, password)"><span class="redirect">Sign Up</span></button>
             </div>
             <div class="redirect-sign-in p-1">
               <button><span>Already have an account?<a [routerLink]="['/auth/sign-in']">Sign

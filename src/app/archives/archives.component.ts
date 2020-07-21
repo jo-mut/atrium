@@ -11,8 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./archives.component.scss']
 })
 export class ArchivesComponent implements OnInit {
-
-  artworks: Observable<ArtWork>;
+  artworks: ArtWork[];
 
   constructor(public dbOperations: DbOperationsService) { }
 
@@ -22,35 +21,15 @@ export class ArchivesComponent implements OnInit {
 
   // Get a list of archived artwork
   private getArchivedArtWorks() {
-    let artWork = new ArtWork();
     this.dbOperations.getArchivedArtWorks()
-    .snapshotChanges().pipe(map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as ArtWork;
-        const id = a.payload.doc.id;
-        console.log(id)
-        console.log(...data + ' artwork data')
-        return { id, ...data };
-      }))
-    );
-    // this.dbOperations.getArchivedArtWorks().get()
-    // .toPromise().then((querySnapshot: QuerySnapshot<DocumentData>) => {
-    //     if (!querySnapshot.empty) {
-    //       for (const doc of querySnapshot.docs) {
-    //         artWork.description = doc.data().description;
-    //         artWork.id = doc.data().id;
-    //         artWork.title = doc.data().title;
-    //         artWork.url = doc.data().url;
-    //         artWork.type = doc.data().type;
-    //         artWork.createdAt = doc.data().createdAt;
-    //         artWork.updatedAt = doc.data().updatedAt;
-    //         artWork.height = doc.data().height;
-    //         artWork.width = doc.data().width;
-    //         artWork.status = doc.data().status;          
-    //       }
-    //     }
-    //   }).catch(function (error) {
-    //     console.log("Error getting document:", error);
-    //   });
+    .snapshotChanges().subscribe(d => {
+      this.artworks = d.map(e => {
+          const data = e.payload.doc.data();
+          const id = e.payload.doc.id;
+          return {id, ...data} as ArtWork;
+      })
+    })
+      
   }
 
 }
