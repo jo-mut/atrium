@@ -1,0 +1,39 @@
+<mat-toolbar class="header">
+  <div>Admin Console</div>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened">
+    <span class="nav-tool-items">
+      <p>Admin Console <mat-icon  (click)="sidenav.toggle()" class="hamburger">menu</mat-icon>
+      </p>
+    </span>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/admin/artworks']">
+        <mat-icon class="mr-3">dashboard</mat-icon> Artworks
+      </a>
+      <a mat-list-item [routerLink]="['/admin/categories']">
+        <mat-icon class="mr-3">person</mat-icon> Categories
+      </a>
+      <a mat-list-item [routerLink]="['/admin/contests']">
+        <mat-icon class="mr-3">content_paste</mat-icon> Contests
+      </a>
+      <a mat-list-item [routerLink]="['/admin/events']">
+        <mat-icon class="mr-3">library_books</mat-icon> Events
+      </a>
+      <a mat-list-item [routerLink]="['/admin/artists']">
+        <mat-icon class="mr-3">location_on</mat-icon> Artists
+      </a>
+      <a mat-list-item [routerLink]="['/admin/curators']">
+        <mat-icon class="mr-3">calendar_today</mat-icon> Curators
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
