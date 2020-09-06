@@ -15,17 +15,14 @@ import { DbOperationsService } from './services/db-operations.service';
 import { AuthService } from './services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatVideoModule } from 'mat-video';
 import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
 import { SiteRoutingModule } from './modules/site/site.module';
-import { TipsComponent } from './site/tips/tips.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DndDirective,
-    TipsComponent,
 
   ],
   imports: [
