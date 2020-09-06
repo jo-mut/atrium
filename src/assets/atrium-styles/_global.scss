@@ -1,46 +1,123 @@
 .app-wrapper {
-    display: flex;
-    flex-direction: column;
-    padding-left: 0;
-    padding-right: 0;
-    background: black;
-    color: white;
-    height: 100%;
-    min-height: 100vh;
-    
-    .sidebar-wrapper {
-        background-color: black;
-        min-height: 100vh;
-        max-height: 100vh;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 11;
-        width: 260px;
+  font-size: 16px;
+  font-family: 'Fondamento', cursive;
+  font-style: bold;
+  background-color: black;
+
+  mat-toolbar {
+    background-color: transparent;
+
+    .menu-spacer {
+      flex: 1 1 auto;
     }
-    .main-panel {
+
+    a {
+      color: white;
+    }
+
+    a:hover {
+      color: #543600;
+    }
+
+    p {
+      color: black;
+    }
+
+
+  }
+
+  mat-sidenav-container {
+    background-color: black;
+
+    .nav-tool-items {
+      display: flex;
+
+      mat-icon {
+        align-content: flex-end;
+      }
+    }
+
+    mat-sidenav {
+      background-color: #1b1b1b;
+      position: fixed;
+      width: 250px;
+      height: 100vh;
+
+      .brand {
+        height: 150px;
         width: 100%;
-        flex-grow: 1;
-        // margin-left: 260px;
+      }
+
+      a {
+        color: white;
+      }
+
+      a:hover {
+        color: #543600;
+      }
+
+      p {
+        color: black;
+      }
     }
+  }
+
+  footer {
+    height: 100px;
+    background-color: #1b1b1b;
+  }
 }
 
+
+
+// .app-wrapper {
+//     display: flex;
+//     flex-direction: column;
+//     padding-left: 0;
+//     padding-right: 0;
+//     background: black;
+//     color: white;
+//     height: 100%;
+//     min-height: 100vh;
+
+//     .sidebar-wrapper {
+//         background-color: black;
+//         min-height: 100vh;
+//         max-height: 100vh;
+//         position: fixed;
+//         top: 0;
+//         bottom: 0;
+//         left: 0;
+//         z-index: 11;
+//         width: 260px;
+//     }
+//     .main-panel {
+//         width: 100%;
+//         flex-grow: 1;
+//         // margin-left: 260px;
+//     }
+// }
+
+
+
 @media (max-width: 768px) {
-    /* Reversing the behavior of the sidebar:
+
+  /* Reversing the behavior of the sidebar:
     it'll be rotated vertically and off canvas by default,
     collapsing in on toggle button click with removal of
     the vertical rotation. */
-    .sidebar-wrapper {
-        margin-left: -260px;
-        transform: rotateY(100deg);
-    }
-    #main-panel {
-        margin-left: 0px;
-        // transform: rotateY(360deg);
-    }
-    #sidebar.active {
-        margin-left: 0;
-        transform: none;
-    }
+  .sidebar-wrapper {
+    margin-left: -260px;
+    transform: rotateY(100deg);
+  }
+
+  #main-panel {
+    margin-left: 0px;
+    // transform: rotateY(360deg);
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+    transform: none;
+  }
 }

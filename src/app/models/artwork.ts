@@ -2,7 +2,7 @@ import {Upload} from "../interfaces/upload";
 
 export class ArtWork implements Upload {
   id: string;
-  exhibitionId: any;
+  artworkId: any;
   narativeUrl: string;
   type: string;
   title: string;

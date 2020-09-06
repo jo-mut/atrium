@@ -48,6 +48,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TipsComponent } from 'src/app/site/tips/tips.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'about', pathMatch: 'full' },
@@ -70,6 +71,8 @@ const routes: Routes = [
   { path: 'create-profile', component: CreateProfileComponent },
   { path: 'add-artworks', component: AddArtworksComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'tips', component: TipsComponent },
+
 
   {
     path: 'vr-gallery', component: VrGalleryComponent, children: [
@@ -135,6 +138,7 @@ const routes: Routes = [
     SubmitArtworksComponent,
     CallComponent,
     AdminComponent,
+    TipsComponent,
     ArtworkItemComponent,
 
   ],
@@ -172,6 +176,7 @@ const routes: Routes = [
     FeaturedDetailComponent,
     SubmitArtworksComponent,
     CallComponent,
+    TipsComponent,
     ArtworkItemComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
