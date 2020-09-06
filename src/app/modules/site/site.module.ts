@@ -13,7 +13,7 @@ import { ExhibitionViewComponent } from 'src/app/site/exhibition/exhibition-view
 import { ArchivesComponent } from 'src/app/site/archives/archives.component';
 import { ArchivesItemDetailComponent } from 'src/app/site/archives/archives-item-detail/archives-item-detail.component';
 import { CategoriesComponent } from 'src/app/site/categories/categories.component';
-import { DashboardComponent } from 'src/app/admin/dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from 'src/app/site/admin/dashboard/dashboard.component';
 import { CreateComponent } from 'src/app/admin/create/create.component';
 import { ArtistsComponent } from 'src/app/site/artists/artists.component';
 import { EventsComponent } from 'src/app/site/events/events.component';
@@ -28,96 +28,154 @@ import { CreateModalComponent } from 'src/app/admin/create-modal/create-modal.co
 import { ArtworkModalComponent } from 'src/app/site/exhibition/artwork-modal/artwork-modal.component';
 import { NavbarComponent } from 'src/app/site/navbar/navbar.component';
 import { SidebarComponent } from 'src/app/site/sidebar/sidebar.component';
-
+import { FeaturedArtworksComponent } from 'src/app/site/featured-artworks/featured-artworks.component';
+import { SubmitArtworksComponent } from 'src/app/site/submit-artworks/submit-artworks.component';
+import { FeaturedItemComponent } from 'src/app/site/featured-artworks/featured-item/featured-item.component';
+import { FeaturedDetailComponent } from 'src/app/site/featured-artworks/featured-detail/featured-detail.component';
+import { CallComponent } from 'src/app/site/call/call.component';
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { MglTimelineModule } from 'angular-mgl-timeline';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CreateProfileComponent } from 'src/app/site/submit-artworks/create-profile/create-profile.component';
+import { AddArtworksComponent } from 'src/app/site/submit-artworks/add-artworks/add-artworks.component';
+import { AdminComponent } from "../../site/admin/admin.component";
+import { ArtworkItemComponent } from "../../site/admin/artwork-item/artwork-item.component";
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'landing', pathMatch: 'full' },
-    { path: 'landing', component: HomeComponent },
-    { path: 'exhibitions', component: ExhibitionsComponent },
-    { path: 'exhibition/:id', component: ExhibitionDetailComponent },
-    { path: 'exhibition/exhibition-detail/:id', component: ExhibitionViewComponent },
-    { path: 'archives', component: ArchivesComponent },
-    { path: 'archived-exhibition/:id', component: ArchivesItemDetailComponent },
-    { path: 'archived-exhibition/archived-exhibition-detail/:id', component: ArchivedViewComponent },
-    { path: 'categories', component: CategoriesComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'create', component: CreateComponent },
-    { path: 'artists', component: ArtistsComponent },
-    { path: 'events', component: EventsComponent },
-    { path: 'contests', component: ContestsComponent },
-    {
-        path: 'vr-gallery', component: VrGalleryComponent, children: [
-            {
-                path: '',
-                loadChildren: () => VrGalleryModule
-            }
-        ]
-    },
-    { path: '**', component: PageNotFoundComponent }
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: 'about', component: HomeComponent },
+  { path: 'exhibitions', component: ExhibitionsComponent },
+  { path: 'exhibition/:id', component: ExhibitionDetailComponent },
+  { path: 'exhibition/exhibition-detail/:id', component: ExhibitionViewComponent },
+  { path: 'archives', component: ArchivesComponent },
+  { path: 'archived-exhibition/:id', component: ArchivesItemDetailComponent },
+  { path: 'archived-exhibition/archived-exhibition-detail/:id', component: ArchivedViewComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'create', component: CreateComponent },
+  { path: 'call', component: CallComponent },
+  { path: 'artists', component: ArtistsComponent },
+  { path: 'events', component: EventsComponent },
+  { path: 'contests', component: ContestsComponent },
+  { path: 'featured', component: FeaturedArtworksComponent },
+  { path: 'submit-works', component: SubmitArtworksComponent },
+  { path: 'create-profile', component: CreateProfileComponent },
+  { path: 'add-artworks', component: AddArtworksComponent },
+  { path: 'admin', component: AdminComponent },
+
+  {
+    path: 'vr-gallery', component: VrGalleryComponent, children: [
+      {
+        path: '',
+        loadChildren: () => VrGalleryModule
+      }
+    ]
+  },
+  { path: '**', component: PageNotFoundComponent }
 
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        FormsModule],
-    declarations: [
-        VrGalleryComponent,
-        HomeComponent,
-        SiteComponent,
-        ToolbarComponent,
-        ProgressComponent,
-        ArchivesComponent,
-        ArchivesItemComponent,
-        ArchivesItemDetailComponent,
-        ExhibitionsComponent,
-        ExhibitionItemComponent,
-        ExhibitionDetailComponent,
-        CategoriesComponent,
-        EventsComponent,
-        PageNotFoundComponent,
-        ArtistsComponent,
-        CreateComponent,
-        CreateItemComponent,
-        SidebarComponent,
-        NavbarComponent,
-        CreateModalComponent,
-        ExhibitionViewComponent,
-        ArtworkModalComponent,
-        ArchivedViewComponent,
-        DashboardComponent,
-        ContestsComponent,
-    ],
-    exports: [
-        VrGalleryComponent,
-        SidebarComponent,
-        NavbarComponent,
-        SiteComponent,
-        HomeComponent,
-        ToolbarComponent,
-        ArchivesComponent,
-        CategoriesComponent,
-        ArtistsComponent,
-        EventsComponent,
-        ProgressComponent,
-        PageNotFoundComponent,
-        CreateComponent,
-        ExhibitionsComponent,
-        ExhibitionItemComponent,
-        ExhibitionDetailComponent,
-        ArchivesItemComponent,
-        CreateItemComponent,
-        ArchivesItemDetailComponent,
-        CreateModalComponent,
-        ExhibitionViewComponent,
-        ArtworkModalComponent,
-        ArchivedViewComponent,
-        DashboardComponent,
-        ContestsComponent,
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormsModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    MglTimelineModule,
+    CarouselModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatIconModule,
+    MatListModule,
 
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  ],
+  declarations: [
+    CreateProfileComponent,
+    AddArtworksComponent,
+    VrGalleryComponent,
+    HomeComponent,
+    SiteComponent,
+    ToolbarComponent,
+    ProgressComponent,
+    ArchivesComponent,
+    ArchivesItemComponent,
+    ArchivesItemDetailComponent,
+    ExhibitionsComponent,
+    ExhibitionItemComponent,
+    ExhibitionDetailComponent,
+    CategoriesComponent,
+    EventsComponent,
+    PageNotFoundComponent,
+    ArtistsComponent,
+    CreateComponent,
+    CreateItemComponent,
+    SidebarComponent,
+    NavbarComponent,
+    CreateModalComponent,
+    ExhibitionViewComponent,
+    ArtworkModalComponent,
+    ArchivedViewComponent,
+    DashboardComponent,
+    FeaturedArtworksComponent,
+    FeaturedItemComponent,
+    FeaturedDetailComponent,
+    ContestsComponent,
+    SubmitArtworksComponent,
+    CallComponent,
+    AdminComponent,
+    ArtworkItemComponent,
+
+  ],
+  exports: [
+    AdminComponent,
+    CreateProfileComponent,
+    AddArtworksComponent,
+    VrGalleryComponent,
+    SidebarComponent,
+    NavbarComponent,
+    SiteComponent,
+    HomeComponent,
+    ToolbarComponent,
+    ArchivesComponent,
+    CategoriesComponent,
+    ArtistsComponent,
+    EventsComponent,
+    ProgressComponent,
+    PageNotFoundComponent,
+    CreateComponent,
+    ExhibitionsComponent,
+    ExhibitionItemComponent,
+    ExhibitionDetailComponent,
+    ArchivesItemComponent,
+    CreateItemComponent,
+    ArchivesItemDetailComponent,
+    CreateModalComponent,
+    ExhibitionViewComponent,
+    ArtworkModalComponent,
+    ArchivedViewComponent,
+    DashboardComponent,
+    ContestsComponent,
+    FeaturedArtworksComponent,
+    FeaturedItemComponent,
+    FeaturedDetailComponent,
+    SubmitArtworksComponent,
+    CallComponent,
+    ArtworkItemComponent,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
-export class SiteRoutingModule { }
+export class SiteRoutingModule {
+}

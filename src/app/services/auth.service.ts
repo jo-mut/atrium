@@ -18,15 +18,13 @@ export class AuthService {
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) { }
 
-  navigateByUrl() {
-    this.router.navigateByUrl('/main/exhibitions')
-  }
+
   // Sign in with email/password
   signIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.navigateByUrl();
+          console.log('signed in')
         });
       }).catch((error) => {
         window.alert(error.message)
@@ -34,14 +32,29 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  signUp(email, password) {
+  signUp(user: User) {
     return new Promise<any>((resolve, reject) => {
-      return this.afAuth.createUserWithEmailAndPassword(email, password)
+      return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
         .then((result) => {
+          this.setUserData(user);
+          return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+            .then((result) => {
+              this.ngZone.run(() => {
+                console.log('signed in')
+                this.proceedToAddArtworks();
+              });
+            }).catch((error) => {
+              window.alert(error.message)
+            })
         }).catch((error) => {
         })
     })
   }
+
+  proceedToAddArtworks() {
+    this.router.navigateByUrl('/site/add-artworks');
+  }
+
 
   // Send email verfificaiton when new user sign up
   sendVerificationMail() {
@@ -90,6 +103,7 @@ export class AuthService {
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   setUserData(user) {
     const userId = this.afs.collection('users').doc();
+    console.log('saved user')
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${userId}`);
     user.id = userId;
     return userRef.set(user, {

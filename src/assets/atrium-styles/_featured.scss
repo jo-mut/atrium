@@ -1,0 +1,17 @@
+.featured-artworks {
+    padding-top: 100px;
+    .featured-item {
+        text-align: center;
+        .card {
+            border-radius: 0.2em;
+            border: none;
+            height: 200px;
+            img {
+                border-radius: 0.2em;
+                width: 100%;
+                height: 200px;
+            }
+        }
+        
+    }
+}

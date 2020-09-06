@@ -10,7 +10,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { MainRoutingModule } from './modules/main/main-routing.module';
 import { DndDirective } from './dnd.directive';
 import { DbOperationsService } from './services/db-operations.service';
 import { AuthService } from './services/auth.service';
@@ -18,18 +17,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatVideoModule } from 'mat-video';
 import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
-import { SiteComponent } from './modules/site/site.component';
 import { SiteRoutingModule } from './modules/site/site.module';
+import { TipsComponent } from './site/tips/tips.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DndDirective,
+    TipsComponent,
 
   ],
   imports: [
-AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -47,5 +47,6 @@ AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [DbOperationsService, AuthService],
   bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

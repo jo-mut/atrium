@@ -4,7 +4,7 @@
       <div class="col-md-8 p-0">
         <div class="arts-diplay">
 
-        </div>                 
+        </div>
       </div>
       <div class="col-md-4 p-0">
         <div class="authblock d-flex">
@@ -14,20 +14,19 @@
               <input type="text" class="formControl" placeholder="Email" [(ngModel)]="user.email" required>
             </div>
             <div class="formGroup mt-3">
-              <input type="text" class="formControl" placeholder="Username" [(ngModel)]="user.username" required>
+              <!--              <input type="text" class="formControl" placeholder="Username" [(ngModel)]="user.username" required>-->
             </div>
             <div class="formGroup mt-3">
-              <input type="password" class="formControl" placeholder="Password" [(ngModel)]="password" required>
+              <input type="password" class="formControl" placeholder="Password" [(ngModel)]="user.password" required>
             </div>
             <div class="formGroup mt-3">
               <input type="text" class="formControl" placeholder="Role" [(ngModel)]="user.role" required>
             </div>
             <div class="formGroup mt-3 p-1">
-              <button (click)="signUp(user.email, password)"><span class="redirect">Sign Up</span></button>
+              <button><span class="redirect">Sign Up</span></button>
             </div>
             <div class="redirect-sign-in p-1">
-              <button><span>Already have an account?<a [routerLink]="['/auth/sign-in']">Sign
-                    In</a></span></button>
+              <button><span>Already have an account?<a [routerLink]="['/auth/sign-in']">Sign In</a></span></button>
             </div>
           </div>
         </div>

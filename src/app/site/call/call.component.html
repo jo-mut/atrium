@@ -1,0 +1,92 @@
+<div class="call">
+  <div class="landing">
+    <div class="container">
+      <div class="call-theme">
+        <p class="display-4"><strong>The Theme</strong></p>
+        <h3 class="theme-description">Brief description</h3>
+      </div>
+    </div>
+  </div>
+  <div class="process">
+    <div class="container pl-0 pr-0">
+      <h1 class="title mb-5">The Process</h1>
+      <div class="timeline">
+        <mgl-timeline class="mt-3" [mobileWidthThreshold]="mobileWidthThreshold">
+          <mgl-timeline-entry (expand)="onExpand($event)">
+            <mgl-timeline-entry-header class="m-5">Submission opens</mgl-timeline-entry-header>
+            <mgl-timeline-entry-content>
+              <h4>1st September 2020</h4>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Beatae quae consequuntur distinctio vero, hic obcaecati praesentium ipsam voluptatum
+                fuga ducimus deleniti laborum error tempora commodi alias reprehenderit.
+                Sint, molestias! Nemo.</p>
+            </mgl-timeline-entry-content>
+            <mgl-timeline-entry-dot>1</mgl-timeline-entry-dot>
+            <mgl-timeline-entry-side class="p-5">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Beatae quae consequuntur distinctio vero, hic obcaecati praesentium ipsam voluptatum
+              fuga ducimus deleniti laborum error tempora commodi alias reprehenderit.
+              Sint, molestias! Nemo.</mgl-timeline-entry-side>
+          </mgl-timeline-entry>
+        </mgl-timeline>
+        <mgl-timeline class="mt-3">
+          <mgl-timeline-entry (expand)="onExpand($event)">
+            <mgl-timeline-entry-header class="m-5">Submission Closes</mgl-timeline-entry-header>
+            <mgl-timeline-entry-content>
+              <h4>Submission closes: 13th November 2020</h4>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Beatae quae consequuntur distinctio vero, hic obcaecati praesentium ipsam voluptatum
+                fuga ducimus deleniti laborum error tempora commodi alias reprehenderit.
+                Sint, molestias! Nemo.</p>
+            </mgl-timeline-entry-content>
+            <mgl-timeline-entry-dot>2</mgl-timeline-entry-dot>
+            <mgl-timeline-entry-side class="p-5">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Beatae quae consequuntur distinctio vero, hic obcaecati praesentium ipsam voluptatum
+              fuga ducimus deleniti laborum error tempora commodi alias reprehenderit.
+              Sint, molestias! Nemo.</mgl-timeline-entry-side>
+          </mgl-timeline-entry>
+        </mgl-timeline>
+        <mgl-timeline class="mt-3">
+          <mgl-timeline-entry (expand)="onExpand($event)">
+            <mgl-timeline-entry-header class="m-5">Submission</mgl-timeline-entry-header>
+            <mgl-timeline-entry-content>
+              <h4>Shortlisting of the best submitions for each category: weekly ….
+                Saturday…. 2020</h4>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Beatae quae consequuntur distinctio vero, hic obcaecati praesentium ipsam voluptatum
+                fuga ducimus deleniti laborum error tempora commodi alias reprehenderit.
+                Sint, molestias! Nemo.</p>
+            </mgl-timeline-entry-content>
+            <mgl-timeline-entry-dot>3</mgl-timeline-entry-dot>
+            <mgl-timeline-entry-side class="p-5">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Beatae quae consequuntur distinctio vero, hic obcaecati praesentium ipsam voluptatum
+              fuga ducimus deleniti laborum error tempora commodi alias reprehenderit.
+              Sint, molestias! Nemo.</mgl-timeline-entry-side>
+          </mgl-timeline-entry>
+        </mgl-timeline>
+      </div>
+    </div>
+  </div>
+  <div class="countries">
+    <div class="container pl-0 pr-0">
+      <h1 class="title m-5">Countries</h1>
+      <div class="row">
+        <div class="container">
+          <div class="flags">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template  carouselSlide *ngFor="let country of countries" [id]="country.id">
+                <div class="m-5">
+                  <img [src]="country.flag" [alt]="country.alt" [title]="country.title">
+                <h3>{{country.name}}</h3>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+      <div class="contest-requirements m-5">
+        <p><strong>Deadline: </strong>1st of October 2020; <strong>Age: </strong>18yrs and above: <strong> Categories:
+          </strong>Video & Photography</p>
+      </div>
+    </div>
+  </div>
+</div>

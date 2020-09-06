@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Upload } from 'src/app/models/upload';
-import { DbOperationsService } from 'src/app/services/db-operations.service';
-import { Router } from '@angular/router';
-import { ArtWork } from 'src/app/models/artwork';
+import {Component, OnInit} from '@angular/core';
+import {Upload} from 'src/app/interfaces/upload';
+import {DbOperationsService} from 'src/app/services/db-operations.service';
+import {Router} from '@angular/router';
+import {ArtWork} from 'src/app/models/artwork';
 
 
 @Component({
@@ -15,13 +15,14 @@ export class CreateModalComponent implements OnInit {
   newExhibitions: ArtWork[] = [];
   files: File[] = [];
 
-  constructor(private dbOperations: DbOperationsService) { }
-
-  ngOnInit(): void {
-    
+  constructor(private dbOperations: DbOperationsService) {
   }
 
-   /**
+  ngOnInit(): void {
+
+  }
+
+  /**
    * on file drop handler
    */
   onFileDropped($event) {
@@ -69,16 +70,10 @@ export class CreateModalComponent implements OnInit {
    * @param files (Files List)
    */
   prepareFilesList(files: File[]) {
-    for (let file of files) {
-      this.dbOperations.uploadImages(file);
-      let snapshot = this.dbOperations.latestUplaod.bytes;
-      let upload = this.dbOperations.latestUplaod;
-      let work = this.dbOperations.latestArtWork;
-      this.uploads.push(upload);
-      this.newExhibitions.push(work);
-      console.log(this.uploads);
-
-    }
+    this.dbOperations.uploadImages(files);
+    let works = this.dbOperations.latestArtWorks;
+    this.newExhibitions = works;
+    console.log(this.uploads);
   }
 
   /**
@@ -95,10 +90,6 @@ export class CreateModalComponent implements OnInit {
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-  }
-
-  startUpload(file: File) {
-    this.uploads.push(this.dbOperations.latestUplaod)
   }
 
   isActive(snapshot) {

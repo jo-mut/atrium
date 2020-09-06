@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { stringify } from 'querystring';
-import { User } from 'src/app/models/user';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/services/auth.service';
+import {stringify} from 'querystring';
+import {User} from 'src/app/models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,33 +11,30 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
   user = new User();
-  password: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit(): void {
-    
+  constructor(private authService: AuthService, private router: Router) {
   }
 
-  signUp(email, password) {
-    this.authService.signUp(email, password).then(res => {
-      /* Call the SendVerificaitonMail() function when new user sign 
+  ngOnInit(): void {
+
+  }
+
+  signUp() {
+    this.authService.signUp(this.user).then(res => {
+      /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
       this.authService.sendVerificationMail();
-      this.authService.setUserData(this.getUserData());
-      this.navigateToGallery();      
+      this.authService.setUserData(this.user);
+      this.navigateToGallery();
     }).catch(error => {
       window.alert(error.message)
     });
   }
 
-  getUserData(): User {
-    return this.user;
-  }
 
   navigateToGallery() {
     this.router.navigateByUrl('/main/exhibitions')
   }
 
-  
+
 }

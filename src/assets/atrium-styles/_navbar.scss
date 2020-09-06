@@ -1,36 +1,22 @@
 .custom-navbar {
-    background-color: black;
+    background-color: transparent;
+    size: 2.5em;
     #navbar {
-        background-color: black;
+        background-color: transparent;
         color: white;
-        .navbar-toggler {
-            color: white;
-        }
-        img {
-            width: 30px;
-            height: 30px;
-            border-radius: 30px;
-        }
+        font-weight: bolder;    
         li a {
             color: white;
+            font-weight: bolder;    
         }
         li a:hover {
-            color: yellow;
+            color: #543600;
         }
-        .dropdown-menu {
-            max-width: 300px;
-            overflow: hidden;
-        }
-    }
 
-    .creat-new-exhibition {
         button {
-            background: white;
-            color: black;
-        }
-
-        button:hover {
-            border: solid 1px yellow;
+            color: white;
+            background-color: #543600;
+            border: none;
         }
     }
 }

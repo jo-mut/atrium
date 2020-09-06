@@ -1,26 +1,41 @@
 <div class="custom-navbar">
-  <nav class="navbar navbar-expand-sm navbar-dark d-flex flex-row" id="navbar">
+  <nav class="container navbar navbar-expand-sm navbar-dark d-flex flex-row fixed-top" id="navbar">
     <p class="active-sidebar-link ml-3"></p>
     <i class="fa fa-bars mr-3 navbar-toggler d-lg-none" data-toggle="collapse" data-target="#collapsibleNavId"
       aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></i>
     <div class="collapse navbar-collapse mr-5" id="collapsibleNavId">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/exhibitions']">The Story</a>
+          <a class="nav-link" [routerLink]="['/site/story']">This Project</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/exhibitions']">The Contest</a>
+          <a class="nav-link" [routerLink]="['/site/call']">The Call</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/site/featured']">Featured Works</a>
+        </li>
+        <!-- <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/site/spotlight']">Spotlight</a>
+        </li> -->
+        <li class="ml-5 submit-button">
+          <button class="btn btn-outline-info" (click)="goToSubmitArtworks()">Submit</button>
+        </li>
+         <!-- <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/site/winners']">Winners</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/site/success-stories']">Success Stories</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/site/archives']">Archives</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/exhibitions']">The Gallery</a>
-        </li>
-        <li class="nav-item active">
-          <a class="btn" [routerLink]="['/site/archives']">Login</a>
-        </li>
+        </li> -->
+        <!-- <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/site/vr-gallery']">The Gallery</a>
+        </li> -->
       </ul>
     </div>
+    <!-- <div class="login">
+      <a class="btn btn-outline-warning" [routerLink]="['/site/archives']">Login</a>
+    </div> -->
   </nav>
 </div>

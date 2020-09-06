@@ -1,0 +1,57 @@
+mat-toolbar {
+  background-color: transparent;
+  .menu-spacer {
+    flex: 1 1 auto;
+  }
+  
+  a {
+    color: white;
+  }
+
+  a:hover {
+    color: #543600;
+  }
+
+  p {
+    color: black;
+  }
+
+ 
+}
+
+mat-sidenav-container {
+  background-color: black;
+  .nav-tool-items {
+    display: flex;
+
+    mat-icon {
+      align-content: flex-end;
+    }
+  }
+
+  mat-sidenav {
+    background-color: #1b1b1b;
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+
+    .brand {
+      height: 150px;
+      width: 100%;
+    }
+
+    a {
+      color: white;
+    }
+
+    a:hover {
+      color: #543600;
+    }
+
+    p {
+      color: black;
+    }
+  }
+}
+
+

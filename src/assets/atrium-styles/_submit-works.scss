@@ -1,0 +1,76 @@
+.create-profile {
+  color: black;
+  margin-bottom: 5em;
+  margin-top: 5em;
+  .profile-form {
+    .card {
+      padding: 1em;
+      background-color: #543600;
+      color: white;
+
+      .profile-form-title {
+        text-align: center;
+      }
+
+      .address-form-title {
+        text-align: center;
+      }
+    }
+
+    .next {
+      width: 50%;
+      text-align: center;
+      margin: 0 auto;
+
+      button {
+        width: 100%;
+        background-color: white;
+        color: black;
+      }
+    }
+
+  }
+}
+
+.add-artworks {
+  color: black;
+  margin-bottom: 20em;
+  margin-top: 5em;
+
+  .card {
+    border-radius: none;
+    width: 100%;
+    height: 200px;
+
+    img {
+      border-radius: 0.2em;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .artwork-form-title {
+    text-align: center;
+  }
+
+  .selected-artworks {
+    .card {
+      .card {
+        background-color: black;
+        padding: 1em;
+        color: white;
+      }
+    }
+  }
+
+  .submit {
+    .card {
+      width: 100%;
+      text-align: center;
+      margin: 0 auto;
+      button {
+        width: 50%;
+      }
+    }
+  }
+}

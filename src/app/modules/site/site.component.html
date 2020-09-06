@@ -1,7 +1,4 @@
-<div class="app-wrapper">
-    <!-- <div class="sidebar-wrapper">
-              <app-sidebar></app-sidebar>
-          </div> -->
+<!-- <div class="app-wrapper">
     <div class="main-panel" id="main-panel">
       <div class="navbar-wrapper ">
         <app-navbar></app-navbar>
@@ -10,5 +7,51 @@
         <router-outlet></router-outlet>
       </div>
     </div>
-  </div>
-  
+  </div> -->
+
+<mat-toolbar class="header fixed-top">
+  <span class="nav-tool-items">
+    <mat-icon (click)="sidenav.toggle()"   class="p-3 m-3 ">menu</mat-icon>
+  </span>
+  <span class="menu-spacer"></span>
+  <a class="mx-3" [routerLink]="['/project/about']">
+    The Project
+  </a>
+  <a class="mx-3" [routerLink]="['/project/call']">
+    The Call
+  </a>
+  <a class="mx-3" [routerLink]="['/project/featured']">
+    Featured Works
+  </a>
+  <!-- <a class="mx-3"  [routerLink]="['/site/tips']">
+    Tips
+  </a> -->
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav [mode]="hide ? 'over' : 'side'" [(opened)]="opened">
+    <div class="brand">
+
+    </div>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/project/about']">
+        The Project
+      </a>
+      <a mat-list-item [routerLink]="['/project/call']">
+        The Call
+      </a>
+      <a mat-list-item [routerLink]="['/project/featured']">
+        Featured Works
+      </a>
+      <a mat-list-item [routerLink]="['/project/tips']">
+        Tips
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content class="main-wrapper mt-3 px-3 ">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

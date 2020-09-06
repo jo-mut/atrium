@@ -1,20 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 // @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import 'assets/atrium-styles/atrium-theme';
 @import "~bootstrap/dist/css/bootstrap.css";
 @import 'assets/atrium-styles/body';
 @import 'assets/atrium-styles/home';
-@import 'assets/atrium-styles/main-content';
 @import 'assets/atrium-styles/create';
 @import 'assets/atrium-styles/progress';
-@import 'assets/atrium-styles/navbar';
+// @import 'assets/atrium-styles/navbar';
 @import 'assets/atrium-styles/sidebar';
-@import 'assets/atrium-styles/global';
+// @import 'assets/atrium-styles/global';
 @import 'assets/atrium-styles/archives';
 @import 'assets/atrium-styles/sign-in';
 @import 'assets/atrium-styles/sign-up';
 @import 'assets/atrium-styles/exhibition';
 @import 'assets/atrium-styles/dashboard';
+@import 'assets/atrium-styles/gallery-site';
+@import 'assets/atrium-styles/call';
+@import 'assets/atrium-styles/featured';
+@import 'assets/atrium-styles/submit-works';
 
   mat-dialog-container#modal-component {
         border: 3px solid yellow;
@@ -40,6 +45,6 @@
       height: auto !important;
       min-height: 100% !important;
       border-radius: 0 !important;
-      background-color: #ececec !important 
+      background-color: #ececec !important
   }
 

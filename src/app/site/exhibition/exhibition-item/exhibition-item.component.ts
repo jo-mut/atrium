@@ -15,9 +15,9 @@ export class ExhibitionItemComponent implements OnInit {
   artworks: ArtWork[] = [];
   // @ViewChild('video') matVideo: MatVideoComponent;
   // video: HTMLVideoElement;
- 
- 
-  constructor(private dbOperations: DbOperationsService, 
+
+
+  constructor(private dbOperations: DbOperationsService,
     private router: Router) {
    }
 
@@ -27,18 +27,17 @@ export class ExhibitionItemComponent implements OnInit {
 
   // Get a list of archived artwork
   getExhibitions() {
-    this.dbOperations.getExhibitions()
+    this.dbOperations.getAllExhibitions()
       .onSnapshot(snapshot => snapshot.forEach(doc => {
         const data = doc.data();
         const id = doc.id;
-        let work = { id, ...data } as ArtWork;
+        const work = { id, ...data } as ArtWork;
         this.artworks.push(work);
       }) )
   }
 
   getSelectedArtwork(id: number) {
     this.router.navigateByUrl('/view/' + id);
-
   }
 
 }

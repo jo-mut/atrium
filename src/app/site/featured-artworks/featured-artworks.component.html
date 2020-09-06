@@ -1,0 +1,8 @@
+<div class="featured-artworks">
+  <div class="container-fluid p-0">
+    <div class="row">
+      <app-featured-item class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3"
+      *ngFor="let work of artworks"  [work]="work" [routerLink]="['/site/vr-gallery', work.id]" ></app-featured-item>
+    </div>
+  </div>
+</div> 

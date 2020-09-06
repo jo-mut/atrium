@@ -7,8 +7,6 @@ export class DndDirective {
   @HostBinding('class.fileover') fileOver: boolean;
   @Output() fileDropped = new EventEmitter<any>();
 
-  constructor() { }
-
   // Dragover listener
   @HostListener('dragover', ['$event']) onDragOver(evt) {
     evt.preventDefault();
@@ -33,5 +31,4 @@ export class DndDirective {
       this.fileDropped.emit(files);
     }
   }
-
 }

@@ -7,7 +7,7 @@ import { SiteComponent } from './modules/site/site.component';
 
 
 const routes: Routes = [
-    { path: '', redirectTo: 'auth', pathMatch: 'full' },
+    { path: '', redirectTo: 'site', pathMatch: 'full' },
     {
         path: 'auth', component: AuthComponent, children: [
             {

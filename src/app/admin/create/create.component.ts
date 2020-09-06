@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { Observable } from 'rxjs';
 import { ArtWork } from 'src/app/models/artwork';
-import { Upload } from 'src/app/models/upload';
+import { Upload } from 'src/app/interfaces/upload';
 import { QuerySnapshot, DocumentData } from '@angular/fire/firestore/interfaces';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateModalComponent } from '../create-modal/create-modal.component';

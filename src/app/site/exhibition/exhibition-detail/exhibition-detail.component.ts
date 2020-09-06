@@ -22,7 +22,7 @@ export class ExhibitionDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       // this.getExhibition(this.id.toString());
-      this.generate()
+      this.generate();
       this.playVideoWhenUserEntersRoom();
     });
 
