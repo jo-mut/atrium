@@ -1,0 +1,232 @@
+<!-- <div class="add-artworks container">
+  <form novalidate>
+    <div class="selected-files"  appDnd (fileDropped)="onFileDropped($event)">
+      <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+      <div class="d-flex justify-content-center">
+        <h3 class="mx-3 mb-0">Drag and drop file here</h3>
+        <h3 class="mx-3 mb-0">or</h3>
+        <h3 class="mx-3 mb-0" for="fileDropRef">Browse for file</h3>
+      </div>
+    </div>
+  </form>
+  <div class="selected-works mt-5">
+    <div class="files-list mt-5">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="single-file" *ngFor="let artwork of artworks; let i = index"
+            class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+            <div class="container-fluid p-0">
+              <div class="card" *ngIf="artwork.type == 'image'">
+                <img class="artwork-image img-fluid" src="{{artwork.url}}" alt="">
+              </div>
+              <div class="card" *ngIf="artwork.type == 'video'">
+                <vg-player (onPlayerReady)="onPlayerReady($event)">
+                  <vg-buffering></vg-buffering>
+                  <vg-controls>
+                    <vg-play-pause></vg-play-pause>
+                    <vg-playback-button></vg-playback-button>
+                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                    <vg-scrub-bar>
+                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                    </vg-scrub-bar>
+                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                    <vg-mute></vg-mute>
+                    <vg-volume></vg-volume>
+                    <vg-fullscreen></vg-fullscreen>
+                  </vg-controls>
+                  <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
+                  </video>
+                </vg-player>
+              </div>
+              <h4 class="name">
+                {{ artwork?.name }}
+              </h4>
+              <div class="info mt-1" *ngIf="artwork.percentage | async as pct">
+                <span><progress class="progress is-info" [value]="pct" max="100"></progress><small>
+                    {{ pct | number }}%</small></span>
+              </div>
+              <p class="size" *ngIf="(artwork.bytes | async) as snap">
+                Uploading {{artwork.bytes.bytesTransferred }} of {{ artwork.bytes.bytesTransferred }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="create-profile container">
+  <div class="profile-form">
+    <div class="card p-5">
+      <div class="card">
+        <div class="profile-form-title">
+          <h2>Select your artwork for submission</h2>
+          <p>Please not that you are only allowed to submit only two photos and/or one video of 60 seconds</p>
+        </div>
+      </div>
+    </div>
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+
+      <div class="artwork-type" *ngIf="artwork.type == 'image'">
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Browse a photograph or video to submit</label>
+              <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
+                name="image" autocomplete="off" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Date Shot</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.shotDate" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Town/Country</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.place" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.title" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.description" maxlength="150"
+                required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="artwork-type" *ngIf="artwork.type == 'video'">
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Date Shot</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.shotDate" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Town/Country</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.place" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.title" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-5">
+          <div class="card">
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.description" maxlength="150"
+                required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="challenges">
+        <div class="card p-3 mt-5">
+          <h3>Please tell us a bit about your work</h3>
+        </div>
+      </div>
+      
+      <div class="card p-3 mt-5">
+        <div class="card">
+          <div class="form-group">
+            <label>Challenges</label>
+            <textarea  [(ngModel)]="extraDetails.challenges" maxlength="150"
+            required class="form-control" name="challenges" id="challenges" rows="5"></textarea>
+            <small class="text-muted">What are some of the challenges you encountered 
+              in the process of taking the photo(s)/video?</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-3 mt-5">
+        <div class="card">
+          <div class="form-group">
+            <label>Experience</label>
+            <textarea  [(ngModel)]="extraDetails.experience" maxlength="150"
+            required class="form-control" name="challenges" id="challenges" rows="5"></textarea>
+            <small class="text-muted">Describe your experience</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-3 mt-5">
+        <div class="card">
+          <div class="form-group">
+            <label>Prior to Covid - 19</label>
+            <textarea  [(ngModel)]="extraDetails.lifeBefore" maxlength="150"
+            required class="form-control" name="challenges" id="challenges" rows="5"></textarea>
+            <small class="text-muted">Please describe to us your normal routine prior to Covid - 19</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="confirm-terms">
+        <div class="container p-5">
+          <div class="form-check">
+            Please check the boxes below:
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+              I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
+              the terms and conditions of the photo(s) and video call for submission.
+            </label>
+          </div>
+          <div class="form-check">
+            Please check the boxes below:
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+              I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
+              the terms and conditions of the photo(s) and video call for submission.
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-3 mt-5">
+        <div class="next">
+          <div class="form-group mb-0">
+            <button type="submit" class="btn btn-light">Proceed to submit <strong>---></strong>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

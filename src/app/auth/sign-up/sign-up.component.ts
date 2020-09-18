@@ -20,15 +20,15 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    this.authService.signUp(this.user).then(res => {
-      /* Call the SendVerificaitonMail() function when new user sign
-      up and returns promise */
-      this.authService.sendVerificationMail();
-      this.authService.setUserData(this.user);
-      this.navigateToGallery();
-    }).catch(error => {
-      window.alert(error.message)
-    });
+    // this.authService.signUp(this.user).then(res => {
+    //   /* Call the SendVerificaitonMail() function when new user sign
+    //   up and returns promise */
+    //   // this.authService.sendVerificationMail();
+    //   this.authService.setUserData(this.user);
+    //   this.navigateToGallery();
+    // }).catch(error => {
+    //   window.alert(error.message)
+    // });
   }
 
 

@@ -1,18 +1,16 @@
 export class User {
-  id: string;
+  userId: string;
   code: string;
   firstName: string;
   lastName: string;
   password: string;
   email: string;
-  role: string;
-  bio: string;
-  profileImage: string;
+  role: string = null;
   phoneNumber: string;
-  websiteUrl: string = null;
-  firstAddress: string;
-  secondAddress: string = null;
+  address: string;
   country: string;
-  region: string;
-  postalCode: string = null;
+  birthDate: string;
+  gender: string;
+  nationality: string;
+  socialMedia: string[];
 }

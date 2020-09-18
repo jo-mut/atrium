@@ -1,0 +1,324 @@
+<div class="score py-5 mt-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="artwork">
+          <div class="artwork-media">
+            <div class="card" *ngIf="work.type == 'image'">
+              <img class="img-fluid" src="{{work.url}}" alt="">
+            </div>
+            <div class="card" *ngIf="work.type == 'video'">
+              <vg-player (onPlayerReady)="onPlayerReady($event)">
+                <vg-buffering></vg-buffering>
+                <vg-controls>
+                  <vg-play-pause></vg-play-pause>
+                  <vg-playback-button></vg-playback-button>
+                  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                  <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                  </vg-scrub-bar>
+                  <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                  <vg-mute></vg-mute>
+                  <vg-volume></vg-volume>
+                  <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+                <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
+                </video>
+              </vg-player>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="score-forms">
+          <div class="photo-score-form" *ngIf="work.type == 'image'">
+            <form class="form-group" #photoScoresForm="ngForm" (ngSubmit)="onSubmit(photoScoresForm)" novalidate>
+              <div class="card p-3 mt-5">
+                <h3 class="p-5">TECHNIQUE</h3>
+                <table>
+                  <tr>
+                    <th></th>
+                    <th align="center">2</th>
+                    <th align="center">4</th>
+                    <th align="center">6</th>
+                    <th align="center">8</th>
+                    <th align="center">10</th>
+                  </tr>
+                  <tr>
+                    <td>Composition</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="composition" ng-model="composition.poor" 
+                        [value]="templateChecked" [checked]="true" (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="composition" ng-model="composition.fair"
+                        [value]="composition.fair" [checked]="true" (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                        ng-model="composition.satisfactory" [value]="composition.satisfactory" [checked]="true" 
+                        (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="composition" ng-model="composition.good"
+                        [value]="composition.good" [checked]="true" (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="composition"
+                        ng-model="composition.excellent" [value]="composition.excellent" [checked]="true" 
+                        (change)="onItemChange($event.target.value)">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Lighting</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="lighting" ng-model="lighting.poor"
+                        [value]="lighting.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="lighting" ng-model="lighting.fair"
+                        [value]="lighting.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="lighting"
+                        ng-model="lighting.satisfactory" [value]="lighting.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="lighting" ng-model="lighting.good"
+                        [value]="lighting.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="lighting"
+                        ng-model="lighting.excellent" [value]="lighting.excellent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Clarity</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="clarity" ng-model="clarity.poor"
+                        [value]="clarity.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="clarity" ng-model="clarity.fair"
+                        [value]="clarity.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="clarity"
+                        ng-model="clarity.satisfactory" [value]="clarity.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="clarity" ng-model="clarity.good"
+                        [value]="clarity.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="clarity"
+                        ng-model="clarity.excellent" [value]="clarity.excellent">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="card p-3 mt-5">
+                <h3 class="p-5">CREATIVITY</h3>
+                <table>
+                  <tr>
+                    <th></th>
+                    <th align="center">2</th>
+                    <th align="center">4</th>
+                    <th align="center">6</th>
+                    <th align="center">8</th>
+                    <th align="center">10</th>
+                  </tr>
+                  <tr>
+                    <td>Theme</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="theme" ng-model="theme.poor"
+                        [value]="theme.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="theme" ng-model="theme.fair"
+                        [value]="theme.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="theme"
+                        ng-model="theme.satisfactory" [value]="theme.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="theme" ng-model="theme.good"
+                        [value]="theme.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="theme"
+                        ng-model="theme.excellent" [value]="theme.excellent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Uniqueness</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="uniqueness" ng-model="uniqueness.poor"
+                        [value]="uniqueness.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="uniqueness" ng-model="uniqueness.fair"
+                        [value]="uniqueness.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="uniqueness"
+                        ng-model="uniqueness.satisfactory" [value]="uniqueness.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="uniqueness" ng-model="uniqueness.good"
+                        [value]="uniqueness.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="uniqueness"
+                        ng-model="uniqueness.excellent" [value]="uniqueness.excellent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Message</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="message" ng-model="message.poor"
+                        [value]="message.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="message" ng-model="message.fair"
+                        [value]="message.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="message"
+                        ng-model="message.satisfactory" [value]="message.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="message" ng-model="message.good"
+                        [value]="message.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="message"
+                        ng-model="message.excellent" [value]="message.excellent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Impression</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="impression" ng-model="impression.poor"
+                        [value]="impression.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="impression" ng-model="impression.fair"
+                        [value]="impression.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="impression"
+                        ng-model="impression.satisfactory" [value]="impression.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="impression" ng-model="impression.good"
+                        [value]="impression.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="impression"
+                        ng-model="impression.excellent" [value]="impression.excellent">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="card p-3 mt-5">
+                <h3 class="p-5">WOW FACTOR</h3>
+                <table>
+                  <tr>
+                    <th></th>
+                    <th align="center">2</th>
+                    <th align="center">4</th>
+                    <th align="center">6</th>
+                    <th align="center">8</th>
+                    <th align="center">10</th>
+                  </tr>
+                  <tr>
+                    <td>Inspirational</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="inspirational" ng-model="inspirational.poor"
+                        [value]="inspirational.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="inspirational" ng-model="inspirational.fair"
+                        [value]="inspirational.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                        ng-model="composition.satisfactory" [value]="composition.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="inspirational" ng-model="inspirational.good"
+                        [value]="inspirational.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="inspirational"
+                        ng-model="inspirational.excellent" [value]="inspirational.excellent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Impact</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="impact" ng-model="impact.poor"
+                        [value]="impact.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="impact" ng-model="impact.fair"
+                        [value]="impact.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="impact"
+                        ng-model="impact.satisfactory" [value]="impact.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="impact" ng-model="impact.good"
+                        [value]="impact.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="impact"
+                        ng-model="impact.excellent" [value]="impact.excellent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Details</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="details" ng-model="details.poor"
+                        [value]="details.poor">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="details" ng-model="details.fair"
+                        [value]="details.fair">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="details"
+                        ng-model="details.satisfactory" [value]="details.satisfactory">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="details" ng-model="details.good"
+                        [value]="details.good">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="details"
+                        ng-model="details.excellent" [value]="details.excellent">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="card p-3 mt-5">
+                <div class="next">
+                  <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-light">Submit Scores<strong></strong>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

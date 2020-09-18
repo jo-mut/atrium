@@ -15,14 +15,16 @@ import { DbOperationsService } from './services/db-operations.service';
 import { AuthService } from './services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
 import { SiteRoutingModule } from './modules/site/site.module';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     DndDirective,
+    
 
   ],
   imports: [
@@ -40,10 +42,12 @@ import { SiteRoutingModule } from './modules/site/site.module';
     VrGalleryModule,
     MatButtonModule,
     MatDialogModule,
+    MatProgressBarModule,
+    MatRadioModule
 
   ],
   providers: [DbOperationsService, AuthService],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
 export class AppModule { }

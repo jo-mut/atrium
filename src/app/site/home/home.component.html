@@ -1,142 +1,187 @@
 <div class="gallery-site">
-  <div class="landing">
-    <div class="text-center gallery-name">
-      <p class="display-4"><strong>African Atz</strong></p>
-      <h3>Contemporary Virtual Gallery</h3>
-    </div>
-  </div>
-  <div class="short-info">
-    <div class="container pl-0">
-      <div class="row ">
-        <div class="col-md-4 pr-0 mt-3">
-          <div class="contest-enterance">
-            <div class="card">
-              <img src="" alt="">
-              <div class="info">
-                <p>Get feedback from the world's leading photographers</p>
-              </div>
-            </div>
-          </div>
+  <div class="container-fluid">
+    <div class="landing-images">
+      <!-- <div class="row">
+        <div class="col-md-3  p-0" *ngFor="let image of landingImages">
+          <img src={{image}} alt="" (mouseover)="onMouseOver(image)" (mouseout)="onMouseOut(image)">
         </div>
-        <div class="col-md-4 pr-0 mt-3">
-          <div class="contest-feedback">
-            <div class="card">
-              <img src="" alt="">
-              <div class="info">
-                <p>Get feedback from the world's leading photographers</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 pr-0 mt-3">
-          <div class="contest-connection">
-            <div class="card">
-              <img src="" alt="">
-              <div class="info">
-                <p>Connect with a global communities of photographers</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="about">
-    <div class="container pl-0 pr-0">
-      <div class="row">
+      </div> -->
+
+      <!-- <div class="row">
         <div class="col-md-6">
-          <p class="display-4 text-center">The Inspiration</p>
-          <p>
-            About us in two o three paragraphs,
-            About us in two o three paragraphs,
-            About us in two o three paragraphs,
-            About us in two o three paragraphs,
-            About us in two o three paragraphs,
-            About us in two o three paragraphs,
-            About us in two o three paragraphs,
-            About us in two o three paragraphs,
-          </p>
+          <div class="row">
+            <div class="col-md-6">
+              <img src="assets/images/gallery/sample/cart.jpg" alt="">
+            </div>
+            <div class="col-md-6">
+
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="spotlight">
-    <div class="container">
-      <p class="display-4 text-center">The Spotlight</p>
-      <div class="spotlight-video">
-        <vg-player (onPlayerReady)="onPlayerReady($event)">
-          <vg-buffering></vg-buffering>
-          <vg-controls>
-            <vg-play-pause></vg-play-pause>
-            <vg-playback-button></vg-playback-button>
-
-            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-
-            <vg-scrub-bar>
-              <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-              <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-            </vg-scrub-bar>
-
-            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-
-            <vg-mute></vg-mute>
-            <vg-volume></vg-volume>
-
-            <vg-fullscreen></vg-fullscreen>
-          </vg-controls>
-
-          <video #media [vgMedia]="media" [src]="currentItem.src" id="singleVideo" preload="auto" crossorigin>
-          </video>
-        </vg-player>
-        <ul>
-          <li *ngFor="let item of playlist; let $index = index" (click)="onClickPlaylistItem(item, $index)"
-            [class.selected]="item === currentItem">
-          </li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-  <div class="host">
-    <div class="container">
-      <div class="host-partners">
-        <owl-carousel-o [options]="customOptions">
-          <ng-template carouselSlide *ngFor="let host of hosts" [id]="host.id">
-            <div class="m-5">
-              <img [src]="host.flag" [alt]="host.alt" [title]="host.title">
-              <h3>{{host.name}}</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <img src="assets/images/gallery/sample/cart.jpg" alt="">
             </div>
-          </ng-template>
-        </owl-carousel-o>
-      </div>
-      <div class="sponsor-name m-5">
-        <img src="assets/images/mc_logo.png" alt="">
-        <p class="partnership">Sponsored by</p>
-        <h3>The MasterCard Foundation</h3>
-      </div>
-    </div>
-  </div>
-  <!-- <div class="container subscribe">
-    <div class="subscription-form">
-      <form action="">
-        <div class="btn-group">
-          <div class="card p-3 mt-5">
-            <div class="card">
-              <div class="form-group">
-                <input type="email" name="email" placeholder="Enter your email address" class="form-control" [(ngModel)]="user.email" required>
-                <button class="btn btn-primary">Subscribe</button>
-              </div>
+            <div class="col-md-6">
+
             </div>
           </div>
         </div>
-        <p>Subscribe to our mailing list</p>
-      </form>
+      </div> -->
+
+      <h3>African Arts In Context</h3>
+
+      <owl-carousel-o class="carousel-images" [options]="customOptions">
+        <ng-template class="mx-5" carouselSlide *ngFor="let image of landingImages">
+          <div class="m-5">
+            <img [src]="image">
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+
+      <div class="introduction">
+        <p>
+          The Mastercard Foundation Public Awareness Campaign is an Information, Education and Communication (IEC)
+          activity
+          for updates and information on COVID-19 in Africa. The Mastercard Foundation works with visionary organizations
+          to
+          enable young people in Africa and in Indigenous communities in Canada to access dignified and fulfilling work.
+          It
+          is one of the largest, private foundations in the world with a mission to advance learning and promote financial
+          inclusion to create an inclusive and equitable world. The Foundation was created by Mastercard in 2006 as an
+          independent organization with its own Board of Directors and Management.
+          For more on the Mastercard Foundation COVID-19 Recovery and Resilience Program, please visit
+          https://mastercardfdn.org/covid19-recovery-resilience-program/. Follow the Foundation on Twitter at
+          @MastercardFdn
+        </p>
+      </div>
+
+      <div class="landing-info">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="{{hoveredImage}}" alt="">
+            </div>
+            <div class="colm-d-7">
+              <div>
+                <h3>African Arts In Context</h3>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <div class="about">
+        <div class="container pl-0 pr-0">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="display-4 text-center">The Inspiration</p>
+              <p>
+                <strong>Bobby Pall Photography (BPP)</strong> is a professional studio composed of highly experienced professionals
+                formed in response to the need for consolidated offerings of consulting services within the creative
+                space. The team is composed of photographers, videographers, graphic designers, writers and professional
+                editors that provide a comprehensive range of photography, videography and desktop publishing services.
+                <br>
+                The establishment has been undertaking photography and videography services in Africa for over ten
+                years. BPP has also been commissioned to undertake projects revolving around corporate image branding,
+                book and press images, travel brochures, portraits and dynamic concepts for communication where reality
+                meets memories. Some of the clients include, the United Nations, Footprints Press, Nikon, and the Kenya
+                Red Cross Society.
+                <br>
+                The elements that make BPP unique are commitment, innovation, creativity, professionalism, daring to do
+                more and thinking outside the norm, integrity and purpose, world class workmanship, high end
+                professional equipment and an understanding and belief that excellence is key.
+
+              </p>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="spotlight">
+        <div class="container">
+          <p class="display-4 text-center">The Spotlight</p>
+          <div class="spotlight-video">
+            <vg-player (onPlayerReady)="onPlayerReady($event)">
+              <vg-buffering></vg-buffering>
+              <vg-controls>
+                <vg-play-pause></vg-play-pause>
+                <vg-playback-button></vg-playback-button>
+
+                <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                <vg-scrub-bar>
+                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+
+                <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                <vg-mute></vg-mute>
+                <vg-volume></vg-volume>
+
+                <vg-fullscreen></vg-fullscreen>
+              </vg-controls>
+
+              <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
+              </video>
+            </vg-player>
+            <!-- <ul>
+            <li *ngFor="let item of playlist; let $index = index" (click)="onClickPlaylistItem(item, $index)"
+              [class.selected]="item === currentItem">
+            </li>
+          </ul> -->
+          </div>
+
+        </div>
+      </div>
+      <div class="host">
+        <div class="by">
+          <h3><strong>Bobby Pall Photography</strong></h3>
+          <p>in partnership with:</p>
+        </div>
+        <div class="container">
+          <div class="host-partners">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template class="mx-5" carouselSlide *ngFor="let host of hosts" [id]="host.id">
+                <div class="m-5">
+                  <img [src]="host.flag" [alt]="host.alt" [title]="host.title">
+                  <h3 class="mt-4">{{host.name}}</h3>
+                  <p>{{host.bio}}</p>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+          <div class="sponsor m-5">
+            <p class="partnership">Project is sponsored by the</p>
+            <img src="assets/images/mc_logo.png" alt="">
+            <h3>The MasterCard Foundation</h3>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="container subscribe">
+      <div class="subscription-form">
+        <form action="">
+          <div class="btn-group">
+            <div class="card p-3 mt-5">
+              <div class="card">
+                <div class="form-group">
+                  <input type="email" name="email" placeholder="Enter your email address" class="form-control" [(ngModel)]="user.email" required>
+                  <button class="btn btn-primary">Subscribe</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>Subscribe to our mailing list</p>
+        </form>
+      </div>
+    </div> -->
+      <div class="footer">
+        <footer></footer>
+      </div>
     </div>
-  </div> -->
-  <div class="footer">
-    <footer></footer>
   </div>
-</div>

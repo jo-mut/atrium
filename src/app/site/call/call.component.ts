@@ -13,6 +13,8 @@ export class CallComponent implements OnInit {
   mobileWidthThreshold: number = 640;
   countries: any[] = [];
 
+  covidPhotos: any[]= [];
+
 
   customOptions: OwlOptions = {
     loop: true,
@@ -49,6 +51,20 @@ export class CallComponent implements OnInit {
     console.log(event);
   }
 
+  getLandinPageImages() {
+    this.covidPhotos =  [
+      'assets/images/gallery/sample/cart.jpg',
+      'assets/images/gallery/sample/cart.jpg',
+      'assets/images/gallery/sample/cart.jpg',
+      'assets/images/gallery/sample/cart.jpg',
+      'assets/images/gallery/sample/cart.jpg',
+      'assets/images/gallery/sample/cart.jpg',
+      'assets/images/gallery/sample/cart.jpg',
+      'assets/images/gallery/sample/cart.jpg'      
+ 
+    ]
+  }
+
   participatingCountries() {
     this.countries = [
       {
@@ -79,7 +95,7 @@ export class CallComponent implements OnInit {
         flag:'assets/images/flags/tanzania-flag-xl.png',
         alt:'Image_4',
         title:'Image_4',
-        name: 'Uganda'
+        name: 'Tanzania'
 
       },
       {
@@ -88,6 +104,13 @@ export class CallComponent implements OnInit {
         alt:'Image_5',
         title:'Image_5',
         name: 'Uganda'
+      },
+      {
+        id:5,
+        flag:'assets/images/flags/nigeria-flag-xl.png',
+        alt:'Image_5',
+        title:'Image_5',
+        name: 'Nigeria'
       }
     ]
   }

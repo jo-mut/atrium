@@ -1,0 +1,88 @@
+.app-wrapper {
+  font-size: 16px;
+  font-family: 'EB Garamond', serif;
+  font-style: bold;
+  background-color:white ;
+
+  mat-toolbar {
+    background: transparent;
+      height: 100px;
+      img{
+        width: 200px;
+      }
+      .menu-spacer {
+        flex: 1 1 auto;
+      }
+      
+      a {
+        font-size: 16px;
+        font-family: 'EB Garamond', serif;
+        font-weight: bolder;
+        color: teal;
+        font-weight: bolder;
+        text-decoration: none;
+      }
+    
+      a:hover {
+        color: white;
+        height: 100;
+        background-color: teal;
+        border-radius: 1em;
+        border: solid 0px;
+        
+      }
+      
+      button {
+        background-color: white;
+        color: teal;
+        border-radius: 1em;
+        border: solid 0px;
+        font-weight: bolder;
+     
+      }
+
+      button:hover {
+        background-color: teal;
+        color: white;
+        font-style: bolder;
+      }
+     
+    }
+    
+    mat-sidenav-container {
+      background-color: white;
+      .nav-tool-items {
+        display: flex;
+    
+        mat-icon {
+          align-content: flex-end;
+          color: teal;
+        }
+      }
+    
+      mat-sidenav {
+        position: fixed;
+        width: 400px;
+        height: 100vh;
+            
+        .brand {
+          height: 150px;
+          width: 100%;
+        }
+    
+        a {
+          color: white;
+        }
+    
+        a:hover {
+          color: teal;
+        }
+    
+        p {
+          color: teal;
+        }
+      }
+    }
+  
+}
+

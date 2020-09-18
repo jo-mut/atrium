@@ -7,7 +7,7 @@ import { SiteComponent } from './modules/site/site.component';
 
 
 const routes: Routes = [
-    { path: '', redirectTo: 'site', pathMatch: 'full' },
+    { path: '', redirectTo: 'project', pathMatch: 'full' },
     {
         path: 'auth', component: AuthComponent, children: [
             {
@@ -17,7 +17,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'site', component: SiteComponent, children: [
+        path: 'project', component: SiteComponent, children: [
             {
                 path: '',
                 loadChildren: () => SiteRoutingModule

@@ -121,7 +121,7 @@
    <a-entity position="-1.5 1.5 19.5" rotation="0 0 0">
      <!--left wall -->
      <a-entity rotation="0 90 0">
-       <a-image position="1 1.5 -4.4" src="#team-poster" height="5" width="5"></a-image>
+       <a-image position="-15.5 1.5 19.5" src="#team-poster" height="3" width="3"></a-image>
      </a-entity>
    </a-entity>
 
@@ -131,7 +131,7 @@
    <a-image position="-.1 3 12" rotation="0 -90 0" src="#team-arcadio" height="3" width="3"></a-image>
    <a-image position="-.1 3 -9" rotation="0 -90 0" src="#team-judy" height="3" width="3"></a-image>
    <!-- left wall -->
-   <a-image position="-2.9 3 12" rotation="0 90 0" src="#team-porfirio" height="3" width="3"></a-image>
+   <a-image position="-26.9 1.5 20" rotation="0 90 0" src="#team-porfirio" height="5" width="5"></a-image>
    <a-image position="-2.9 3 -9" rotation="0 90 0" src="#team-dustin" height="3" width="3"></a-image>
    <a-image position="-2.9 3 3" rotation="0 90 0" src="#team-maceij" height="3" width="3"></a-image>
 
@@ -274,21 +274,11 @@
      <a-plane position="0 6 0" rotation="90 0 0" height="9" width="9" color="black"></a-plane>
    </a-entity>
 
-   <!-- Secret Room (Second Right) -->
-   <a-entity position="-22.5 1.5 19.5" rotation="0 0 0">
-     <a-entity obj-model="obj: #fox-obj; mtl: #fox-mtl" rotation="0 -110 0"></a-entity>
-   </a-entity>
-
-
-
    <!-- Ground -->
    <a-grid id="ground" static-body material="src: #floor; repeat: 15 15" rotation="0 -90 0"></a-grid>
-
    <!-- Walls (used by map.js -->)
    <a-entity id="walls"></a-entity>
-
-
    <!-- Sky -->
-   <a-sky id="sky" color="#0077b5"></a-sky>
+   <a-sky id="sky" color="#ffffff"></a-sky>
 
  </a-scene>

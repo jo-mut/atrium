@@ -5,12 +5,10 @@
 @import 'assets/atrium-styles/atrium-theme';
 @import "~bootstrap/dist/css/bootstrap.css";
 @import 'assets/atrium-styles/body';
-@import 'assets/atrium-styles/home';
 @import 'assets/atrium-styles/create';
 @import 'assets/atrium-styles/progress';
-// @import 'assets/atrium-styles/navbar';
+@import 'assets/atrium-styles/navbar';
 @import 'assets/atrium-styles/sidebar';
-// @import 'assets/atrium-styles/global';
 @import 'assets/atrium-styles/archives';
 @import 'assets/atrium-styles/sign-in';
 @import 'assets/atrium-styles/sign-up';
@@ -20,9 +18,11 @@
 @import 'assets/atrium-styles/call';
 @import 'assets/atrium-styles/featured';
 @import 'assets/atrium-styles/submit-works';
+@import 'assets/atrium-styles/score';
+@import 'assets/atrium-styles/artworks';
 
   mat-dialog-container#modal-component {
-        border: 3px solid yellow;
+        border: 3px solid #1b1b1b;
         border-radius: 1em;
         background-color: white;
         width: 100% !important;

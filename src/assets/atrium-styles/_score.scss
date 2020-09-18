@@ -1,0 +1,39 @@
+.score {
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 100vh;
+  .artwork{
+    height: 100%;
+    .artwork-media {
+      .card {
+        border: none;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .score-forms {
+    overflow-y:hidden;
+    .card {
+      border: none;
+      border-radius: 1em;
+      color: black;
+      h3 {
+        text-align: center;
+      }
+
+      input {
+        background-color: white;
+      }
+    }
+
+    button {
+      width: 100%;
+      font-weight: bolder;
+    }
+
+   
+  }
+}

@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
   }
 
   signInWithGoogle() {
-    this.authService.googleAuth();
+    // this.authService.googleAuth();
   }
 
 

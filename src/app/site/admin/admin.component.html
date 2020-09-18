@@ -1,8 +1,58 @@
-<div class="featured-artworks">
-  <div class="container-fluid p-0">
+<div class="admin py-5 mt-5">
+  <div class="container">
     <div class="row">
-      <app-artwork-item class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3"
-                         *ngFor="let work of artworks"></app-artwork-item>
+      <div class="col-md-4 mt-3">
+        <div class="card">
+          <div></div>
+        </div>
+        <div class="description p-3">
+          <h3 class="title" >Artworks</h3>
+          <p class="description-tag" > View all the submitted artworks</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToAllArtworks()">View</button>
+        </div>
+      </div>
+      <div class="col-md-4 mt-3">
+        <div class="card">
+          <div></div>
+        </div>
+        <div class="description p-3">
+          <h3 class="title" >Artists</h3>
+          <p class ="description-tag" > View all the registered artists</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToAllArtists()">View</button>
+        </div>
+      </div>
+      <div class="col-md-4 mt-3">
+        <div class="card">
+          <div></div>
+        </div>
+        <div class="description p-3">
+          <h3 class="title" >Team</h3>
+          <p class="description-tag"> View the profiles of the panel team</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToAllTeam()">View</button>
+        </div>
+      </div>
     </div>
+    <!-- <div class="row">
+      <div class="col-md-6 mt-3">
+        <div class="card">
+          <div></div>
+        </div>
+        <div class="description p-3">
+          <h3 class="title" >Categories</h3>
+          <p class="description-tag">View artwork by categories</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToAllCurators()">View</button>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="card">
+          <div></div>
+        </div>
+        <div class="description p-3">
+          <h3 class="title" >Team</h3>
+          <p class="description-tag"> View the profiles of the panel team</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToAllTeam()">View</button>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>

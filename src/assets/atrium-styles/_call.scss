@@ -1,22 +1,45 @@
 .call {
+  color: teal;
   .landing {
-    background-image: url('assets/images/photo.png');
-    background-repeat: no-repeat;
-    background-size: cover;
     width: 100%;
-    height: 80vh;
     text-align: center;
-    margin-bottom: 100px;
-
     .call-theme {
-      padding-top: 100px;
+      color: teal;
+      padding-top: 200px;
+      h3 {
+        font-size: 4em;
+        text-align: center;
+      }
+    }
+
+    img {
+      margin-top: 150px;
+      width: 100%;
+    }
+
+  }
+
+  .call-info {
+    .introduction {
+      text-align: justify;
+    }
+  }
+
+  .purpose {
+    img {
+      width: 100%;
+    }
+  }
+
+  .rules {
+    img {
+      width: 100%;
     }
   }
 
   .process {
     padding-top: 100px;
     padding-bottom: 100px;
-    background-color: #1b1b1b;
     text-align: center;
 
     img {
@@ -26,21 +49,21 @@
 
     .timeline {
       text-align: center;
-      color: black;
+      color: white;
 
       mgl-timeline {
         mgl-timeline-entry {
           mgl-timeline-entry-header {
-            background-color: #543600;
+            background-color: teal;
             color: white;
           }
 
           mgl-timeline-entry-side {
-            background-color: white;
+            background-color: teal;
           }
 
           mgl-timeline-entry-dot {
-            background-color: #543600;
+            background-color: teal;
             padding: 5px;
             color: white;
             font-size: 20px;
@@ -55,13 +78,13 @@
     padding-top: 100px;
     padding-bottom: 100px;
     text-align: center;
+    color: teal;
 
     .flags {
       .card {
         border: none;
         width: 150px;
         height: 100px;
-
         img {
           width: 100%;
           height: 100%;

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CreateModalComponent } from 'src/app/admin/create-modal/create-modal.component';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
@@ -19,8 +17,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,
     private fauth: AngularFireAuth,
-    private dbOperations: DbOperationsService,
-    private matDialog: MatDialog) { }
+    private dbOperations: DbOperationsService) { }
 
   ngOnInit(): void {
     this.authState = this.fauth.authState;
@@ -32,17 +29,6 @@ export class NavbarComponent implements OnInit {
     } else {
       this.hidden = true;
     }
-  }
-
-  openModal() {
-    const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = false;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "40%";
-    dialogConfig.width = "60%";
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(CreateModalComponent, dialogConfig);
   }
 
   goToSubmitArtworks() {
@@ -63,13 +49,13 @@ export class NavbarComponent implements OnInit {
   }
 
   checkIfUserIsAdmin(userId: string) {
-    this.dbOperations.usersCollection(userId)
+    this.dbOperations.usersCollection()
       .ref.where('userId', '==', userId).onSnapshot(data => {
         if(data != null) {
           data.forEach(e => {
             const data = e.data();
             const id = e.id;
-            let user = { id, ...data } as User;
+            let user = {...data } as User;
             if (user.role === 'admin') {
               this.router.navigateByUrl('/site/admin')
             }else {

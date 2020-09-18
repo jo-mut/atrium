@@ -14,24 +14,29 @@
   <span class="nav-tool-items">
     <mat-icon (click)="sidenav.toggle()"   class="p-3 m-3 ">menu</mat-icon>
   </span>
+  <img src="assets/images/gallery/logo.png" alt="">
   <span class="menu-spacer"></span>
-  <a class="mx-3" [routerLink]="['/project/about']">
+  <a class="mx-1 px-3 " [routerLink]="['/project/about']">
     The Project
   </a>
-  <a class="mx-3" [routerLink]="['/project/call']">
+  <a class="mx-1 px-3 " [routerLink]="['/project/call']">
     The Call
   </a>
-  <a class="mx-3" [routerLink]="['/project/featured']">
+  <a class="mx-1 px-3 " [routerLink]="['/project/featured']">
     Featured Works
   </a>
-  <!-- <a class="mx-3"  [routerLink]="['/site/tips']">
+
+  <!-- <a class="mx-3"  [routerLink]="['/project/tips']">
     Tips
   </a> -->
+
+  <button class="btn btn-outline-info px-3 mx-5" (click)="goToSubmitArtworks()">Submit</button>
+
 </mat-toolbar>
 
 <mat-sidenav-container>
   <!-- Sidenav -->
-  <mat-sidenav #sidenav [mode]="hide ? 'over' : 'side'" [(opened)]="opened">
+  <mat-sidenav #sidenav [mode]="hide ? 'side' : 'over'" [(opened)]="opened">
     <div class="brand">
 
     </div>
@@ -48,11 +53,13 @@
       <a mat-list-item [routerLink]="['/project/tips']">
         Tips
       </a>
+      <a class="btn btn-outline-info m-3 " [routerLink]="['/project/tips']">Submit</a>
+
     </mat-nav-list>
   </mat-sidenav>
 
   <!-- Main content -->
-  <mat-sidenav-content class="main-wrapper mt-3 px-3 ">
+  <mat-sidenav-content class="main-wrapper">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

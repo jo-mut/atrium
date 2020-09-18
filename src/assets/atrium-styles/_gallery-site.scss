@@ -1,41 +1,105 @@
 .gallery-site {
-  .landing {
-    background-image: url('assets/images/photo.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+  color: teal;
+  padding-top: 100px;
+  // .landing-info {
+  //   position: relative;
+  //   margin-top: -300px;
+  //   margin-bottom: 300px;
+  //   color: teal;
+  //   h3 {
+  //     color: white;
+  //     position: absolute;
+  //     font-size: 4em;
+  //     font-weight: bolder;
+  //     text-align: center;
+  //   }
+  //   p {
+  //     color: white;
+  //     margin-top: 5em;
+  //     position: absolute;
+  //   }
+  // }
+  .landing-images {
+    margin-top: 1em;
     width: 100%;
-    height: 80vh;
-    .gallery-name {
-      padding-top: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+    .carousel-images{
+      img {
+        width: 100%;
+      }
     }
+   
+    
   }
 
   .short-info {
-    padding-top: 50px;
-    padding-bottom: 50px;
     .card {
+      background-color: transparent;
+      border-radius: 0.5em;
+      color: teal;
       height: 100px;
       width: 100%;
     }
+
+    .card:hover {
+      background-color: teal;
+      color: white;
+    }
+  }
+
+
+   .about:hover {
+    margin-top: 100px;
+    padding-top: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 100px;
+    color: white;
+    background-color: teal;
+    border-radius: 0.5em;
+    border: solid 0.5px lightgray;
+    text-align: center;
   }
 
   .about {
+    margin-top: 100px;
     padding-top: 100px;
     padding-bottom: 100px;
-    background-color:#1b1b1b ;
+    color: teal;
+    text-align: justify
+  }
+
+  .about:hover {
+    margin-top: 100px;
+    padding-top: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 100px;
     color: white;
-    text-align: center;
+    background-color: teal;
+    border-radius: 0.5em;
+    border: solid 0.5px lightgray;
+    text-align: justify;
   }
 
   .host {
+    color: teal;
     padding-top: 100px;
     padding-bottom: 100px;
-    background-color:#1b1b1b ;
     text-align: center;
+    img {
+      width: 16em;
+      
+    }
+    .sponsor {
+      img {
+        width: 100px;
+      }
+    }
   }
 
   .spotlight {
-    padding-top: 100px;
     padding-bottom: 100px;
     text-align: center;
   }
@@ -53,7 +117,7 @@
         border-bottom-left-radius: 0.2em;
       }
       button {
-        background-color: #543600;
+        background-color: teal;
         padding: 0.5em;
         border: none;
         color: white;
