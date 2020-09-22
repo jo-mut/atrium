@@ -52,19 +52,25 @@ export class HomeComponent implements OnInit {
   inspiration: string;
   moreInspiation: string;
   morePurpose: string;
+  purpose: string;
+
+  showPurpose = false;
+  showInspiration = false;
+
 
   constructor(
     private config: NgbCarouselConfig,
     private matDialog: MatDialog,
     private dbOperations: DbOperationsService) {
       this.carouselConfig();
+      this.purposeOfCompetion();
+      this.getInspiration();
    }
 
   ngOnInit(): void {
     this.getSampleArtworks();
     this.projectHost();
-    this.purposeOfCompetion();
-    
+  
   }
 
   carouselConfig() {
@@ -93,7 +99,7 @@ export class HomeComponent implements OnInit {
     this.api.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
   }
 
-  getInspiration(): string  {
+  getInspiration() {
     this.inspiration = `is a professional studio composed of highly experienced  professionals
     formed in response to the need for consolidated offerings of consulting services within the creative
     space. The team is composed of photographers, videographers, graphic designers, writers and professional
@@ -106,18 +112,21 @@ export class HomeComponent implements OnInit {
     more and thinking outside the norm, integrity and purpose, world class workmanship, high end
     professional equipment and an understanding and belief that excellence is key.`
 
-    if(this.inspirationMore) {
-      this.moreInspiation = 'show less'
-      return this.inspiration;
-    }else{
-      this.moreInspiation = 'show more'
-      return this.inspiration.substring(0, 700);
-    }
+    // if(this.showInspiration) {
+    //   this.inspiration;
+    //   this.showInspiration = false;
+
+    // }else{
+    //   this.inspiration.substring(0, 600);
+    //   this.showInspiration = true;
+    // }
+
+    return  this.inspiration.substring(0, 600);
   }
 
 
-  purposeOfCompetion(): string  {
-    let purpose = `As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public
+  purposeOfCompetion() {
+    this.purpose = `As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public
     awareness campaign to share timely, accurate information about the coronavirus, how it is spread, and how
     young people are adapting to their new reality. The Campaign seeks to enhance dissemination, understanding
     and uptake of public health information as a key outcome. The Campaign targets to reach the majority of
@@ -134,14 +143,15 @@ export class HomeComponent implements OnInit {
     photography and videography campaign is: ‘African Resilience in the Wake of a Pandemic’.
     Please read the guidelines and rules carefully before submitting your entry`;
 
-    if(this.showMorePurpose) {
-      this.morePurpose = 'show less'
-      return purpose;
-    }else{
-      this.morePurpose = 'show more'
-      return purpose.substring(0, 650);
-    }
-
+    // if(this.showPurpose) {
+    //   this.showPurpose = false;
+    //   this.purpose;
+    // }else{
+    //   this.showPurpose = true;
+    //   this.purpose.substring(0, 600);
+    // }
+    
+    return this.purpose.substring(0, 600);
   }
 
 
@@ -285,9 +295,21 @@ export class HomeComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "80%";
+    dialogConfig.height = "60%";
     dialogConfig.width = "60%";
-    dialogConfig.data = host;
+    dialogConfig.data = {'info': host.bio}
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
+  }
+
+  lauchMoreInfoModal(info) {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "60%";
+    dialogConfig.width = "60%";
+    dialogConfig.data = {'info': info}
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
   }

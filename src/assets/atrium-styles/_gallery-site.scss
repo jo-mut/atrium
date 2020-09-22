@@ -1,5 +1,6 @@
 .gallery-site {
   color: teal;
+
   img {
     width: 100%;
     border-radius: 0.5em;
@@ -7,32 +8,20 @@
 
   padding-top: 100px;
 
-  // .landing-info {
-  //   position: relative;
-  //   margin-top: -300px;
-  //   margin-bottom: 300px;
-  //   color: teal;
-  //   h3 {
-  //     color: white;
-  //     position: absolute;
-  //     font-size: 4em;
-  //     font-weight: bolder;
-  //     text-align: center;
-  //   }
-  //   p {
-  //     color: white;
-  //     margin-top: 5em;
-  //     position: absolute;
-  //   }
-  // }
-
   .landing {
     max-height: 100vh;
     min-height: 100vh;
     width: 100%;
-    background-image: url('assets/images/gallery/sample/poster1.jpg');
+    background-image: url('assets/images/gallery/sample/poster6.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+
+    h3 {
+      color: white;
+      align-self: baseline;
+      font-weight: bolder;
+    }
+
     .info {
       max-height: 100vh;
       min-height: 100vh;
@@ -50,10 +39,12 @@
     ngb-carousel {
       width: 100%;
       padding: 0px;
+
       img {
         width: 100%;
       }
     }
+
     .carousel-control-prev:hover {
       background: rgba(0, 0, 0, 0.7);
     }
@@ -74,13 +65,11 @@
   }
 
   .privacy {
-    .card {
-      border-radius: 1em;
-      color: black;
+    border-radius: 1em;
+    color: black;
 
-      h3 {
-        color: teal;
-      }
+    h3 {
+      color: teal;
     }
   }
 
@@ -90,6 +79,14 @@
       color: white;
     }
 
+  }
+
+  .submission-call {
+    color: black;
+
+    h3 {
+      color: teal;
+    }
   }
 
   .purpose {
@@ -146,6 +143,7 @@
 
     img {
       width: 100%;
+      border-radius: 1em;
     }
 
   }
@@ -168,9 +166,11 @@
 
   .host {
     color: black;
+
     h3 {
       color: teal;
     }
+
     .host-partners {
       height: 100%;
       border: solid 1px teal;
@@ -178,6 +178,7 @@
 
       .card {
         border-radius: 1em;
+
         img {
           width: 100%;
           margin: 0 auto;
@@ -204,6 +205,7 @@
   .sponsor {
     color: black;
     text-align: center;
+
     h3 {
       text-align: center;
       color: teal;
@@ -221,7 +223,7 @@
     margin-top: 100px;
     padding-bottom: 100px;
 
-    
+
     vg-player {
       width: 100%;
       height: 500px;

@@ -2,7 +2,8 @@
   <div class="p-0">
     <!-- <div class="landing">
       <div class="info">
-        <h3 class="display-4">African Arts in Context</h3>
+        <h3 class="display-4">African Resilience in 
+          the Wake of a Pandemic</h3>
       </div>
     </div> -->
     <div class="host mt-5">
@@ -97,7 +98,7 @@
               <div class="card">
                 <div class="row">
                   <div class="col-md-6">
-                    <img [src]="hosts[0].flag">
+                    <img [src]="hosts[5].flag">
                   </div>
                   <div class="col-md-6">
                     <div class="host-info p-3">
@@ -131,8 +132,8 @@
               independent organization with its own Board of Directors and Management.
               For more on the Mastercard Foundation COVID-19 Recovery and Resilience Program, please visit
               <a href="https://mastercardfdn.org/covid19-recovery-resilience-program/">
-                https://mastercardfdn.org/covid19-recovery-resilience-program/.</a> Follow the Foundation on Twitter at
-              @MastercardFdn.
+                https://mastercardfdn.org/covid19-recovery-resilience-program/.</a> <strong>Follow the Foundation on Twitter at
+                  @MastercardFdn.</strong>
             </p>
           </div>
           <div class="col-md-8">
@@ -153,28 +154,26 @@
             <ul>
               <li><strong>Theme:</strong> African Resilience in the Wake of a Pandemic</li>
               <li><strong>Organisation:</strong> Bobby Pall Photography in collaboration with Mastercard Foundation</li>
-              <li><strong>Submission Dates:</strong> 21th September – 30st November 2020</li>
+              <li><strong>Submission Dates:</strong> 21st September – 30th November 2020</li>
               <li><strong>Eligibility:</strong> Youth (18 – 30 years)</li>
-              <li><strong>Categories: </strong> Photography and Video</li>
+              <li><strong>Categories: </strong> Photography and Videography</li>
               <li><strong>Participating Countries:</strong> Senegal, Ghana, Kenya, Nigeria, Rwanda, Ethiopia, Uganda
               </li>
-              <li><strong>Compensation:</strong> US$100 for every selected image/video (inclusive transfer and
-                withdrawal
-                fees)</li>
+              <li><strong>Compensation:</strong> US$100 for every selected image/video</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="about mt-5">
-      <div class="container pl-0 pr-0">
+    <div class="about mt-5" *ngIf="inspiration" >
+      <div class="container  pl-0 pr-0">
         <div class="row">
           <div class="col-md-4">
             <h3 class="display-4 my-3">The Inspiration</h3>
             <p>
               <strong>Bobby Pall Photography (BPP)</strong>
-              {{getInspiration()}} <strong class="showMore" (click)="getInspiration()">...{{moreInspiation}}</strong>
+              {{getInspiration()}} <strong class="showMore" (click)="lauchMoreInfoModal(inspiration)">...show more</strong>
             </p>
           </div>
           <div class="col-md-8">
@@ -209,19 +208,16 @@
       </div>
     </div> -->
     <div class="call-info container mt-5">
-      <div class="purpose">
+      <div class="purpose" *ngIf="purpose" >
         <div class="row">
           <div class="col-md-8">
             <img src="assets/images/gallery/sample/poster2.jpg" alt="">
           </div>
           <div class="col-md-4">
             <h3 class="mb-5 display-4 text-center">Purpose Of The Campaign</h3>
-            <div *ngIf="showMorePurpose == true">
-              <p>{{purposeOfCompetion()}} <strong (click)="purposeOfCompetion()">...show less</strong></p>
-            </div>
-            <div *ngIf="showMorePurpose == false">
-              <p> {{purposeOfCompetion()}} <strong (click)="purposeOfCompetion()">...show more</strong></p>
-            </div>
+            
+            <p> {{purposeOfCompetion()}} <strong (click)="lauchMoreInfoModal(purpose)">...show more</strong></p>
+
           </div>
         </div>
       </div>
@@ -232,6 +228,71 @@
       <h3>The MasterCard Foundation</h3>
     </div>
   </div>
+
+  <div class="terms mt-5">
+    <h3 class=" display-4 text-center" >Privacy Policy</h3>
+    <div class="privacy">
+      <div class="m-3 p-3">
+        <p>
+          This privacy policy applies to everyone who wishes to participate in this Campaign. This privacy
+          policy
+          explains how the Organizer will use the submitted personal data, such as names or e-mail
+          addresses
+          (Personal
+          Data) and how your privacy will be protected. It is the responsibility of the Organizer to
+          ensure
+          that your
+          Personal Data is handled with due care. The Organizer will neither sell nor trade your Personal
+          Data nor
+          infringe your personal rights in any way. If you register to participate in the Campaign, you
+          disclose your
+          Personal Data. This Personal Data will only be collected, processed and used for the purpose of
+          organizing
+          the
+          Campaign, or informing you about the COVID-19 Public Awareness Campaign, or making a payment to
+          you (if you
+          are selected as a finalist), in accordance with this Privacy Policy.
+
+          The Organizer will not use the contact details for other private or commercial purposes, e.g.
+          for
+          promotional
+          purposes especially, but not limited to, unrequested and uninvited advertising by email, or to
+          be
+          contacted
+          by
+          mail. The Organizer will collect, process and use the Personal Data provided in the Registration
+          Form and
+          Payment Details Form.
+
+          As a condition of participating in the Campaign, each Entrant gives consent for the Organizer to
+          obtain and
+          deliver his or her name, address and other information to third parties for the purpose of
+          administering and
+          organizing the Campaign and to comply with applicable laws, regulations and rules.
+
+          The Organizer will comply with all privacy and data protection laws applicable to its processing
+          of Personal
+          Data.
+
+        </p>
+        <h3 class="text-center dis" >Agreement, Changes to Dates and Deadlines</h3>
+        <p>
+          These Submission Guidelines and Rules are the only agreement between the Entrant and the
+          Organizer, and that
+          is why the submission of any entry, within its scope, expresses acceptance by the Entrant of the
+          terms and
+          conditions stipulated herein.
+
+          The deadlines and dates set out in these Submission Guidelines and Rules may be amended by
+          decision of the
+          Organizer. Any change will be notified through the website: <a
+            href="https://africanartincontext.com/">africanartincontext.com</a>
+
+        </p>
+      </div>
+    </div>
+  </div>
+  
   <div class="footer mt-5">
     <footer></footer>
   </div>

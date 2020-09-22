@@ -1,18 +1,18 @@
 .call {
-  color: teal;
+  color: black;
   text-align: justify;
   h3{
     text-align: center;
+    color: teal;
     
   }
   img {
     width: 100%;
     border-radius: 0.5em;
   }
-  .landing {
+  .call-landing {
     width: 100%;
     ngb-carousel {
-      margin-top: 150px;
       img {
         width: 100%;
         border:none;
@@ -21,7 +21,6 @@
    
     .call-theme {
       height: 600px;
-      margin-top: 150px;
       background-image: url('assets/images/gallery/sample/poster1.jpg');
       background-size: cover;
       background-repeat: no-repeat;

@@ -10,32 +10,31 @@
     </div>
   </div> -->
 
-<mat-toolbar class="header px-5  fixed-top">
-  <!-- <span class="nav-tool-items">
-    <mat-icon (click)="sidenav.toggle()"   class="p-3 m-3 ">menu</mat-icon>
-  </span> -->
-  <img src="assets/images/gallery/logo.png" alt="">
-  <span class="menu-spacer"></span>
-  <a class="mx-1 px-3 " [routerLink]="['/project/about']">
-    The Project
-  </a>
-  <a class="mx-1 px-3 " [routerLink]="['/project/call']">
-    The Call
-  </a>
-  <!-- <a class="mx-1 px-3 " [routerLink]="['/project/featured']">
-    Featured Works
-  </a> -->
-
-  <!-- <a class="mx-3"  [routerLink]="['/project/tips']">
-    Tips
-  </a> -->
-
-  <!-- <div *ngIf="role == 'artist'"> -->
-    <button class="btn btn-outline-info px-3 ml-3 " (click)="goToSubmitArtworks()">Submit</button>
-  <!-- </div> -->
-
-</mat-toolbar>
-
+  <mat-toolbar class="header px-5" [class.hide-nav]="hideNav">
+    <!-- <span class="nav-tool-items">
+      <mat-icon (click)="sidenav.toggle()"   class="p-3 m-3 ">menu</mat-icon>
+    </span> -->
+    <img src="assets/images/gallery/logo.png" alt="">
+    <span class="menu-spacer"></span>
+    <a class="mx-1 px-3 " [routerLink]="['/project/about']">
+      This Project
+    </a>
+    <a class="mx-1 px-3 " [routerLink]="['/project/call']">
+      This Call
+    </a>
+    <!-- <a class="mx-1 px-3 " [routerLink]="['/project/featured']">
+      Featured Works
+    </a> -->
+  
+    <!-- <a class="mx-3"  [routerLink]="['/project/tips']">
+      Tips
+    </a> -->
+  
+    <!-- <div *ngIf="role == 'artist'"> -->
+      <button class="btn btn-outline-info px-3 ml-3 " (click)="goToSubmitArtworks()">Submit</button>
+    <!-- </div> -->
+  
+  </mat-toolbar>
 <mat-sidenav-container>
   <!-- Sidenav -->
   <mat-sidenav #sidenav [mode]="hide ? 'side' : 'over'" [(opened)]="opened">
@@ -44,7 +43,7 @@
     </div>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/project/about']">
-        The Project
+        This Project
       </a>
       <a mat-list-item [routerLink]="['/project/call']">
         The Call

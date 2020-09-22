@@ -26,6 +26,8 @@ export class SiteComponent implements OnInit {
 
   hide: any;
   role: string;
+  scrollTop = 0;
+  hideNav = false;
 
   constructor(private router: Router,
     public ngZone: NgZone,
@@ -44,7 +46,7 @@ export class SiteComponent implements OnInit {
     }
   }
 
- 
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     if (event.target.innerWidth < 768) {
@@ -55,7 +57,12 @@ export class SiteComponent implements OnInit {
       this.opened = true;
     }
   }
- 
+
+  onScroll(event) {
+    this.hideNav = this.scrollTop < event.target.scrollTop;
+    this.scrollTop = event.target.scrollTop;
+  }
+
   isBiggerScreen() {
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     if (width < 768) {
@@ -68,17 +75,17 @@ export class SiteComponent implements OnInit {
   goToSubmitArtworks() {
     this.authState.subscribe(user => {
       this.ngZone.run(() => {
-        if(user != null) {
+        if (user != null) {
           if (user.uid) {
             this.checkIfUserIsAdmin(user.uid)
           } else {
             this.router.navigateByUrl('/project/create-profile')
           }
-        }else{
+        } else {
           this.router.navigateByUrl('/project/create-profile')
         }
       })
-     
+
     },
       err => {
         console.log('Please try again')
@@ -89,17 +96,17 @@ export class SiteComponent implements OnInit {
   checkIfUserIsAdmin(userId: string) {
     this.dbOperations.usersCollectionById(userId)
       .onSnapshot(data => {
-        if(data != null) {
+        if (data != null) {
           data.forEach(e => {
             console.log('AUTHSTATE USER', e.data);
             const data = e.data();
             const id = e.id;
-            let user = {...data} as User;
+            let user = { ...data } as User;
             if (user.role === 'admin') {
               this.role = 'admin';
-              console.log('AUTHSTATE USER', 'admin'); 
+              console.log('AUTHSTATE USER', 'admin');
               this.router.navigateByUrl('/project/admin')
-            }else {
+            } else {
               this.router.navigateByUrl('/project/add-artworks')
               console.log('AUTHSTATE USER', 'artist');
             }

@@ -1,13 +1,13 @@
 .app-wrapper {
   font-size: 16px;
-  font-family: 'Crimson Text', serif;
+  font-family: 'Raleway', sans-serif;
   font-style: bold;
   background-color: white;
 
   mat-toolbar {
     background: transparent;
     height: 100px;
-
+  
     img {
       width: 200px;
     }
@@ -18,7 +18,7 @@
 
     a {
       font-size: 16px;
-      font-family: 'Crimson Text', serif;
+      font-family: 'Raleway', sans-serif;
       font-weight: bolder;
       color: teal;
       font-weight: bolder;
