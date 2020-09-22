@@ -69,7 +69,7 @@
     </div>
     <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
 
-      <div class="artwork-type" *ngIf="artwork.type == 'image'">
+      <div class="artwork-type">
         <div class="card p-3 mt-5">
           <div class="card">
             <div class="form-group">
@@ -84,7 +84,13 @@
           <div class="card">
             <div class="form-group">
               <label>Date Shot</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.shotDate" required>
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker"/>
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
             </div>
           </div>
         </div>
@@ -93,7 +99,7 @@
           <div class="card">
             <div class="form-group">
               <label>Town/Country</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.place" required>
+              <input type="text" name="place" class="form-control" [(ngModel)]="artwork.place" required>
             </div>
           </div>
         </div>
@@ -102,7 +108,7 @@
           <div class="card">
             <div class="form-group">
               <label>Title</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.title" required>
+              <input type="text" name="title" class="form-control" [(ngModel)]="artwork.title" required>
             </div>
           </div>
         </div>
@@ -111,14 +117,14 @@
           <div class="card">
             <div class="form-group">
               <label>Description</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.description" maxlength="150"
-                required>
+              <input type="text" name="description" class="form-control" [(ngModel)]="artwork.description"
+                maxlength="150" required>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="artwork-type" *ngIf="artwork.type == 'video'">
+      <!-- <div class="artwork-type" *ngIf="artwork.type == 'video'">
 
         <div class="card p-3 mt-5">
           <div class="card">
@@ -133,7 +139,7 @@
           <div class="card">
             <div class="form-group">
               <label>Town/Country</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.place" required>
+              <input type="text" name="place" class="form-control" [(ngModel)]="artwork.place" required>
             </div>
           </div>
         </div>
@@ -142,7 +148,7 @@
           <div class="card">
             <div class="form-group">
               <label>Title</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.title" required>
+              <input type="text" name="title" class="form-control" [(ngModel)]="artwork.title" required>
             </div>
           </div>
         </div>
@@ -151,26 +157,26 @@
           <div class="card">
             <div class="form-group">
               <label>Description</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.description" maxlength="150"
+              <input type="text" name="description" class="form-control" [(ngModel)]="artwork.description" maxlength="150"
                 required>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="challenges">
-        <div class="card p-3 mt-5">
+        <div class="card text-center p-3 mt-5">
           <h3>Please tell us a bit about your work</h3>
         </div>
       </div>
-      
+
       <div class="card p-3 mt-5">
         <div class="card">
           <div class="form-group">
             <label>Challenges</label>
-            <textarea  [(ngModel)]="extraDetails.challenges" maxlength="150"
-            required class="form-control" name="challenges" id="challenges" rows="5"></textarea>
-            <small class="text-muted">What are some of the challenges you encountered 
+            <textarea [(ngModel)]="extraDetails.challenges" maxlength="150" required class="form-control"
+              name="challenges" id="challenges" rows="3"></textarea>
+            <small class="help-text">What are some of the challenges you encountered
               in the process of taking the photo(s)/video?</small>
           </div>
         </div>
@@ -180,9 +186,9 @@
         <div class="card">
           <div class="form-group">
             <label>Experience</label>
-            <textarea  [(ngModel)]="extraDetails.experience" maxlength="150"
-            required class="form-control" name="challenges" id="challenges" rows="5"></textarea>
-            <small class="text-muted">Describe your experience</small>
+            <textarea [(ngModel)]="extraDetails.experience" maxlength="150" required class="form-control"
+              name="challenges" id="challenges" rows="3"></textarea>
+            <small class="help-text">Describe your experience</small>
           </div>
         </div>
       </div>
@@ -191,9 +197,9 @@
         <div class="card">
           <div class="form-group">
             <label>Prior to Covid - 19</label>
-            <textarea  [(ngModel)]="extraDetails.lifeBefore" maxlength="150"
-            required class="form-control" name="challenges" id="challenges" rows="5"></textarea>
-            <small class="text-muted">Please describe to us your normal routine prior to Covid - 19</small>
+            <textarea [(ngModel)]="extraDetails.lifeBefore" maxlength="150" required class="form-control"
+              name="challenges" id="challenges" rows="3"></textarea>
+            <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
           </div>
         </div>
       </div>
@@ -203,7 +209,7 @@
           <div class="form-check">
             Please check the boxes below:
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+              <input type="checkbox" class="form-check-input" name="read" (change)="checkReadTermsValue()" value="checked" >
               I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
               the terms and conditions of the photo(s) and video call for submission.
             </label>
@@ -211,14 +217,93 @@
           <div class="form-check">
             Please check the boxes below:
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+              <input type="checkbox" class="form-check-input" name="terms" (change)="checkReadPrivacy()"  value="checked">
               I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
               the terms and conditions of the photo(s) and video call for submission.
             </label>
           </div>
         </div>
       </div>
+      <div class="terms">
+        <div id="accordianId" role="tablist" aria-multiselectable="true">
+          <div class="card">
+            <div class="card-header" role="tab" id="section1HeaderId">
+              <h5 class="mb-0">
+                <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+                  aria-controls="section1ContentId">
+                  <h3>Privacy Policty</h3>
+                </a>
+              </h5>
+            </div>
+            <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
+              <div class="card-body">
+                <div class="card-body">
+                  <div class="privacy mt-5">
+                    <div class="card p-3">
+                      <p>
+                        This privacy policy applies to everyone who wishes to participate in this Campaign. This privacy
+                        policy
+                        explains how the Organizer will use the submitted personal data, such as names or e-mail
+                        addresses
+                        (Personal
+                        Data) and how your privacy will be protected. It is the responsibility of the Organizer to
+                        ensure
+                        that your
+                        Personal Data is handled with due care. The Organizer will neither sell nor trade your Personal
+                        Data nor
+                        infringe your personal rights in any way. If you register to participate in the Campaign, you
+                        disclose your
+                        Personal Data. This Personal Data will only be collected, processed and used for the purpose of
+                        organizing
+                        the
+                        Campaign, or informing you about the COVID-19 Public Awareness Campaign, or making a payment to
+                        you (if you
+                        are selected as a finalist), in accordance with this Privacy Policy.
 
+                        The Organizer will not use the contact details for other private or commercial purposes, e.g.
+                        for
+                        promotional
+                        purposes especially, but not limited to, unrequested and uninvited advertising by email, or to
+                        be
+                        contacted
+                        by
+                        mail. The Organizer will collect, process and use the Personal Data provided in the Registration
+                        Form and
+                        Payment Details Form.
+
+                        As a condition of participating in the Campaign, each Entrant gives consent for the Organizer to
+                        obtain and
+                        deliver his or her name, address and other information to third parties for the purpose of
+                        administering and
+                        organizing the Campaign and to comply with applicable laws, regulations and rules.
+
+                        The Organizer will comply with all privacy and data protection laws applicable to its processing
+                        of Personal
+                        Data.
+
+                      </p>
+                      <h3>Agreement, Changes to Dates and Deadlines</h3>
+                      <p>
+                        These Submission Guidelines and Rules are the only agreement between the Entrant and the
+                        Organizer, and that
+                        is why the submission of any entry, within its scope, expresses acceptance by the Entrant of the
+                        terms and
+                        conditions stipulated herein.
+
+                        The deadlines and dates set out in these Submission Guidelines and Rules may be amended by
+                        decision of the
+                        Organizer. Any change will be notified through the website: <a
+                          href="#">www.AfricanArtinContext.com</a>
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="card p-3 mt-5">
         <div class="next">
           <div class="form-group mb-0">

@@ -1,187 +1,233 @@
 <div class="gallery-site">
-  <div class="container-fluid">
+  <div class="container">
     <div class="landing-images">
-      <!-- <div class="row">
-        <div class="col-md-3  p-0" *ngFor="let image of landingImages">
-          <img src={{image}} alt="" (mouseover)="onMouseOver(image)" (mouseout)="onMouseOut(image)">
-        </div>
-      </div> -->
-
-      <!-- <div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="assets/images/gallery/sample/cart.jpg" alt="">
-            </div>
-            <div class="col-md-6">
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="assets/images/gallery/sample/cart.jpg" alt="">
-            </div>
-            <div class="col-md-6">
-
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <h3>African Arts In Context</h3>
-
-      <owl-carousel-o class="carousel-images" [options]="customOptions">
-        <ng-template class="mx-5" carouselSlide *ngFor="let image of landingImages">
-          <div class="m-5">
-            <img [src]="image">
-          </div>
-        </ng-template>
-      </owl-carousel-o>
-
-      <div class="introduction">
-        <p>
-          The Mastercard Foundation Public Awareness Campaign is an Information, Education and Communication (IEC)
-          activity
-          for updates and information on COVID-19 in Africa. The Mastercard Foundation works with visionary organizations
-          to
-          enable young people in Africa and in Indigenous communities in Canada to access dignified and fulfilling work.
-          It
-          is one of the largest, private foundations in the world with a mission to advance learning and promote financial
-          inclusion to create an inclusive and equitable world. The Foundation was created by Mastercard in 2006 as an
-          independent organization with its own Board of Directors and Management.
-          For more on the Mastercard Foundation COVID-19 Recovery and Resilience Program, please visit
-          https://mastercardfdn.org/covid19-recovery-resilience-program/. Follow the Foundation on Twitter at
-          @MastercardFdn
-        </p>
-      </div>
-
-      <div class="landing-info">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-5">
-              <img src="{{hoveredImage}}" alt="">
-            </div>
-            <div class="colm-d-7">
-              <div>
-                <h3>African Arts In Context</h3>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-     
-      <div class="about">
-        <div class="container pl-0 pr-0">
-          <div class="row">
-            <div class="col-md-6">
-              <p class="display-4 text-center">The Inspiration</p>
-              <p>
-                <strong>Bobby Pall Photography (BPP)</strong> is a professional studio composed of highly experienced professionals
-                formed in response to the need for consolidated offerings of consulting services within the creative
-                space. The team is composed of photographers, videographers, graphic designers, writers and professional
-                editors that provide a comprehensive range of photography, videography and desktop publishing services.
-                <br>
-                The establishment has been undertaking photography and videography services in Africa for over ten
-                years. BPP has also been commissioned to undertake projects revolving around corporate image branding,
-                book and press images, travel brochures, portraits and dynamic concepts for communication where reality
-                meets memories. Some of the clients include, the United Nations, Footprints Press, Nikon, and the Kenya
-                Red Cross Society.
-                <br>
-                The elements that make BPP unique are commitment, innovation, creativity, professionalism, daring to do
-                more and thinking outside the norm, integrity and purpose, world class workmanship, high end
-                professional equipment and an understanding and belief that excellence is key.
-
-              </p>
-            </div>
-            <div class="col-md-6">
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="spotlight">
-        <div class="container">
-          <p class="display-4 text-center">The Spotlight</p>
-          <div class="spotlight-video">
-            <vg-player (onPlayerReady)="onPlayerReady($event)">
-              <vg-buffering></vg-buffering>
-              <vg-controls>
-                <vg-play-pause></vg-play-pause>
-                <vg-playback-button></vg-playback-button>
-
-                <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-
-                <vg-scrub-bar>
-                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                </vg-scrub-bar>
-
-                <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-
-                <vg-mute></vg-mute>
-                <vg-volume></vg-volume>
-
-                <vg-fullscreen></vg-fullscreen>
-              </vg-controls>
-
-              <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
-              </video>
-            </vg-player>
-            <!-- <ul>
-            <li *ngFor="let item of playlist; let $index = index" (click)="onClickPlaylistItem(item, $index)"
-              [class.selected]="item === currentItem">
-            </li>
-          </ul> -->
-          </div>
-
-        </div>
-      </div>
-      <div class="host">
+      <div class="host mt-5">
         <div class="by">
-          <h3><strong>Bobby Pall Photography</strong></h3>
-          <p>in partnership with:</p>
+          <h3 class="display-4 text-center"><strong>Bobby Pall Photography</strong></h3>
+          <h3 class="text-center">in partnership with:</h3>
         </div>
         <div class="container">
-          <div class="host-partners">
-            <owl-carousel-o [options]="customOptions">
-              <ng-template class="mx-5" carouselSlide *ngFor="let host of hosts" [id]="host.id">
-                <div class="m-5">
-                  <img [src]="host.flag" [alt]="host.alt" [title]="host.title">
-                  <h3 class="mt-4">{{host.name}}</h3>
-                  <p>{{host.bio}}</p>
+          <div class="host-partners mt-5 p-5">
+            <ngb-carousel *ngIf="hosts">
+              <ng-template ngbSlide>
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <img [src]="hosts[0].flag">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="host-info p-3">
+                        <h4 class="mt-4 name"><strong>{{hosts[0].name}}</strong></h4>
+                        <p class="bio">{{hosts[0].lessInfo}}</p>
+                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[0])">Read More</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </ng-template>
-            </owl-carousel-o>
-          </div>
-          <div class="sponsor m-5">
-            <p class="partnership">Project is sponsored by the</p>
-            <img src="assets/images/mc_logo.png" alt="">
-            <h3>The MasterCard Foundation</h3>
+              <ng-template ngbSlide >
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <img [src]="hosts[1].flag">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="host-info p-3">
+                        <h4 class="mt-4 name"><strong>{{hosts[1].name}}</strong></h4>
+                        <p class="bio">{{hosts[1].lessInfo}}</p>
+                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[1])">Read More</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbSlide >
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <img [src]="hosts[2].flag">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="host-info p-3">
+                        <h4 class="mt-4 name"><strong>{{hosts[2].name}}</strong></h4>
+                        <p class="bio">{{hosts[2].lessInfo}}</p>
+                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[2])">Read More</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbSlide >
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <img [src]="hosts[3].flag">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="host-info p-3">
+                        <h4 class="mt-4 name"><strong>{{hosts[3].name}}</strong></h4>
+                        <p class="bio">{{hosts[3].lessInfo}}</p>
+                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[3])">Read More</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbSlide >
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <img [src]="hosts[4].flag">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="host-info p-3">
+                        <h4 class="mt-4 name"><strong>{{hosts[4].name}}</strong></h4>
+                        <p class="bio">{{hosts[4].lessInfo}}</p>
+                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[4])">Read More</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbSlide >
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <img [src]="hosts[0].flag">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="host-info p-3">
+                        <h4 class="mt-4 name"><strong>{{hosts[5].name}}</strong></h4>
+                        <p class="bio">{{hosts[5].lessInfo}}</p>
+                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[5])">Read More</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-carousel>
           </div>
         </div>
       </div>
-      <!-- <div class="container subscribe">
-      <div class="subscription-form">
-        <form action="">
-          <div class="btn-group">
-            <div class="card p-3 mt-5">
-              <div class="card">
-                <div class="form-group">
-                  <input type="email" name="email" placeholder="Enter your email address" class="form-control" [(ngModel)]="user.email" required>
-                  <button class="btn btn-primary">Subscribe</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p>Subscribe to our mailing list</p>
-        </form>
-      </div>
-    </div> -->
-      <div class="footer">
-        <footer></footer>
+    </div>
+    <div class="introduction mt-5">
+      <div class="row">
+        <div class="col-md-4">
+          <h3 class="display-4 mb-3">This Project</h3>
+          <p>
+            The Mastercard Foundation Public Awareness Campaign is an Information, Education and Communication (IEC)
+            activity for updates and information on COVID-19 in Africa. The Mastercard Foundation works with visionary
+            organizations to enable young people in Africa and in Indigenous communities in Canada to access dignified
+            and
+            fulfilling work.
+            It is one of the largest, private foundations in the world with a mission to advance learning and promote
+            financial inclusion to create an inclusive and equitable world. The Foundation was created by Mastercard
+            in
+            2006 as an
+            independent organization with its own Board of Directors and Management.
+            For more on the Mastercard Foundation COVID-19 Recovery and Resilience Program, please visit
+            <a href="https://mastercardfdn.org/covid19-recovery-resilience-program/">
+              https://mastercardfdn.org/covid19-recovery-resilience-program/.</a> Follow the Foundation on Twitter at
+            @MastercardFdn.
+          </p>
+        </div>
+        <div class="col-md-8">
+          <img src="assets/images/gallery/sample/poster7.jpg">
+        </div>
       </div>
     </div>
+
+    <div class="submission-call mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="assets/images/gallery/sample/poster6.jpg">
+          </div>
+          <div class="col-md-6">
+            <h3 class="display-4 mb-3 text-center">Call for Submission</h3>
+            <ul>
+              <li><strong>Theme:</strong> African Resilience in the Wake of a Pandemic</li>
+              <li><strong>Organisation:</strong> Bobby Pall Photography in collaboration with Mastercard Foundation</li>
+              <li><strong>Submission Dates:</strong> 21th September – 30st November 2020</li>
+              <li><strong>Eligibility:</strong> Youth (18 – 30 years)</li>
+              <li><strong>Categories: </strong> Photography and Video</li>
+              <li><strong>Participating Countries:</strong> Senegal, Ghana, Kenya, Nigeria, Rwanda, Ethiopia, Uganda
+              </li>
+              <li><strong>Compensation:</strong> US$100 for every selected image/video (inclusive transfer and
+                withdrawal
+                fees)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about mt-5">
+      <div class="container pl-0 pr-0">
+        <div class="row">
+          <div class="col-md-4">
+            <h3 class="display-4 my-3">The Inspiration</h3>
+            <p>
+              <strong>Bobby Pall Photography (BPP)</strong>
+              {{getInspiration()}} <strong class="showMore" (click)="getInspiration()">...{{moreInspiation}}</strong>
+            </p>
+          </div>
+          <div class="col-md-8">
+            <img src="assets/images/gallery/sample/poster3.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="spotlight mt-5">
+      <div class="container">
+        <p class="display-4 mb-5 text-center">The Spotlight</p>
+        <div class="spotlight-video">
+          <vg-player (onPlayerReady)="onPlayerReady($event)">
+            <vg-buffering></vg-buffering>
+            <vg-controls>
+              <vg-play-pause></vg-play-pause>
+              <vg-playback-button></vg-playback-button>
+              <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+              <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+              </vg-scrub-bar>
+              <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+              <vg-mute></vg-mute>
+              <vg-volume></vg-volume>
+              <vg-fullscreen></vg-fullscreen>
+            </vg-controls>
+            <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
+            </video>
+          </vg-player>
+        </div>
+      </div>
+    </div> -->
+    <div class="call-info container mt-5">
+      <div class="purpose">
+        <div class="row">
+          <div class="col-md-8">
+            <img src="assets/images/gallery/sample/poster2.jpg" alt="">
+          </div>
+          <div class="col-md-4">
+            <h3 class="mb-5 display-4 text-center">Purpose Of The Campaign</h3>
+            <div *ngIf="showMorePurpose == true">
+              <p>{{purposeOfCompetion()}} <strong (click)="purposeOfCompetion()">...show less</strong></p>
+            </div>
+            <div *ngIf="showMorePurpose == false">
+              <p> {{purposeOfCompetion()}} <strong (click)="purposeOfCompetion()">...show more</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sponsor mt-5">
+      <h3 class="display-4">Sponsored By</h3>
+      <img src="assets/images/mc_logo.png" alt="">
+      <h3>The MasterCard Foundation</h3>
+    </div>
   </div>
+  <div class="footer mt-5">
+    <footer></footer>
+  </div>
+</div>

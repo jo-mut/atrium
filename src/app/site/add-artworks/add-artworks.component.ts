@@ -1,11 +1,12 @@
-import {Component, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
-import {ArtWork} from 'src/app/models/artwork';
-import {Upload} from "../../interfaces/upload";
-import {DbOperationsService} from "../../services/db-operations.service";
-import {VgApiService} from "@videogular/ngx-videogular/core";
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { ArtWork } from 'src/app/models/artwork';
+import { Upload } from "../../interfaces/upload";
+import { DbOperationsService } from "../../services/db-operations.service";
+import { VgApiService } from "@videogular/ngx-videogular/core";
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { ExtraDetails } from 'src/app/models/extraDetails';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-artworks',
@@ -13,10 +14,10 @@ import { ExtraDetails } from 'src/app/models/extraDetails';
   styleUrls: ['./add-artworks.component.scss']
 })
 export class AddArtworksComponent implements OnInit {
-  @ViewChild('fileDropRef', {static: false}) fileDropEl: ElementRef;
+  @ViewChild('fileDropRef', { static: false }) fileDropEl: ElementRef;
 
   artwork: ArtWork = new ArtWork();
-  extraDetails: ExtraDetails =  new ExtraDetails();
+  extraDetails: ExtraDetails = new ExtraDetails();
   artworks: ArtWork[] = [];
   submittedWorks: ArtWork[] = [];
   files: any[] = [];
@@ -26,6 +27,8 @@ export class AddArtworksComponent implements OnInit {
   video: string;
   private authState: Observable<firebase.User>;
 
+  checkedTerms = false
+  checkedPrivacy = false
 
   constructor(
     private fauth: AngularFireAuth,
@@ -37,16 +40,35 @@ export class AddArtworksComponent implements OnInit {
     this.getCurrentUser();
   }
 
+  checkReadTermsValue() {
+    console.log(this.checkedTerms)
+    if (!this.checkedTerms) {
+      this.checkedTerms = true;
+    } else {
+      this.checkedTerms = false;
+    }
+
+  }
+
+  checkReadPrivacy() {
+    if (!this.checkedPrivacy) {
+      this.checkedPrivacy = true;
+    } else {
+      this.checkedPrivacy = false;
+    }
+
+  }
+
   getCurrentUser() {
     this.authState = this.fauth.authState;
     this.authState.subscribe(user => {
-        if (user) {
-          this.getSubmittedArtworks(user.uid);
-          console.log('AUTHSTATE USER', user.uid); //this works
-        } else {
-          console.log('AUTHSTATE USER EMPTY', user);
-        }
-      },
+      if (user) {
+        this.getSubmittedArtworks(user.uid);
+        console.log('AUTHSTATE USER', user.uid); //this works
+      } else {
+        console.log('AUTHSTATE USER EMPTY', user);
+      }
+    },
       err => {
         console.log('Please try again')
       });
@@ -54,24 +76,53 @@ export class AddArtworksComponent implements OnInit {
 
   getSubmittedArtworks(id: string) {
     this.dbOperations.getUserSubmittedArtworks(id)
-    .onSnapshot(data => {
-      data.forEach(e => {
-        const data = e.data();
-        const id = e.id;
-        let work = {id, ...data} as ArtWork;
-        this.submittedWorks.push(work);
-        console.log(this.submittedWorks.length);
-    })
-    })
+      .onSnapshot(data => {
+        data.forEach(e => {
+          const data = e.data();
+          const id = e.id;
+          let work = { id, ...data } as ArtWork;
+          this.submittedWorks.push(work);
+          console.log(this.submittedWorks.length);
+        })
+      })
   }
 
   onFileSelected(event) {
     this.file = event.target.files[0];
-    console.log(this.file);
+    this.files.push(this.file);
+  }
+
+  public OnDateChange(event): void {
+    this.artwork.shotDate = event;
   }
 
   onSubmit(form) {
-    form.reset();
+    console.log(this.artwork.shotDate);
+    if (this.checkedPrivacy && this.checkReadTermsValue) {
+
+      if (this.file != null) {
+        let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
+        if (ext === 'png' || ext === 'jpg' || ext === ' JPEG'
+          || ext === 'mp4' || ext === 'mov') {
+          this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
+            .then((res) => {
+              form.reset;
+            }).catch((rej) => {
+              window.alert('Upload failed')
+            })
+          console.log('on dropped' + this.submittedWorks.length);
+          const works = this.dbOperations.latestArtWorks;
+
+          console.log('on dropped' + { ...works });
+        } else {
+          window.alert('Please upload an image file')
+        }
+      } else {
+        window.alert('Please upload profile picture')
+      }
+    } else {
+      window.alert('Confirm that you have read the Terms and Conditions')
+    }
   }
 
 
@@ -110,7 +161,7 @@ export class AddArtworksComponent implements OnInit {
       return;
     } else {
 
-      this.dbOperations.uploadImages(this.files);
+      this.dbOperations.uploadImages(this.file, this.artwork);
       console.log('on dropped' + this.submittedWorks.length);
       const works = this.dbOperations.latestArtWorks;
       this.artworks = works;
@@ -131,9 +182,9 @@ export class AddArtworksComponent implements OnInit {
   prepareFilesList(files: Array<any>) {
     const submitterArtworks = this.artworks.length;
     const additionalArtworks = files.length;
-    if(submitterArtworks + additionalArtworks >= 10) {
+    if (submitterArtworks + additionalArtworks >= 10) {
       window.confirm('You can only submit 10 pieces of artwork')
-    }else{
+    } else {
       for (const item of files) {
         // if (item?.type === 'image' || item?.type === 'video') {
         //   item.progress = 0;
@@ -167,7 +218,8 @@ export class AddArtworksComponent implements OnInit {
 
   onPlayerReady(api: VgApiService) {
     this.api = api;
-    this.api.getDefaultMedia().subscriptions.loadedMetadata.subscribe(this.playVideo.bind(this));
+    this.api.getDefaultMedia().subscriptions
+      .loadedMetadata.subscribe(this.playVideo.bind(this));
   }
 
   playVideo() {

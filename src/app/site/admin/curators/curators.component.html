@@ -1,6 +1,6 @@
-<div class="curators pt-5">
+<div class="curators container pt-5">
   <div class="card p-3 mt-5">
-    <div class="add">
+    <div class="add ">
       <div style="display:flex; flex-direction: row; justify-content: space-between; align-items: center">
         <h3>Curators</h3>
         <p class="add-curator" (click)="lauchCuratorModal()" class="mb-0">
@@ -9,13 +9,11 @@
       </div>
     </div>
   </div>
-  <div class="conatainer-fluid p-0">
-    <div class="row">
-      <div class="col-md-4" *ngFor="let curator of curators">
-        <div class="artist">
-          <div class="card">
-            <img class="img-fluid" src="{{curator.profileImage}}" alt="">
-          </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let curator of curators">
+      <div class="artist">
+        <div class="card">
+          <img class="img-fluid" src="{{curator.profileImage}}" alt="">
         </div>
       </div>
     </div>

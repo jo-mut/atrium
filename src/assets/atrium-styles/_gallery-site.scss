@@ -1,6 +1,12 @@
 .gallery-site {
   color: teal;
+  img {
+    width: 100%;
+    border-radius: 0.5em;
+  }
+
   padding-top: 100px;
+
   // .landing-info {
   //   position: relative;
   //   margin-top: -300px;
@@ -24,13 +30,62 @@
     width: 100%;
     padding-left: 5%;
     padding-right: 5%;
-    .carousel-images{
+
+    ngb-carousel {
+      width: 100%;
+      padding: 0px;
       img {
         width: 100%;
       }
     }
-   
-    
+    .carousel-control-prev:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-control-next:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+  }
+
+  .introduction {
+    color: black;
+
+    h3 {
+      text-align: center;
+      color: teal;
+    }
+  }
+
+  .privacy {
+    .card {
+      border-radius: 1em;
+      color: black;
+
+      h3 {
+        color: teal;
+      }
+    }
+  }
+
+  .privacy:hover {
+    .card {
+      background-color: teal;
+      color: white;
+    }
+
+  }
+
+  .purpose {
+    color: black;
+
+    h3 {
+      color: teal;
+    }
+
+    img {
+      width: 100%;
+    }
   }
 
   .short-info {
@@ -49,81 +104,112 @@
   }
 
 
-   .about:hover {
-    margin-top: 100px;
-    padding-top: 100px;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 100px;
-    color: white;
-    background-color: teal;
-    border-radius: 0.5em;
-    border: solid 0.5px lightgray;
-    text-align: center;
-  }
+  // .about:hover {
+  //   margin-top: 100px;
+  //   padding-top: 100px;
+  //   padding-left: 5%;
+  //   padding-right: 5%;
+  //   padding-bottom: 100px;
+  //   color: white;
+  //   background-color: teal;
+  //   border-radius: 0.5em;
+  //   border: solid 0.5px lightgray;
+  //   text-align: center;
+
+  //   h3 {
+  //     color: white;
+  //   }
+  // }
 
   .about {
-    margin-top: 100px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    color: teal;
-    text-align: justify
+    color: black;
+
+    h3 {
+      color: teal;
+    }
+
+    img {
+      width: 100%;
+    }
+
   }
 
-  .about:hover {
-    margin-top: 100px;
-    padding-top: 100px;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 100px;
-    color: white;
-    background-color: teal;
-    border-radius: 0.5em;
-    border: solid 0.5px lightgray;
-    text-align: justify;
-  }
+  // .about:hover {
+  //   margin-top: 100px;
+  //   padding-top: 100px;
+  //   padding-left: 5%;
+  //   padding-right: 5%;
+  //   padding-bottom: 100px;
+  //   color: white;
+  //   background-color: teal;
+  //   border-radius: 0.5em;
+  //   border: solid 0.5px lightgray;
+  //   text-align: justify;
+  //   h3 {
+  //     color: white;
+  //   }
+  // }
 
   .host {
-    color: teal;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    text-align: center;
-    img {
-      width: 16em;
-      
+    color: black;
+    h3 {
+      color: teal;
     }
-    .sponsor {
-      img {
-        width: 100px;
+    .host-partners {
+      height: 100%;
+      border: solid 1px teal;
+      border-radius: 1em;
+
+      .card {
+        border-radius: 1em;
+        img {
+          width: 100%;
+          margin: 0 auto;
+          border-radius: 1em;
+          width: 16em;
+        }
+
+        .host-info {
+          .name {
+            color: black;
+          }
+
+          .bio {
+            color: black;
+          }
+
+        }
       }
+
+    }
+
+  }
+
+  .sponsor {
+    color: black;
+    text-align: center;
+    h3 {
+      text-align: center;
+      color: teal;
+    }
+
+    img {
+      margin: 0 auto;
+      width: 100px;
     }
   }
+
+
 
   .spotlight {
+    margin-top: 100px;
     padding-bottom: 100px;
-    text-align: center;
-  }
 
-  .subscribe {
-    text-align: center;
-    margin-top: 150px;
-    margin-bottom: 150px;
-    .subscription-form {
-      input {
-        width: 100%;
-        padding: 0.5em;
-        border: none;
-        border-top-left-radius: 0.2em;
-        border-bottom-left-radius: 0.2em;
-      }
-      button {
-        background-color: teal;
-        padding: 0.5em;
-        border: none;
-        color: white;
-        border-top-right-radius: 0.2em;
-        border-bottom-right-radius: 0.2em;
-      }
+    
+    vg-player {
+      width: 100%;
+      height: 500px;
     }
   }
+
 }

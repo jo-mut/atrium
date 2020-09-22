@@ -1,46 +1,79 @@
 .call {
   color: teal;
+  text-align: justify;
+  h3{
+    text-align: center;
+    
+  }
+  img {
+    width: 100%;
+    border-radius: 0.5em;
+  }
   .landing {
     width: 100%;
-    text-align: center;
-    .call-theme {
-      color: teal;
-      padding-top: 200px;
-      h3 {
-        font-size: 4em;
-        text-align: center;
+    ngb-carousel {
+      margin-top: 150px;
+      img {
+        width: 100%;
+        border:none;
       }
     }
-
-    img {
+   
+    .call-theme {
+      height: 600px;
       margin-top: 150px;
-      width: 100%;
+      background-image: url('assets/images/gallery/sample/poster1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: teal;
+      h3 {
+        font-size: 4em;
+      }
     }
 
   }
 
-  .call-info {
-    .introduction {
-      text-align: justify;
+  .submission {
+    color: black;
+    h3 {
+      color: teal;
+      text-align: center;
+    }
+    
+  }
+
+  .selection {
+    color: black;
+    h3 {
+      color: teal;
+      text-align: center;
     }
   }
 
   .purpose {
+    color: black;
     img {
       width: 100%;
+    }
+
+    h3 {
+      color: teal;
     }
   }
 
   .rules {
+    color: black;
     img {
       width: 100%;
+    }
+
+    h3{
+      color: teal;
     }
   }
 
   .process {
     padding-top: 100px;
-    padding-bottom: 100px;
-    text-align: center;
 
     img {
       width: 100%;
@@ -48,7 +81,6 @@
     }
 
     .timeline {
-      text-align: center;
       color: white;
 
       mgl-timeline {
@@ -74,10 +106,16 @@
 
   }
 
+  .submission {
+    padding-top: 100px;
+  }
+
+  .selection {
+    padding-top: 100px;
+  }
+
   .countries {
     padding-top: 100px;
-    padding-bottom: 100px;
-    text-align: center;
     color: teal;
 
     .flags {
@@ -91,5 +129,10 @@
         }
       }
     }
+  }
+
+  .contest-requirements {
+    margin-top: 100px;
+    font-weight: bolder;
   }
 }

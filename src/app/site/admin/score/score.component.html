@@ -1,4 +1,4 @@
-<div class="score py-5 mt-5">
+<div class="score py-5">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
@@ -34,7 +34,7 @@
         <div class="score-forms">
           <div class="photo-score-form" *ngIf="work.type == 'image'">
             <form class="form-group" #photoScoresForm="ngForm" (ngSubmit)="onSubmit(photoScoresForm)" novalidate>
-              <div class="card p-3 mt-5">
+              <div class="card p-3">
                 <h3 class="p-5">TECHNIQUE</h3>
                 <table>
                   <tr>
@@ -48,72 +48,76 @@
                   <tr>
                     <td>Composition</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" ng-model="composition.poor" 
-                        [value]="templateChecked" [checked]="true" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" name="composition" [(ngModel)]="composition.poor" 
+                        [value]="composition.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" ng-model="composition.fair"
-                        [value]="composition.fair" [checked]="true" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="composition.fair"
+                        [value]="composition.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="composition"
-                        ng-model="composition.satisfactory" [value]="composition.satisfactory" [checked]="true" 
+                      [(ngModel)]="composition.satisfactory" [value]="composition.satisfactory" [checked]="false" 
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" ng-model="composition.good"
-                        [value]="composition.good" [checked]="true" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="composition.good"
+                        [value]="composition.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="composition"
-                        ng-model="composition.excellent" [value]="composition.excellent" [checked]="true" 
+                      [(ngModel)]="composition.excellent" [value]="composition.excellent" [checked]="false" 
                         (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
                     <td>Lighting</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="lighting" ng-model="lighting.poor"
-                        [value]="lighting.poor">
+                      <input type="radio" class="form-control" name="lighting" [(ngModel)]="lighting.poor"
+                        [value]="lighting.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="lighting" ng-model="lighting.fair"
-                        [value]="lighting.fair">
+                      <input type="radio" class="form-control" id="fair" name="lighting" [(ngModel)]="lighting.fair"
+                        [value]="lighting.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="lighting"
-                        ng-model="lighting.satisfactory" [value]="lighting.satisfactory">
+                      [(ngModel)]="lighting.satisfactory" [value]="lighting.satisfactory" 
+                      [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="lighting" ng-model="lighting.good"
-                        [value]="lighting.good">
+                      <input type="radio" class="form-control" id="good" name="lighting" [(ngModel)]="lighting.good"
+                        [value]="lighting.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="lighting"
-                        ng-model="lighting.excellent" [value]="lighting.excellent">
+                      [(ngModel)]="lighting.excellent" [value]="lighting.excellent" [checked]="false"
+                       (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
                     <td>Clarity</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="clarity" ng-model="clarity.poor"
-                        [value]="clarity.poor">
+                      <input type="radio" class="form-control" name="clarity" [(ngModel)]="clarity.poor"
+                        [value]="clarity.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="clarity" ng-model="clarity.fair"
-                        [value]="clarity.fair">
+                      <input type="radio" class="form-control" id="fair" name="clarity" [(ngModel)]="clarity.fair"
+                        [value]="clarity.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="clarity"
-                        ng-model="clarity.satisfactory" [value]="clarity.satisfactory">
+                      [(ngModel)]="clarity.satisfactory" [value]="clarity.satisfactory" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="clarity" ng-model="clarity.good"
-                        [value]="clarity.good">
+                      <input type="radio" class="form-control" id="good" name="clarity" [(ngModel)]="clarity.good"
+                        [value]="clarity.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="clarity"
-                        ng-model="clarity.excellent" [value]="clarity.excellent">
+                      [(ngModel)]="clarity.excellent" [value]="clarity.excellent" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                 </table>
@@ -133,93 +137,101 @@
                   <tr>
                     <td>Theme</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="theme" ng-model="theme.poor"
-                        [value]="theme.poor">
+                      <input type="radio" class="form-control" name="theme" [(ngModel)]="theme.poor"
+                        [value]="theme.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="theme" ng-model="theme.fair"
-                        [value]="theme.fair">
+                      <input type="radio" class="form-control" id="fair" name="theme" [(ngModel)]="theme.fair"
+                        [value]="theme.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="theme"
-                        ng-model="theme.satisfactory" [value]="theme.satisfactory">
+                      [(ngModel)]="theme.satisfactory" [value]="theme.satisfactory" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="theme" ng-model="theme.good"
-                        [value]="theme.good">
+                      <input type="radio" class="form-control" id="good" name="theme" [(ngModel)]="theme.good"
+                        [value]="theme.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="theme"
-                        ng-model="theme.excellent" [value]="theme.excellent">
+                      [(ngModel)]="theme.excellent" [value]="theme.excellent" [checked]="false"
+                       (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
                     <td>Uniqueness</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="uniqueness" ng-model="uniqueness.poor"
-                        [value]="uniqueness.poor">
+                      <input type="radio" class="form-control" name="uniqueness" [(ngModel)]="uniqueness.poor"
+                        [value]="uniqueness.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="uniqueness" ng-model="uniqueness.fair"
-                        [value]="uniqueness.fair">
+                      <input type="radio" class="form-control" id="fair" name="uniqueness" [(ngModel)]="uniqueness.fair"
+                        [value]="uniqueness.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="uniqueness"
-                        ng-model="uniqueness.satisfactory" [value]="uniqueness.satisfactory">
+                      [(ngModel)]="uniqueness.satisfactory" [value]="uniqueness.satisfactory" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="uniqueness" ng-model="uniqueness.good"
-                        [value]="uniqueness.good">
+                      <input type="radio" class="form-control" id="good" name="uniqueness" [(ngModel)]="uniqueness.good"
+                        [value]="uniqueness.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="uniqueness"
-                        ng-model="uniqueness.excellent" [value]="uniqueness.excellent">
+                      [(ngModel)]="uniqueness.excellent" [value]="uniqueness.excellent" [checked]="false"
+                       (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
                     <td>Message</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="message" ng-model="message.poor"
-                        [value]="message.poor">
+                      <input type="radio" class="form-control" name="message" [(ngModel)]="message.poor"
+                        [value]="message.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="message" ng-model="message.fair"
-                        [value]="message.fair">
+                      <input type="radio" class="form-control" id="fair" name="message" [(ngModel)]="message.fair"
+                        [value]="message.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="message"
-                        ng-model="message.satisfactory" [value]="message.satisfactory">
+                        ng-model="message.satisfactory" [value]="message.satisfactory" [checked]="false"
+                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="message" ng-model="message.good"
-                        [value]="message.good">
+                      <input type="radio" class="form-control" id="good" name="message" [(ngModel)]="message.good"
+                        [value]="message.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="message"
-                        ng-model="message.excellent" [value]="message.excellent">
+                      [(ngModel)]="message.excellent" [value]="message.excellent" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
                     <td>Impression</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="impression" ng-model="impression.poor"
-                        [value]="impression.poor">
+                      <input type="radio" class="form-control" name="impression" [(ngModel)]="impression.poor"
+                        [value]="impression.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="impression" ng-model="impression.fair"
-                        [value]="impression.fair">
+                      <input type="radio" class="form-control" id="fair" name="impression" [(ngModel)]="impression.fair"
+                        [value]="impression.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="impression"
-                        ng-model="impression.satisfactory" [value]="impression.satisfactory">
+                        ng-model="impression.satisfactory" [value]="impression.satisfactory" [checked]="false" 
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="impression" ng-model="impression.good"
-                        [value]="impression.good">
+                      <input type="radio" class="form-control" id="good" name="impression" [(ngModel)]="impression.good"
+                        [value]="impression.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="impression"
-                        ng-model="impression.excellent" [value]="impression.excellent">
+                      [(ngModel)]="impression.excellent" [value]="impression.excellent" [checked]="false"
+                       (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                 </table>
@@ -239,75 +251,81 @@
                   <tr>
                     <td>Inspirational</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="inspirational" ng-model="inspirational.poor"
-                        [value]="inspirational.poor">
+                      <input type="radio" class="form-control" name="inspirational" [(ngModel)]="inspirational.poor"
+                        [value]="inspirational.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="inspirational" ng-model="inspirational.fair"
-                        [value]="inspirational.fair">
+                      <input type="radio" class="form-control" id="fair" name="inspirational" [(ngModel)]="inspirational.fair"
+                        [value]="inspirational.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="composition"
-                        ng-model="composition.satisfactory" [value]="composition.satisfactory">
+                      [(ngModel)]="composition.satisfactory" [value]="composition.satisfactory" [checked]="false"
+                       (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="inspirational" ng-model="inspirational.good"
-                        [value]="inspirational.good">
+                      <input type="radio" class="form-control" id="good" name="inspirational" [(ngModel)]="inspirational.good"
+                        [value]="inspirational.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="inspirational"
-                        ng-model="inspirational.excellent" [value]="inspirational.excellent">
+                      [(ngModel)]="inspirational.excellent" [value]="inspirational.excellent" [checked]="false"
+                       (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
                     <td>Impact</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="impact" ng-model="impact.poor"
-                        [value]="impact.poor">
+                      <input type="radio" class="form-control" name="impact" [(ngModel)]="impact.poor"
+                        [value]="impact.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="impact" ng-model="impact.fair"
-                        [value]="impact.fair">
+                      <input type="radio" class="form-control" id="fair" name="impact" [(ngModel)]="impact.fair"
+                        [value]="impact.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="impact"
-                        ng-model="impact.satisfactory" [value]="impact.satisfactory">
+                      [(ngModel)]="impact.satisfactory" [value]="impact.satisfactory" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="impact" ng-model="impact.good"
-                        [value]="impact.good">
+                      <input type="radio" class="form-control" id="good" name="impact" [(ngModel)]="impact.good"
+                        [value]="impact.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="impact"
-                        ng-model="impact.excellent" [value]="impact.excellent">
+                      [(ngModel)]="impact.excellent" [value]="impact.excellent" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
                     <td>Details</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="details" ng-model="details.poor"
-                        [value]="details.poor">
+                      <input type="radio" class="form-control" name="details" [(ngModel)]="details.poor"
+                        [value]="details.poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="details" ng-model="details.fair"
-                        [value]="details.fair">
+                      <input type="radio" class="form-control" id="fair" name="details" [(ngModel)]="details.fair"
+                        [value]="details.fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="details"
-                        ng-model="details.satisfactory" [value]="details.satisfactory">
+                      [(ngModel)]="details.satisfactory" [value]="details.satisfactory" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="details" ng-model="details.good"
-                        [value]="details.good">
+                      <input type="radio" class="form-control" id="good" name="details" [(ngModel)]="details.good"
+                        [value]="details.good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="details"
-                        ng-model="details.excellent" [value]="details.excellent">
+                      [(ngModel)]="details.excellent" [value]="details.excellent" [checked]="false" 
+                      (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                 </table>
               </div>
-              <div class="card p-3 mt-5">
+              <div class="mt-5">
                 <div class="next">
                   <div class="form-group mb-0">
                     <button type="submit" class="btn btn-light">Submit Scores<strong></strong>

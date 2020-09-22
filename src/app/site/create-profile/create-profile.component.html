@@ -52,7 +52,13 @@
         <div class="card">
           <div class="form-group">
             <label>Date Of Birth</label>
-            <input type="text" name="birthDate" class="form-control" [(ngModel)]="user.birthDate" required>
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker"/>
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
           </div>
         </div>
       </div>
@@ -61,7 +67,8 @@
         <div class="card">
           <div class="form-group">
             <label>Gender</label>
-            <select class="form-control">
+            <select class="form-control" (change)="selectOption($event.target.value)"
+            [(ngModel)]="user.gender" name="gender" required>
               <option value="">Select an option</option>
               <option *ngFor="let gender of genders">
                 {{gender}}

@@ -47,7 +47,6 @@ export class AuthService {
       return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
         .then((result) => {
           this.saveUserProfileInfo(user);
-          window.alert(result.additionalUserInfo);
         }).catch((error) => {
           window.alert(error.message)
         })

@@ -1,21 +1,20 @@
 import {Upload} from "../interfaces/upload";
 
 export class ArtWork implements Upload {
-  id: string;
-  artworkId: any;
-  type: string;
-  title: string;
-  description: string;
-  url: string;
-  status: string;
-  userId: string;
-  place: string;
-  shotDate: string;
-  updatedAt: string;
-  createdAt: string;
-  reviewedBy: string;
-  approvedBy: string;
-  
+  id: string = null;
+  artworkId: any = null;
+  type: string = null;
+  title: string = null;
+  description: string = null;
+  url: string = null;
+  status: string = null;
+  userId: string = null;
+  place: string = null;
+  shotDate: string = null;
+  updatedAt: string = null;
+  createdAt: string = null;
+  reviewedBy: string = null;
+  approvedBy: string = null;
 
   constructor() {
 

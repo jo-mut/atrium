@@ -23,6 +23,7 @@ export class CreateProfileComponent implements OnInit {
   youtube: string;
   instagram: string;
   others: string;
+  social: string[] = [];
 
   constructor(private authService: AuthService,
     private matDialog: MatDialog,
@@ -40,17 +41,29 @@ export class CreateProfileComponent implements OnInit {
     console.log(this.file);
   }
 
+  public OnDateChange(event): void {
+    this.user.birthDate = event;
+  }
+
+  selectOption(event) {
+    this.user.gender = event;
+  }
+
   onSubmit(form) {
+    this.user.code = Date.now() + '';
+    this.social.push(this.facebook);
+      this.social.push(this.instagram);
+      this.social.push(this.others);
+      this.social.push(this.youtube);
+      this.user.socialMedia = this.social;
     this.signUp(this.user, this.file);
     // form.reset();
   }
 
-  signUp(user, file) {
-    console.log(user)
+  signUp(user: User, file) {
+    // console.log(user)
     this.authService.signUp(user)
     .then(res => {
-      console.log(user)
-      this.authService.signUp(user)
       /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
       // this.authService.sendVerificationMail();

@@ -31,19 +31,22 @@ export class AddCuratorModalComponent implements OnInit {
 
 
   onSubmit(form) {
-    if (this.file != null) {
-      if (this.file.type.includes('image')) {
-        this.createCuratorProfile();
-        form.reset();
-      } else {
-        window.alert('Please upload an image file')
-      }
-    } else {
-      window.alert('Please upload profile picture')
-    }
+    // if (this.file != null) {
+    //   if (this.file.type.includes('image')) {
+    //     this.createCuratorProfile();
+    //     form.reset();
+    //   } else {
+    //     window.alert('Please upload an image file')
+    //   }
+    // } else {
+    //   window.alert('Please upload profile picture')
+    // }
+
+    this.createCuratorProfile(this.file);
+    form.reset();
   }
 
-  createCuratorProfile() {
+  createCuratorProfile(file?: File) {
     this.dbOperations.getCurrentUser().subscribe(user => {
       if (user) {
         this.curator.authorizorId = user.uid;

@@ -4,10 +4,9 @@
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import 'assets/atrium-styles/atrium-theme';
 @import "~bootstrap/dist/css/bootstrap.css";
-@import 'assets/atrium-styles/body';
 @import 'assets/atrium-styles/create';
 @import 'assets/atrium-styles/progress';
-@import 'assets/atrium-styles/navbar';
+// @import 'assets/atrium-styles/navbar';
 @import 'assets/atrium-styles/sidebar';
 @import 'assets/atrium-styles/archives';
 @import 'assets/atrium-styles/sign-in';
@@ -16,35 +15,57 @@
 @import 'assets/atrium-styles/dashboard';
 @import 'assets/atrium-styles/gallery-site';
 @import 'assets/atrium-styles/call';
-@import 'assets/atrium-styles/featured';
 @import 'assets/atrium-styles/submit-works';
 @import 'assets/atrium-styles/score';
 @import 'assets/atrium-styles/artworks';
+@import 'assets/atrium-styles/admin';
 
-  mat-dialog-container#modal-component {
-        border: 3px solid #1b1b1b;
-        border-radius: 1em;
-        background-color: white;
-        width: 100% !important;
-        height: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        max-width:none !important;
-    }
 
-    .modal-dialog-full-width {
-      width: 100% !important;
-      height: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      max-width:none !important;
-
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Crimson Text', serif;
+  color: black;
+  text-align: justify;
+  h3{
+    text-align: justify;
   }
 
-  .modal-content-full-width  {
-      height: auto !important;
-      min-height: 100% !important;
-      border-radius: 0 !important;
-      background-color: #ececec !important
+  img {
+    border-radius: 0.5em;
   }
+}
 
+footer {
+  height: 100px;
+  background-color: #1b1b1b;
+}
+
+
+
+mat-dialog-container#modal-component {
+  border: 3px solid #1b1b1b;
+  border-radius: 1em;
+  background-color: white;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+.modal-dialog-full-width {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+
+}
+
+.modal-content-full-width {
+  height: auto !important;
+  min-height: 100% !important;
+  border-radius: 0 !important;
+  background-color: #ececec !important
+}

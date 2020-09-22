@@ -4,6 +4,9 @@ import { ArtWork } from './../../models/artwork';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import { IMedia } from 'src/app/interfaces/imedia';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { HostProfileModalComponent } from '../admin/host-profile-modal/host-profile-modal.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -18,10 +21,12 @@ export class HomeComponent implements OnInit {
   hoveredImage: any;
   backgroundImgs = ['1.png', '2.png', '3.png'];
   chosenImage: any;
-  video = "assets/videos/kawasaki.mp4";
+  video = "assets/videos/resilience.mp4";
   mobileWidthThreshold: number = 640;
   hosts: any[] = [];
   customOptions: OwlOptions;
+  showMorePurpose = false;
+  inspirationMore = false;
 
   playlist: Array<IMedia> = [
     {
@@ -44,16 +49,30 @@ export class HomeComponent implements OnInit {
   currentIndex = 0;
   api: VgApiService;
   currentItem: IMedia = this.playlist[this.currentIndex];
+  inspiration: string;
+  moreInspiation: string;
+  morePurpose: string;
 
-
-  constructor(private dbOperations: DbOperationsService) {
-    this.getLandinPageImages();
+  constructor(
+    private config: NgbCarouselConfig,
+    private matDialog: MatDialog,
+    private dbOperations: DbOperationsService) {
+      this.carouselConfig();
    }
 
   ngOnInit(): void {
     this.getSampleArtworks();
     this.projectHost();
+    this.purposeOfCompetion();
     
+  }
+
+  carouselConfig() {
+    this.config.interval = 3000;
+    this.config.wrap = false;
+    this.config.keyboard = false;
+    this.config.pauseOnHover = false;
+    this.config.wrap = false;
   }
 
   // Get a list of archived artwork
@@ -71,22 +90,60 @@ export class HomeComponent implements OnInit {
     this.api = api;
     this.api.getDefaultMedia().subscriptions
     .loadedMetadata.subscribe(this.playVideo.bind(this));
-    // this.api.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
   }
 
-  getLandinPageImages() {
-    this.landingImages =  [
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg'      
- 
-    ]
+  getInspiration(): string  {
+    this.inspiration = `is a professional studio composed of highly experienced  professionals
+    formed in response to the need for consolidated offerings of consulting services within the creative
+    space. The team is composed of photographers, videographers, graphic designers, writers and professional
+    editors that provide a comprehensive range of photography, videography and desktop publishing services.
+    The establishment has been undertaking photography and videography services in Africa for over ten
+    years. BPP has also been commissioned to undertake projects revolving around corporate image branding,
+    book and press images, travel brochures, portraits and dynamic concepts for communication where reality
+    meets memories. Some of the clients include, the United Nations, Footprints Press, Nikon, and the Kenya
+    Red Cross Society. The elements that make BPP unique are commitment, innovation, creativity, professionalism, daring to do
+    more and thinking outside the norm, integrity and purpose, world class workmanship, high end
+    professional equipment and an understanding and belief that excellence is key.`
+
+    if(this.inspirationMore) {
+      this.moreInspiation = 'show less'
+      return this.inspiration;
+    }else{
+      this.moreInspiation = 'show more'
+      return this.inspiration.substring(0, 700);
+    }
   }
+
+
+  purposeOfCompetion(): string  {
+    let purpose = `As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public
+    awareness campaign to share timely, accurate information about the coronavirus, how it is spread, and how
+    young people are adapting to their new reality. The Campaign seeks to enhance dissemination, understanding
+    and uptake of public health information as a key outcome. The Campaign targets to reach the majority of
+    populations, making use of multi-communication
+    channels and tactics. The goal is to engage young people across seven countries (Kenya, Uganda, Ethiopia,
+    Rwanda, Nigeria, Ghana and Senegal) to share stories about their personal experiences navigating life
+    during the global pandemic. The storytelling should take the form of photographs and videos. Bobby Pall
+    Photography (The Organizer) is partnering with the Foundation on this Campaign that provides
+    photographers and videographers with the opportunity to actively participate in the COVID-19 Recovery and
+    Resilience Programme and to acquire international exposure when their work is published in the
+    online/virtual
+    gallery. By choosing to participate in this Campaign, the Entrant agrees to the following official
+    guidelines and rules, which create a contract between him/her and the Organizer. The theme of the
+    photography and videography campaign is: ‘African Resilience in the Wake of a Pandemic’.
+    Please read the guidelines and rules carefully before submitting your entry`;
+
+    if(this.showMorePurpose) {
+      this.morePurpose = 'show less'
+      return purpose;
+    }else{
+      this.morePurpose = 'show more'
+      return purpose.substring(0, 650);
+    }
+
+  }
+
 
   onMouseOver(image): void {
     this.hoveredImage = image;
@@ -96,24 +153,24 @@ export class HomeComponent implements OnInit {
     this.hoveredImage = null;
   }
 
-  // nextVideo() {
-  //   this.currentIndex++;
+  nextVideo() {
+    this.currentIndex++;
 
-  //   if (this.currentIndex === this.playlist.length) {
-  //     this.currentIndex = 0;
-  //   }
+    if (this.currentIndex === this.playlist.length) {
+      this.currentIndex = 0;
+    }
 
-  //   this.currentItem = this.playlist[this.currentIndex];
-  // }
+    this.currentItem = this.playlist[this.currentIndex];
+  }
 
   playVideo() {
     this.api.play();
   }
 
-  // onClickPlaylistItem(item: IMedia, index: number) {
-  //   this.currentIndex = index;
-  //   this.currentItem = item;
-  // }
+  onClickPlaylistItem(item: IMedia, index: number) {
+    this.currentIndex = index;
+    this.currentItem = item;
+  }
 
   getOwlOptions() {
     this.customOptions = {
@@ -129,13 +186,13 @@ export class HomeComponent implements OnInit {
           items: 1
         },
         400: {
-          items: 2
+          items: 1
         },
         740: {
-          items: 3
+          items: 2
         },
         940: {
-          items: 4
+          items: 3
         }
       },
       nav: true
@@ -143,16 +200,19 @@ export class HomeComponent implements OnInit {
 
   }
 
+ 
+
   projectHost() {
     this.hosts = [
       {
-        id:1,
+        id:0,
         flag:'assets/images/gallery/hosts/bobby.jpg',
         title:'Project Lead',
         name: 'Bobby Pall',
+        lessInfo: ` Bobby Pall is a modern day photographic artist who believes that photography is the ideal medium for ...`,
         bio: `
         Bobby Pall is a modern day photographic artist who believes that photography is the ideal medium for communicating today’s issues. 
-        My passion is to:
+        My passion is to: 
         TOUCH those who encounter my work
         MOVE to cause a change using the power of photography
         INSPIRE to be part of a proactive community
@@ -165,6 +225,7 @@ export class HomeComponent implements OnInit {
         flag:'assets/images/gallery/hosts/george.jpg',
         title:'Writer/Documentary Filmmaker',
         name: 'George Muiruri',
+        lessInfo: ` I have had innumerable restarts in my life; start and stop periods. Start periods that birthed new life ...`,
         bio: `I have had innumerable restarts in my life; start and stop periods. Start periods that birthed new life; stop periods at junctions seeking direction.  Each, the genesis of a new opportunity, a new perception, a new idea, a new love, a new…, a new… 
         I am a creator; a documentary filmmaker intertwined with a writer. The writer in me manifested three years before the filmmaker was born. Over the past 10 years of my filmmaking journey, I have had the good fortune of creating short documentary pieces for profit and non-profit organizations.
         Covid-19 has brought me to another junction, only this time, this is not a restart. I already know what I need to do for the foreseeable future, and ‘African Resilience in the Wake of a Pandemic’, a photography and videography campaign under the Mastercard Foundation COVID-19 Public Awareness Campaign has provided the impetus. I am excited to be part of the Campaign.
@@ -175,40 +236,60 @@ export class HomeComponent implements OnInit {
         flag:'assets/images/gallery/hosts/edna.jpg',
         title:'Finance Specialist/Economist',
         name: 'Edna Kalumbini, MA',
+        lessInfo: `I am Edna Kalumbini and I see myself as a high-impact, solutions-oriented, team player and Finance Specialist ...`,
         bio: `I am Edna Kalumbini and I see myself as a high-impact, solutions-oriented, team player and Finance Specialist. Accounting and management of the project accounts is my forte and I excel in delivering monthly financial reports, accounts reconciliation, planning and financial forecasting. My skills and expertise in bringing order to projects have benefited the organisations I have supported in the private sector and the non-profit sector. 
         I am now excited to be part of the team that gets to share with the world the beauty of African Art, shared by the Youth in Africa in ‘African Resilience in the Wake of a Pandemic’, a photography and videography campaign under the Mastercard Foundation COVID-19 Public Awareness Campaign. 
         `
 
       },
       {
-        id:4,
+        id:3,
         flag:'assets/images/gallery/hosts/lucy.jpg',
         title:'Editor/Writer',
         name: 'Lucy Mwangi',
+        lessInfo: `I am Edna Kalumbini and I see myself as a high-impact, solutions-oriented, team player and Finance Specialist ...`,
         bio: `My name is Lucy Mwangi and I am excited to provide a brief insight into who I am and what drives me. I am a storytelling enthusiast that has lent her skills in the end-to-end production of over 20 publications that strive to tell the African story from an African perspective. Over the last two decades, I have partnered with research organisations, profit organisations, publishing houses, and independent writers/authors to provide editorial and communication expertise.
         It is now a real pleasure to lend my skills and years of experience to ensure the success of ‘African Resilience in the Wake of a Pandemic’, a photography and videography campaign under the Mastercard Foundation COVID-19 Public Awareness Campaign. The Campaign is a great opportunity to witness and celebrate as the Youth of Africa use their creativity to open up about how Covid-19 has affected their lives. It is a privilege to work on this Campaign.
         `
 
       },
       {
-        id:5,
+        id:4,
         flag:'assets/images/gallery/hosts/christine.jpg',
         name: 'Christine Njoki Kuriah, MPA',
         title: 'Operations and Systems Development',
+        lessInfo: `I am Christine Njoki Kuriah and I am delighted to tell you a little bit about myself. I am a passionate individual ...`,
         bio: `I am Christine Njoki Kuriah and I am delighted to tell you a little bit about myself. I am a passionate individual who champions causes that promote social justice and equality, civil rights and democracy. For the past two decades, I have partnered with organizations around the globe to bring my operations and systems development/management and resource mobilization expertise to both the non-profit and public service sectors in the Healthcare, Education, Advocacy and Community Development fields.
         Now, I am excited to use some of my professional skills and experience and be a part of ‘African Resilience in the Wake of a Pandemic’, photography and videography campaign under the MasterCard Foundation Covid-19 Public Awareness Campaign. I get to see and hear, first-hand, the dynamic stories told by the Youth in Africa, through photographs and videos, about their deeply personal experiences as they navigate life through this global pandemic. What better way is there for them to express themselves in an honest and authentic way while letting us into their world as they convey their stories? I am honoured to be a part of this amazing Campaign.
         `
       }, {
-        id:3,
+        id:5,
         flag:'assets/images/gallery/hosts/xotichil.jpg',
         name: 'Xochitl Ramirez',
         title: 'Industrial Designer and, Public Policy and Social Project Developer',
+        lessInfo: `My twenty (20) years as a Designer have taught me that being creative and designing out of the box is about the passion ... `,
         bio: `My twenty (20) years as a Designer have taught me that being creative and designing out of the box is about the passion for creativity that one nurtures in their inner-most being and is not limited to the equipment or software at hand. I am a risk taker who is passionate about empowering all people regardless of race, age, or creeds. This is me, Xochitl Ramirez—creativity and social development are my two great passions. 
         It is a privilege to be part of this interdisciplinary team that has taken on the task of ensuring the success of ‘African Resilience in the Wake of a Pandemic’, a photography and videography campaign under the Mastercard Foundation COVID-19 Public Awareness Campaign. I am eager to participate in putting the creative storytelling capabilities of young African through the lens. 
         `
 
       },
     ]
+  }
+
+  showHostProfile() {
+
+  }
+
+  lauchHostModal(host) {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "80%";
+    dialogConfig.width = "60%";
+    dialogConfig.data = host;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
   }
 
 }

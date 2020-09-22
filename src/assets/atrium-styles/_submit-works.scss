@@ -2,24 +2,19 @@
   color: black;
   margin-bottom: 5em;
   margin-top: 10em;
+
+  .help-text{
+    color: white;
+  }
   .profile-form {
     .card {
       padding: 1em;
       background-color: teal;
       color: white;
-
-      .profile-form-title {
-        text-align: center;
-      }
-
-      .address-form-title {
-        text-align: center;
-      }
     }
 
     .next {
       width: 50%;
-      text-align: center;
       margin: 0 auto;
 
       button {
@@ -49,9 +44,6 @@
     }
   }
 
-  .artwork-form-title {
-    text-align: center;
-  }
 
   .selected-artworks {
     .card {
@@ -66,7 +58,6 @@
   .submit {
     .card {
       width: 100%;
-      text-align: center;
       margin: 0 auto;
       button {
         width: 50%;

@@ -10,10 +10,10 @@
     </div>
   </div> -->
 
-<mat-toolbar class="header fixed-top">
-  <span class="nav-tool-items">
+<mat-toolbar class="header px-5  fixed-top">
+  <!-- <span class="nav-tool-items">
     <mat-icon (click)="sidenav.toggle()"   class="p-3 m-3 ">menu</mat-icon>
-  </span>
+  </span> -->
   <img src="assets/images/gallery/logo.png" alt="">
   <span class="menu-spacer"></span>
   <a class="mx-1 px-3 " [routerLink]="['/project/about']">
@@ -22,15 +22,17 @@
   <a class="mx-1 px-3 " [routerLink]="['/project/call']">
     The Call
   </a>
-  <a class="mx-1 px-3 " [routerLink]="['/project/featured']">
+  <!-- <a class="mx-1 px-3 " [routerLink]="['/project/featured']">
     Featured Works
-  </a>
+  </a> -->
 
   <!-- <a class="mx-3"  [routerLink]="['/project/tips']">
     Tips
   </a> -->
 
-  <button class="btn btn-outline-info px-3 mx-5" (click)="goToSubmitArtworks()">Submit</button>
+  <!-- <div *ngIf="role == 'artist'"> -->
+    <button class="btn btn-outline-info px-3 ml-3 " (click)="goToSubmitArtworks()">Submit</button>
+  <!-- </div> -->
 
 </mat-toolbar>
 
@@ -47,13 +49,13 @@
       <a mat-list-item [routerLink]="['/project/call']">
         The Call
       </a>
-      <a mat-list-item [routerLink]="['/project/featured']">
+      <!-- <a mat-list-item [routerLink]="['/project/featured']">
         Featured Works
-      </a>
-      <a mat-list-item [routerLink]="['/project/tips']">
+      </a> -->
+      <!-- <a mat-list-item [routerLink]="['/project/tips']">
         Tips
-      </a>
-      <a class="btn btn-outline-info m-3 " [routerLink]="['/project/tips']">Submit</a>
+      </a> -->
+      <a class="btn btn-outline-info m-3 " (click)="goToSubmitArtworks()">Submit</a>
 
     </mat-nav-list>
   </mat-sidenav>

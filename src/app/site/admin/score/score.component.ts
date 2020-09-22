@@ -58,7 +58,18 @@ export class ScoreComponent implements OnInit {
 
   onSubmit(form) {
     if (form.valid) {
-      console.log(this.composition);
+      // this.score.artworkId = this.id.toString();
+      // this.score.technique.composition = this.composition;
+      // this.score.technique.clarity = this.clarity;
+      // this.score.technique.lighting = this.lighting;
+      // this.score.creativity.message = this.message;
+      // this.score.creativity.theme = this.theme;
+      // this.score.creativity.uniquness = this.uniqueness;
+      // this.score.creativity.impression = this.impression;
+      // this.score.wowFactor.details = this.details;
+      // this.score.wowFactor.impact = this.impact;
+      // this.score.wowFactor.inspirational = this.inspirational;
+      // console.log(this.score);
       console.log(JSON.stringify(form.value))
       form.reset();
     }

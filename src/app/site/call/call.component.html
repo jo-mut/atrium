@@ -1,63 +1,33 @@
 <div class="call">
   <div class="landing">
     <div class="container">
-      <!-- <div class="row">
-        <div class="col-md-6">
-          <div class="call-theme">
-            <h3><strong>African Resilience in the Wake of a Pandemic</strong>
-            </h3>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="call-photos">
-            <img src="assets/images/gallery/sample/cart.jpg" alt="">
-          </div>
-        </div>
-      </div> -->
-      <div class="call-theme">
-        <h3><strong>African Resilience in the Wake of a Pandemic</strong>
-        </h3>
-      </div>
+      <ngb-carousel *ngIf="landingImages">
+        <ng-template ngbSlide>
+          <img [src]="landingImages[0]" alt="Random first slide">
+        </ng-template>
+        <ng-template ngbSlide>
+          <img [src]="landingImages[1]" alt="Random second slide">
+        </ng-template>
+        <ng-template ngbSlide>
+          <img [src]="landingImages[2]" alt="Random third slide">
+        </ng-template>
+        <ng-template ngbSlide>
+          <img [src]="landingImages[3]" alt="Random third slide">
+        </ng-template>
+        <ng-template ngbSlide>
+          <img [src]="landingImages[4]" alt="Random third slide">
+        </ng-template>
+      </ngb-carousel>
+      <!-- <div class="call-theme">
+       
+      </div>  -->
     </div>
   </div>
-  <div class="call-info  mt-5 container">
 
-    <div class="purpose mt-5">
-      <h3>Purpose Of The Campaign</h3>
-      <div class="row">
-        <div class="col-md-6">
-          <img src="assets/images/gallery/sample/cart.jpg" alt="">
-        </div>
-        <div class="col-md-6">
-          As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public awareness
-          campaign to share timely, accurate information about the coronavirus, how it is spread, and how young people
-          are adapting to their new reality.
-
-          The Campaign seeks to enhance dissemination, understanding and uptake of public health information as a key
-          outcome. The Campaign targets to reach the majority of populations, making use of multi-communication channels
-          and tactics.
-
-          The goal is to engage young people across seven countries (Kenya, Uganda, Ethiopia, Rwanda, Nigeria, Ghana and
-          Senegal) to share stories about their personal experiences navigating life during the global pandemic. The
-          storytelling should take the form of photographs and videos.
-
-          Bobby Pall Photography (The Organizer) is partnering with the Foundation on this Campaign that provides
-          photographers and videographers with the opportunity to actively participate in the COVID-19 Recovery and
-          Resilience Programme and to acquire international exposure when their work is published in the online/virtual
-          gallery. By choosing to participate in this Campaign, the Entrant agrees to the following official guidelines
-          and rules, which create a contract between him/her and the Organizer.
-
-          The theme of the photography and videography campaign is: ‘African Resilience in the Wake of a Pandemic’.
-
-          Please read the guidelines and rules carefully before submitting your entry.
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="rules container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <h3>Rules For Participation</h3>
+        <h3 class="display-4" >Rules For Participation</h3>
         <ol>
           <li>Each Entrant must fill and submit an online registration form prior to submitting either or;
             <ul>
@@ -75,7 +45,7 @@
         </ol>
       </div>
       <div class="col-md-6">
-        <h3>Conditions and Copyright</h3>
+        <h3 class="display-4 text-center">Conditions and Copyright</h3>
         <ul>
           <li>Mastercard Foundation respects the rights of the photographers and video-makers’ and does not claim
             copyright over images/videos submitted to this Campaign. The author retains full copyright in each entry.
@@ -90,7 +60,7 @@
       </div>
     </div>
   </div>
-  <div class="process">
+  <!-- <div class="process">
     <div class="container pl-0 pr-0">
       <h1 class="title mb-5">The Process</h1>
       <div class="timeline">
@@ -133,10 +103,65 @@
         </mgl-timeline>
       </div>
     </div>
+  </div> -->
+  <div class="submission">
+    <div class="container">
+      <div class="format">
+        <h3 class="display-4 mb-5">Submission Format</h3>
+        <ol>
+          <li>Photographs must be submitted in <strong>.jpeg</strong> and <strong>.png</strong> format. Photos should be submitted with
+            the highest quality possible regarding file size, bit depth and resolution. Both colour and/or black and
+            white
+            images will be accepted.</li>
+          <li>Videos must be submitted in <strong>.mp4</strong> and <strong>.mov</strong> format. They may not exceed 1 minute in run-time. Videos should
+            be submitted with the highest quality possible regarding file size, bit depth and resolution.</li>
+          <li> The material must not constitute copyright infringement or otherwise violate or infringe Mastercard
+            Foundation or third party rights, including but not limited to trademark, privacy, publicity or other
+            intellectual property rights.</li>
+          <li>The submission must not contain dates, texts, brand names, logos and/or trademarks.</li>
+          <li>The submission description and captions must be in English or contain English translations.</li>
+          <li>Filmmaker must have rights to use any soundtrack (music bed), sound-effects and any graphic/animation
+            assets.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="selection">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="display-4 mb-5">Selection Process</h3>
+        <p>
+          The finalists will be selected by a panel with different areas of expertise in photography and videography.
+          The finalists will be selected based on the following criteria:
+        </p>
+        <ul>
+          <li>✔ Creativity/Originality</li>
+          <li>✔ Informational Content/Relevance to Theme</li>
+          <li>✔ Technical Proficiency (colour, lighting, and focus)</li>
+          <li>✔ Artistic and Visual Impact</li>
+        </ul>
+        </div>
+        <div class="col-md-6">
+          <div class="compenstion">
+            <h3 class=" display-4 mb-5">Compensation/Appreciation</h3>
+            The finalists in each category will receive USD 100. (inclusive transfer and withdrawal fees)
+          </div>
+          <div class="timeline">
+            <h3 class="display-4 mb-3" >Timeline</h3>
+              <ul>   
+                <li>✔ Submission opens: 21st September 2020</li>
+                <li>✔ Submission closes: 30th November 2020</li>
+                <li>✔ Shortlisting of the 100 best photos and 50 best videos submissions: 4th December2020</li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="countries">
     <div class="container pl-0 pr-0">
-      <h1 class="title m-5">Countries</h1>
+      <h3 class="display-4 title mb-5">Countries</h3>
       <div class="row">
         <div class="container">
           <div class="flags">
@@ -151,10 +176,13 @@
           </div>
         </div>
       </div>
-      <div class="contest-requirements m-5">
-        <p><strong>Deadline: </strong>1st of October 2020; <strong>Age: </strong>18yrs and above: <strong> Categories:
-          </strong>Video & Photography</p>
+      <div class="contest-requirements">
+        <h3><strong>Deadline: </strong>1st of October 2020; <strong>Age: </strong>18yrs and above: <strong> Categories:
+          </strong>Video & Photography</h3>
       </div>
     </div>
+  </div>
+  <div class="footer">
+    <footer></footer>
   </div>
 </div>

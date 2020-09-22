@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-call',
@@ -12,6 +13,7 @@ export class CallComponent implements OnInit {
   size: number = 40;
   mobileWidthThreshold: number = 640;
   countries: any[] = [];
+  landingImages = [];
 
   covidPhotos: any[]= [];
 
@@ -41,7 +43,12 @@ export class CallComponent implements OnInit {
     nav: true
   }
 
-  constructor() { }
+  constructor(
+    private config: NgbCarouselConfig
+  ) { 
+    this.getLandinPageImages();
+    this.carouselConfig();
+  }
 
   ngOnInit(): void {
     this.participatingCountries();
@@ -52,18 +59,16 @@ export class CallComponent implements OnInit {
   }
 
   getLandinPageImages() {
-    this.covidPhotos =  [
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg',
-      'assets/images/gallery/sample/cart.jpg'      
+    this.landingImages =  [
+      'assets/images/gallery/sample/landing1.png',
+      'assets/images/gallery/sample/landing2.png',
+      'assets/images/gallery/sample/landing3.png',
+      'assets/images/gallery/sample/landing4.png',
+      'assets/images/gallery/sample/landing5.png',     
  
     ]
   }
+
 
   participatingCountries() {
     this.countries = [
@@ -111,8 +116,23 @@ export class CallComponent implements OnInit {
         alt:'Image_5',
         title:'Image_5',
         name: 'Nigeria'
+      },
+      {
+        id:5,
+        flag:'assets/images/flags/ethiopia-flag-xl.png',
+        alt:'Image_5',
+        title:'Image_5',
+        name: 'Ethiopia'
       }
     ]
+  }
+
+  carouselConfig() {
+    this.config.interval = 4000;
+    this.config.wrap = false;
+    this.config.keyboard = false;
+    this.config.pauseOnHover = false;
+    this.config.wrap = false;
   }
 
 }

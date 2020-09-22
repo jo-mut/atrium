@@ -1,4 +1,5 @@
 .dashboard {
+    color: black;
     .card {
         border-radius: 1em;
         color: black;
@@ -7,10 +8,14 @@
     }
 
     .module-desc {
-        text-align: center;
         color: black;
         .module-title {
             font-size: 2em;
         }
+    }
+
+    button {
+        background-color: teal;
+        color: black;
     }
 }

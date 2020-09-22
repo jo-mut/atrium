@@ -37,7 +37,10 @@ import { ScoreComponent } from 'src/app/site/admin/score/score.component';
 import { ProfileComponent } from 'src/app/site/profile/profile.component';
 import { ArtworksDetailComponent } from 'src/app/site/artworks/artworks-detail/artworks-detail.component';
 import { TermModalComponent } from 'src/app/site/create-profile/term-modal/term-modal.component';
-
+import { HostProfileModalComponent } from 'src/app/site/admin/host-profile-modal/host-profile-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 const routes: Routes = [
   { path: '', redirectTo: 'about', pathMatch: 'full' },
   { path: 'about', component: HomeComponent },
@@ -60,8 +63,6 @@ const routes: Routes = [
   { path: 'admin/categories/videos', component: CategoriesComponent },
   { path: 'admin/team', component: CuratorsComponent },
   { path: 'admin/team/profile/:id', component: ProfileComponent },
-
-
 
   {
     path: 'vr-gallery', component: VrGalleryComponent, children: [
@@ -91,7 +92,9 @@ const routes: Routes = [
     MatGridListModule,
     MatIconModule,
     MatListModule,
-
+    NgbModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
 
   ],
   declarations: [
@@ -117,7 +120,7 @@ const routes: Routes = [
     ArtworksDetailComponent,
     ProfileComponent,
     TermModalComponent,
-
+    HostProfileModalComponent
 
   ],
   exports: [
@@ -143,6 +146,7 @@ const routes: Routes = [
     ArtworksDetailComponent,
     ProfileComponent,
     TermModalComponent,
+    HostProfileModalComponent,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

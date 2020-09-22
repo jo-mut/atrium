@@ -1,5 +1,6 @@
 export class ExtraDetails {
-    challenges: string;
-    lifeBefore: string;  
-    experience: string;
+    challenges: string = null;
+    lifeBefore: string = null;
+    experience: string = null;
+    userId: string =  null;
 }

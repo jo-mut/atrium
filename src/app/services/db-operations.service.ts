@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Curator } from '../models/curator';
+import { ExtraDetails } from '../models/extraDetails';
 
 
 @Injectable({
@@ -18,7 +19,6 @@ export class DbOperationsService {
   docId: string;
   userId: string;
   latestArtWorks: ArtWork[] = [];
-
   private authState: Observable<firebase.User>;
 
 
@@ -50,6 +50,10 @@ export class DbOperationsService {
 
   curatorsCollection() {
     return this.firestore.collection('curators');
+  }
+
+  interviewssCollection() {
+    return this.firestore.collection('interviews');
   }
 
   // Return document snapshot of every document
@@ -96,66 +100,131 @@ export class DbOperationsService {
     return this.firestore.collection('scores');
   }
 
-  createCurator(curator: Curator, file: File) {
-    const path = `curators/images/${Date.now() + ''}_${file?.name}`;
-    // Reference to storage bucket
-    const ref = this.storage.ref(path);
-    // The main task
-    const task = this.storage.upload(path, file);
-    // Progress monitoring
-    const percentage = task.percentageChanges();
-    task.snapshotChanges().pipe(finalize(async () => {
-      let downloadUrl = await ref.getDownloadURL().toPromise();
-      curator.profileImage = downloadUrl;
-      const param = JSON.parse(JSON.stringify(curator));
-      this.curatorsCollection().doc(curator.curatorId).set(param);
-    })
-    ).subscribe();
+  createCurator(curator: Curator, file?: File) {
+    let param = null;
+    let percentage = null
 
-    return percentage;
-  }
-
-  // cloud storage operations
-  uploadImages(files: File[]) {
-    files.forEach(file => {
-      // create a new artwork
-      const artwork = new ArtWork();
-      // The storage path
-      this.docId = Date.now() + '';
-      const path = `artworks/images/${Date.now() + ''}_${file.name}`;
+    if (file != null) {
+      const path = `curators/images/${Date.now() + ''}_${file?.name}`;
       // Reference to storage bucket
       const ref = this.storage.ref(path);
       // The main task
       const task = this.storage.upload(path, file);
       // Progress monitoring
-      const percentage = task.percentageChanges();
-      const snapshot = task.snapshotChanges().pipe(
-        // The file's download URL
-        finalize(async () => {
-          this.downloadURL = await ref.getDownloadURL().toPromise();
-          artwork.type = file?.type;
-          artwork.title = '';
+      percentage = task.percentageChanges();
+      task.snapshotChanges().pipe(finalize(async () => {
+        let downloadUrl = await ref.getDownloadURL().toPromise();
+        curator.profileImage = downloadUrl;
+        param = JSON.parse(JSON.stringify(curator));
+        this.curatorsCollection().doc(curator.curatorId).set(param);
+      })
+      ).subscribe();
+    } else {
+      this.curatorsCollection().doc(curator.curatorId).set(param);
+    }
+
+    return percentage;
+  }
+
+
+  uploadArtwork(file: File, artwork: ArtWork, extraDetails: ExtraDetails) {
+    var promise = new Promise((resolve, reject) => {
+      let param = null;
+      let percentage = null
+      if (file != null) {
+        this.docId = Date.now() + '';
+        const path = `artworks/images/${Date.now() + ''}_${file.name}`;
+        // Reference to storage bucket
+        const ref = this.storage.ref(path);
+        // The main task
+        const task = this.storage.upload(path, file);
+        // Progress monitoring
+        percentage = task.percentageChanges();
+        const snapshot = task.snapshotChanges().pipe(finalize(async () => {
+          let downloadUrl = await ref.getDownloadURL().toPromise();
           artwork.type = 'image';
+          artwork.name = file.name;
           artwork.artworkId = this.generatePushId();
           artwork.id = this.docId;
-          artwork.url = this.downloadURL;
-          artwork.description = '';
-          artwork.status = 'exhibition';
+          artwork.url = downloadUrl;
+          artwork.status = 'created';
           artwork.userId = this.userId;
           artwork.createdAt = new Date().toISOString();
           artwork.updatedAt = '';
-          console.log(artwork);
+          extraDetails.userId = this.userId;
+          console.log(JSON.parse(JSON.stringify(artwork)))
+          console.log(JSON.parse(JSON.stringify(extraDetails)))
+          const extra = JSON.parse(JSON.stringify(extraDetails));
           const param = JSON.parse(JSON.stringify(artwork));
-          this.artworksFirestoreCollection().add(param);
-        })
-      );
 
-      artwork.name = file?.name;
-      artwork.bytes = snapshot;
-      artwork.lastModified = file?.lastModified + '';
-      artwork.percentage = percentage;
-      this.latestArtWorks.push(artwork);
+          this.artworksFirestoreCollection().add(param);
+          this.interviewssCollection().add(extra);
+          this.router.navigateByUrl('project')
+
+        })
+        ).subscribe();
+        artwork.name = file?.name;
+        artwork.bytes = snapshot;
+        artwork.lastModified = file?.lastModified + '';
+        artwork.percentage = percentage;
+        this.latestArtWorks.push(artwork);
+      }
+
+      return percentage;
     });
+    return promise;
+  }
+
+
+  // cloud storage operations
+  uploadImages(file: File, artwork: ArtWork, extraDetails?: ExtraDetails) {
+    // files.forEach(file => {
+
+    // });
+
+    // if (file != null && artwork != null) {
+    //   // The storage path
+    //   this.docId = Date.now() + '';
+    //   const path = `artworks/images/${Date.now() + ''}_${file.name}`;
+    //   // Reference to storage bucket
+    //   const ref = this.storage.ref(path);
+    //   // The main task
+    //   const task = this.storage.upload(path, file);
+    //   // Progress monitoring
+    //   const percentage = task.percentageChanges();
+    //   const snapshot = task.snapshotChanges().pipe(
+    //     // The file's download URL
+    //     finalize(async () => {
+
+    //       this.downloadURL = await ref.getDownloadURL().toPromise();
+    //       console.log(this.downloadURL)
+    //       artwork.type = 'image';
+    //       artwork.name = file.name;
+    //       artwork.artworkId = this.generatePushId();
+    //       artwork.id = this.docId;
+    //       artwork.url = this.downloadURL;
+    //       artwork.status = 'created';
+    //       artwork.userId = this.userId;
+    //       artwork.createdAt = new Date().toISOString();
+    //       artwork.updatedAt = '';
+    //       console.log(JSON.parse(JSON.stringify(artwork)))
+    //       console.log(JSON.parse(JSON.stringify(extraDetails)))
+    //       const extra = JSON.parse(JSON.stringify(extraDetails));
+    //       const param = JSON.parse(JSON.stringify(artwork));
+
+    //       this.artworksFirestoreCollection().add(param);
+    //       this.interviewssCollection().add(JSON.parse(JSON.stringify(extra)))
+
+    //     })
+    //   );
+
+    //   artwork.name = file?.name;
+    //   artwork.bytes = snapshot;
+    //   artwork.lastModified = file?.lastModified + '';
+    //   artwork.percentage = percentage;
+    //   this.latestArtWorks.push(artwork);
+    // }
+
   }
 
 }
