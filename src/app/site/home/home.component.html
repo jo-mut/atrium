@@ -1,138 +1,143 @@
 <div class="gallery-site">
-  <div class="container">
-    <div class="landing-images">
-      <div class="host mt-5">
-        <div class="by">
-          <h3 class="display-4 text-center"><strong>Bobby Pall Photography</strong></h3>
-          <h3 class="text-center">in partnership with:</h3>
-        </div>
-        <div class="container">
-          <div class="host-partners mt-5 p-5">
-            <ngb-carousel *ngIf="hosts">
-              <ng-template ngbSlide>
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img [src]="hosts[0].flag">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="host-info p-3">
-                        <h4 class="mt-4 name"><strong>{{hosts[0].name}}</strong></h4>
-                        <p class="bio">{{hosts[0].lessInfo}}</p>
-                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[0])">Read More</button>
-                      </div>
+  <div class="p-0">
+    <!-- <div class="landing">
+      <div class="info">
+        <h3 class="display-4">African Arts in Context</h3>
+      </div>
+    </div> -->
+    <div class="host mt-5">
+      <div class="by">
+        <h3 class="display-4 text-center"><strong>Bobby Pall Photography</strong></h3>
+        <h3 class="text-center">in partnership with:</h3>
+      </div>
+      <div class="container">
+        <div class="host-partners mt-5 p-5">
+          <ngb-carousel *ngIf="hosts">
+            <ng-template ngbSlide>
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img [src]="hosts[0].flag">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="host-info p-3">
+                      <h4 class="mt-4 name"><strong>{{hosts[0].name}}</strong></h4>
+                      <p class="bio">{{hosts[0].lessInfo}}</p>
+                      <button class="btn btn-primary" (click)="lauchHostModal(hosts[0])">Read More</button>
                     </div>
                   </div>
                 </div>
-              </ng-template>
-              <ng-template ngbSlide >
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img [src]="hosts[1].flag">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="host-info p-3">
-                        <h4 class="mt-4 name"><strong>{{hosts[1].name}}</strong></h4>
-                        <p class="bio">{{hosts[1].lessInfo}}</p>
-                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[1])">Read More</button>
-                      </div>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide >
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img [src]="hosts[1].flag">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="host-info p-3">
+                      <h4 class="mt-4 name"><strong>{{hosts[1].name}}</strong></h4>
+                      <p class="bio">{{hosts[1].lessInfo}}</p>
+                      <button class="btn btn-primary" (click)="lauchHostModal(hosts[1])">Read More</button>
                     </div>
                   </div>
                 </div>
-              </ng-template>
-              <ng-template ngbSlide >
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img [src]="hosts[2].flag">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="host-info p-3">
-                        <h4 class="mt-4 name"><strong>{{hosts[2].name}}</strong></h4>
-                        <p class="bio">{{hosts[2].lessInfo}}</p>
-                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[2])">Read More</button>
-                      </div>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide >
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img [src]="hosts[2].flag">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="host-info p-3">
+                      <h4 class="mt-4 name"><strong>{{hosts[2].name}}</strong></h4>
+                      <p class="bio">{{hosts[2].lessInfo}}</p>
+                      <button class="btn btn-primary" (click)="lauchHostModal(hosts[2])">Read More</button>
                     </div>
                   </div>
                 </div>
-              </ng-template>
-              <ng-template ngbSlide >
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img [src]="hosts[3].flag">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="host-info p-3">
-                        <h4 class="mt-4 name"><strong>{{hosts[3].name}}</strong></h4>
-                        <p class="bio">{{hosts[3].lessInfo}}</p>
-                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[3])">Read More</button>
-                      </div>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide >
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img [src]="hosts[3].flag">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="host-info p-3">
+                      <h4 class="mt-4 name"><strong>{{hosts[3].name}}</strong></h4>
+                      <p class="bio">{{hosts[3].lessInfo}}</p>
+                      <button class="btn btn-primary" (click)="lauchHostModal(hosts[3])">Read More</button>
                     </div>
                   </div>
                 </div>
-              </ng-template>
-              <ng-template ngbSlide >
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img [src]="hosts[4].flag">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="host-info p-3">
-                        <h4 class="mt-4 name"><strong>{{hosts[4].name}}</strong></h4>
-                        <p class="bio">{{hosts[4].lessInfo}}</p>
-                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[4])">Read More</button>
-                      </div>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide >
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img [src]="hosts[4].flag">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="host-info p-3">
+                      <h4 class="mt-4 name"><strong>{{hosts[4].name}}</strong></h4>
+                      <p class="bio">{{hosts[4].lessInfo}}</p>
+                      <button class="btn btn-primary" (click)="lauchHostModal(hosts[4])">Read More</button>
                     </div>
                   </div>
                 </div>
-              </ng-template>
-              <ng-template ngbSlide >
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img [src]="hosts[0].flag">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="host-info p-3">
-                        <h4 class="mt-4 name"><strong>{{hosts[5].name}}</strong></h4>
-                        <p class="bio">{{hosts[5].lessInfo}}</p>
-                        <button class="btn btn-primary" (click)="lauchHostModal(hosts[5])">Read More</button>
-                      </div>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide >
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img [src]="hosts[0].flag">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="host-info p-3">
+                      <h4 class="mt-4 name"><strong>{{hosts[5].name}}</strong></h4>
+                      <p class="bio">{{hosts[5].lessInfo}}</p>
+                      <button class="btn btn-primary" (click)="lauchHostModal(hosts[5])">Read More</button>
                     </div>
                   </div>
                 </div>
-              </ng-template>
-            </ngb-carousel>
-          </div>
+              </div>
+            </ng-template>
+          </ngb-carousel>
         </div>
       </div>
     </div>
     <div class="introduction mt-5">
-      <div class="row">
-        <div class="col-md-4">
-          <h3 class="display-4 mb-3">This Project</h3>
-          <p>
-            The Mastercard Foundation Public Awareness Campaign is an Information, Education and Communication (IEC)
-            activity for updates and information on COVID-19 in Africa. The Mastercard Foundation works with visionary
-            organizations to enable young people in Africa and in Indigenous communities in Canada to access dignified
-            and
-            fulfilling work.
-            It is one of the largest, private foundations in the world with a mission to advance learning and promote
-            financial inclusion to create an inclusive and equitable world. The Foundation was created by Mastercard
-            in
-            2006 as an
-            independent organization with its own Board of Directors and Management.
-            For more on the Mastercard Foundation COVID-19 Recovery and Resilience Program, please visit
-            <a href="https://mastercardfdn.org/covid19-recovery-resilience-program/">
-              https://mastercardfdn.org/covid19-recovery-resilience-program/.</a> Follow the Foundation on Twitter at
-            @MastercardFdn.
-          </p>
-        </div>
-        <div class="col-md-8">
-          <img src="assets/images/gallery/sample/poster7.jpg">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h3 class="display-4 mb-3">This Project</h3>
+            <p>
+              The Mastercard Foundation Public Awareness Campaign is an Information, Education and Communication (IEC)
+              activity for updates and information on COVID-19 in Africa. The Mastercard Foundation works with visionary
+              organizations to enable young people in Africa and in Indigenous communities in Canada to access dignified
+              and
+              fulfilling work.
+              It is one of the largest, private foundations in the world with a mission to advance learning and promote
+              financial inclusion to create an inclusive and equitable world. The Foundation was created by Mastercard
+              in
+              2006 as an
+              independent organization with its own Board of Directors and Management.
+              For more on the Mastercard Foundation COVID-19 Recovery and Resilience Program, please visit
+              <a href="https://mastercardfdn.org/covid19-recovery-resilience-program/">
+                https://mastercardfdn.org/covid19-recovery-resilience-program/.</a> Follow the Foundation on Twitter at
+              @MastercardFdn.
+            </p>
+          </div>
+          <div class="col-md-8">
+            <img src="assets/images/gallery/sample/poster7.jpg">
+          </div>
         </div>
       </div>
     </div>
