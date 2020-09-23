@@ -1,27 +1,22 @@
 <div class="call">
   <div class="call-landing">
-    <div class="container">
-      <ngb-carousel *ngIf="landingImages">
-        <ng-template ngbSlide>
-          <img [src]="landingImages[0]" alt="Random first slide">
-        </ng-template>
-        <ng-template ngbSlide>
-          <img [src]="landingImages[1]" alt="Random second slide">
-        </ng-template>
-        <ng-template ngbSlide>
-          <img [src]="landingImages[2]" alt="Random third slide">
-        </ng-template>
-        <ng-template ngbSlide>
-          <img [src]="landingImages[3]" alt="Random third slide">
-        </ng-template>
-        <ng-template ngbSlide>
-          <img [src]="landingImages[4]" alt="Random third slide">
-        </ng-template>
-      </ngb-carousel>
-      <!-- <div class="call-theme">
-       
-      </div>  -->
-    </div>
+    <ngb-carousel *ngIf="landingImages">
+      <ng-template ngbSlide>
+        <img [src]="landingImages[0]" alt="Random first slide">
+      </ng-template>
+      <ng-template ngbSlide>
+        <img [src]="landingImages[1]" alt="Random second slide">
+      </ng-template>
+      <ng-template ngbSlide>
+        <img [src]="landingImages[2]" alt="Random third slide">
+      </ng-template>
+      <ng-template ngbSlide>
+        <img [src]="landingImages[3]" alt="Random third slide">
+      </ng-template>
+      <ng-template ngbSlide>
+        <img [src]="landingImages[4]" alt="Random third slide">
+      </ng-template>
+    </ngb-carousel>
   </div>
 
   <div class="rules container mt-5">
@@ -162,6 +157,13 @@
       </div>
     </div>
   </div>
+  <div class="container">
+    <div class="sponsor mt-5">
+      <h3 class="display-4">Sponsored By</h3>
+      <img src="assets/images/mcf_logo.png" alt="">
+      <p>The MasterCard Foundation</p>
+    </div>
+  </div>
   <div class="countries">
     <div class="container pl-0 pr-0">
       <h3 class="display-4 title mb-5">Countries</h3>
@@ -180,8 +182,8 @@
         </div>
       </div>
       <div class="contest-requirements">
-        <h3><strong>Deadline: </strong>1st of October 2020; <strong>Age: </strong>18yrs and above: <strong> Categories:
-          </strong>Video & Photography</h3>
+        <h3><strong>Deadline: </strong>30th of November 2020; <strong>Age: </strong>18yrs and above: <br> <strong> Categories:
+          </strong>Photography & Videography</h3>
       </div>
     </div>
   </div>

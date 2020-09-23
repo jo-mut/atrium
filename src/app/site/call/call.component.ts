@@ -60,11 +60,11 @@ export class CallComponent implements OnInit {
 
   getLandinPageImages() {
     this.landingImages =  [
-      'assets/images/gallery/sample/landing1.png',
-      'assets/images/gallery/sample/landing2.png',
-      'assets/images/gallery/sample/landing3.png',
-      'assets/images/gallery/sample/landing4.png',
-      'assets/images/gallery/sample/landing5.png',     
+      'assets/images/gallery/sample/poster1.png',
+      'assets/images/gallery/sample/poster2.png',
+      'assets/images/gallery/sample/poster3.png',
+      'assets/images/gallery/sample/poster4.png',
+      'assets/images/gallery/sample/poster5.png',     
  
     ]
   }

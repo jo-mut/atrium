@@ -15,13 +15,13 @@
     ngb-carousel {
       img {
         width: 100%;
-        border:none;
+        border-radius: 0px;
       }
     }
    
     .call-theme {
       height: 600px;
-      background-image: url('assets/images/gallery/sample/poster1.jpg');
+      background-image: url('assets/images/gallery/sample/poster6.png');
       background-size: cover;
       background-repeat: no-repeat;
       color: teal;
@@ -133,5 +133,28 @@
   .contest-requirements {
     margin-top: 100px;
     font-weight: bolder;
+  }
+
+  .sponsor {
+    color: black;
+    text-align: center;
+
+    h3 {
+      text-align: center;
+      color: teal;
+      font-size: 2.5em;
+      font-weight: bolder;
+    }
+
+    p{
+      font-size: 2em;
+      font-weight: bolder;
+      color: black;
+    }
+
+    img {
+      margin: 0 auto;
+      width: 100px;
+    }
   }
 }

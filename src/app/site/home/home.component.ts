@@ -75,10 +75,9 @@ export class HomeComponent implements OnInit {
 
   carouselConfig() {
     this.config.interval = 3000;
-    this.config.wrap = false;
     this.config.keyboard = false;
-    this.config.pauseOnHover = false;
-    this.config.wrap = false;
+    this.config.pauseOnHover = true;
+    this.config.wrap = true;
   }
 
   // Get a list of archived artwork

@@ -6,27 +6,35 @@
     border-radius: 0.5em;
   }
 
-  padding-top: 100px;
-
   .landing {
     max-height: 100vh;
     min-height: 100vh;
     width: 100%;
-    background-image: url('assets/images/gallery/sample/poster6.jpg');
+    background-image: url('assets/images/gallery/sample/poster8.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 
-    h3 {
-      color: white;
-      align-self: baseline;
-      font-weight: bolder;
-    }
-
+   
     .info {
       max-height: 100vh;
       min-height: 100vh;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.6);
+     
+      h3 {
+        color: white;
+        font-weight: bolder;
+        height: inherit;
+        text-align: center;
+        padding-top: 250px;
+      
+    }
+    h3:after { /* trick to add bottom padding */
+        content: '';
+        display: block;
+        height: 10px; 
+    }
+  
     }
   }
 
@@ -141,11 +149,6 @@
       color: teal;
     }
 
-    img {
-      width: 100%;
-      border-radius: 1em;
-    }
-
   }
 
   // .about:hover {
@@ -166,6 +169,12 @@
 
   .host {
     color: black;
+    border: solid 1px teal;
+    border-radius: 1em;
+
+    .hosted-by {
+      font-size: 2.5em;
+    }
 
     h3 {
       color: teal;
@@ -173,8 +182,10 @@
 
     .host-partners {
       height: 100%;
-      border: solid 1px teal;
-      border-radius: 1em;
+  
+      h3 {
+        font-weight: bolder;
+      }
 
       .card {
         border-radius: 1em;
@@ -182,7 +193,7 @@
         img {
           width: 100%;
           margin: 0 auto;
-          border-radius: 1em;
+          border-radius: -.5em;
           width: 16em;
         }
 
@@ -209,6 +220,14 @@
     h3 {
       text-align: center;
       color: teal;
+      font-size: 2.5em;
+      font-weight: bolder;
+    }
+
+    p{
+      font-size: 2em;
+      font-weight: bolder;
+      color: black;
     }
 
     img {
