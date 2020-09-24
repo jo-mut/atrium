@@ -41,14 +41,23 @@ import { HostProfileModalComponent } from 'src/app/site/admin/host-profile-modal
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { CampaignComponent } from 'src/app/site/campaign/campaign.component';
+import { TeamComponent } from 'src/app/site/team/team.component';
+import { GuidelinesComponent } from 'src/app/site/guidelines/guidelines.component';
+import { SuccessfulComponent } from 'src/app/site/successful/successful.component';
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 const routes: Routes = [
-  { path: '', redirectTo: 'about', pathMatch: 'full' },
-  { path: 'about', component: HomeComponent },
+  { path: '', redirectTo: 'call', pathMatch: 'full' },
+  { path: 'campaign', component: CampaignComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'team', component: TeamComponent },
+  { path: 'successful', component: SuccessfulComponent },
+  { path: 'guidelines', component: GuidelinesComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'call', component: CallComponent },
   { path: 'artists', component: ArtistsComponent },
-  { path: 'featured', component: ArtworksComponent },
+  { path: 'gallery', component: ArtworksComponent },
   { path: 'create-profile', component: CreateProfileComponent },
   { path: 'add-artworks', component: AddArtworksComponent },
   { path: 'tips', component: TipsComponent },
@@ -95,6 +104,8 @@ const routes: Routes = [
     NgbModule,
     MatDatepickerModule,
     MatNativeDateModule, 
+    NgxNavbarModule
+
 
   ],
   declarations: [
@@ -120,7 +131,12 @@ const routes: Routes = [
     ArtworksDetailComponent,
     ProfileComponent,
     TermModalComponent,
-    HostProfileModalComponent
+    HostProfileModalComponent,
+    TeamComponent,
+    GuidelinesComponent,
+    CampaignComponent,
+    SuccessfulComponent,
+
 
   ],
   exports: [
@@ -147,6 +163,10 @@ const routes: Routes = [
     ProfileComponent,
     TermModalComponent,
     HostProfileModalComponent,
+    TeamComponent,
+    GuidelinesComponent,
+    CampaignComponent,
+    SuccessfulComponent,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

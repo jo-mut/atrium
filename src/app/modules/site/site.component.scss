@@ -1,89 +1,83 @@
 .app-wrapper {
   font-size: 16px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-style: bold;
   background-color: white;
+  min-height: 100vh;
+  height: 100%;
 
-  mat-toolbar {
-    background: transparent;
-    height: 100px;
-  
-    img {
-      width: 200px;
-    }
+  // mat-toolbar {
+  //   background: white;  
+  //   img {
+  //     width: 150px;
+  //   }
 
-    .menu-spacer {
-      flex: 1 1 auto;
-    }
+  //   .menu-spacer {
+  //     flex: 1 1 auto;
+  //   }
 
-    a {
-      font-size: 16px;
-      font-family: 'Raleway', sans-serif;
-      font-weight: bolder;
-      color: teal;
-      font-weight: bolder;
-      text-decoration: none;
-    }
+  //   a {
+  //     font-size: 16px;
+  //     font-family: 'Open Sans', sans-serif;
+  //     font-weight: bolder;
+  //     color: black;
+  //     font-weight: bolder;
+  //     text-decoration: none;
+  //   }
 
-    a:hover {
-      color: white;
-      height: 100;
-      background-color: teal;
-      border-radius: 1em;
-      border: solid 0px;
+  //   // a:hover {
+  //   //   background-color: black;
+  //   //   color: white;
+  //   //   height: 100%;
+  //   //   height: 100;
+  //   //   border-radius: 1em;
+  //   //   border: solid 0px;
 
-    }
+  //   // }
 
-    button {
-      background-color: teal;
-      color: white;
-      border-radius: 1em;
-      border: solid 0px;
-      font-weight: bolder;
+  //   button {
+  //     background-color: black;
+  //     color: white;
+  //     border-radius: 1em;
+  //     border: solid 0px;
+  //     font-weight: bolder;
 
-    }
+  //   }
 
-    button:hover {
-      background-color: teal;
-      color: white;
-      font-style: bolder;
-    }
+  // }
 
-  }
+  // mat-sidenav-container {
+  //   background-color: white;
 
-  mat-sidenav-container {
-    background-color: white;
+  //   .nav-tool-items {
+  //     display: flex;
 
-    .nav-tool-items {
-      display: flex;
+  //     mat-icon {
+  //       align-content: flex-end;
+  //     }
+  //   }
 
-      mat-icon {
-        align-content: flex-end;
-        color: teal;
-      }
-    }
+  //   mat-sidenav {
+  //     width: 250px;
+  //     height: 100vh;
 
-    mat-sidenav {
-      width: 250px;
-      height: 100vh;
+  //     .brand {
+  //       height: 150px;
+  //       width: 100%;
+  //     }
 
-      .brand {
-        height: 150px;
-        width: 100%;
-      }
+  //     a {
+  //       color: white;
+  //     }
 
-      a {
-        color: white;
-      }
+  //     a:hover {
+  //       color: teal;
+  //     }
 
-      a:hover {
-        color: teal;
-      }
-
-      p {
-        color: teal;
-      }
-    }
-  }
+  //     p {
+  //       color: teal;
+  //     }
+  //   }
+  // }
 
 }

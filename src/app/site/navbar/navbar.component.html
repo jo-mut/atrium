@@ -1,41 +1,65 @@
-<div class="custom-navbar">
-  <nav class="container navbar navbar-expand-sm navbar-dark d-flex flex-row fixed-top" id="navbar">
-    <p class="active-sidebar-link ml-3"></p>
-    <i class="fa fa-bars mr-3 navbar-toggler d-lg-none" data-toggle="collapse" data-target="#collapsibleNavId"
-      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></i>
+<!-- <div class="custom-navbar">
+  <nav class="navbar navbar-expand-sm navbar-dark d-flex flex-row" id="navbar">
+    <img src="assets/images/gallery/logo.png" alt="">
+    <button class="btn btn-dark mr-3 navbar-toggler d-lg-none" data-toggle="collapse" data-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse mr-5" id="collapsibleNavId">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/story']">This Project</a>
+          <a class="nav-link" [routerLink]="['/project/home']">Home</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/call']">The Call</a>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/project/call']">The Call</a>
         </li>
-        <!-- <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/featured']">Featured Works</a>
-        </li> -->
-        <!-- <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/spotlight']">Spotlight</a>
-        </li> -->
-        <!-- <li class="ml-5 submit-button">
-          <button class="btn btn-outline-info" (click)="goToSubmitArtworks()">Submit</button>
-        </li> -->
-         <!-- <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/winners']">Winners</a>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/project/campaign']">The Campaign</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/success-stories']">Success Stories</a>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/project/featured']">Featured</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/archives']">Archives</a>
-        </li> -->
-        <!-- <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/site/vr-gallery']">The Gallery</a>
-        </li> -->
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/project/team']">The Team</a>
+        </li>
+        <button class="nav-item">
+          <a class="nav-link" [routerLink]="['/project/submit']">Submit</a>
+        </button>
       </ul>
     </div>
-    <!-- <div class="login">
-      <a class="btn btn-outline-warning" [routerLink]="['/site/archives']">Login</a>
-    </div> -->
+  </nav>
+</div> -->
+
+
+<div class="custom-navbar">
+  <nav ngxNavbarDynamicExpand class="navbar-light bg-light">
+    <img src="assets/images/gallery/logo.png" alt="">
+    <button class="navbar-toggler" type="button" (click)="collapse.toggle()" aria-controls="main-nav"
+      aria-expanded="false" aria-label="Navigáció kapcsoló">
+      <span class="navbar-toggler-icon d-flex align-items-center justify-content-center">
+      </span>
+    </button>
+    <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/project/home']">Home</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/project/call']">The Call</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/project/campaign']">The Campaign</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/project/gallery']">Gallery</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link mr-3" [routerLink]="['/project/team']">The Team</a>
+        </li>
+        <button class=" btn btn-primary nav-item " (click)="goToSubmitArtworks()">
+          Submit
+        </button>
+      </ul>
+    </ngx-navbar-collapse>
   </nav>
 </div>

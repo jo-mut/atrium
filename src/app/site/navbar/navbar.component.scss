@@ -1,0 +1,28 @@
+.custom-navbar {
+  background-color: white;
+  size: 3em;
+  background-color: transparent;
+  color: black;
+  font-weight: bolder;
+
+  li a {
+    color: black;
+    font-weight: bolder;
+  }
+
+  li a:hover {
+    color: black;
+  }
+
+  #main-nav button {
+    color: white;
+    background-color: black;
+    border: none;
+    width: 100px;
+  }
+
+  img {
+    width: 150px;
+  }
+
+}

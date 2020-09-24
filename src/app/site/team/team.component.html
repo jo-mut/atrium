@@ -1,0 +1,43 @@
+<div class="team py-5">
+  <div class="container">
+    <h3>THE TEAM</h3>
+    <hr class="hr-rule mt-1">
+    <div class="host">
+      <div class="team">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-3" *ngFor="let host of hosts">
+            <div class="card">
+              <img class="img-fluid" [src]="host.img">
+            </div>
+            <div class="host-info">
+              <div class="card p-3">
+                <h4 class="name"><strong>{{host.name}}</strong></h4>
+                <p class="bio">{{host.bio.substring(0, 150)}} <strong (click)="lauchHostModal(host)">. . .read
+                    more</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="partners py-5">
+    <div class="container">
+      <h3>PARTNERS</h3>
+      <hr class="hr-rule mt-1">
+      <div class="host">
+        <div class="row">
+          <div class="col-md-4 mt-3">
+
+          </div>
+          <div class="col-md-4 mt-3">
+
+          </div>
+          <div class="col-md-4 mt-3">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

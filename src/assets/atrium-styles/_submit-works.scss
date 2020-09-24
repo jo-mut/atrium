@@ -1,16 +1,11 @@
 .create-profile {
   color: black;
-  margin-bottom: 5em;
-  margin-top: 150px;
-
   .help-text{
     color: white;
   }
   .profile-form {
     .card {
       padding: 1em;
-      background-color: teal;
-      color: white;
     }
 
     .next {
@@ -19,8 +14,6 @@
 
       button {
         width: 100%;
-        background-color: white;
-        color: teal;
       }
     }
 
@@ -28,10 +21,6 @@
 }
 
 .add-artworks {
-  color: teal;
-  margin-bottom: 20em;
-  margin-top: 150px;
-
   .card {
     border-radius: none;
     width: 100%;
@@ -48,9 +37,7 @@
   .selected-artworks {
     .card {
       .card {
-        background-color: teal;
         padding: 1em;
-        color: white;
       }
     }
   }

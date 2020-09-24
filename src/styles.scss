@@ -4,48 +4,45 @@
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import 'assets/atrium-styles/atrium-theme';
 @import "~bootstrap/dist/css/bootstrap.css";
-@import 'assets/atrium-styles/create';
-@import 'assets/atrium-styles/progress';
-// @import 'assets/atrium-styles/navbar';
-@import 'assets/atrium-styles/sidebar';
-@import 'assets/atrium-styles/archives';
-@import 'assets/atrium-styles/sign-in';
-@import 'assets/atrium-styles/sign-up';
-@import 'assets/atrium-styles/exhibition';
-@import 'assets/atrium-styles/dashboard';
-@import 'assets/atrium-styles/gallery-site';
-@import 'assets/atrium-styles/call';
-@import 'assets/atrium-styles/submit-works';
-@import 'assets/atrium-styles/score';
-@import 'assets/atrium-styles/artworks';
-@import 'assets/atrium-styles/admin';
+// @import 'assets/atrium-styles/create';
+// @import 'assets/atrium-styles/progress';
+// // @import 'assets/atrium-styles/navbar';
+// @import 'assets/atrium-styles/sidebar';
+// @import 'assets/atrium-styles/archives';
+// @import 'assets/atrium-styles/sign-in';
+// @import 'assets/atrium-styles/sign-up';
+// @import 'assets/atrium-styles/exhibition';
+// @import 'assets/atrium-styles/dashboard';
+// @import 'assets/atrium-styles/gallery-site';
+// @import 'assets/atrium-styles/call';
+// @import 'assets/atrium-styles/submit-works';
+// @import 'assets/atrium-styles/score';
+// @import 'assets/atrium-styles/artworks';
+// @import 'assets/atrium-styles/admin';
 
 
 body {
   margin: 0;
   font-size: 16px;
-  font-family: 'Raleway', sans-serif;
-    color: black;
-  text-align: justify;
-  h3{
-    text-align: justify;
-  }
+  font-family: 'Spectral', serif;
+  color: black;
 
-  img {
-    border-radius: 0.5em;
+  h3 {
+    font-size: 3em;
+    font-weight: bolder;
   }
 }
 
 footer {
-  height: 100px;
   background-color: #1b1b1b;
+
+  img {
+    margin: 0 auto;
+    width: 100px;
+  }
 }
 
-
-
 mat-dialog-container#modal-component {
-  border: 3px solid #1b1b1b;
-  border-radius: 1em;
   background-color: white;
   width: 100% !important;
   height: 100% !important;

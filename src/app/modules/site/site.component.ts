@@ -36,61 +36,6 @@ export class SiteComponent implements OnInit {
 
   ngOnInit(): void {
     this.authState = this.fauth.authState;
-    console.log(window.innerWidth)
-    if (window.innerWidth > 768) {
-      this.sidenav.fixedTopGap = 55;
-      this.opened = false;
-    } else {
-      this.sidenav.fixedTopGap = 55;
-      this.opened = true;
-    }
-  }
-
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    if (event.target.innerWidth < 768) {
-      this.sidenav.fixedTopGap = 55;
-      this.opened = false;
-    } else {
-      this.sidenav.fixedTopGap = 55
-      this.opened = true;
-    }
-  }
-
-  onScroll(event) {
-    this.hideNav = this.scrollTop < event.target.scrollTop;
-    this.scrollTop = event.target.scrollTop;
-  }
-
-  isBiggerScreen() {
-    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if (width < 768) {
-      this.hide = true;
-    } else {
-      this.hide = false;
-    }
-  }
-
-  goToSubmitArtworks() {
-    this.authState.subscribe(user => {
-      this.ngZone.run(() => {
-        if (user != null) {
-          if (user.uid) {
-            this.checkIfUserIsAdmin(user.uid)
-          } else {
-            this.router.navigateByUrl('/project/create-profile')
-          }
-        } else {
-          this.router.navigateByUrl('/project/create-profile')
-        }
-      })
-
-    },
-      err => {
-        console.log('Please try again')
-      });
-
   }
 
   checkIfUserIsAdmin(userId: string) {

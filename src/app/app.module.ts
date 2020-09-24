@@ -19,14 +19,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
 import { SiteRoutingModule } from './modules/site/site.module';
-import { SuccessfulComponent } from './site/successful/successful.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DndDirective,
-    SuccessfulComponent,
-    
+    DndDirective,    
 
   ],
   imports: [

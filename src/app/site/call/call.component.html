@@ -1,193 +1,234 @@
 <div class="call">
-  <div class="call-landing">
-    <ngb-carousel *ngIf="landingImages">
-      <ng-template ngbSlide>
-        <img [src]="landingImages[0]" alt="Random first slide">
-      </ng-template>
-      <ng-template ngbSlide>
-        <img [src]="landingImages[1]" alt="Random second slide">
-      </ng-template>
-      <ng-template ngbSlide>
-        <img [src]="landingImages[2]" alt="Random third slide">
-      </ng-template>
-      <ng-template ngbSlide>
-        <img [src]="landingImages[3]" alt="Random third slide">
-      </ng-template>
-      <ng-template ngbSlide>
-        <img [src]="landingImages[4]" alt="Random third slide">
-      </ng-template>
-    </ngb-carousel>
+  <div class="landing">
+    <div class="info">
+      <h3 class="display-4">African Resilience in the Wake
+        <br> of a Pandemic
+      </h3>
+    </div>
   </div>
 
-  <div class="rules container mt-5">
-    <div class="row">
-      <div class="col-md-6">
-        <h3 class="display-4">Rules For Participation</h3>
-        <ol>
-          <li>Each Entrant must fill and submit an online registration form prior to submitting either or;
-            <ul>
-              <li>no more than two photographs</li>
-              <li>a one minute (60 seconds) video</li>
-            </ul>
-          </li>
-          <li>All entries must be submitted directly on the website, <a
-              href="https://africanartincontext.com/">africanartincontext.com</a>, using the submission
-            button.</li>
-          <li>Entrants must own the copyright and must have taken the photographs/videos themselves. They may have been
-            taken at any time prior to the start of the Campaign.</li>
-          <li>Entrants should not forget to post their photos/videos if they have social media accounts, using the
-            Campaign hashtags: #ItsUpToUs. Mastercard Foundation corporate social media may share and retweet the
-            selected photos and videos on their corporate accounts</li>
-        </ol>
-      </div>
-      <div class="col-md-6">
-        <h3 class="display-4 text-center">Conditions and Copyright</h3>
-        <ul>
-          <li>Mastercard Foundation respects the rights of the photographers and video-makers’ and does not claim
-            copyright over images/videos submitted to this Campaign. The author retains full copyright in each entry.
-            Whenever the image/video is published, the author will be credited.</li>
-          <li>Participation in the Campaign grants Mastercard Foundation permission to exhibit and/or publish the
-            photos/videos, either in part or in their entirety.</li>
-          <li>Mastercard Foundation has the right to apply minor changes or amendments without damaging the integrity of
-            the project, e.g. change colours, cut the background or parts of it.</li>
-          <li>Mastercard Foundation does NOT own copyright and authors are free to use the photos/videos for other
-            purposes at their choosing.</li>
-        </ul>
+  <div class="guidelines">
+    <div class="rules">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 py-5">
+            <h3>HOW TO PARTICIPATE</h3>
+            <ol>
+              <li>Each Entrant must fill and submit an online registration form prior to submitting either or;
+                <ul>
+                  <li>no more than two photographs</li>
+                  <li>a one minute (60 seconds) video</li>
+                </ul>
+              </li>
+              <li>All entries must be submitted directly on the website, <a
+                  href="https://africanartincontext.com/">africanartincontext.com</a>, using the submission
+                button.</li>
+              <li>Entrants must own the copyright and must have taken the photographs/videos themselves. They may have
+                been
+                taken at any time prior to the start of the Campaign.</li>
+              <li>Entrants should not forget to post their photos/videos if they have social media accounts, using the
+                Campaign hashtags: <strong>#ItsUpToUs.</strong> Mastercard Foundation corporate social media may share
+                and retweet the
+                selected photos and videos on their corporate accounts</li>
+            </ol>
+          </div>
+          <div class="col-md-6 py-5">
+            <img src="assets/images/gallery/sample/poster6.jpg">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- <div class="process">
-    <div class="container pl-0 pr-0">
-      <h1 class="title mb-5">The Process</h1>
-      <div class="timeline">
-        <mgl-timeline class="mt-1" [mobileWidthThreshold]="mobileWidthThreshold">
-          <mgl-timeline-entry (expand)="onExpand($event)">
-            <mgl-timeline-entry-header>Submission opens</mgl-timeline-entry-header>
-            <mgl-timeline-entry-content>
-              <h4>21st September 2020</h4>
-            </mgl-timeline-entry-content>
-            <mgl-timeline-entry-dot>1</mgl-timeline-entry-dot>
-            <mgl-timeline-entry-side class="p-3">
-              <p>Submit you artwork</p>
-            </mgl-timeline-entry-side>
-          </mgl-timeline-entry>
-        </mgl-timeline>
-        <mgl-timeline class="mt-1">
-          <mgl-timeline-entry (expand)="onExpand($event)">
-            <mgl-timeline-entry-header>Submission Closes</mgl-timeline-entry-header>
-            <mgl-timeline-entry-content>
-              <h4>Submission closes: 30th November 2020</h4>
-              <p>Artist will not submit artworks beyond this time</p>
-            </mgl-timeline-entry-content>
-            <mgl-timeline-entry-dot>2</mgl-timeline-entry-dot>
-            <mgl-timeline-entry-side class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Beatae quae consequuntur distinctio vero, hic obcaecati praesentium ipsam voluptatum
-              fuga ducimus deleniti laborum error tempora commodi alias reprehenderit.
-              Sint, molestias! Nemo.</mgl-timeline-entry-side>
-          </mgl-timeline-entry>
-        </mgl-timeline>
-        <mgl-timeline class="mt-1">
-          <mgl-timeline-entry (expand)="onExpand($event)">
-            <mgl-timeline-entry-header>4th December 2020</mgl-timeline-entry-header>
-            <mgl-timeline-entry-content>
-            </mgl-timeline-entry-content>
-            <mgl-timeline-entry-dot>3</mgl-timeline-entry-dot>
-            <mgl-timeline-entry-side class="p-3">
-              <p>Shortlisting of the 100 best photos and 50 best videos submissions</p>
-            </mgl-timeline-entry-side>
-          </mgl-timeline-entry>
-        </mgl-timeline>
+
+    <div class="submission">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 py-5">
+
+          </div>
+          <div class="col-md-6 py-5">
+            <div class="format">
+              <h3 class="mt-5">SUBMISSION FORMAT</h3>
+              <ol>
+                <li>Photographs must be submitted in <strong>.jpeg</strong> and <strong>.png</strong> format. Photos
+                  should be
+                  submitted with
+                  the highest quality possible regarding file size, bit depth and resolution. Both colour and/or black
+                  and
+                  white
+                  images will be accepted.</li>
+                <li>Videos must be submitted in <strong>.mp4</strong> and <strong>.mov</strong> format. They may not
+                  exceed 1
+                  minute in run-time. Videos should
+                  be submitted with the highest quality possible regarding file size, bit depth and resolution.</li>
+                <li> The material must not constitute copyright infringement or otherwise violate or infringe Mastercard
+                  Foundation or third party rights, including but not limited to trademark, privacy, publicity or other
+                  intellectual property rights.</li>
+                <li>The submission must not contain dates, texts, brand names, logos and/or trademarks.</li>
+                <li>The submission description and captions must be in English or contain English translations.</li>
+                <li>Filmmaker must have rights to use any soundtrack (music bed), sound-effects and any
+                  graphic/animation
+                  assets.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div> -->
-  <div class="submission">
-    <div class="container">
-      <div class="format">
-        <h3 class="display-4 mb-5">Submission Format</h3>
-        <ol>
-          <li>Photographs must be submitted in <strong>.jpeg</strong> and <strong>.png</strong> format. Photos should be
-            submitted with
-            the highest quality possible regarding file size, bit depth and resolution. Both colour and/or black and
-            white
-            images will be accepted.</li>
-          <li>Videos must be submitted in <strong>.mp4</strong> and <strong>.mov</strong> format. They may not exceed 1
-            minute in run-time. Videos should
-            be submitted with the highest quality possible regarding file size, bit depth and resolution.</li>
-          <li> The material must not constitute copyright infringement or otherwise violate or infringe Mastercard
-            Foundation or third party rights, including but not limited to trademark, privacy, publicity or other
-            intellectual property rights.</li>
-          <li>The submission must not contain dates, texts, brand names, logos and/or trademarks.</li>
-          <li>The submission description and captions must be in English or contain English translations.</li>
-          <li>Filmmaker must have rights to use any soundtrack (music bed), sound-effects and any graphic/animation
-            assets.</li>
-        </ol>
+    <div class="selection py-5">
+      <div class="selection-info ">
+        <div class="container">
+          <div class="card my-5">
+            <h3 class="mt-5">SELECTION PROCESS</h3>
+            <hr class="hr-rule mt-1">
+            <p class="text-center mt-3">
+              The finalists will be selected by a panel with different areas of expertise
+              in photography and videography. <br> The finalists will be selected based on the
+              following criteria:
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="criteria mt-5">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="criteria-title">
+                <h3>CRITERIA</h3>
+                <hr class="hr-rule mt-1">
+              </div>
+              <div class="criteria-points">
+                <p>Creativity/Originality</p>
+                <p>Informational Content/Relevance to Theme</p>
+                <p>Technical Proficiency (colour, lighting, and focus)</p>
+                <p> Artistic and Visual Impact</p>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card">
+                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="selection">
-    <div class="container">
+    <div class="compensation my-5">
+      <div class="container">
+        <div class="card">
+          <h3 class="mt-5">COMPENSATION</h3>
+          <hr class="hr-rule mt-1">
+          <p>The finalists in each category will receive USD 100</p>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
       <div class="row">
         <div class="col-md-6">
-          <h3 class="display-4 mb-5">Selection Process</h3>
-          <p>
-            The finalists will be selected by a panel with different areas of expertise in photography and videography.
-            The finalists will be selected based on the following criteria:
-          </p>
+          <img src="assets/images/gallery/sample/poster6.jpg">
+        </div>
+        <div class="col-md-6">
+          <h3 class="m-3">CONDITIONS AND COPYRIGHT</h3>
+          <hr class="hr-rule mt-1">
           <ul>
-            <li>✔ Creativity/Originality</li>
-            <li>✔ Informational Content/Relevance to Theme</li>
-            <li>✔ Technical Proficiency (colour, lighting, and focus)</li>
-            <li>✔ Artistic and Visual Impact</li>
+            <li>Mastercard Foundation respects the rights of the photographers and video-makers’ and does not claim
+              copyright over images/videos submitted to this Campaign. The author retains full copyright in each entry.
+              Whenever the image/video is published, the author will be credited.</li>
+            <li>Participation in the Campaign grants Mastercard Foundation permission to exhibit and/or publish the
+              photos/videos, either in part or in their entirety.</li>
+            <li>Mastercard Foundation has the right to apply minor changes or amendments without damaging the integrity
+              of
+              the project, e.g. change colours, cut the background or parts of it.</li>
+            <li>Mastercard Foundation does NOT own copyright and authors are free to use the photos/videos for other
+              purposes at their choosing.</li>
           </ul>
         </div>
-        <div class="col-md-6">
-          <div class="compenstion">
-            <h3 class=" display-4 mb-5">Compensation/Appreciation</h3>
-            The finalists in each category will receive USD 100. (inclusive transfer and withdrawal fees)
-          </div>
-          <div class="timeline">
-            <h3 class="display-4 mb-3">Timeline</h3>
-            <ul>
-              <li>✔ Submission opens: 21st September 2020</li>
-              <li>✔ Submission closes: 30th November 2020</li>
-              <li>✔ Shortlisting of the 100 best photos and 50 best videos submissions: 4th December2020</li>
-            </ul>
+      </div>
+    </div>
+    <div class="timeline py-5">
+      <div class="container">
+        <div class="card">
+          <div class="row">
+            <div class="col-md-5">
+              <h3>THE TIMELINE</h3>
+              <hr class="hr-rule mt-1">
+              <div class="timeline-process">
+                <p>Submission opens: 21st September 2020</p>
+                <p>Submission closes: 30th November 2020</p>
+                <p>Shortlisting of the 100 best photos and 50 best videos submissions: 4th
+                  December2020</p>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="card">
+                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="sponsor mt-5">
-      <h3 class="display-4">A paternship with</h3>
-      <img src="assets/images/mcf_logo.png" alt="">
-      <p>The Mastercard Foundation</p>
-    </div>
-  </div>
-  <div class="countries">
-    <div class="container pl-0 pr-0">
-      <h3 class="display-4 title mb-5">Countries</h3>
-      <div class="row">
+    <div class="sample-images p-5">
+      <div class="artistic-images">
+        <h3 class="mt-5">FEATURED PHOTOS</h3>
+        <hr class="hr-rule mt-1">
         <div class="container">
-          <div class="flags">
-            <owl-carousel-o [options]="customOptions">
-              <ng-template carouselSlide *ngFor="let country of countries" [id]="country.id">
-                <div class="m-5">
-                  <img [src]="country.flag" [alt]="country.alt" [title]="country.title">
-                  <h3>{{country.name}}</h3>
+          <div class="row pr-3">
+            <div class="col-md-8 pr-0 mt-3">
+              <div class="card">
+                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+              </div>
+            </div>
+            <div class="col-md-4 pr-0">
+              <div class="row">
+                <div class="col-12 mt-3">
+                  <div class="card">
+                    <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+                  </div>
                 </div>
-              </ng-template>
-            </owl-carousel-o>
+              </div>
+              <div class="row">
+                <div class="col-12 mt-3">
+                  <div class="card">
+                    <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row pr-3">
+            <div class="col-md-3 pr-0 mt-3">
+              <div class="card">
+                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+              </div>
+            </div>
+            <div class="col-md-3 pr-0 mt-3">
+              <div class="card">
+                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+              </div>
+            </div>
+            <div class="col-md-3 pr-0 mt-3">
+              <div class="card">
+                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+              </div>
+            </div>
+            <div class="col-md-3 pr-0 mt-3">
+              <div class="card">
+                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="contest-requirements">
-        <h3><strong>Deadline: </strong>30th of November 2020; <strong>Age: </strong>18yrs and above: <br> <strong> Categories:
-          </strong>Photography & Videography</h3>
-      </div>
     </div>
+    <footer class="p-5">
+      <div class="container">
+        <div layout="row" layout-align="center center">
+          <p>Brought to you by Mastercard Foundation in partnership with </p>
+          <div class="mcf p-3">
+            <a href="https://africanartincontext.com/"><img src="assets/images/mcf_logo.png" alt=""></a>
+            <p>The Mastercard Foundation</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
-  <div class="footer">
-    <footer></footer>
-  </div>
-</div>

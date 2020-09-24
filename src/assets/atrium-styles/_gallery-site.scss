@@ -1,6 +1,4 @@
 .gallery-site {
-  color: teal;
-
   img {
     width: 100%;
     border-radius: 0.5em;
@@ -22,7 +20,6 @@
       background-color: rgba(0, 0, 0, 0.6);
      
       h3 {
-        color: white;
         font-weight: bolder;
         height: inherit;
         text-align: center;
@@ -65,11 +62,6 @@
 
   .introduction {
     color: black;
-
-    h3 {
-      text-align: center;
-      color: teal;
-    }
   }
 
   .privacy {
@@ -81,66 +73,15 @@
     }
   }
 
-  .privacy:hover {
-    .card {
-      background-color: teal;
-      color: white;
-    }
-
-  }
-
-  .submission-call {
-    color: black;
-
-    h3 {
-      color: teal;
-    }
-  }
-
-  .purpose {
-    color: black;
-
-    h3 {
-      color: teal;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
 
   .short-info {
     .card {
       background-color: transparent;
       border-radius: 0.5em;
-      color: teal;
       height: 100px;
       width: 100%;
     }
-
-    .card:hover {
-      background-color: teal;
-      color: white;
-    }
   }
-
-
-  // .about:hover {
-  //   margin-top: 100px;
-  //   padding-top: 100px;
-  //   padding-left: 5%;
-  //   padding-right: 5%;
-  //   padding-bottom: 100px;
-  //   color: white;
-  //   background-color: teal;
-  //   border-radius: 0.5em;
-  //   border: solid 0.5px lightgray;
-  //   text-align: center;
-
-  //   h3 {
-  //     color: white;
-  //   }
-  // }
 
   .about {
     color: black;
@@ -151,52 +92,13 @@
 
   }
 
-  // .about:hover {
-  //   margin-top: 100px;
-  //   padding-top: 100px;
-  //   padding-left: 5%;
-  //   padding-right: 5%;
-  //   padding-bottom: 100px;
-  //   color: white;
-  //   background-color: teal;
-  //   border-radius: 0.5em;
-  //   border: solid 0.5px lightgray;
-  //   text-align: justify;
-  //   h3 {
-  //     color: white;
-  //   }
-  // }
-
   .host {
-    color: black;
     border: solid 1px teal;
     border-radius: 1em;
-
-    .hosted-by {
-      font-size: 2.5em;
-    }
-
-    h3 {
-      color: teal;
-    }
-
     .host-partners {
       height: 100%;
-  
-      h3 {
-        font-weight: bolder;
-      }
-
       .card {
         border-radius: 1em;
-
-        img {
-          width: 100%;
-          margin: 0 auto;
-          border-radius: -.5em;
-          width: 16em;
-        }
-
         .host-info {
           .name {
             color: black;

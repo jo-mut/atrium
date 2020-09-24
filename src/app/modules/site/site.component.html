@@ -1,68 +1,79 @@
 <div class="app-wrapper">
-  <!-- <div class="app-wrapper">
+  <div class="app-wrapper">
     <div class="main-panel" id="main-panel">
       <div class="navbar-wrapper ">
         <app-navbar></app-navbar>
       </div>
-      <div class="main-wrapper mt-3 px-3 ">
-        <router-outlet></router-outlet>
+      <div class="main-wrapper">
+        <router-outlet></router-outlet>       
       </div>
     </div>
-  </div> -->
+  </div>
 
-  <mat-toolbar class="header px-5 fixed-top" [class.hide-nav]="hideNav">
-    <!-- <span class="nav-tool-items">
+  <!-- <mat-toolbar class="header p-3" [class.hide-nav]="hideNav">
+    <span class="nav-tool-items">
       <mat-icon (click)="sidenav.toggle()"   class="p-3 m-3 ">menu</mat-icon>
-    </span> -->
+    </span>
     <img src="assets/images/gallery/logo.png" alt="">
     <span class="menu-spacer"></span>
-    <a class="mx-1 px-3 " [routerLink]="['/project/about']">
-      This Project
+    <a class="m-3" [routerLink]="['/project/call']">
+      The Call
     </a>
-    <a class="mx-1 px-3 " [routerLink]="['/project/call']">
-      This Call
+    <a class="m-3" [routerLink]="['/project/campaign']">
+      The Campaign
     </a>
-    <!-- <a class="mx-1 px-3 " [routerLink]="['/project/featured']">
+    <a class="mx-1 px-3 " [routerLink]="['/project/featured']">
       Featured Works
-    </a> -->
-  
-    <!-- <a class="mx-3"  [routerLink]="['/project/tips']">
+    </a>
+
+    <a class="mx-3"  [routerLink]="['/project/tips']">
       Tips
-    </a> -->
-  
-    <!-- <div *ngIf="role == 'artist'"> -->
-      <button class="btn btn-outline-info px-3 ml-3 " (click)="goToSubmitArtworks()">Submit</button>
-    <!-- </div> -->
-  
-  </mat-toolbar>
-<mat-sidenav-container>
-  <!-- Sidenav -->
-  <mat-sidenav #sidenav [mode]="hide ? 'side' : 'over'" [(opened)]="opened">
-    <div class="brand">
+    </a>
 
+    <div *ngIf="role == 'artist'">
+    <button class="btn btn-outline-info px-3 ml-3 " (click)="goToSubmitArtworks()">Submit</button>
     </div>
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="['/project/about']">
-        This Project
-      </a>
-      <a mat-list-item [routerLink]="['/project/call']">
-        The Call
-      </a>
-      <!-- <a mat-list-item [routerLink]="['/project/featured']">
+  </mat-toolbar> -->
+
+
+  <!-- <mat-sidenav-container> -->
+    <!-- Sidenav -->
+
+    <!-- <mat-sidenav #sidenav [mode]="hide ? 'side' : 'over'" [(opened)]="opened">
+      <div class="brand">
+      </div>
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="['/project/about']">
+          This Project
+        </a>
+        <a mat-list-item [routerLink]="['/project/call']">
+          The Call
+        </a>
+        <a mat-list-item [routerLink]="['/project/featured']">
         Featured Works
-      </a> -->
-      <!-- <a mat-list-item [routerLink]="['/project/tips']">
+      </a>
+        <a mat-list-item [routerLink]="['/project/tips']">
         Tips
-      </a> -->
-      <a class="btn btn-outline-info m-3 " (click)="goToSubmitArtworks()">Submit</a>
+      </a>
+        <a class="btn btn-outline-info m-3 " (click)="goToSubmitArtworks()">Submit</a>
+      </mat-nav-list>
+    </mat-sidenav> -->
 
-    </mat-nav-list>
-  </mat-sidenav>
+    <!-- Main content -->
 
-  <!-- Main content -->
-  <mat-sidenav-content class="main-wrapper">
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-
+    <!-- <mat-sidenav-content class="main-wrapper">
+      <router-outlet></router-outlet>
+      <footer class="mt-5">
+        <div class="container">
+         <div layout="row" layout-align="center center">
+          <p>Brought to you by Mastercard Foundation in partnership with </p>
+          <div class="mcf p-3">
+            <a href="https://africanartincontext.com/"><img src="assets/images/mcf_logo.png" alt=""></a>
+            <p>The Mastercard Foundation</p>
+          </div>
+         </div>
+        </div>
+      </footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container> -->
 </div>

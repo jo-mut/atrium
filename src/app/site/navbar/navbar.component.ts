@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -13,14 +13,20 @@ import { User } from 'src/app/models/user';
 export class NavbarComponent implements OnInit {
   private hidden = false
   private authState: Observable<firebase.User>;
-
+  checked = 0;
+  role: string;
 
   constructor(private router: Router,
+    public ngZone: NgZone,
     private fauth: AngularFireAuth,
     private dbOperations: DbOperationsService) { }
 
   ngOnInit(): void {
     this.authState = this.fauth.authState;
+  }
+
+  ngDoCheck() {
+    console.log(++this.checked);
   }
 
   showHideSidebar() {
@@ -31,16 +37,21 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+ 
   goToSubmitArtworks() {
     this.authState.subscribe(user => {
-      if (user.uid) {
-        console.log('AUTHSTATE USER', user.uid);
-        this.checkIfUserIsAdmin(user.uid)
-      } else {
-        console.log('AUTHSTATE USER EMPTY', user);
-        this.router.navigateByUrl('/site/create-profile')
+      this.ngZone.run(() => {
+        if (user != null) {
+          if (user.uid) {
+            this.checkIfUserIsAdmin(user.uid)
+          } else {
+            this.router.navigateByUrl('/project/create-profile')
+          }
+        } else {
+          this.router.navigateByUrl('/project/create-profile')
+        }
+      })
 
-      }
     },
       err => {
         console.log('Please try again')
@@ -49,22 +60,26 @@ export class NavbarComponent implements OnInit {
   }
 
   checkIfUserIsAdmin(userId: string) {
-    this.dbOperations.usersCollection()
-      .ref.where('userId', '==', userId).onSnapshot(data => {
-        if(data != null) {
+    this.dbOperations.usersCollectionById(userId)
+      .onSnapshot(data => {
+        if (data != null) {
           data.forEach(e => {
+            console.log('AUTHSTATE USER', e.data);
             const data = e.data();
             const id = e.id;
-            let user = {...data } as User;
+            let user = { ...data } as User;
             if (user.role === 'admin') {
-              this.router.navigateByUrl('/site/admin')
-            }else {
-              this.router.navigateByUrl('/site/add-artworks')
-              console.log('AUTHSTATE USER', userId); //this works
+              this.role = 'admin';
+              console.log('AUTHSTATE USER', 'admin');
+              this.router.navigateByUrl('/project/admin')
+            } else {
+              this.router.navigateByUrl('/project/add-artworks')
+              console.log('AUTHSTATE USER', 'artist');
             }
           })
         }
       })
   };
+
 
 }

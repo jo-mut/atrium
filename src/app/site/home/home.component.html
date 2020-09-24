@@ -1,310 +1,118 @@
-<div class="gallery-site">
-  <div class="p-0">
-    <div class="landing">
-      <div class="info">
-        <h3 class="display-4">African Resilience in the Wake
-          <br> of a Pandemic</h3>
-      </div>
-    </div>
-    <div class="container">
-      <div class="host mt-5">
-        <h3 class="text-center mt-5 hosted-by"><strong>Hosted By Bobby Pall Photography</strong></h3>
-        <div class="row">
-          <div class="col-md-8">
-              <div class="host-partners p-5">
-                <h3 class="text-center mb-3">The Team</h3>
-                <ngb-carousel *ngIf="hosts">
-                  <ng-template ngbSlide>
-                    <div class="card">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img [src]="hosts[0].flag">
-                        </div>
-                        <div class="col-md-6">
-                          <div class="host-info p-3">
-                            <h4 class="mt-4 name"><strong>{{hosts[0].name}}</strong></h4>
-                            <p class="bio">{{hosts[0].lessInfo}}</p>
-                            <button class="btn btn-primary" (click)="lauchHostModal(hosts[0])">Read More</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                  <ng-template ngbSlide>
-                    <div class="card">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img [src]="hosts[1].flag">
-                        </div>
-                        <div class="col-md-6">
-                          <div class="host-info p-3">
-                            <h4 class="mt-4 name"><strong>{{hosts[1].name}}</strong></h4>
-                            <p class="bio">{{hosts[1].lessInfo}}</p>
-                            <button class="btn btn-primary" (click)="lauchHostModal(hosts[1])">Read More</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                  <ng-template ngbSlide>
-                    <div class="card">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img [src]="hosts[2].flag">
-                        </div>
-                        <div class="col-md-6">
-                          <div class="host-info p-3">
-                            <h4 class="mt-4 name"><strong>{{hosts[2].name}}</strong></h4>
-                            <p class="bio">{{hosts[2].lessInfo}}</p>
-                            <button class="btn btn-primary" (click)="lauchHostModal(hosts[2])">Read More</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                  <ng-template ngbSlide>
-                    <div class="card">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img [src]="hosts[3].flag">
-                        </div>
-                        <div class="col-md-6">
-                          <div class="host-info p-3">
-                            <h4 class="mt-4 name"><strong>{{hosts[3].name}}</strong></h4>
-                            <p class="bio">{{hosts[3].lessInfo}}</p>
-                            <button class="btn btn-primary" (click)="lauchHostModal(hosts[3])">Read More</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                  <ng-template ngbSlide>
-                    <div class="card">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img [src]="hosts[4].flag">
-                        </div>
-                        <div class="col-md-6">
-                          <div class="host-info p-3">
-                            <h4 class="mt-4 name"><strong>{{hosts[4].name}}</strong></h4>
-                            <p class="bio">{{hosts[4].lessInfo}}</p>
-                            <button class="btn btn-primary" (click)="lauchHostModal(hosts[4])">Read More</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                  <ng-template ngbSlide>
-                    <div class="card">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img [src]="hosts[5].flag">
-                        </div>
-                        <div class="col-md-6">
-                          <div class="host-info p-3">
-                            <h4 class="mt-4 name"><strong>{{hosts[5].name}}</strong></h4>
-                            <p class="bio">{{hosts[5].lessInfo}}</p>
-                            <button class="btn btn-primary" (click)="lauchHostModal(hosts[5])">Read More</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                </ngb-carousel>
+<div class="home">
+  <div class="home-bg">
+    <div class="home-landing py-5">
+      <div class="container">
+        <div class="home-heading">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+              <div class="home-info p-5">
+                <h1>ARE YOU A PHOTOGRAPHER <br>
+                  OR A VIDEOGRAPHER</h1>
+                <p>How has COVID-19 affected your life, what has changed, what have you learnt, how are you adapting? Be
+                  creative, show us, share your experience and lessons with the world . . .</p>
+                <button class="btn btn-primary">JOIN THE CAMPAIGN</button>
               </div>
-          </div>
-          <div class="col-md-4">
-            <div class="sponsor mt-5 p-5">
-              <h3>A paternship with</h3>
-              <a href="https://africanartincontext.com/"><img src="assets/images/mcf_logo.png" alt=""></a>
-              <p>The Mastercard Foundation</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+              <img src="assets/images/gallery/sample/masai.png">
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="introduction mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h3 class="display-4 mb-3">This Project</h3>
-            <p>
-              The Mastercard Foundation Public Awareness Campaign is an Information, Education and Communication (IEC)
-              activity for updates and information on COVID-19 in Africa. The Mastercard Foundation works with visionary
-              organizations to enable young people in Africa and in Indigenous communities in Canada to access dignified
-              and
-              fulfilling work.
-              It is one of the largest, private foundations in the world with a mission to advance learning and promote
-              financial inclusion to create an inclusive and equitable world. The Foundation was created by Mastercard
-              in
-              2006 as an
-              independent organization with its own Board of Directors and Management.
-              For more on the Mastercard Foundation COVID-19 Recovery and Resilience Program, please visit
-              <a href="https://mastercardfdn.org/covid19-recovery-resilience-program/">
-                https://mastercardfdn.org/covid19-recovery-resilience-program/.</a> <strong>Follow the Foundation on
-                Twitter at
-                @MastercardFdn.</strong>
-            </p>
-          </div>
-          <div class="col-md-8">
-            <img src="assets/images/gallery/sample/poster7.jpg">
-          </div>
-        </div>
-      </div>
+  </div>
+  <div class="introduction p-5">
+    <div class="about p-3">
+      <h3 class="about-title mb-0">ABOUT</h3>
+      <hr class="hr-rule mt-1">
     </div>
-
-    <div class="submission-call mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="assets/images/gallery/sample/poster6.jpg">
-          </div>
-          <div class="col-md-6">
-            <h3 class="display-4 mb-3 text-center">Call for Submission</h3>
-            <ul>
-              <li><strong>Theme:</strong> African Resilience in the Wake of a Pandemic</li>
-              <li><strong>Organisation:</strong> Bobby Pall Photography in collaboration with Mastercard Foundation</li>
-              <li><strong>Submission Dates:</strong> 21st September – 30th November 2020</li>
-              <li><strong>Eligibility:</strong> Youth (18 – 30 years)</li>
-              <li><strong>Categories: </strong> Photography and Videography</li>
-              <li><strong>Participating Countries:</strong> Senegal, Ghana, Kenya, Nigeria, Rwanda, Ethiopia, Uganda
-              </li>
-              <li><strong>Compensation:</strong> US$100 for every selected image/video</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="about mt-5" *ngIf="inspiration">
-      <div class="container  pl-0 pr-0">
-        <div class="row">
-          <div class="col-md-4">
-            <h3 class="display-4 my-3">The Inspiration</h3>
-            <p>
-              <strong>Bobby Pall Photography (BPP)</strong>
-              {{getInspiration()}} <strong class="showMore" (click)="lauchMoreInfoModal(inspiration)">...show
-                more</strong>
-            </p>
-          </div>
-          <div class="col-md-8">
-            <img src="assets/images/gallery/sample/poster9.jpg">
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="spotlight mt-5">
-      <div class="container">
-        <p class="display-4 mb-5 text-center">The Spotlight</p>
-        <div class="spotlight-video">
-          <vg-player (onPlayerReady)="onPlayerReady($event)">
-            <vg-buffering></vg-buffering>
-            <vg-controls>
-              <vg-play-pause></vg-play-pause>
-              <vg-playback-button></vg-playback-button>
-              <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-              <vg-scrub-bar>
-                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-              </vg-scrub-bar>
-              <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-              <vg-mute></vg-mute>
-              <vg-volume></vg-volume>
-              <vg-fullscreen></vg-fullscreen>
-            </vg-controls>
-            <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
-            </video>
-          </vg-player>
-        </div>
-      </div>
-    </div> -->
-    <div class="call-info container mt-5">
-      <div class="purpose" *ngIf="purpose">
-        <div class="row">
-          <div class="col-md-8">
-            <img src="assets/images/gallery/sample/poster10.jpg" alt="">
-          </div>
-          <div class="col-md-4">
-            <h3 class="mb-5 display-4 text-center">Purpose Of The Campaign</h3>
-
-            <p> {{purposeOfCompetion()}} <strong (click)="lauchMoreInfoModal(purpose)">...show more</strong></p>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="sponsor mt-5">
-      <h3 class="display-4">A paternship with</h3>
-      <img src="assets/images/mcf_logo.png" alt="">
-      <p>The Mastercard Foundation</p>
+    <div class="container">
+      <p>
+        This is an information, education, and communication activity run by Bobby Pall Photography in partnership with
+        Mastercard Foundation in the form of a photography and videography campaign in a bid to increase awareness on
+        how to deal with the COVID-19 pandemic. In September 2020, the total number of confirmed COVID-19 cases in
+        Africa
+        surpassed 1.4 million. The pandemic has continued to cause major disruptions in the daily lives of Africans.
+        In the wake of this world-wide havoc, the Youth of Africa though greatly impacted from several perspectives
+        including education and unemployment, have shown remarkable resilience through creative art. Many have taken
+        up photography and videography to tell stories around their day-to-day lives, the challenges of social
+        distancing and wearing masks in a society that is highly social in nature.
+      </p>
     </div>
   </div>
-
-  <div class="terms container mt-5">
-    <h3 class=" display-4 text-center">Privacy Policy</h3>
-    <div class="privacy">
-      <div class="mt-3">
-        <p>
-          This privacy policy applies to everyone who wishes to participate in this Campaign. This privacy
-          policy
-          explains how the Organizer will use the submitted personal data, such as names or e-mail
-          addresses
-          (Personal
-          Data) and how your privacy will be protected. It is the responsibility of the Organizer to
-          ensure
-          that your
-          Personal Data is handled with due care. The Organizer will neither sell nor trade your Personal
-          Data nor
-          infringe your personal rights in any way. If you register to participate in the Campaign, you
-          disclose your
-          Personal Data. This Personal Data will only be collected, processed and used for the purpose of
-          organizing
-          the
-          Campaign, or informing you about the COVID-19 Public Awareness Campaign, or making a payment to
-          you (if you
-          are selected as a finalist), in accordance with this Privacy Policy.
-
-          The Organizer will not use the contact details for other private or commercial purposes, e.g.
-          for
-          promotional
-          purposes especially, but not limited to, unrequested and uninvited advertising by email, or to
-          be
-          contacted
-          by
-          mail. The Organizer will collect, process and use the Personal Data provided in the Registration
-          Form and
-          Payment Details Form.
-
-          As a condition of participating in the Campaign, each Entrant gives consent for the Organizer to
-          obtain and
-          deliver his or her name, address and other information to third parties for the purpose of
-          administering and
-          organizing the Campaign and to comply with applicable laws, regulations and rules.
-
-          The Organizer will comply with all privacy and data protection laws applicable to its processing
-          of Personal
-          Data.
-
-        </p>
-        <h3 class="text-center dis">Agreement, Changes to Dates and Deadlines</h3>
-        <p>
-          These Submission Guidelines and Rules are the only agreement between the Entrant and the
-          Organizer, and that
-          is why the submission of any entry, within its scope, expresses acceptance by the Entrant of the
-          terms and
-          conditions stipulated herein.
-
-          The deadlines and dates set out in these Submission Guidelines and Rules may be amended by
-          decision of the
-          Organizer. Any change will be notified through the website: <a
-            href="https://africanartincontext.com/">africanartincontext.com</a>
-
-        </p>
+  <div class="submission p-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+          <img src="assets/images/gallery/sample/poster6.jpg">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+          <h3>CALL FOR SUBMISSION</h3>
+          <hr class="hr-rule mt-1">
+          <ul>
+            <li><strong>Dates:</strong> 21st September – 30th November 2020</li>
+            <li><strong>Theme:</strong> African Resilience in the Wake of a Pandemic</li>
+            <li><strong>Organisation:</strong> Bobby Pall Photography in collaboration with Mastercard Foundation</li>
+            <li><strong>Eligibility:</strong> 18 – 30 years</li>
+            <li><strong>Categories: </strong> Photography and Videography</li>
+            <li><strong>Participating Countries:</strong> Senegal, Ghana, Kenya, Nigeria, Rwanda, Ethiopia, Uganda </li>
+            <li><strong>Compensation:</strong> US$100 for every selected image/video</li>
+            <li><strong>Organisation:</strong> Bobby Pall Photography in partnership with Mastercard Foundation </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="footer mt-5">
-    <footer></footer>
+  <div class="countries py-5">
+    <div class="container">
+      <h3>COUNTRIES</h3>
+      <hr class="hr-rule mt-1">
+      <div class="row" *ngIf="countries" >
+        <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
+          <img src="{{countries[0].flag}}" alt="">
+          <h3>{{countries[0].name}}</h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
+          <img src="{{countries[1].flag}}" alt="">
+          <h3>{{countries[1].name}}</h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
+          <img src="{{countries[2].flag}}" alt="">
+          <h3>{{countries[2].name}}</h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
+          <img src="{{countries[3].flag}}" alt="">
+          <h3>{{countries[3].name}}</h3>
+        </div>
+      </div>
+      <div class="row" *ngIf="countries" >
+        <div class="col-xs-6 col-sm-12 col-md-4 mt-3">
+          <img src="{{countries[5].flag}}" alt="">
+          <h3>{{countries[5].name}}</h3>
+        </div>
+        <div class="col-xs-6 col-sm-12 col-md-4 mt-3">
+          <img src="{{countries[6].flag}}" alt="">
+          <h3>{{countries[6].name}}</h3>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 mt-3">
+          <img src="{{countries[4].flag}}" alt="">
+          <h3>{{countries[4].name}}</h3>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <footer class="mt-5">
+    <div class="container">
+      <div layout="row" layout-align="center center">
+        <p>Brought to you by Mastercard Foundation in partnership with </p>
+        <div class="mcf p-3">
+          <a href="https://africanartincontext.com/"><img src="assets/images/mcf_logo.png" alt=""></a>
+          <p>The Mastercard Foundation</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </div>
