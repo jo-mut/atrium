@@ -11,6 +11,11 @@
     width: 100%;
   }
 
+  .card{
+    background-color: none;
+    border: none
+  }
+
 
   .landing {
     max-height: 100vh;
@@ -68,10 +73,7 @@
 
   .selection {
     background-color: whitesmoke;
-    .card{
-      background-color: none;
-      border: none
-    }
+    
   }
   .timeline {
     background-color: whitesmoke;

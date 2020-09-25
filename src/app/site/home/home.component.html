@@ -1,19 +1,18 @@
 <div class="home">
   <div class="home-bg">
-    <div class="home-landing py-5">
-      <div class="container">
+    <div class="home-landing">
+      <div class="container-fluid p-0">
         <div class="home-heading">
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
               <div class="home-info p-5">
-                <h1>ARE YOU A PHOTOGRAPHER <br>
-                  OR A VIDEOGRAPHER</h1>
+                <h1>ARE YOU A PHOTOGRAPHER OR A VIDEOGRAPHER</h1>
                 <p>How has COVID-19 affected your life, what has changed, what have you learnt, how are you adapting? Be
                   creative, show us, share your experience and lessons with the world . . .</p>
                 <button class="btn btn-primary">JOIN THE CAMPAIGN</button>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
               <img src="assets/images/gallery/sample/masai.png">
             </div>
           </div>
@@ -43,10 +42,10 @@
   <div class="submission p-5">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
           <img src="assets/images/gallery/sample/poster6.jpg">
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
           <h3>CALL FOR SUBMISSION</h3>
           <hr class="hr-rule mt-1">
           <ul>
@@ -65,39 +64,53 @@
   </div>
 
   <div class="countries py-5">
-    <div class="container">
+    <div class="container" *ngIf="countries">
       <h3>COUNTRIES</h3>
       <hr class="hr-rule mt-1">
-      <div class="row" *ngIf="countries" >
-        <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
-          <img src="{{countries[0].flag}}" alt="">
-          <h3>{{countries[0].name}}</h3>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-3 mt-3 ">
+          <div class="country">
+            <img src="{{countries[0].flag}}" alt="">
+            <h3 class="mx-3">{{countries[0].name}}</h3>
+          </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
-          <img src="{{countries[1].flag}}" alt="">
-          <h3>{{countries[1].name}}</h3>
+          <div class="country">
+            <img src="{{countries[1].flag}}" alt="">
+            <h3 class="mx-3"> {{countries[1].name}}</h3>
+          </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
-          <img src="{{countries[2].flag}}" alt="">
-          <h3>{{countries[2].name}}</h3>
+          <div class="country">
+            <img src="{{countries[2].flag}}" alt="">
+            <h3 class="mx-3"> {{countries[2].name}}</h3>
+          </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
-          <img src="{{countries[3].flag}}" alt="">
-          <h3>{{countries[3].name}}</h3>
+          <div class="country">
+            <img src="{{countries[3].flag}}" alt="">
+            <h3 class="mx-3"> {{countries[3].name}}</h3>
+          </div>
         </div>
       </div>
-      <div class="row" *ngIf="countries" >
+      <div class="row">
         <div class="col-xs-6 col-sm-12 col-md-4 mt-3">
-          <img src="{{countries[5].flag}}" alt="">
-          <h3>{{countries[5].name}}</h3>
+          <div class="country">
+            <img src="{{countries[5].flag}}" alt="">
+            <h3 class="mx-3"> {{countries[5].name}}</h3>
+          </div>
         </div>
         <div class="col-xs-6 col-sm-12 col-md-4 mt-3">
-          <img src="{{countries[6].flag}}" alt="">
-          <h3>{{countries[6].name}}</h3>
+          <div class="country">
+            <img src="{{countries[6].flag}}" alt="">
+            <h3 class="mx-3"> {{countries[6].name}}</h3>
+          </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 mt-3">
-          <img src="{{countries[4].flag}}" alt="">
-          <h3>{{countries[4].name}}</h3>
+        <div class="col-xs-12 col-sm-12 col-md-4 mt-3 ">
+          <div class="country">
+            <img src="{{countries[4].flag}}" alt="">
+            <h3 class="mx-3"> {{countries[4].name}}</h3>
+          </div>
         </div>
       </div>
     </div>
