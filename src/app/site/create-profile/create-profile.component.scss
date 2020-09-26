@@ -1,4 +1,8 @@
 .create-profile {
+    min-height: 80vh;
+    background-image: url('/assets/images/gallery/sample/poster8.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     h3{
         text-align: center;
         font-size: 2.0em;
@@ -9,6 +13,7 @@
         background-color: black;
         color: white;
         border: none;
+        width: 100%;
     }
     .card {
         border: none;

@@ -76,6 +76,7 @@
               <label>Browse a photograph or video to submit</label>
               <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
                 name="image" autocomplete="off" />
+                <small class="help-text">Select a photo or video from your device</small>
             </div>
           </div>
         </div>
@@ -90,6 +91,8 @@
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
+              <small class="help-text">Which date did you shoot this </small>
+
             </div>
           </div>
         </div>
@@ -99,6 +102,7 @@
             <div class="form-group">
               <label>Town/Country</label>
               <input type="text" name="place" class="form-control" [(ngModel)]="artwork.place" required>
+              <small class="help-text">Tell us your country</small>
             </div>
           </div>
         </div>
@@ -108,6 +112,7 @@
             <div class="form-group">
               <label>Title</label>
               <input type="text" name="title" class="form-control" [(ngModel)]="artwork.title" required>
+              <small class="help-text">What is the title of this submission</small>
             </div>
           </div>
         </div>
@@ -118,6 +123,8 @@
               <label>Description</label>
               <input type="text" name="description" class="form-control" [(ngModel)]="artwork.description"
                 maxlength="150" required>
+                <small class="help-text">Describe your submission in 150 words</small>
+
             </div>
           </div>
         </div>

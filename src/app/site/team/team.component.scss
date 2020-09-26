@@ -12,9 +12,35 @@
     height: 100%;
     width: 100%;
   }
-  
+
+  .host-info {
+    button {
+      align-content: center;
+      border-radius: 1em;
+      // border-radius: 250px 750px 250px 750px / 750px 250px 750px 250px;
+      height: 60px;
+      border: 3px solid;
+      background-color: transparent;
+      color: white;
+      font-weight: bolder;
+      background-image: linear-gradient(to right, orangered 0%, orange 100%);
+      ;
+
+
+    }
+  }
+
+
   .partners {
-      background-color: whitesmoke;
+    background-color: whitesmoke;
+
+    .mcf_logo {
+      text-align: center;
+
+      img {
+        width: 100px;
+      }
+    }
   }
 
 }

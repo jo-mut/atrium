@@ -47,7 +47,7 @@ import { GuidelinesComponent } from 'src/app/site/guidelines/guidelines.componen
 import { SuccessfulComponent } from 'src/app/site/successful/successful.component';
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 const routes: Routes = [
-  { path: '', redirectTo: 'call', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'campaign', component: CampaignComponent },
   { path: 'home', component: HomeComponent },
   { path: 'team', component: TeamComponent },

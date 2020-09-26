@@ -1,5 +1,8 @@
 <div class="team py-5">
-  <div class="container">
+  <div class="team-landing">
+
+  </div>
+  <div class="container py-5">
     <h3>THE TEAM</h3>
     <hr class="hr-rule mt-1">
     <div class="host">
@@ -10,10 +13,12 @@
               <img class="img-fluid" [src]="host.img">
             </div>
             <div class="host-info">
-              <div class="p-3">
-                <h4 class="name"><strong>{{host.name}}</strong></h4>
-                <p class="bio">{{host.bio.substring(0, 100)}} <strong (click)="lauchHostModal(host)">. . .read
-                    more</strong></p>
+              <div class="card">
+                <div class="p-3">
+                  <h4 class="name"><strong>{{host.name}}</strong></h4>
+                  <p class="bio">{{host.bio.substring(0, 100)}} <strong>. . .</strong></p>
+                  <button class="btn bt" (click)="lauchHostModal(host)">Read More</button>
+                </div>
               </div>
             </div>
           </div>
@@ -26,16 +31,9 @@
       <h3>PARTNERS</h3>
       <hr class="hr-rule mt-1">
       <div class="host">
-        <div class="row">
-          <div class="col-md-4 mt-3">
-
-          </div>
-          <div class="col-md-4 mt-3">
-
-          </div>
-          <div class="col-md-4 mt-3">
-
-          </div>
+        <div class="mcf_logo">
+          <a href="https://africanartincontext.com/">
+            <img src="assets/images/mcf_logo.png" alt=""></a>
         </div>
       </div>
     </div>
