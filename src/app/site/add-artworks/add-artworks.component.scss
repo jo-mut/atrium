@@ -1,0 +1,54 @@
+.add-artwork {
+    min-height: 100vh;
+    max-height: 100vh;
+    background-image: url('/assets/images/gallery/sample/picture7.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: auto;
+    max-height: 100vh;
+  
+    .artwork-bg {
+      background-color: rgba(0, 0, 0, 0.8);
+  
+      .container-fluid {
+        width: 100%;
+  
+        .card {
+          background-color: rgba(0, 0, 0, 0.6);
+          padding: 1em;
+          border: none;
+          color: whitesmoke;
+          border-radius: 1em;
+          ;
+  
+          input,
+          select,
+          option, textarea {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 0.5em;
+            border-color: orange;
+          }
+        }
+  
+        h3 {
+          text-align: center;
+          font-size: 2.0em;
+        }
+
+        p {
+            color: whitesmoke;
+        }
+  
+  
+        button {
+          background-color: black;
+          color: white;
+          border: none;
+          width: 100%;
+        }
+      }
+  
+    }
+  }
+  

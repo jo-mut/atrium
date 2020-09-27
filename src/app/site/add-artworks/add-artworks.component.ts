@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, HostListener } from '@angular/core';
 import { ArtWork } from 'src/app/models/artwork';
 import { Upload } from "../../interfaces/upload";
 import { DbOperationsService } from "../../services/db-operations.service";
@@ -29,6 +29,8 @@ export class AddArtworksComponent implements OnInit {
 
   checkedTerms = false
   checkedPrivacy = false
+  formWidth = 100;
+
 
   constructor(
     private fauth: AngularFireAuth,
@@ -36,8 +38,44 @@ export class AddArtworksComponent implements OnInit {
 
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    let width = event.target.innerWidth;
+    if (width > 800) {
+      this.formWidth = 80;
+    } 
+
+    if(width > 1000) {
+      this.formWidth = 70;
+
+    } 
+
+    if (width > 1200) {
+      this.formWidth = 60;
+    }
+
+  }
+
+  getScreenSize() {
+    let width = window.innerWidth;
+    if (width > 800) {
+      this.formWidth = 80;
+    } 
+
+    if(width > 1000) {
+      this.formWidth = 70;
+
+    } 
+
+    if (width > 1200) {
+      this.formWidth = 60;
+    }
+  }
+
   ngOnInit() {
     this.getCurrentUser();
+    this.getScreenSize();
+
   }
 
   checkReadTermsValue() {

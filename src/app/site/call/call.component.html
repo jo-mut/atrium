@@ -2,102 +2,143 @@
   <div class="landing">
     <div class="container py-5">
       <div class="row">
-        <div class="col-md-7">
-
-        </div>
-        <div class="col-md-5">
-
-        </div>
         <div class="info">
-          <h3>African Resilience in the Wake of a Pandemic
-          </h3>
+          <h3>AFRICAN RESILIENCE IN THE WAKE OF A PANDEMIC</h3>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="guidelines">
-    <div class="rules">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
-            <img src="assets/images/gallery/sample/picture15.png">
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
-            <h3>HOW TO PARTICIPATE</h3>
-            <hr class="hr-rule mt-1">
-            <ol class="px-2">
-              <li>Each Entrant must fill and submit an online registration form prior to submitting either or;
-                <ul>
-                  <li>no more than two photographs</li>
-                  <li>a one minute (60 seconds) video</li>
-                </ul>
-              </li>
-              <li>All entries must be submitted directly on the website, <a
-                  href="https://africanartincontext.com/">africanartincontext.com</a>, using the submission
-                button.</li>
-              <li>Entrants must own the copyright and must have taken the photographs/videos themselves. They may have
-                been
-                taken at any time prior to the start of the Campaign.</li>
-              <li>Entrants should not forget to post their photos/videos if they have social media accounts, using the
-                Campaign hashtags: <strong>#ItsUpToUs.</strong> Mastercard Foundation corporate social media may share
-                and retweet the
-                selected photos and videos on their corporate accounts</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
+ 
+ <div class="container">
+  <div class="accordion-action-buttons my-4">
+    <button class="btn mx-3" (click)="accordion.openAll()">Expand All</button>
+    <button class="btn mx-3" (click)="accordion.closeAll()">Collapse All</button>
+  </div>
+  <mat-accordion class="accordion-headers-align" multi>
+    <mat-expansion-panel  hideToggle="true" #rules >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>HOW TO PARTICIPATE</h3>
+        </mat-panel-title>
+        <mat-panel-description> 
+          <!-- <mat-icon *ngIf="!rules.expanded">add</mat-icon>
+          <mat-icon *ngIf="rules.expanded">add_box</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <div class="submission">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
-            <div class="format">
-              <h3>SUBMISSION FORMAT</h3>
-              <hr class="hr-rule mt-1">
-              <ol class="p-2">
-                <li>Photographs must be submitted in <strong>.jpeg</strong> and <strong>.png</strong> format. Photos
-                  should be
-                  submitted with
-                  the highest quality possible regarding file size, bit depth and resolution. Both colour and/or black
-                  and
-                  white
-                  images will be accepted.</li>
-                <li>Videos must be submitted in <strong>.mp4</strong> and <strong>.mov</strong> format. They may not
-                  exceed 1
-                  minute in run-time. Videos should
-                  be submitted with the highest quality possible regarding file size, bit depth and resolution.</li>
-                <li> The material must not constitute copyright infringement or otherwise violate or infringe Mastercard
-                  Foundation or third party rights, including but not limited to trademark, privacy, publicity or other
-                  intellectual property rights.</li>
-                <li>The submission must not contain dates, texts, brand names, logos and/or trademarks.</li>
-                <li>The submission description and captions must be in English or contain English translations.</li>
-                <li>Filmmaker must have rights to use any soundtrack (music bed), sound-effects and any
-                  graphic/animation
-                  assets.</li>
-              </ol>
+
+      <div class="guidelines">
+        <div class="rules">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
+                <img src="assets/images/gallery/sample/picture15.png">
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
+                <h3>HOW TO PARTICIPATE</h3>
+                <hr class="hr-rule mt-1">
+                <ol class="px-2">
+                  <li>Each Entrant must fill and submit an online registration form prior to submitting either or;
+                    <ul>
+                      <li>no more than two photographs</li>
+                      <li>a one minute (60 seconds) video</li>
+                    </ul>
+                  </li>
+                  <li>All entries must be submitted directly on the website, <a
+                      href="https://africanartincontext.com/">africanartincontext.com</a>, using the submission
+                    button.</li>
+                  <li>Entrants must own the copyright and must have taken the photographs/videos themselves. They
+                    may have
+                    been
+                    taken at any time prior to the start of the Campaign.</li>
+                  <li>Entrants should not forget to post their photos/videos if they have social media accounts,
+                    using the
+                    Campaign hashtags: <strong>#ItsUpToUs.</strong> Mastercard Foundation corporate social media may
+                    share
+                    and retweet the
+                    selected photos and videos on their corporate accounts</li>
+                </ol>
+              </div>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
-            <div class="row pr-3">
-              <div class="col-md-12 pr-0 pl-0 mt-3">
-                <img src="assets/images/gallery/sample/mwalimu.png">
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel  hideToggle="true" #submission >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>SUBMISSION FORMAT</h3>
+        </mat-panel-title>
+        <mat-panel-description> 
+          <!-- <mat-icon *ngIf="!submission.expanded">add</mat-icon>
+          <mat-icon *ngIf="submission.expanded">add_box</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="submission">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
+              <div class="format">
+                <h3>SUBMISSION FORMAT</h3>
+                <hr class="hr-rule mt-1">
+                <ol class="p-2">
+                  <li>Photographs must be submitted in <strong>.jpeg</strong> and <strong>.png</strong> format. Photos
+                    should be
+                    submitted with
+                    the highest quality possible regarding file size, bit depth and resolution. Both colour and/or black
+                    and
+                    white
+                    images will be accepted.</li>
+                  <li>Videos must be submitted in <strong>.mp4</strong> and <strong>.mov</strong> format. They may not
+                    exceed 1
+                    minute in run-time. Videos should
+                    be submitted with the highest quality possible regarding file size, bit depth and resolution.</li>
+                  <li> The material must not constitute copyright infringement or otherwise violate or infringe
+                    Mastercard
+                    Foundation or third party rights, including but not limited to trademark, privacy, publicity or
+                    other
+                    intellectual property rights.</li>
+                  <li>The submission must not contain dates, texts, brand names, logos and/or trademarks.</li>
+                  <li>The submission description and captions must be in English or contain English translations.</li>
+                  <li>Filmmaker must have rights to use any soundtrack (music bed), sound-effects and any
+                    graphic/animation
+                    assets.</li>
+                </ol>
               </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
               <div class="row pr-3">
-                <div class="col-md-6 pr-0 mt-3">
-                  <img src="assets/images/gallery/sample/picture3.png">
+                <div class="col-md-12 pr-0 pl-0 mt-3">
+                  <img src="assets/images/gallery/sample/mwalimu.png">
                 </div>
-                <div class="col-md-6 pr-0 mt-3">
-                  <img src="assets/images/gallery/sample/picture10.png">
+                <div class="row pr-3">
+                  <div class="col-md-6 pr-0 mt-3">
+                    <img src="assets/images/gallery/sample/picture3.png">
+                  </div>
+                  <div class="col-md-6 pr-0 mt-3">
+                    <img src="assets/images/gallery/sample/picture10.png">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="selection py-5">
+    </mat-expansion-panel>
+
+    <mat-expansion-panel  hideToggle="true" #selection >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>SELECTION PROCESS</h3>
+        </mat-panel-title>
+        <mat-panel-description> 
+          <!-- <mat-icon *ngIf="!selection.expanded">add</mat-icon>
+          <mat-icon *ngIf="selection.expanded">add_box</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
       <div class="selection-info ">
         <div class="container">
           <div class="card my-5">
@@ -111,6 +152,18 @@
           </div>
         </div>
       </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel  hideToggle="true" #criteria >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>CRITERIA</h3>
+        </mat-panel-title>
+        <mat-panel-description> 
+          <!-- <mat-icon *ngIf="!criteria.expanded">add</mat-icon>
+          <mat-icon *ngIf="criteria.expanded">add_box</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
       <div class="container">
         <div class="criteria mt-5">
           <div class="row">
@@ -134,6 +187,18 @@
           </div>
         </div>
       </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel  hideToggle="true" #compensation >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>COMPENSATION</h3>
+        </mat-panel-title>
+        <mat-panel-description> 
+          <!-- <mat-icon *ngIf="!compensation.expanded">add</mat-icon>
+          <mat-icon *ngIf="compensation.expanded">add_box</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
       <div class="compensation my-5">
         <div class="container">
           <div class="card">
@@ -143,105 +208,133 @@
           </div>
         </div>
       </div>
-    </div>
-    
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
-          <img src="assets/images/gallery/sample/picture9.png">
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
+    </mat-expansion-panel>
+
+    <mat-expansion-panel  hideToggle="true" #conditions >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
           <h3>CONDITIONS AND COPYRIGHT</h3>
-          <hr class="hr-rule mt-1">
-          <ol class="px-2">
-            <li>Mastercard Foundation respects the rights of the photographers and video-makers’ and does not claim
-              copyright over images/videos submitted to this Campaign. The author retains full copyright in each entry.
-              Whenever the image/video is published, the author will be credited.</li>
-            <li>Participation in the Campaign grants Mastercard Foundation permission to exhibit and/or publish the
-              photos/videos, either in part or in their entirety.</li>
-            <li>Mastercard Foundation has the right to apply minor changes or amendments without damaging the integrity
-              of
-              the project, e.g. change colours, cut the background or parts of it.</li>
-            <li>Mastercard Foundation does NOT own copyright and authors are free to use the photos/videos for other
-              purposes at their choosing.</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <div class="timeline py-5">
-      <div class="container">
-        <div class="card">
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-5">
-              <h3>THE TIMELINE</h3>
-              <hr class="hr-rule mt-1">
-              <div class="timeline-process">
-                <p>Submission opens: 21st September 2020</p>
-                <p>Submission closes: 30th November 2020</p>
-                <p>Shortlisting of the 100 best photos and 50 best videos submissions: 4th
-                  December2020</p>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-5">
-              <div class="card">
-                <img  src="assets/images/gallery/sample/picture8.png" alt="">
-              </div>
-            </div>
+        </mat-panel-title>
+        <mat-panel-description> 
+          <!-- <mat-icon *ngIf="!conditions.expanded">add</mat-icon>
+          <mat-icon *ngIf="conditions.expanded">add_box</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
+            <img src="assets/images/gallery/sample/picture9.png">
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 py-5">
+            <h3>CONDITIONS AND COPYRIGHT</h3>
+            <hr class="hr-rule mt-1">
+            <ol class="px-2">
+              <li>Mastercard Foundation respects the rights of the photographers and video-makers’ and does not claim
+                copyright over images/videos submitted to this Campaign. The author retains full copyright in each entry.
+                Whenever the image/video is published, the author will be credited.</li>
+              <li>Participation in the Campaign grants Mastercard Foundation permission to exhibit and/or publish the
+                photos/videos, either in part or in their entirety.</li>
+              <li>Mastercard Foundation has the right to apply minor changes or amendments without damaging the integrity
+                of
+                the project, e.g. change colours, cut the background or parts of it.</li>
+              <li>Mastercard Foundation does NOT own copyright and authors are free to use the photos/videos for other
+                purposes at their choosing.</li>
+            </ol>
           </div>
         </div>
       </div>
-    </div>
-    <div class="sample-images p-5">
-      <div class="artistic-images">
-        <h3 class="mt-5">FEATURED PHOTOS</h3>
-        <hr class="hr-rule mt-1">
+    </mat-expansion-panel>
+
+    <mat-expansion-panel  hideToggle="true" #timeline >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>THE TIMELINE</h3>
+        </mat-panel-title>
+        <mat-panel-description> 
+          <!-- <mat-icon *ngIf="!timeline.expanded">add</mat-icon>
+          <mat-icon *ngIf="timeline.expanded">add_box</mat-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="timeline py-5">
         <div class="container">
-          <div class="row pr-3">
-            <div class="col-xs-12 col-sm-12 col-md-8 pr-0 mt-3">
-              <div class="card">
-                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 pr-0">
-              <div class="row">
-                <div class="col-12 mt-3">
-                  <div class="card">
-                    <img src="assets/images/gallery/sample/poster8.jpg" alt="">
-                  </div>
+          <div class="card">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-5">
+                <h3>THE TIMELINE</h3>
+                <hr class="hr-rule mt-1">
+                <div class="timeline-process">
+                  <p>Submission opens: 21st September 2020</p>
+                  <p>Submission closes: 30th November 2020</p>
+                  <p>Shortlisting of the 100 best photos and 50 best videos submissions: 4th
+                    December2020</p>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-12 mt-3">
-                  <div class="card">
-                    <img src="assets/images/gallery/sample/poster8.jpg" alt="">
-                  </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-5">
+                <div class="card">
+                  <img src="assets/images/gallery/sample/picture8.png" alt="">
                 </div>
               </div>
             </div>
           </div>
-          <div class="row pr-3">
-            <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
-              <div class="card">
-                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+ </div>
+
+
+  <div class="sample-images p-5">
+    <div class="artistic-images">
+      <h3 class="mt-5">FEATURED PHOTOS</h3>
+      <hr class="hr-rule mt-1">
+      <div class="container">
+        <div class="row pr-3">
+          <div class="col-xs-12 col-sm-12 col-md-8 pr-0 mt-3">
+            <div class="card">
+              <img src="assets/images/gallery/sample/picture18.JPG" alt="">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-4 pr-0">
+            <div class="row">
+              <div class="col-12 mt-3">
+                <div class="card">
+                  <img src="assets/images/gallery/sample/picture16.JPG" alt="">
+                </div>
               </div>
             </div>
-            <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
-              <div class="card">
-                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
+            <div class="row">
+              <div class="col-12 mt-3">
+                <div class="card">
+                  <img src="assets/images/gallery/sample/7.png" alt="">
+                </div>
               </div>
             </div>
-            <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
-              <div class="card">
-                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
-              </div>
+          </div>
+        </div>
+        <div class="row pr-3">
+          <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
+            <div class="card">
+              <img src="assets/images/gallery/sample/picture8.png" alt="">
             </div>
-            <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
-              <div class="card">
-                <img src="assets/images/gallery/sample/poster8.jpg" alt="">
-              </div>
+          </div>
+          <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
+            <div class="card">
+              <img src="assets/images/gallery/sample/poster7.jpg" alt="">
+            </div>
+          </div>
+          <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
+            <div class="card">
+              <img src="assets/images/gallery/sample/picture14.jpg" alt="">
+            </div>
+          </div>
+          <div class=" col-xs-12 col-sm-6 col-md-3 pr-0 mt-3">
+            <div class="card">
+              <img src="assets/images/gallery/sample/picture13.jpg" alt="">
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

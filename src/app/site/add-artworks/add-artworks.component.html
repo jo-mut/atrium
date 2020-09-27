@@ -1,323 +1,134 @@
-<!-- <div class="add-artworks container">
-  <form novalidate>
-    <div class="selected-files"  appDnd (fileDropped)="onFileDropped($event)">
-      <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
-      <div class="d-flex justify-content-center">
-        <h3 class="mx-3 mb-0">Drag and drop file here</h3>
-        <h3 class="mx-3 mb-0">or</h3>
-        <h3 class="mx-3 mb-0" for="fileDropRef">Browse for file</h3>
-      </div>
-    </div>
-  </form>
-  <div class="selected-works mt-5">
-    <div class="files-list mt-5">
-      <div class="container-fluid p-0">
-        <div class="row">
-          <div class="single-file" *ngFor="let artwork of artworks; let i = index"
-            class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
-            <div class="container-fluid p-0">
-              <div class="card" *ngIf="artwork.type == 'image'">
-                <img class="artwork-image img-fluid" src="{{artwork.url}}" alt="">
-              </div>
-              <div class="card" *ngIf="artwork.type == 'video'">
-                <vg-player (onPlayerReady)="onPlayerReady($event)">
-                  <vg-buffering></vg-buffering>
-                  <vg-controls>
-                    <vg-play-pause></vg-play-pause>
-                    <vg-playback-button></vg-playback-button>
-                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-                    <vg-scrub-bar>
-                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                    </vg-scrub-bar>
-                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-                    <vg-mute></vg-mute>
-                    <vg-volume></vg-volume>
-                    <vg-fullscreen></vg-fullscreen>
-                  </vg-controls>
-                  <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
-                  </video>
-                </vg-player>
-              </div>
-              <h4 class="name">
-                {{ artwork?.name }}
-              </h4>
-              <div class="info mt-1" *ngIf="artwork.percentage | async as pct">
-                <span><progress class="progress is-info" [value]="pct" max="100"></progress><small>
-                    {{ pct | number }}%</small></span>
-              </div>
-              <p class="size" *ngIf="(artwork.bytes | async) as snap">
-                Uploading {{artwork.bytes.bytesTransferred }} of {{ artwork.bytes.bytesTransferred }}
-              </p>
-            </div>
+<div class="add-artwork" (window:resize)="onResize($event)">
+  <div class="artwork-bg">
+    <div class="container-fluid py-5" [style.width.%]="formWidth">
+      <div class="artwork-form py-5">
+        <div class="card text-center mt-3">
+          <div class="profile-form-title">
+            <h2>Select your artwork for submission</h2>
+            <p>Please not that you are only allowed to submit only two photos and/or one video of 60 seconds</p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="create-profile container">
-  <div class="profile-form">
-    <div class="card p-5">
-      <div class="card text-center">
-        <div class="profile-form-title">
-          <h2>Select your artwork for submission</h2>
-          <p>Please not that you are only allowed to submit only two photos and/or one video of 60 seconds</p>
-        </div>
-      </div>
-    </div>
-    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-
-      <div class="artwork-type">
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Browse a photograph or video to submit</label>
-              <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
-                name="image" autocomplete="off" />
+        <form #artworkForm="ngForm" (ngSubmit)="onSubmit(artworkForm)">
+          <div class="artwork-type">
+            <div class="card p-3 mt-3">
+              <div class="form-group">
+                <label>Browse a photograph or video to submit</label>
+                <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
+                  name="image" autocomplete="off" />
                 <small class="help-text">Select a photo or video from your device</small>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Date Shot</label>
-              <mat-form-field>
-                <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker"/>
-                <mat-datepicker-toggle matSuffix [for]="picker">
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-              <small class="help-text">Which date did you shoot this </small>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Town/Country</label>
-              <input type="text" name="place" class="form-control" [(ngModel)]="artwork.place" required>
-              <small class="help-text">Tell us your country</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Title</label>
-              <input type="text" name="title" class="form-control" [(ngModel)]="artwork.title" required>
-              <small class="help-text">What is the title of this submission</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Description</label>
-              <input type="text" name="description" class="form-control" [(ngModel)]="artwork.description"
-                maxlength="150" required>
-                <small class="help-text">Describe your submission in 150 words</small>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div class="artwork-type" *ngIf="artwork.type == 'video'">
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Date Shot</label>
-              <input type="text" name="birthDate" class="form-control" [(ngModel)]="artwork.shotDate" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Town/Country</label>
-              <input type="text" name="place" class="form-control" [(ngModel)]="artwork.place" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Title</label>
-              <input type="text" name="title" class="form-control" [(ngModel)]="artwork.title" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-3 mt-5">
-          <div class="card">
-            <div class="form-group">
-              <label>Description</label>
-              <input type="text" name="description" class="form-control" [(ngModel)]="artwork.description" maxlength="150"
-                required>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <div class="challenges">
-        <div class="card text-center p-3 mt-5">
-          <h3>Please tell us a bit about your work</h3>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-5">
-        <div class="card">
-          <div class="form-group">
-            <label>Challenges</label>
-            <textarea [(ngModel)]="extraDetails.challenges" maxlength="150" required class="form-control"
-              name="challenges" id="challenges" rows="3"></textarea>
-            <small class="help-text">What are some of the challenges you encountered
-              in the process of taking the photo(s)/video?</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-5">
-        <div class="card">
-          <div class="form-group">
-            <label>Experience</label>
-            <textarea [(ngModel)]="extraDetails.experience" maxlength="150" required class="form-control"
-              name="challenges" id="challenges" rows="3"></textarea>
-            <small class="help-text">Describe your experience</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-5">
-        <div class="card">
-          <div class="form-group">
-            <label>Prior to Covid - 19</label>
-            <textarea [(ngModel)]="extraDetails.lifeBefore" maxlength="150" required class="form-control"
-              name="challenges" id="challenges" rows="3"></textarea>
-            <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="confirm-terms">
-        <div class="container p-5">
-          <div class="form-check">
-            Please check the boxes below:
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="read" (change)="checkReadTermsValue()" value="checked" >
-              I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
-              the terms and conditions of the photo(s) and video call for submission.
-            </label>
-          </div>
-          <div class="form-check">
-            Please check the boxes below:
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="terms" (change)="checkReadPrivacy()"  value="checked">
-              I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
-              the terms and conditions of the photo(s) and video call for submission.
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="terms">
-        <div id="accordianId" role="tablist" aria-multiselectable="true">
-          <div class="card">
-            <div class="card-header" role="tab" id="section1HeaderId">
-              <h5 class="mb-0">
-                <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
-                  aria-controls="section1ContentId">
-                  <h3>Privacy Policty</h3>
-                </a>
-              </h5>
-            </div>
-            <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
-              <div class="card-body">
-                <div class="card-body">
-                  <div class="privacy mt-5">
-                    <div class="card p-3">
-                      <p>
-                        This privacy policy applies to everyone who wishes to participate in this Campaign. This privacy
-                        policy
-                        explains how the Organizer will use the submitted personal data, such as names or e-mail
-                        addresses
-                        (Personal
-                        Data) and how your privacy will be protected. It is the responsibility of the Organizer to
-                        ensure
-                        that your
-                        Personal Data is handled with due care. The Organizer will neither sell nor trade your Personal
-                        Data nor
-                        infringe your personal rights in any way. If you register to participate in the Campaign, you
-                        disclose your
-                        Personal Data. This Personal Data will only be collected, processed and used for the purpose of
-                        organizing
-                        the
-                        Campaign, or informing you about the COVID-19 Public Awareness Campaign, or making a payment to
-                        you (if you
-                        are selected as a finalist), in accordance with this Privacy Policy.
-
-                        The Organizer will not use the contact details for other private or commercial purposes, e.g.
-                        for
-                        promotional
-                        purposes especially, but not limited to, unrequested and uninvited advertising by email, or to
-                        be
-                        contacted
-                        by
-                        mail. The Organizer will collect, process and use the Personal Data provided in the Registration
-                        Form and
-                        Payment Details Form.
-
-                        As a condition of participating in the Campaign, each Entrant gives consent for the Organizer to
-                        obtain and
-                        deliver his or her name, address and other information to third parties for the purpose of
-                        administering and
-                        organizing the Campaign and to comply with applicable laws, regulations and rules.
-
-                        The Organizer will comply with all privacy and data protection laws applicable to its processing
-                        of Personal
-                        Data.
-
-                      </p>
-                      <h3>Agreement, Changes to Dates and Deadlines</h3>
-                      <p>
-                        These Submission Guidelines and Rules are the only agreement between the Entrant and the
-                        Organizer, and that
-                        is why the submission of any entry, within its scope, expresses acceptance by the Entrant of the
-                        terms and
-                        conditions stipulated herein.
-
-                        The deadlines and dates set out in these Submission Guidelines and Rules may be amended by
-                        decision of the
-                        Organizer. Any change will be notified through the website: <a
-                          href="#">www.AfricanArtinContext.com</a>
-
-                      </p>
-                    </div>
-                  </div>
+  
+            <div class="card p-3 mt-3">
+              <div class="form-group">
+                <div>
+                  <label>Date Shot</label>
                 </div>
+                <mat-form-field>
+                  <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
+                  <mat-datepicker-toggle matSuffix [for]="picker">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>  
+              </div>
+              <div>
+                <small class="help-text">Which date did you shoot this </small>
+              </div>
+            </div>
+  
+            <div class="card p-3 mt-3">
+              <div class="form-group">
+                <label>Town/Country</label>
+                <input type="text" name="place" class="form-control" [(ngModel)]="artwork.place" required>
+                <small class="help-text">Tell us your country</small>
+              </div>
+            </div>
+  
+            <div class="card p-3 mt-3">
+              <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control" [(ngModel)]="artwork.title" required>
+                <small class="help-text">What is the title of this submission</small>
+              </div>
+            </div>
+  
+            <div class="card p-3 mt-3">
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="description" class="form-control" [(ngModel)]="artwork.description"
+                  maxlength="150" required>
+                <small class="help-text">Describe your submission in 150 words</small>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="card p-3 mt-5">
-        <div class="next">
-          <div class="form-group mb-0">
-            <button type="submit" class="btn btn-light">Proceed to submit <strong>---></strong>
-            </button>
+  
+          <div class="challenges">
+            <div class="card text-center p-3 mt-3">
+              <h3>Please tell us a bit about your work</h3>
+            </div>
           </div>
-        </div>
+  
+          <div class="card p-3 mt-3">
+            <div class="form-group">
+              <label>Challenges</label>
+              <textarea [(ngModel)]="extraDetails.challenges" maxlength="150" required class="form-control"
+                name="challenges" id="challenges" rows="3"></textarea>
+              <small class="help-text">What are some of the challenges you encountered
+                in the process of taking the photo(s)/video?</small>
+            </div>
+          </div>
+  
+          <div class="card p-3 mt-3">
+            <div class="form-group">
+              <label>Experience</label>
+              <textarea [(ngModel)]="extraDetails.experience" maxlength="150" required class="form-control"
+                name="challenges" id="challenges" rows="3"></textarea>
+              <small class="help-text">Describe your experience</small>
+            </div>
+          </div>
+  
+          <div class="card p-3 mt-3">
+            <div class="form-group">
+              <label>Prior to Covid - 19</label>
+              <textarea [(ngModel)]="extraDetails.lifeBefore" maxlength="150" required class="form-control"
+                name="challenges" id="challenges" rows="3"></textarea>
+              <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
+            </div>
+          </div>
+  
+          <div class="confirm-terms">
+            <div class="container-fluid ">
+              <div class="form-check">
+                Please check the boxes below:
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="read" (change)="checkReadTermsValue()"
+                    value="checked">
+                  I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
+                  the terms and conditions of the photo(s) and video call for submission.
+                </label>
+              </div>
+              <div class="form-check">
+                Please check the boxes below:
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="terms" (change)="checkReadPrivacy()"
+                    value="checked">
+                  I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
+                  the terms and conditions of the photo(s) and video call for submission.
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card p-3 mt-5">
+            <div class="next">
+              <div class="form-group mb-0">
+                <button type="submit" class="btn btn-light">Proceed to submit <strong>---></strong>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>

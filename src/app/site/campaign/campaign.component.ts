@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { VgApiService } from '@videogular/ngx-videogular/core';
@@ -53,11 +53,14 @@ export class CampaignComponent implements OnInit {
 
   showPurpose = false;
   showInspiration = false;
+  headingSize = 4;
+
 
   constructor(
     private config: NgbCarouselConfig,
     private matDialog: MatDialog,
     private dbOperations: DbOperationsService) {
+    this.getScreenSize();
     this.carouselConfig();
     this.purposeOfCompetion();
     this.getInspiration();
@@ -163,6 +166,44 @@ export class CampaignComponent implements OnInit {
     this.currentItem = item;
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    let width = event.target.innerWidth;
+    if (width < 800) {
+      this.headingSize = 2;
+    } 
+
+    if(width > 800) {
+      this.headingSize = 3;
+
+    } 
+
+    if (width > 1000) {
+      this.headingSize = 4;
+    }
+
+
+  }
+
+  getScreenSize() {
+    // let width = window.innerWidth;
+    // if (width < 800) {
+    //   this.headingSize = 2;
+    // } 
+
+    // if(width > 800) {
+    //   this.headingSize = 3;
+
+    // } 
+
+    // if (width > 1000) {
+    //   this.headingSize = 4;
+    // }
+
+  }
+
+
+
   getOwlOptions() {
     this.customOptions = {
       loop: true,
@@ -193,7 +234,7 @@ export class CampaignComponent implements OnInit {
 
 
 
-  
+
   showHostProfile() {
 
   }

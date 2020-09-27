@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { HostProfileModalComponent } from '../admin/host-profile-modal/host-profile-modal.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TabsetComponent } from '../tabset/tabset.component';
+import { MatAccordion } from '@angular/material/expansion';
+
 
 @Component({
   selector: 'app-call',
@@ -10,6 +13,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   styleUrls: ['./call.component.scss']
 })
 export class CallComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   dotAnimation: boolean = true;
   contentAnimation: boolean = true;
   size: number = 40;
@@ -18,6 +22,7 @@ export class CallComponent implements OnInit {
 
   covidPhotos: any[]= [];
   purpose: string;
+  headingSize = 4;
 
 
   customOptions: OwlOptions = {
@@ -49,6 +54,7 @@ export class CallComponent implements OnInit {
     private matDialog: MatDialog,
     private config: NgbCarouselConfig
   ) { 
+    this.getScreenSize();
     this.getLandinPageImages();
     this.carouselConfig();
     this.purposeOfCompetion();
@@ -61,6 +67,42 @@ export class CallComponent implements OnInit {
   onExpand(event) {
     console.log(event);
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    let width = event.target.innerWidth;
+    if (width < 800) {
+      this.headingSize = 2;
+    } 
+
+    if(width > 800) {
+      this.headingSize = 3;
+
+    } 
+
+    if (width > 1000) {
+      this.headingSize = 4;
+    }
+
+  }
+
+  getScreenSize() {
+    let width = window.innerWidth;
+    if (width < 800) {
+      this.headingSize = 2;
+    } 
+
+    if(width > 800) {
+      this.headingSize = 3;
+
+    } 
+
+    if (width > 1000) {
+      this.headingSize = 4;
+    }
+  }
+
+
 
   getLandinPageImages() {
     this.landingImages =  [

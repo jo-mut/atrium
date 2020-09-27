@@ -21,6 +21,7 @@
     background-image: url('/assets/images/gallery/sample/poster8.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     width: 100%;
 
     .info {
@@ -31,7 +32,7 @@
       margin-top: 350px;
 
       h3 {
-        font-size: 4em;
+        word-wrap: break-word;
         font-weight: bolder;
         color: white;
         font-weight: bolder;
@@ -187,4 +188,57 @@
 
 }
 
+mat-accordion {
 
+  mat-expansion-panel {
+    background-color: whitesmoke;
+    color: black;
+    mat-icon {
+      color: black;
+    }
+    h3 {
+      color: black;
+      font-size: 1em;
+      text-align: center;
+    }
+
+  }
+}
+
+.accordion-action-buttons {
+  padding: 1em;
+  border: 3px solid;
+  text-align: center;
+  button:hover {
+    background-image: linear-gradient(to right, orangered 0%, orange 100%);
+    color: white;
+    font-weight: bolder;
+    height: 100%;
+    padding: 1em;
+    font-size: 1.2em;
+    background-image: linear-gradient(to right, orange 0%,  orangered 100%);
+  }
+  button:hover {
+    background-image: linear-gradient(to right, orangered 0%, orange 100%);
+    color: white;
+    height: 100%;
+    padding: 1em;
+    font-size: 1.2em;
+    background-image: linear-gradient(to right, orange 0%,  orangered 100%);
+  }
+}
+
+.accordion-headers-align .mat-expansion-panel-header-title,
+.accordion-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.accordion-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.accordion-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}

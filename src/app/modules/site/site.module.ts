@@ -46,6 +46,10 @@ import { TeamComponent } from 'src/app/site/team/team.component';
 import { GuidelinesComponent } from 'src/app/site/guidelines/guidelines.component';
 import { SuccessfulComponent } from 'src/app/site/successful/successful.component';
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { TabsetComponent } from 'src/app/site/tabset/tabset.component';
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'campaign', component: CampaignComponent },
@@ -104,7 +108,9 @@ const routes: Routes = [
     NgbModule,
     MatDatepickerModule,
     MatNativeDateModule, 
-    NgxNavbarModule
+    NgxNavbarModule,
+    // TabsModule
+    MatExpansionModule
 
 
   ],
@@ -136,6 +142,8 @@ const routes: Routes = [
     GuidelinesComponent,
     CampaignComponent,
     SuccessfulComponent,
+    TabsetComponent,
+
 
 
   ],
@@ -167,6 +175,7 @@ const routes: Routes = [
     GuidelinesComponent,
     CampaignComponent,
     SuccessfulComponent,
+    TabsetComponent,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

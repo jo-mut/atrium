@@ -3,7 +3,7 @@
   .campaign-landing {
     background-image: url('/assets/images/gallery/sample/12.png');
     background-repeat:no-repeat;
-    background-position: fixed;
+    background-attachment: fixed;
     background-size: cover;
     min-height: 100vh;
     background-color: black;
@@ -13,6 +13,7 @@
     .campaign-images {
       background-color: black;
       min-height: 100vh;
+      word-wrap: break-word;
     }
 
   }

@@ -1,0 +1,25 @@
+[debug] [2020-09-26T18:06:21.463Z] ----------------------------------------------------------------------
+[debug] [2020-09-26T18:06:21.466Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\CS\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve --only hosting
+[debug] [2020-09-26T18:06:21.466Z] CLI Version:   8.7.0
+[debug] [2020-09-26T18:06:21.466Z] Platform:      win32
+[debug] [2020-09-26T18:06:21.466Z] Node Version:  v12.18.3
+[debug] [2020-09-26T18:06:21.468Z] Time:          Sat Sep 26 2020 21:06:21 GMT+0300 (East Africa Time)
+[debug] [2020-09-26T18:06:21.468Z] ----------------------------------------------------------------------
+[debug] [2020-09-26T18:06:21.468Z] 
+[debug] [2020-09-26T18:06:21.479Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-26T18:06:21.480Z] > authorizing via signed-in user
+[debug] [2020-09-26T18:06:21.480Z] [iam] checking project atrium-775f4 for permissions ["firebase.projects.get"]
+[debug] [2020-09-26T18:06:21.484Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/atrium-775f4:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-09-26T18:06:23.320Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 26 Sep 2020 18:06:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=657","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-26T18:06:23.322Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/atrium-775f4  
+ 
+[debug] [2020-09-26T18:06:24.012Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 26 Sep 2020 18:06:25 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-26T18:06:24.014Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/atrium-775f4/webApps/-/config  
+ 
+[debug] [2020-09-26T18:06:25.240Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 26 Sep 2020 18:06:26 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[info] i  hosting: Serving hosting files from: dist/atrium-artz {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist/atrium-artz\u001b[22m"}}
+[info] +  hosting: Local server: http://localhost:5005 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5005\u001b[22m\u001b[24m"}}
+[info] i  hosting: 127.0.0.1 - - [26/Sep/2020:18:06:31 +0000] "GET / HTTP/1.1" 200 1570 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [26/Sep/2020:18:06:31 +0000] \"GET / HTTP/1.1\" 200 1570 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [26/Sep/2020:18:12:21 +0000] "GET / HTTP/1.1" 200 1570 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [26/Sep/2020:18:12:21 +0000] \"GET / HTTP/1.1\" 200 1570 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36\""}}

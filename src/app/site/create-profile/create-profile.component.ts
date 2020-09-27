@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {User} from "../../models/user";
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import { Component, HostListener, OnInit } from '@angular/core';
+import { User } from "../../models/user";
+import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
@@ -18,12 +18,15 @@ export class CreateProfileComponent implements OnInit {
   user: User = new User();
   file: File;
   private authState: Observable<firebase.User>;
-  genders: string [] = ['Male', 'Female'];
+  genders: string[] = ['Male', 'Female'];
   facebook: string;
   youtube: string;
   instagram: string;
   others: string;
   social: string[] = [];
+
+  formWidth: any = 100;
+  headingSize = '2.0em';
 
   constructor(private authService: AuthService,
     private matDialog: MatDialog,
@@ -33,7 +36,7 @@ export class CreateProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+   this.getScreenSize();
   }
 
   onFileSelected(event) {
@@ -52,10 +55,10 @@ export class CreateProfileComponent implements OnInit {
   onSubmit(form) {
     this.user.code = Date.now() + '';
     this.social.push(this.facebook);
-      this.social.push(this.instagram);
-      this.social.push(this.others);
-      this.social.push(this.youtube);
-      this.user.socialMedia = this.social;
+    this.social.push(this.instagram);
+    this.social.push(this.others);
+    this.social.push(this.youtube);
+    this.user.socialMedia = this.social;
     this.signUp(this.user, this.file);
     // form.reset();
   }
@@ -63,13 +66,13 @@ export class CreateProfileComponent implements OnInit {
   signUp(user: User, file) {
     // console.log(user)
     this.authService.signUp(user)
-    .then(res => {
-      /* Call the SendVerificaitonMail() function when new user sign
-      up and returns promise */
-      // this.authService.sendVerificationMail();
-    }).catch(error => {
-      window.alert(error.message);
-    });
+      .then(res => {
+        /* Call the SendVerificaitonMail() function when new user sign
+        up and returns promise */
+        // this.authService.sendVerificationMail();
+      }).catch(error => {
+        window.alert(error.message);
+      });
   }
 
   lauchCuratorModal() {
@@ -81,6 +84,40 @@ export class CreateProfileComponent implements OnInit {
     dialogConfig.width = "50%";
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(TermModalComponent, dialogConfig);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    let width = event.target.innerWidth;
+    if (width > 800) {
+      this.formWidth = 80;
+    } 
+
+    if(width > 1000) {
+      this.formWidth = 70;
+
+    } 
+
+    if (width > 1200) {
+      this.formWidth = 60;
+    }
+
+  }
+
+  getScreenSize() {
+    let width = window.innerWidth;
+    if (width > 800) {
+      this.formWidth = 80;
+    } 
+
+    if(width > 1000) {
+      this.formWidth = 70;
+
+    } 
+
+    if (width > 1200) {
+      this.formWidth = 60;
+    }
   }
 
 }

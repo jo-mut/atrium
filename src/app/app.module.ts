@@ -23,7 +23,7 @@ import { SiteRoutingModule } from './modules/site/site.module';
 @NgModule({
   declarations: [
     AppComponent,
-    DndDirective,    
+    DndDirective,
 
   ],
   imports: [

@@ -9,7 +9,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
               <div class="home-info p-5">
-                <h1>ARE YOU A PHOTOGRAPHER OR A VIDEOGRAPHER</h1>
+                <h3 [style.font-size.em]="headingSize" (window:resize)="onResize($event)" >ARE YOU A PHOTOGRAPHER OR A VIDEOGRAPHER?</h3>
                 <p>How has COVID-19 affected your life, what has changed, what have you learnt, how are you adapting? Be
                   creative, show us, share your experience <br> and lessons with the world . . .</p>
                 <button class="btn btn-primary" [routerLink]="['/project/call']">JOIN THE CAMPAIGN</button>

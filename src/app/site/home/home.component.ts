@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 
 @Component({
@@ -8,12 +8,54 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
   countries: any[] = [];
+
+  headingSize = 4;
+
+  constructor() {
+    this.getScreenSize();
+
+  }
+
 
   ngOnInit(): void {
     this.participatingCountries();
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    let width = event.target.innerWidth;
+    if (width < 800) {
+      this.headingSize = 2;
+    } 
+
+    if(width > 800) {
+      this.headingSize = 3;
+
+    } 
+
+    if (width > 1000) {
+      this.headingSize = 4;
+    }
+
+  }
+
+  getScreenSize() {
+    let width = window.innerWidth;
+    if (width < 800) {
+      this.headingSize = 2;
+    } 
+
+    if(width > 800) {
+      this.headingSize = 3;
+
+    } 
+
+    if (width > 1000) {
+      this.headingSize = 4;
+    }
+  }
+
 
   participatingCountries() {
     this.countries = [
