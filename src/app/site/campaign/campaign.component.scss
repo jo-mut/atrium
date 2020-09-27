@@ -1,22 +1,27 @@
 .project {
   color: black;
+
   .campaign-landing {
-    background-image: url('/assets/images/gallery/sample/12.png');
-    background-repeat:no-repeat;
+    background-image: url('/assets/images/gallery/sample/12a.png');
+    background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height: 100vh;
     background-color: black;
     color: orange;
-    font-size: 2.0em;
     padding-top: 150px;
-    .campaign-images {
-      background-color: black;
-      min-height: 100vh;
-      word-wrap: break-word;
+
+    .call-theme {
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 0 auto;
+
+      h3 {
+        word-wrap: break-word;
+      }
     }
 
   }
+
   img {
     width: 100%;
   }

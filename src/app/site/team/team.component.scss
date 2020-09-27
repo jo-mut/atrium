@@ -39,12 +39,14 @@
     background-color: whitesmoke;
 
     img {
-      width: 100px;
+      width: 200px;
     }
 
-    .mcf_logo, .bobby-pall {
-      width: 90%;
-      margin: 0 auto;
+    .bobby-pall {
+      text-align: center;
+    }
+
+    .mcf_logo{
       text-align: center;
     }
   }

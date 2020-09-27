@@ -53,7 +53,7 @@ export class CampaignComponent implements OnInit {
 
   showPurpose = false;
   showInspiration = false;
-  headingSize = 4;
+  headingSize = 2;
 
 
   constructor(
@@ -68,7 +68,6 @@ export class CampaignComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSampleArtworks();
-
   }
 
   carouselConfig() {
@@ -76,6 +75,49 @@ export class CampaignComponent implements OnInit {
     this.config.keyboard = false;
     this.config.pauseOnHover = false;
     this.config.wrap = true;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    let width = event.target.innerWidth;
+    if (width < 800) {
+      console.log(this.headingSize)
+      this.headingSize = 2;
+    } 
+
+    if(width > 800) {
+      console.log(this.headingSize)
+      this.headingSize = 3;
+
+    } 
+
+    if (width > 1000) {
+      console.log(this.headingSize)
+      this.headingSize = 4;
+    }
+
+
+  }
+
+  getScreenSize() {
+    let width = window.innerWidth;
+    if (width < 800) {
+      console.log(this.headingSize)
+      this.headingSize = 2;
+    } 
+
+    if(width > 800) {
+      console.log(this.headingSize)
+      this.headingSize = 3;
+
+    } 
+
+    if (width > 1000) {
+      console.log(this.headingSize)
+      this.headingSize = 4;
+    }
+
   }
 
   // Get a list of archived artwork
@@ -165,44 +207,6 @@ export class CampaignComponent implements OnInit {
     this.currentIndex = index;
     this.currentItem = item;
   }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    let width = event.target.innerWidth;
-    if (width < 800) {
-      this.headingSize = 2;
-    } 
-
-    if(width > 800) {
-      this.headingSize = 3;
-
-    } 
-
-    if (width > 1000) {
-      this.headingSize = 4;
-    }
-
-
-  }
-
-  getScreenSize() {
-    // let width = window.innerWidth;
-    // if (width < 800) {
-    //   this.headingSize = 2;
-    // } 
-
-    // if(width > 800) {
-    //   this.headingSize = 3;
-
-    // } 
-
-    // if (width > 1000) {
-    //   this.headingSize = 4;
-    // }
-
-  }
-
-
 
   getOwlOptions() {
     this.customOptions = {

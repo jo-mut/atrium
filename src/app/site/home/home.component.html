@@ -1,4 +1,4 @@
-<div class="home">
+<div class="home" (window:resize)="onResize($event)"  >
   <div class="home-bg">
     <div class="home-landing">
       <div class="container-fluid p-0">
@@ -9,7 +9,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
               <div class="home-info p-5">
-                <h3 [style.font-size.em]="headingSize" (window:resize)="onResize($event)" >ARE YOU A PHOTOGRAPHER OR A VIDEOGRAPHER?</h3>
+                <h3 [style.font-size.em]="headingSize" >ARE YOU A PHOTOGRAPHER OR A VIDEOGRAPHER?</h3>
                 <p>How has COVID-19 affected your life, what has changed, what have you learnt, how are you adapting? Be
                   creative, show us, share your experience <br> and lessons with the world . . .</p>
                 <button class="btn btn-primary" [routerLink]="['/project/call']">JOIN THE CAMPAIGN</button>
@@ -51,7 +51,6 @@
           <ul class="list-unstyled">
             <li><strong>Dates:</strong> 21st September – 30th November 2020</li>
             <li><strong>Theme:</strong> African Resilience in the Wake of a Pandemic</li>
-            <li><strong>Organisation:</strong> Bobby Pall Photography in collaboration with Mastercard Foundation</li>
             <li><strong>Eligibility:</strong> 18 – 30 years</li>
             <li><strong>Categories: </strong> Photography and Videography</li>
             <li><strong>Participating Countries:</strong> Senegal, Ghana, Kenya, Nigeria, Rwanda, Ethiopia, Uganda </li>

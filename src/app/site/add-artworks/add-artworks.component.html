@@ -5,7 +5,7 @@
         <div class="card text-center mt-3">
           <div class="profile-form-title">
             <h2>Select your artwork for submission</h2>
-            <p>Please not that you are only allowed to submit only two photos and/or one video of 60 seconds</p>
+            <p>Please note that you are only allowed to submit only two photos and/or one video of 60 seconds</p>
           </div>
         </div>
         <form #artworkForm="ngForm" (ngSubmit)="onSubmit(artworkForm)">
@@ -96,35 +96,31 @@
             </div>
           </div>
   
-          <div class="confirm-terms">
+          <div class="confirm-terms mt-3">
             <div class="container-fluid ">
               <div class="form-check">
-                Please check the boxes below:
+                <p>Please check the boxes below:</p>
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" name="read" (change)="checkReadTermsValue()"
                     value="checked">
-                  I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
-                  the terms and conditions of the photo(s) and video call for submission.
+                  <p>I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
+                    the terms and conditions of the photo(s) and video call for submission.</p>
                 </label>
               </div>
               <div class="form-check">
-                Please check the boxes below:
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" name="terms" (change)="checkReadPrivacy()"
                     value="checked">
-                  I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
-                  the terms and conditions of the photo(s) and video call for submission.
+                  <p>I have read the Submission Guidelines and Rules (including the copyright conditions) below and agree to
+                    the terms and conditions of the photo(s) and video call for submission.</p>
                 </label>
               </div>
             </div>
           </div>
           
-          <div class="card p-3 mt-5">
-            <div class="next">
-              <div class="form-group mb-0">
-                <button type="submit" class="btn btn-light">Proceed to submit <strong>---></strong>
-                </button>
-              </div>
+          <div class="next mt-5">
+            <div class="form-group mb-0">
+              <button type="submit" class="btn btn-light">Submit</button>
             </div>
           </div>
         </form>
