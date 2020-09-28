@@ -21,7 +21,7 @@ export class TeamComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    // dialogConfig.height = "60%";
+    dialogConfig.height = "80%";
     dialogConfig.width = '400px';
     dialogConfig.data = { 'info': host.bio, 'img': host.img, 'name': host.name }
     // https://material.angular.io/components/dialog/overview
