@@ -150,16 +150,20 @@ export class AuthService {
   }
 
   getUserProfileInfo(user: User) {
-    return this.dbOperations.usersCollection()
-      .ref.where('id', '==', user.userId).onSnapshot(data => {
+    this.dbOperations.usersCollection()
+      .ref.where('userId', '==', user.userId).onSnapshot(data => {
         data.docs.forEach(d => {
           const id = d.id;
-          const user = d.data() as User;
-          if (user.role === 'admin') {
-            this.router.navigateByUrl('/project/admin')
-          } else {
-            this.router.navigateByUrl('/project/add-artworks')
-          }
+          const u = d.data() as User;
+          console.log("sign in trial " + u.userId);
+
+          this.ngZone.run(() => {
+            if (u.role === 'admin') {
+              this.router.navigateByUrl('/project/admin')
+            }else {
+              this.router.navigateByUrl('/project/add-artworks')
+            }
+          })
         })
       })
   }

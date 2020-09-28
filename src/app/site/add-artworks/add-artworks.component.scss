@@ -19,16 +19,17 @@
           padding: 1em;
           border: none;
           color: whitesmoke;
-          border-radius: 1em;
-          ;
-  
-          input,
-          select,
-          option, textarea {
-            background-color: rgba(0, 0, 0, 0.9);
-            border-radius: 0.5em;
-            border-color: orange;
-          }
+          border-radius: 1em;  
+         
+        }
+
+        input,
+        select,
+        option, textarea {
+          background-color: rgba(0, 0, 0, 0.9);
+          border-radius: 0.5em;
+          border-color: orange;
+          color: white;
         }
   
         h3 {
