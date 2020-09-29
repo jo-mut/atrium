@@ -1,11 +1,12 @@
 import { Scoring } from '../interfaces/score';
 
 export class Score {
-    technique: Technique;
-    creativity: Creativity;
-    wowFactor: WowFactor;
+    technique: Technique = new Technique();
+    creativity: Creativity = new Creativity();
+    wowFactor: WowFactor = new WowFactor();
     meanScore: number;
-    scoredBy: string
+    scoredBy: string;
+    artistId: string;
     artworkId: string;
     scoredDate: string;
     scoredTime: string;
@@ -17,9 +18,9 @@ export class Score {
 }
 
 export class Technique {
-    composition: Composition;
-    lighting: Lighting;
-    clarity: Clarity;
+    composition: Composition = new Composition();
+    lighting: Lighting = new Lighting();
+    clarity: Clarity = new Clarity();
  
     constructor() {
         
@@ -27,10 +28,10 @@ export class Technique {
 }
 
 export class Creativity {
-    theme: Theme;
-    uniquness: Uniquness;
-    message: Message;
-    impression: Impression;
+    theme: Theme = new Theme();
+    uniquness: Uniquness = new Uniquness();
+    message: Message = new Message();
+    impression: Impression = new Impression();
   
     constructor() {
         
@@ -39,9 +40,9 @@ export class Creativity {
 }
 
 export class WowFactor  {
-    inspirational: Inspirational;
-    impact: Impact;
-    details: Details;
+    inspirational: Inspirational = new Inspirational();
+    impact: Impact = new Impact();
+    details: Details = new Details();
    
     constructor() {
         
@@ -50,11 +51,11 @@ export class WowFactor  {
 }
 
 export class Composition {
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -63,11 +64,11 @@ export class Composition {
 
 
 export class Lighting{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -77,11 +78,11 @@ export class Lighting{
 }
 
 export class Clarity {
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -91,11 +92,11 @@ export class Clarity {
 }
 
 export class Theme{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -106,12 +107,11 @@ export class Theme{
 
 
 export class Uniquness{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
-   
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
     constructor() {
         
     }
@@ -120,11 +120,11 @@ export class Uniquness{
 }
 
 export class Message{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -134,11 +134,11 @@ export class Message{
 }
 
 export class Impression{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -147,11 +147,11 @@ export class Impression{
 }
 
 export class Inspirational{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -162,11 +162,11 @@ export class Inspirational{
 
 
 export class Impact{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         
@@ -177,11 +177,11 @@ export class Impact{
 
 
 export class Details{
-    poor: number = 2;
-    fair: number = 4;
-    satisfactory: number = 6;
-    good: number = 8;
-    excellent: number = 10;
+    poor: number;
+    fair: number;
+    satisfactory: number;
+    good: number;
+    excellent: number;
    
     constructor() {
         

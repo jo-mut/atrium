@@ -1,0 +1,34 @@
+.score {
+    .artwork{
+      height: 100%;
+      .artwork-media {
+        .card {
+          border: none;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  
+    .score-forms {
+      overflow-y:hidden;
+
+      h3 {
+          font-size: 2.0em;
+      }
+
+      button {
+          background-color: black;
+          color: white;
+          text-align: center;
+          width: 100%;
+      }
+
+      .card {
+        border: none;
+        border-radius: 1em;
+      }   
+    }
+  }
+  

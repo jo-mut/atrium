@@ -54,6 +54,7 @@ export class ArtworksComponent implements OnInit {
       this.artworks = d.map(e => {
           const data = e.payload.doc.data();
           const id = e.payload.doc.id;
+          console.log({...data})
           return {id, ...data} as ArtWork;
       });
     });
