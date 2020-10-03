@@ -1,12 +1,31 @@
-import { Scoring } from '../interfaces/score';
 
 export class Score {
     technique: Technique = new Technique();
     creativity: Creativity = new Creativity();
     wowFactor: WowFactor = new WowFactor();
-    meanScore: number;
+    vStory: VStory = new VStory();
+    vCreativity: VCreativity = new VCreativity();
+    vEdit: VEdit = new VEdit();
+    vTechnical: VTechnical = new VTechnical();
     scoredBy: string;
-    artistId: string;
+    artworkId: string;
+    scoredDate: string;
+    scoredTime: string;
+
+    constructor() {
+        
+    }
+
+}
+
+export class VScore {
+    vStory: VStory = new VStory();
+    vCreativity: VCreativity = new VCreativity();
+    vEdit: VEdit = new VEdit();
+    vTechnical: VTechnical = new VTechnical();
+    meanScore: number;
+    totalScore: number;
+    scoredBy: string;
     artworkId: string;
     scoredDate: string;
     scoredTime: string;
@@ -18,20 +37,20 @@ export class Score {
 }
 
 export class Technique {
-    composition: Composition = new Composition();
-    lighting: Lighting = new Lighting();
-    clarity: Clarity = new Clarity();
- 
+    composition: Points = new Points();
+    lighting: Points = new Points();
+    clarity: Points = new Points();
+    
     constructor() {
         
     }
 }
 
 export class Creativity {
-    theme: Theme = new Theme();
-    uniquness: Uniquness = new Uniquness();
-    message: Message = new Message();
-    impression: Impression = new Impression();
+    theme: Points = new Points();
+    uniquness: Points = new Points();
+    message: Points = new Points();
+    impression: Points = new Points();
   
     constructor() {
         
@@ -40,9 +59,9 @@ export class Creativity {
 }
 
 export class WowFactor  {
-    inspirational: Inspirational = new Inspirational();
-    impact: Impact = new Impact();
-    details: Details = new Details();
+    inspirational: Points = new Points();
+    impact: Points = new Points();
+    details: Points = new Points();
    
     constructor() {
         
@@ -50,7 +69,49 @@ export class WowFactor  {
 
 }
 
-export class Composition {
+export class VCreativity  {
+    useofequipments: Points = new Points();
+    useoftechniques: Points = new Points();
+   
+    constructor() {
+        
+    }
+
+}
+
+export class VTechnical  {
+    composition: Points = new Points();
+    stability: Points = new Points();
+    lighting: Points = new Points();
+    audioClarity: Points = new Points();
+    pcitureClarity: Points = new Points();
+   
+    constructor() {
+        
+    }
+
+}
+
+export class VStory  {
+    message: Points = new Points();
+   
+    constructor() {
+        
+    }
+
+}
+
+export class VEdit  {
+    scene: Points = new Points();
+    execution: Points = new Points();
+   
+    constructor() {
+        
+    }
+
+}
+
+export class Points {
     poor: number;
     fair: number;
     satisfactory: number;
@@ -63,132 +124,6 @@ export class Composition {
 }
 
 
-export class Lighting{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-
-    
-}
-
-export class Clarity {
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-
-    
-}
-
-export class Theme{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-
-    
-}
-
-
-export class Uniquness{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-    constructor() {
-        
-    }
-
-    
-}
-
-export class Message{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-
-    
-}
-
-export class Impression{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-    
-}
-
-export class Inspirational{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-
-    
-}
-
-
-export class Impact{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-
-    
-}
-
-
-export class Details{
-    poor: number;
-    fair: number;
-    satisfactory: number;
-    good: number;
-    excellent: number;
-   
-    constructor() {
-        
-    }
-
-    
-}
 
 
 

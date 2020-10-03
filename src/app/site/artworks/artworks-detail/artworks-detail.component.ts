@@ -13,7 +13,7 @@ export class ArtworksDetailComponent implements OnInit {
 
   work: ArtWork = new ArtWork;
   api: VgApiService;
-  video = "assets/videos/kawasaki.mp4";
+  video = "http://static.videogular.com/assets/videos/elephants-dream.mp4";
   id: number;
 
 
@@ -39,7 +39,7 @@ export class ArtworksDetailComponent implements OnInit {
   }
 
   getArtWorkDetails(id: string) {
-    this.dbOperations.artworksFirestoreCollection()
+    this.dbOperations.artworksCollection()
       .ref.where('id', '==', id).onSnapshot(data => {
         data.docs.forEach(d => {
           const id = d.id;

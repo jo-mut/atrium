@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { VgApiService } from '@videogular/ngx-videogular/core';
+import { firestore } from 'firebase';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { IMedia } from 'src/app/interfaces/imedia';
 import { ArtWork } from 'src/app/models/artwork';
@@ -16,10 +17,11 @@ import { HostProfileModalComponent } from '../admin/host-profile-modal/host-prof
 export class CampaignComponent implements OnInit {
   landingImages = [];
   artworks: ArtWork[] = [];
+  artwork: ArtWork = new ArtWork();
   hoveredImage: any;
   backgroundImgs = ['1.png', '2.png', '3.png'];
   chosenImage: any;
-  video = "assets/videos/resilience.mp4";
+  video = '';
   mobileWidthThreshold: number = 640;
   customOptions: OwlOptions;
   showMorePurpose = false;
@@ -54,20 +56,23 @@ export class CampaignComponent implements OnInit {
   showPurpose = false;
   showInspiration = false;
   headingSize = 2;
+  id = 1597836027860;
 
 
   constructor(
     private config: NgbCarouselConfig,
     private matDialog: MatDialog,
     private dbOperations: DbOperationsService) {
+
     this.getScreenSize();
-    this.carouselConfig();
+    // this.carouselConfig();
     this.purposeOfCompetion();
     this.getInspiration();
   }
 
   ngOnInit(): void {
-    this.getSampleArtworks();
+    // this.getSampleArtworks();
+    this.getArtWorkDetails(this.id.toString());
   }
 
   carouselConfig() {
@@ -78,58 +83,63 @@ export class CampaignComponent implements OnInit {
   }
 
 
+
+  getArtWorkDetails(id: string) {
+
+    this.dbOperations.artworksCollection()
+    .ref.where('id', '==', id).onSnapshot(data => {
+      data.docs.forEach(d => {
+        const work = d.data() as ArtWork;
+        console.log(work)
+        this.video = work.url;
+        this.artwork = work;
+      })
+    })
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     let width = event.target.innerWidth;
     if (width < 800) {
-      console.log(this.headingSize)
-      this.headingSize = 2;
+      this.headingSize = 1.5;
     } 
 
     if(width > 800) {
-      console.log(this.headingSize)
-      this.headingSize = 3;
+      this.headingSize = 2.5;
 
     } 
 
     if (width > 1000) {
-      console.log(this.headingSize)
-      this.headingSize = 4;
+      this.headingSize = 3;
     }
 
+    if (width > 1200) {
+      this.headingSize = 4;
+    }
 
   }
 
   getScreenSize() {
     let width = window.innerWidth;
     if (width < 800) {
-      console.log(this.headingSize)
-      this.headingSize = 2;
+      this.headingSize = 1.5;
     } 
 
     if(width > 800) {
-      console.log(this.headingSize)
-      this.headingSize = 3;
+      this.headingSize = 2.5;
 
     } 
 
     if (width > 1000) {
-      console.log(this.headingSize)
+      this.headingSize = 3;
+    }
+
+    if (width > 1200) {
       this.headingSize = 4;
     }
 
   }
 
-  // Get a list of archived artwork
-  getSampleArtworks() {
-    this.dbOperations.getAllExhibitions()
-      .onSnapshot(snapshot => snapshot.forEach(doc => {
-        const data = doc.data();
-        const id = doc.id;
-        let work = { id, ...data } as ArtWork;
-        this.artworks.push(work);
-      }))
-  }
 
   onPlayerReady(api: VgApiService) {
     this.api = api;

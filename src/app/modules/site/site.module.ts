@@ -52,7 +52,7 @@ import { TabsetComponent } from 'src/app/site/tabset/tabset.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'campaign', component: CampaignComponent },
+  { path: 'stories', component: CampaignComponent },
   { path: 'home', component: HomeComponent },
   { path: 'team', component: TeamComponent },
   { path: 'successful', component: SuccessfulComponent },

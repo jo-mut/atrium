@@ -69,18 +69,29 @@
     h3 {
       text-align: center;
     }
-    .country {
-      width: 90%;
-      text-align: center;
-      img {
-        margin: 0 auto;
-        width: 50px;
-      }
 
-      p{
-        text-align: center;
+    .countries-bg {
+      // background-image: url('/assets/images/gallery/sample/cobler1.png');
+      // background-size: cover;
+      // background-repeat: no-repeat;
+      // background-attachment: fixed;
+      img {
+        width: 100%;
       }
     }
+
+    // .country {
+    //   width: 90%;
+    //   text-align: center;
+    //   img {
+    //     margin: 0 auto;
+    //     width: 50px;
+    //   }
+
+    //   p{
+    //     text-align: center;
+    //   }
+    // }
   }
 
   footer {

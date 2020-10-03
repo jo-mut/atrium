@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngDoCheck() {
-    console.log(++this.checked);
   }
 
   showHideSidebar() {

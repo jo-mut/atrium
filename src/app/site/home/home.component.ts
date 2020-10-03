@@ -26,15 +26,19 @@ export class HomeComponent implements OnInit {
   onResize(event) {
     let width = event.target.innerWidth;
     if (width < 800) {
-      this.headingSize = 2;
+      this.headingSize = 1.5;
     } 
 
     if(width > 800) {
-      this.headingSize = 3;
+      this.headingSize = 2.5;
 
     } 
 
     if (width > 1000) {
+      this.headingSize = 3;
+    }
+
+    if (width > 1200) {
       this.headingSize = 4;
     }
 
@@ -43,15 +47,19 @@ export class HomeComponent implements OnInit {
   getScreenSize() {
     let width = window.innerWidth;
     if (width < 800) {
-      this.headingSize = 2;
+      this.headingSize = 1.5;
     } 
 
     if(width > 800) {
-      this.headingSize = 3;
+      this.headingSize = 2.5;
 
     } 
 
     if (width > 1000) {
+      this.headingSize = 3;
+    }
+
+    if (width > 1200) {
       this.headingSize = 4;
     }
   }

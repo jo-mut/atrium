@@ -22,9 +22,6 @@ export class AddArtworksComponent implements OnInit {
   submittedWorks: ArtWork[] = [];
   files: any[] = [];
   file: File;
-  currentIndex = 0;
-  api: VgApiService;
-  video: string;
   private authState: Observable<firebase.User>;
 
   checkedTerms = false
@@ -35,7 +32,7 @@ export class AddArtworksComponent implements OnInit {
   constructor(
     private fauth: AngularFireAuth,
     private dbOperations: DbOperationsService) {
-
+      this.getScreenSize();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -74,7 +71,6 @@ export class AddArtworksComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
-    this.getScreenSize();
 
   }
 
@@ -127,7 +123,14 @@ export class AddArtworksComponent implements OnInit {
 
   onFileSelected(event) {
     this.file = event.target.files[0];
-    this.files.push(this.file);
+    if(this.file.type.includes('video')) {
+      if (this.file.type == "video") {
+      }
+    }else if(this.file.type.includes('image')) {
+      this.files.push(this.file);
+    }else {
+
+    }
   }
 
   public OnDateChange(event): void {
@@ -153,7 +156,7 @@ export class AddArtworksComponent implements OnInit {
 
           console.log('on dropped' + { ...works });
         } else {
-          window.alert('Please upload an image file')
+          window.alert('Please upload either jpg, .png, .mov or .mp4 file')
         }
       } else {
         window.alert('Please upload profile picture')
@@ -252,16 +255,6 @@ export class AddArtworksComponent implements OnInit {
     const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-  }
-
-  onPlayerReady(api: VgApiService) {
-    this.api = api;
-    this.api.getDefaultMedia().subscriptions
-      .loadedMetadata.subscribe(this.playVideo.bind(this));
-  }
-
-  playVideo() {
-    this.api.play();
   }
 
 }

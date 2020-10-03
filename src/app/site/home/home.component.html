@@ -1,4 +1,4 @@
-<div class="home" (window:resize)="onResize($event)"  >
+<div class="home" (window:resize)="onResize($event)">
   <div class="home-bg">
     <div class="home-landing">
       <div class="container-fluid p-0">
@@ -8,11 +8,13 @@
 
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-              <div class="home-info p-5">
-                <h3 [style.font-size.em]="headingSize" >ARE YOU A PHOTOGRAPHER OR A VIDEOGRAPHER?</h3>
-                <p>How has COVID-19 affected your life, what has changed, what have you learnt, how are you adapting? Be
-                  creative, show us, share your experience <br> and lessons with the world . . .</p>
-                <button class="btn btn-primary" [routerLink]="['/project/call']">JOIN THE CAMPAIGN</button>
+              <div class="home-info p-3">
+                <h3 [style.font-size.em]="headingSize">ARE YOU A PHOTOGRAPHER OR A VIDEOGRAPHER?</h3>
+                <p>What’s your COVID-19 story?
+                  We’re looking for photo and video submissions that showcase African resilience in the wake of the
+                  pandemic.
+                </p>
+                <button class="btn btn-primary" [routerLink]="['/project/call']">SHARE YOUR STORY </button>
               </div>
             </div>
           </div>
@@ -27,7 +29,7 @@
     </div>
     <div class="container">
       <p>
-        This is an information, education, and communication activity run by Bobby Pall Photography in partnership with
+        <!-- This is an information, education, and communication activity run by Bobby Pall Photography in partnership with
         Mastercard Foundation in the form of a photography and videography campaign in a bid to increase awareness on
         how to deal with the COVID-19 pandemic. In September 2020, the total number of confirmed COVID-19 cases in
         Africa
@@ -35,7 +37,17 @@
         In the wake of this world-wide havoc, the Youth of Africa though greatly impacted from several perspectives
         including education and unemployment, have shown remarkable resilience through creative art. Many have taken
         up photography and videography to tell stories around their day-to-day lives, the challenges of social
-        distancing and wearing masks in a society that is highly social in nature.
+        distancing and wearing masks in a society that is highly social in nature. -->
+
+        A global pandemic dramatically reshaped the world, our continent, and all our lives. But amid the disruption,
+        we’ve also seen hope. Innovators rising to respond to the challenges. Communities stepping up to practice the
+        precautions required. Each of us doing what we can, and what we must, to keep going. Safely.
+
+        The African Art in Context Call for Submissions seeks to tell those stories. Too often in crises, the narrative
+        surrounding Africa is dominated by inordinate fear and negativity. This is our chance to shape a narrative that
+        showcases to the world what we see everyday: the resilience, ingenuity, and beauty of a continent that is
+        navigating COVID-19 with courage, commitment, and compassion.
+
       </p>
     </div>
   </div>
@@ -66,37 +78,10 @@
     <div class="container" *ngIf="countries">
       <h3>COUNTRIES</h3>
       <hr class="hr-rule mt-1">
-      <!-- <div class="d-flex">
-        <div class="country">
-          <img src="{{countries[0].flag}}" alt="">
-          <p class="mx-3">{{countries[0].name}}</p>
-        </div>
-        <div class="country">
-          <img src="{{countries[1].flag}}" alt="">
-          <p class="mx-3"> {{countries[1].name}}</p>
-        </div>
-        <div class="country">
-          <img src="{{countries[2].flag}}" alt="">
-          <p class="mx-3"> {{countries[2].name}}</p>
-        </div>
-        <div class="country">
-          <img src="{{countries[3].flag}}" alt="">
-          <p class="mx-3"> {{countries[3].name}}</p>
-        </div>
-        <div class="country">
-          <img src="{{countries[4].flag}}" alt="">
-          <p class="mx-3"> {{countries[4].name}}</p>
-        </div>
-        <div class="country">
-          <img src="{{countries[5].flag}}" alt="">
-          <p class="mx-3"> {{countries[5].name}}</p>
-        </div>
-        <div class="country">
-          <img src="{{countries[6].flag}}" alt="">
-          <p class="mx-3"> {{countries[6].name}}</p>
-        </div>
-      </div> -->
-      <div class="container px-5">
+      <div class="countries-bg">
+        <img src="assets/images/map.png" alt="">
+      </div>
+      <!-- <div class="container px-5">
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-3 mt-3 ">
             <div class="country">
@@ -143,7 +128,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

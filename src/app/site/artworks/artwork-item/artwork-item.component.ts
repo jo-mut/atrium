@@ -11,14 +11,16 @@ export class ArtworkItemComponent implements OnInit {
 
   @Input() work: ArtWork;
   api: VgApiService;
-  video: string;
+  video = '';
 
   constructor() {
   }
 
   ngOnInit(): void {
-    console.log({...this.work} + 'work');
-    this.video = this.work.url;
+    if(this.work.type === 'video') {
+      this.video = this.work.url;
+    console.log(this.video + 'work');
+    }
   }
 
   onPlayerReady(api: VgApiService) {
@@ -27,7 +29,15 @@ export class ArtworkItemComponent implements OnInit {
   }
 
   playVideo() {
+    this.api.pause();
+  }
+
+  onMouseOver(): void {
     this.api.play();
+  }
+
+  onMouseOut(): void {
+    this.api.pause();
   }
 
 }

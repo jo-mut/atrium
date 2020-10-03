@@ -57,22 +57,22 @@ export class DbOperationsService {
   }
 
   // Return document snapshot of every document
-  artworksFirestoreCollection() {
+  artworksCollection() {
     return this.firestore.collection<ArtWork>('artworks');
   }
 
   getFeaturedArtworks() {
-    let featuredRef = this.artworksFirestoreCollection();
+    let featuredRef = this.artworksCollection();
     return featuredRef.ref.where('status', '==', 'featured')
   }
 
   getArtworkReviewedBy(userId: string) {
-    let reviewedRef = this.artworksFirestoreCollection();
+    let reviewedRef = this.artworksCollection();
     return reviewedRef.ref.where('reviewedBy', '==', userId)
   }
 
   getArtworkApprovedBy(userId: string) {
-    let approvedRef = this.artworksFirestoreCollection();
+    let approvedRef = this.artworksCollection();
     return approvedRef.ref.where('approvedBy', '==', userId)
   }
 
@@ -142,7 +142,13 @@ export class DbOperationsService {
         percentage = task.percentageChanges();
         const snapshot = task.snapshotChanges().pipe(finalize(async () => {
           let downloadUrl = await ref.getDownloadURL().toPromise();
-          artwork.type = 'image';
+          if(file.type.includes('image')) {
+            artwork.type = 'image';
+          } else if(file.type.includes('video')) {
+            artwork.type = 'video';
+          }else{
+            // file not supported
+          }
           artwork.name = file.name;
           artwork.artworkId = this.generatePushId();
           artwork.id = this.docId;
@@ -157,7 +163,7 @@ export class DbOperationsService {
           const extra = JSON.parse(JSON.stringify(extraDetails));
           const param = JSON.parse(JSON.stringify(artwork));
 
-          this.artworksFirestoreCollection().add(param);
+          this.artworksCollection().add(param);
           this.interviewssCollection().add(extra);
           this.router.navigateByUrl('project')
 

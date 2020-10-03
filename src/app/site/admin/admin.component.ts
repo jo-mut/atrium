@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
 
   // Get a list of archived artwork
   private getAllExhibitions() {
-    this.dbOperations.artworksFirestoreCollection()
+    this.dbOperations.artworksCollection()
       .snapshotChanges().subscribe(d => {
       this.artworks = d.map(e => {
         const data = e.payload.doc.data();

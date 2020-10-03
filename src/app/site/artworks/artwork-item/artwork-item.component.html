@@ -19,7 +19,8 @@
           <vg-volume></vg-volume>
           <vg-fullscreen></vg-fullscreen>
         </vg-controls>
-        <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
+        <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto"
+         (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" crossorigin>
         </video>
       </vg-player>
     </div>
