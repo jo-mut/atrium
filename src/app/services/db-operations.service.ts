@@ -163,8 +163,8 @@ export class DbOperationsService {
           const extra = JSON.parse(JSON.stringify(extraDetails));
           const param = JSON.parse(JSON.stringify(artwork));
 
-          this.artworksCollection().add(param);
-          this.interviewssCollection().add(extra);
+          this.artworksCollection().doc(artwork.artworkId).set(param);
+          this.interviewssCollection().doc(artwork.artworkId).set(extra);
           this.router.navigateByUrl('project')
 
         })

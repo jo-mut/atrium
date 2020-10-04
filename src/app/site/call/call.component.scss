@@ -210,22 +210,12 @@ mat-accordion {
   border: 3px solid;
   text-align: center;
   button:hover {
-    background-image: linear-gradient(to right, orangered 0%, orange 100%);
+    background-color: orange;
     color: white;
     font-weight: bolder;
     height: 100%;
-    padding: 1em;
-    font-size: 1.2em;
-    background-image: linear-gradient(to right, orange 0%,  orangered 100%);
   }
-  button:hover {
-    background-image: linear-gradient(to right, orangered 0%, orange 100%);
-    color: white;
-    height: 100%;
-    padding: 1em;
-    font-size: 1.2em;
-    background-image: linear-gradient(to right, orange 0%,  orangered 100%);
-  }
+ 
 }
 
 .accordion-headers-align .mat-expansion-panel-header-title,

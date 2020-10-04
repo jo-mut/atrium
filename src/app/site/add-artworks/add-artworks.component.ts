@@ -28,11 +28,12 @@ export class AddArtworksComponent implements OnInit {
   checkedPrivacy = false
   formWidth = 100;
 
+  answered = false;
 
   constructor(
     private fauth: AngularFireAuth,
     private dbOperations: DbOperationsService) {
-      this.getScreenSize();
+    this.getScreenSize();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -40,12 +41,12 @@ export class AddArtworksComponent implements OnInit {
     let width = event.target.innerWidth;
     if (width > 800) {
       this.formWidth = 80;
-    } 
+    }
 
-    if(width > 1000) {
+    if (width > 1000) {
       this.formWidth = 70;
 
-    } 
+    }
 
     if (width > 1200) {
       this.formWidth = 60;
@@ -57,12 +58,12 @@ export class AddArtworksComponent implements OnInit {
     let width = window.innerWidth;
     if (width > 800) {
       this.formWidth = 80;
-    } 
+    }
 
-    if(width > 1000) {
+    if (width > 1000) {
       this.formWidth = 70;
 
-    } 
+    }
 
     if (width > 1200) {
       this.formWidth = 60;
@@ -99,6 +100,7 @@ export class AddArtworksComponent implements OnInit {
       if (user) {
         this.getSubmittedArtworks(user.uid);
         console.log('AUTHSTATE USER', user.uid); //this works
+        this.getArtistInterview(user.uid);
       } else {
         console.log('AUTHSTATE USER EMPTY', user);
       }
@@ -121,14 +123,24 @@ export class AddArtworksComponent implements OnInit {
       })
   }
 
+  getArtistInterview(id: string) {
+    this.dbOperations.interviewssCollection()
+    .ref.where('userId', '==', id)
+      .onSnapshot(data => {
+        if(data != null) {
+          this.answered = true;
+        }
+      })
+  }
+
   onFileSelected(event) {
     this.file = event.target.files[0];
-    if(this.file.type.includes('video')) {
+    if (this.file.type.includes('video')) {
       if (this.file.type == "video") {
       }
-    }else if(this.file.type.includes('image')) {
+    } else if (this.file.type.includes('image')) {
       this.files.push(this.file);
-    }else {
+    } else {
 
     }
   }
@@ -138,31 +150,36 @@ export class AddArtworksComponent implements OnInit {
   }
 
   onSubmit(form) {
-    console.log(this.artwork.shotDate);
-    if (this.checkedPrivacy && this.checkReadTermsValue) {
+    if (this.submittedWorks.length <= 2) {
+      console.log(this.artwork.shotDate);
+      if (this.checkedPrivacy && this.checkReadTermsValue) {
 
-      if (this.file != null) {
-        let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
-        if (ext === 'png' || ext === 'jpg' || ext === ' JPEG'
-          || ext === 'mp4' || ext === 'mov') {
-          this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
-            .then((res) => {
-              form.reset;
-            }).catch((rej) => {
-              window.alert('Upload failed')
-            })
-          console.log('on dropped' + this.submittedWorks.length);
-          const works = this.dbOperations.latestArtWorks;
+        if (this.file != null) {
+          let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
+          if (ext === 'png' || ext === 'jpg' || ext === ' JPEG'
+            || ext === 'mp4' || ext === 'mov') {
+            this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
+              .then((res) => {
+                form.reset;
+              }).catch((rej) => {
+                window.alert('Upload failed')
+              })
+            console.log('on dropped' + this.submittedWorks.length);
+            const works = this.dbOperations.latestArtWorks;
 
-          console.log('on dropped' + { ...works });
+            console.log('on dropped' + { ...works });
+          } else {
+            window.alert('Please upload either jpg, .png, .mov or .mp4 file')
+          }
         } else {
-          window.alert('Please upload either jpg, .png, .mov or .mp4 file')
+          window.alert('Please upload profile picture')
         }
       } else {
-        window.alert('Please upload profile picture')
+        window.alert('Confirm that you have read the Terms and Conditions')
       }
     } else {
-      window.alert('Confirm that you have read the Terms and Conditions')
+      window.alert('You can only submit two pieces of your artwork')
+
     }
   }
 

@@ -1,46 +1,56 @@
 .score {
   min-height: 100vh;
-    .artwork{
-      height: 100%;
-      .artwork-media {
-        .card {
-          border: none;
-          img {
-            width: 100%;
-          }
+
+  .artwork {
+    height: 100%;
+
+    .artwork-media {
+      .card {
+        border: none;
+
+        img {
+          width: 100%;
         }
       }
     }
-  
-    button {
-      background-color: black;
-      color: white;
-      text-align: center;
-      width: 100%;
   }
 
-    .score-forms, .video-score-form{
-      overflow-y:hidden;
-
-      h3 {
-        text-align: center;
-          font-size: 2.0em;
-      }
-
-      .card {
-        border: none;
-        border-radius: 1em;
-      }   
-    }
-  }
-  
-
-  vg-player {
+  button {
+    background-color: black;
+    color: white;
+    text-align: center;
     width: 100%;
-  
-    video {
-      height: 500px;
-      margin: 0 auto;
+  }
+
+  button:hover {
+    background-color: orange;
+    color: white;
+    text-align: center;
+    width: 100%;
+  }
+
+  .score-forms,
+  .video-score-form {
+    overflow-y: hidden;
+
+    h3 {
+      text-align: center;
+      font-size: 2.0em;
+    }
+
+    .card {
+      border: none;
+      border-radius: 1em;
     }
   }
-  
+}
+
+
+vg-player {
+  width: 100%;
+
+  video {
+    height: 500px;
+    margin: 0 auto;
+  }
+}

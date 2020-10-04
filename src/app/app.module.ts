@@ -10,6 +10,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { DndDirective } from './dnd.directive';
 import { DbOperationsService } from './services/db-operations.service';
 import { AuthService } from './services/auth.service';
@@ -30,6 +31,7 @@ import { SiteRoutingModule } from './modules/site/site.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
     AppRoutingModule,
+    AngularFireAnalyticsModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,
     AngularFireModule,

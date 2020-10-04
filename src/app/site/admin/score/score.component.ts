@@ -212,6 +212,16 @@ export class ScoreComponent implements OnInit, AfterViewInit {
     .update({'status': 'declined'});
   }
 
+  featureArtwork() {
+    this.dbOperations.artworksCollection().doc(this.work.artworkId)
+    .update({'status': 'feature'});
+  }
+
+  exhibitArtwork() {
+    this.dbOperations.artworksCollection().doc(this.work.artworkId)
+    .update({'status': 'exhibit'});
+  }
+
 
   getArtWorkDetail() {
     this.dbOperations.artworksCollection()
