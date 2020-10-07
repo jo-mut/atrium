@@ -3,7 +3,7 @@ export class User {
   code: string  = null;
   firstName: string = null;
   lastName: string = null;
-  password: string = null;
+  // password: string = null;
   email: string = null;
   role: string = null;
   phoneNumber: string = null;

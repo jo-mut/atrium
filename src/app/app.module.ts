@@ -20,11 +20,13 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
 import { SiteRoutingModule } from './modules/site/site.module';
+import { UploadModalComponent } from './site/add-artworks/upload-modal/upload-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DndDirective,
+    UploadModalComponent,
 
   ],
   imports: [

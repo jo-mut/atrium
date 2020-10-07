@@ -27,7 +27,7 @@ export class CreateProfileComponent implements OnInit {
 
   formWidth: any = 100;
   headingSize = '2.0em';
-  disableProfileCreate = false;
+  disableProfileCreate = true;
 
   constructor(private authService: AuthService,
     private matDialog: MatDialog,
@@ -66,16 +66,8 @@ export class CreateProfileComponent implements OnInit {
 
   signUp(user: User, file) {
     // console.log(user)
-    this.disableProfileCreate = true;
-    this.authService.signUp(user)
-      .then(res => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
-        // this.authService.sendVerificationMail();
-      }).catch(error => {
-        this.disableProfileCreate = false;
-        window.alert(error.message);
-      });
+    // this.disableProfileCreate = true;
+    this.authService.signInAnonymously(user);
   }
 
   lauchCuratorModal() {

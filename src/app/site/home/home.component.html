@@ -14,7 +14,7 @@
                   We’re looking for photo and video submissions that showcase African resilience in the wake of the
                   pandemic.
                 </p>
-                <button class="btn btn-primary" [routerLink]="['/project/call']">SHARE YOUR STORY </button>
+                <button class="btn btn-primary" [routerLink]="['/project/guidelines']">SHARE YOUR STORY </button>
               </div>
             </div>
           </div>
@@ -51,6 +51,20 @@
       </p>
     </div>
   </div>
+
+  <div class="covid-hq">
+    <div class="container">
+      <div class="covid-hq-info py-5">
+        <h4 class="join"><span class="because">Because</span> <strong class="hashtag"> #ItsUpToUs. </strong>Be part of</h4>
+      <div class="covid-hq">
+        <a href="http://www.covidhqafrica.com/">
+          <img src="assets/images/covidhqlogo.png" alt="">
+        </a>
+      </div>
+      </div>
+    </div>
+  </div>
+
   <div class="submission p-5">
     <div class="container">
       <div class="row">
@@ -61,12 +75,13 @@
           <h3>CALL FOR SUBMISSION</h3>
           <hr class="hr-rule mt-1">
           <ul class="list-unstyled">
-            <li><strong>Dates:</strong> 21st September – 30th November 2020</li>
+            <li><strong>Dates:</strong> 9th October – 30th November 2020</li>
             <li><strong>Theme:</strong> African Resilience in the Wake of a Pandemic</li>
-            <li><strong>Eligibility:</strong> 18 – 30 years</li>
+            <li><strong>Eligibility:</strong> 18 – 35 years</li>
             <li><strong>Categories: </strong> Photography and Videography</li>
-            <li><strong>Participating Countries:</strong> Senegal, Ghana, Kenya, Nigeria, Rwanda, Ethiopia, Uganda </li>
-            <li><strong>Compensation:</strong> USD $100 for every selected image/video</li>
+            <li><strong>Participating Countries:</strong> Africa telling her stories of resilience during the pandemic
+            </li>
+            <li><strong>Recognition:</strong> USD $100 for every selected image/video</li>
             <li><strong>Organisation:</strong> Bobby Pall Photography in partnership with Mastercard Foundation </li>
           </ul>
         </div>
@@ -75,60 +90,32 @@
   </div>
 
   <div class="countries py-5">
-    <div class="container" *ngIf="countries">
-      <h3>COUNTRIES</h3>
+    <div class="container">
       <hr class="hr-rule mt-1">
-      <div class="countries-bg">
-        <img src="assets/images/map.png" alt="">
+      <div class="campaign-video">
+        <h3 class="mb-5 text-center">The Spotlight</h3>
+        <div class="spotlight-video">
+          <vg-player (onPlayerReady)="onPlayerReady($event)">
+            <vg-buffering></vg-buffering>
+            <vg-controls>
+              <vg-play-pause></vg-play-pause>
+              <vg-playback-button></vg-playback-button>
+              <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+              <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+              </vg-scrub-bar>
+              <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+              <vg-mute></vg-mute>
+              <vg-volume></vg-volume>
+              <vg-fullscreen></vg-fullscreen>
+            </vg-controls>
+            <video #media [vgMedia]="media" [src]="video" id="singleVideo"
+             (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" preload="auto" crossorigin>
+            </video>
+          </vg-player>
+        </div>
       </div>
-      <!-- <div class="container px-5">
-        <div class="row">
-          <div class="col-xs-6 col-sm-6 col-md-3 mt-3 ">
-            <div class="country">
-              <img src="{{countries[0].flag}}" alt="">
-              <p class="mx-3">{{countries[0].name}}</p>
-            </div>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
-            <div class="country">
-              <img src="{{countries[1].flag}}" alt="">
-              <p class="mx-3"> {{countries[1].name}}</p>
-            </div>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
-            <div class="country">
-              <img src="{{countries[2].flag}}" alt="">
-              <p class="mx-3"> {{countries[2].name}}</p>
-            </div>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-3 mt-3">
-            <div class="country">
-              <img src="{{countries[3].flag}}" alt="">
-              <p class="mx-3"> {{countries[3].name}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6 col-sm-12 col-md-4 mt-3">
-            <div class="country">
-              <img src="{{countries[5].flag}}" alt="">
-              <p class="mx-3"> {{countries[5].name}}</p>
-            </div>
-          </div>
-          <div class="col-xs-6 col-sm-12 col-md-4 mt-3">
-            <div class="country">
-              <img src="{{countries[6].flag}}" alt="">
-              <p class="mx-3"> {{countries[6].name}}</p>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-4 mt-3 ">
-            <div class="country">
-              <img src="{{countries[4].flag}}" alt="">
-              <p class="mx-3"> {{countries[4].name}}</p>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>

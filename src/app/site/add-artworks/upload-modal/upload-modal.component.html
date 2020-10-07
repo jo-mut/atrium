@@ -1,0 +1,4 @@
+<div *ngIf="uploadProgress | async as pct">
+  <progress [value]="pct" max="100"></progress>
+  {{ pct | number }}%
+</div>

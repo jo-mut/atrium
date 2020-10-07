@@ -24,7 +24,7 @@ export class ArchivedViewComponent implements OnInit {
   }
 
   getArchivedArtWorkById(id: string) {
-    this.dbOperations.artworksFirestoreCollection()
+    this.dbOperations.artworksCollection()
     .ref.where('id', '==', id).onSnapshot(data => {
       data.docs.forEach(d => {
         const id = d.id;

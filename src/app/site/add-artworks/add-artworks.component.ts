@@ -7,6 +7,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { ExtraDetails } from 'src/app/models/extraDetails';
 import { FormControl } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UploadModalComponent } from './upload-modal/upload-modal.component';
 
 @Component({
   selector: 'app-add-artworks',
@@ -30,10 +32,28 @@ export class AddArtworksComponent implements OnInit {
 
   answered = false;
 
+  currentUser = '';
+
+
   constructor(
+    private matDialog: MatDialog,
     private fauth: AngularFireAuth,
     private dbOperations: DbOperationsService) {
     this.getScreenSize();
+  }
+
+
+  lauchUploadProgressDialog(artwork: ArtWork) {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = '300px';
+    dialogConfig.height = '30px';
+    dialogConfig.data = { 'progress': artwork.percentage}
+
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(UploadModalComponent, dialogConfig);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -98,9 +118,10 @@ export class AddArtworksComponent implements OnInit {
     this.authState = this.fauth.authState;
     this.authState.subscribe(user => {
       if (user) {
-        this.getSubmittedArtworks(user.uid);
+        this.currentUser = user.uid;
+        this.getSubmittedArtworks(this.currentUser);
         console.log('AUTHSTATE USER', user.uid); //this works
-        this.getArtistInterview(user.uid);
+        this.getArtistInterview(this.currentUser);
       } else {
         console.log('AUTHSTATE USER EMPTY', user);
       }
@@ -156,10 +177,13 @@ export class AddArtworksComponent implements OnInit {
 
         if (this.file != null) {
           let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
-          if (ext === 'png' || ext === 'jpg' || ext === ' JPEG'
-            || ext === 'mp4' || ext === 'mov') {
+          if (this.file.type.includes('image') || this.file.type.includes('video')) {
+            // this.lauchUploadProgressDialog(this.artwork)
+            this.artwork.userId = this.currentUser;
+            this.extraDetails.userId = this.currentUser;
             this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
               .then((res) => {
+                console.log(this.artwork.percentage)
                 form.reset;
               }).catch((rej) => {
                 window.alert('Upload failed')
@@ -174,6 +198,27 @@ export class AddArtworksComponent implements OnInit {
         } else {
           window.alert('Please upload profile picture')
         }
+
+        // if (this.file != null) {
+        //   let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
+        //   if (ext === 'png' || ext === 'jpg' || ext === ' JPEG'
+        //     || ext === 'mp4' || ext === 'mov') {
+        //     this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
+        //       .then((res) => {
+        //         form.reset;
+        //       }).catch((rej) => {
+        //         window.alert('Upload failed')
+        //       })
+        //     console.log('on dropped' + this.submittedWorks.length);
+        //     const works = this.dbOperations.latestArtWorks;
+
+        //     console.log('on dropped' + { ...works });
+        //   } else {
+        //     window.alert('Please upload either jpg, .png, .mov or .mp4 file')
+        //   }
+        // } else {
+        //   window.alert('Please upload profile picture')
+        // }
       } else {
         window.alert('Confirm that you have read the Terms and Conditions')
       }
@@ -182,8 +227,7 @@ export class AddArtworksComponent implements OnInit {
 
     }
   }
-
-
+  
   /**
    * on file drop handler
    */

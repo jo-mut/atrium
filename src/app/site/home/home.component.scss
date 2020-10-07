@@ -12,6 +12,7 @@
 
   .introduction {
     background-color: whitesmoke;
+
     h3 {
       text-align: center;
     }
@@ -28,6 +29,7 @@
     height: 100%;
     min-height: 100vh;
     background-color: rgba(0, 0, 0, 0);
+
     .home-heading {
       color: white;
       padding: 5%;
@@ -37,6 +39,7 @@
         width: 90%;
         margin: 0 auto;
         margin-top: 200px;
+
         h3 {
           word-wrap: break-word;
           font-size: 4em;
@@ -64,13 +67,35 @@
     }
   }
 
+
+  .covid-hq {
+    .covid-hq-info {
+      background: white;
+      text-align: center;
+
+      .hashtag {
+        color: orange;
+      }
+
+      img {
+        width: 250px;
+      }
+    }
+  }
+
+  .submission {
+    background-color: whitesmoke;
+  }
+
   .countries {
     background-color: whitesmoke;
+
     h3 {
       text-align: center;
     }
 
     .countries-bg {
+
       // background-image: url('/assets/images/gallery/sample/cobler1.png');
       // background-size: cover;
       // background-repeat: no-repeat;
@@ -94,13 +119,24 @@
     // }
   }
 
+  .campaign-video {
+    margin-top: 100px;
+    padding-bottom: 100px;
+
+    video {
+      width: 100%;
+      height: 500px;
+    }
+  }
+
+
   footer {
     background-color: #1b1b1b;
-  
+
     img {
       margin: 0 auto;
       width: 100px;
     }
   }
-  
+
 }

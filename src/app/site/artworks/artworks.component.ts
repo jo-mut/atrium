@@ -6,6 +6,7 @@ import {
   NavigationCancel, NavigationEnd, NavigationError,
   NavigationStart, Router, Event
 } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-artworks',
@@ -14,7 +15,7 @@ import {
 })
 export class ArtworksComponent implements OnInit {
 
-  artworks: ArtWork[];
+  artworks: ArtWork[] = [];
   id: number;
   loading = false;
 
@@ -24,6 +25,7 @@ export class ArtworksComponent implements OnInit {
   constructor(
     public ngZone: NgZone,
     public router: Router,
+    public firestore: AngularFirestore,
     public dbOperations: DbOperationsService) { }
 
   ngOnInit(): void {
@@ -70,9 +72,10 @@ export class ArtworksComponent implements OnInit {
           });
         });
 
-    } else if(role === 'admin') {
+    } else if (role === 'admin') {
       this.dbOperations.artworksCollection()
-        .ref.where('status', '==', 'approved').onSnapshot(data => {
+        .ref.where('status', '==', 'approved')
+        .onSnapshot(data => {
           data.docs.forEach(d => {
             const id = d.id;
             const work = d.data() as ArtWork;
@@ -81,12 +84,14 @@ export class ArtworksComponent implements OnInit {
         })
     } else {
       this.dbOperations.artworksCollection()
-        .ref.where('status', '==', 'featured').onSnapshot(data => {
-          data.docs.forEach(d => {
-            const id = d.id;
-            const work = d.data() as ArtWork;
+        .ref.where('status', '==', 'featured')
+        .onSnapshot(data => {
+          data.forEach(e => {
+            const data = e.data();
+            const id = e.id;
+            let work = {id, ...data} as ArtWork;
             this.artworks.push(work);
-          })
+        })
         })
     }
   }
@@ -149,7 +154,7 @@ export class ArtworksComponent implements OnInit {
           this.ngZone.run(() => {
             if (u.role === 'moderator') {
               this.role = 'moderator'
-            } else if (u.role = 'admin') {
+            } else if (u.role === 'admin') {
               this.role = 'admin'
             } else {
               this.role = 'artist'

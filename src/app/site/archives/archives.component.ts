@@ -21,7 +21,7 @@ export class ArchivesComponent implements OnInit {
 
   // Get a list of archived artwork
   private getArchivedArtWorks() {
-    this.dbOperations.artworksFirestoreCollection()
+    this.dbOperations.artworksCollection()
     .snapshotChanges().subscribe(d => {
       this.artworks = d.map(e => {
           const data = e.payload.doc.data();

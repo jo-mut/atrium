@@ -95,7 +95,6 @@ export class ScoreComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getArtWorkDetail()
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.getArtWorkDetails(this.id.toString());
@@ -222,20 +221,6 @@ export class ScoreComponent implements OnInit, AfterViewInit {
     .update({'status': 'exhibit'});
   }
 
-
-  getArtWorkDetail() {
-    this.dbOperations.artworksCollection()
-    .ref.where('id', '==', this.id.toString()).onSnapshot(data => {
-      data.docs.forEach(d => {
-        const work = d.data() as ArtWork;
-        this.video = work.url;
-        this.work = work;
-        
-        console.log(this.video)
-
-      })
-    })
-  }
 
   getAdminRole() {
     this.dbOperations.usersCollection()

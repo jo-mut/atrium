@@ -18,6 +18,8 @@ export class AuthService {
 
   downloadUrl: any = null;
   private authState: Observable<firebase.User>;
+  emailSent = false;
+
 
   constructor(
     private storage: AngularFireStorage,
@@ -26,7 +28,9 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
-  ) { }
+  ) {
+    
+  }
 
 
   // Sign in with email/password
@@ -39,29 +43,39 @@ export class AuthService {
       }).catch((error) => {
         window.alert(error.message)
       })
+
+
   }
 
-  // Sign up with email/password
-  signUp(user: User) {
-    if (user != null) {
-      return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+  async signInAnonymously(user: User) {
+    await this.afAuth.signInAnonymously().then((res) => {
+      console.log(res.user.uid);
+      user.userId = res.user.uid;
+      user.role = "artist"
+      console.log(user.userId)
+      const userRef = this.dbOperations
+        .usersCollection().doc(user.userId);
+      const param = JSON.parse(JSON.stringify(user));
+      return userRef.set(param)
         .then((result) => {
-          this.saveUserProfileInfo(user);
+          this.getUserProfileInfo(user);
+          // sign in user after profile has been saved
         }).catch((error) => {
-          window.alert(error.message)
+          window.alert(error.message);
         })
-    } else {
-      console.log('auth sign up ' + null);
-    }
+
+    }).catch((err) => {
+
+    })
   }
 
   // Send email verfificaiton when new user sign up
-  // sendVerificationMail() {
-  //   return this.afAuth.currentUser.sendEmailVerification()
-  //   .then(() => {
-  //     this.router.navigate(['verify-email-address']);
-  //   })
-  // }
+  sendVerificationMail() {
+    // return this.afAuth.currentUser.sendEmailVerification()
+    // .then(() => {
+    //   this.router.navigate(['verify-email-address']);
+    // })
+  }
 
   // Reset Forggot password
   forgotPassword(passwordResetEmail) {
@@ -79,39 +93,6 @@ export class AuthService {
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
-
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  setUserData(user: User) {
-    console.log("set user data " + user.email);
-    this.authState = this.afAuth.authState;
-    this.authState.subscribe(currentUser => {
-      if (currentUser.uid) {
-        user.userId = currentUser.uid;
-        user.role = "artist"
-        // const path = `users/images/${Date.now() + ''}_${file?.name}`;
-        // // Reference to storage bucket
-        // const ref = this.storage.ref(path);
-        // // The main task
-        // const task = this.storage.upload(path, file);
-        // // Progress monitoring
-        // const percentage = task.percentageChanges();
-        // task.snapshotChanges().pipe(finalize(async () => {
-        //     this.downloadUrl = await ref.getDownloadURL().toPromise();
-        //     console.log("download url " + this.downloadUrl);
-        //   })
-        //   ).subscribe();
-
-        //   return percentage;
-      }
-    },
-      err => {
-        console.log('Please try again')
-      });
-
-  }
-
   saveUserProfileInfo(user: User) {
     console.log("set user data " + user.email);
     this.authState = this.afAuth.authState;
@@ -124,8 +105,8 @@ export class AuthService {
         const param = JSON.parse(JSON.stringify(user));
         return userRef.set(param)
           .then((result) => {
+            this.getUserProfileInfo(user);
             // sign in user after profile has been saved
-            this.navigateAfterSignIn(user);
           }).catch((error) => {
             window.alert(error.message);
           })
@@ -137,17 +118,17 @@ export class AuthService {
 
   }
 
-  navigateAfterSignIn(user: User) {
-    console.log("sign in trial " + user.email);
-    this.afAuth.signInWithEmailAndPassword(user.email, user.password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.getUserProfileInfo(user);
-        });
-      }).catch((error) => {
-        window.alert(error.message)
-      })
-  }
+  // navigateAfterSignIn(user: User) {
+  //   console.log("sign in trial " + user.email);
+  //   this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+  //     .then((result) => {
+  //       this.ngZone.run(() => {
+  //         this.getUserProfileInfo(user);
+  //       });
+  //     }).catch((error) => {
+  //       window.alert(error.message)
+  //     })
+  // }
 
   getUserProfileInfo(user: User) {
     this.dbOperations.usersCollection()
@@ -160,7 +141,7 @@ export class AuthService {
           this.ngZone.run(() => {
             if (u.role === 'admin') {
               this.router.navigateByUrl('/project/admin')
-            }else {
+            } else {
               this.router.navigateByUrl('/project/add-artworks')
             }
           })

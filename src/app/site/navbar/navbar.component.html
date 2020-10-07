@@ -1,36 +1,3 @@
-<!-- <div class="custom-navbar">
-  <nav class="navbar navbar-expand-sm navbar-dark d-flex flex-row" id="navbar">
-    <img src="assets/images/gallery/logo.png" alt="">
-    <button class="btn btn-dark mr-3 navbar-toggler d-lg-none" data-toggle="collapse" data-target="#collapsibleNavId"
-      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse mr-5" id="collapsibleNavId">
-      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/project/home']">Home</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/call']">The Call</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/campaign']">The Campaign</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/project/featured']">Featured</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/team']">The Team</a>
-        </li>
-        <button class="nav-item">
-          <a class="nav-link" [routerLink]="['/project/submit']">Submit</a>
-        </button>
-      </ul>
-    </div>
-  </nav>
-</div> -->
-
-
 <div class="custom-navbar">
   <nav ngxNavbarDynamicExpand class="navbar-light bg-light">
     <img src="assets/images/gallery/logo.png" alt="">
@@ -42,19 +9,20 @@
     <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/project/home']">Home</a>
+          <a class="nav-link" [routerLink]="['/project/about']" routerLinkActive="active">About Us</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/call']">The Call</a>
+          <a class="nav-link" [routerLink]="['/project/guidelines']" routerLinkActive="active">Participation Guidelines</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/stories']">Our Stories</a>
+          <a class="nav-link" [routerLink]="['/project/stories']" routerLinkActive="active">Spotlight Stories</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/project/gallery']">Gallery</a>
-        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/project/gallery']"   routerLinkActive="active" 
+          [routerLinkActiveOptions]="{exact:true}">Gallery</a>
+        </li> -->
         <li class="nav-item ">
-          <a class="nav-link mr-3" [routerLink]="['/project/team']">The Team</a>
+          <a class="nav-link mr-3" [routerLink]="['/project/team']" routerLinkActive="active">The Team</a>
         </li>
         <button class=" btn btn-primary nav-item " (click)="goToSubmitArtworks()">
           Submit
@@ -62,4 +30,5 @@
       </ul>
     </ngx-navbar-collapse>
   </nav>
+  <ngx-loading-bar ref="router" [includeSpinner]="false" ></ngx-loading-bar>
 </div>

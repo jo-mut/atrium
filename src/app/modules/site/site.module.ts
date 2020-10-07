@@ -48,18 +48,19 @@ import { SuccessfulComponent } from 'src/app/site/successful/successful.componen
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { TabsetComponent } from 'src/app/site/tabset/tabset.component';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
   { path: 'stories', component: CampaignComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'about', component: HomeComponent },
   { path: 'team', component: TeamComponent },
   { path: 'successful', component: SuccessfulComponent },
-  { path: 'guidelines', component: GuidelinesComponent },
+  { path: 'guidelines', component: CallComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'call', component: CallComponent },
   { path: 'artists', component: ArtistsComponent },
   { path: 'gallery', component: ArtworksComponent },
   { path: 'create-profile', component: CreateProfileComponent },
@@ -110,8 +111,10 @@ const routes: Routes = [
     MatNativeDateModule, 
     NgxNavbarModule,
     // TabsModule
-    MatExpansionModule
-
+    MatExpansionModule,
+   LoadingBarRouterModule,
+   LoadingBarModule
+   
 
   ],
   declarations: [

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-progress',
@@ -7,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProgressComponent implements OnInit {
   @Input() progress = 0;
+  uploadProgress: Observable<number>;
 
   constructor() { }
 

@@ -89,7 +89,7 @@ export class DbOperationsService {
 
   getAllExhibitions() {
     let exhibitionsRef = this.firestore.collection('artworks');
-    return exhibitionsRef.ref.where('status', '==', 'exhibition');
+    return exhibitionsRef.ref.where('status', '==', 'featured');
   }
 
   getExhibitionDetail() {
@@ -154,10 +154,8 @@ export class DbOperationsService {
           artwork.id = this.docId;
           artwork.url = downloadUrl;
           artwork.status = 'created';
-          artwork.userId = this.userId;
           artwork.createdAt = new Date().toISOString();
           artwork.updatedAt = '';
-          extraDetails.userId = this.userId;
           console.log(JSON.parse(JSON.stringify(artwork)))
           console.log(JSON.parse(JSON.stringify(extraDetails)))
           const extra = JSON.parse(JSON.stringify(extraDetails));

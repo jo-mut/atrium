@@ -27,7 +27,7 @@ export class ArchivesItemDetailComponent implements OnInit {
   }
 
   getArchivedArtworById(id: string) {
-    this.dbOperations.artworksFirestoreCollection()
+    this.dbOperations.artworksCollection()
     .ref.where('id', '==', id).onSnapshot(data => {
       data.forEach(e => {
         const data = e.data();

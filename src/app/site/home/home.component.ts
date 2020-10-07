@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { VgApiService } from '@videogular/ngx-videogular/core';
+import { IMedia } from 'src/app/interfaces/imedia';
 
 
 @Component({
@@ -8,9 +10,31 @@ import { Component, HostListener, OnInit } from '@angular/core';
 
 })
 export class HomeComponent implements OnInit {
-  countries: any[] = [];
+
+  playlist: Array<IMedia> = [
+    {
+      title: 'Pale Blue Dot',
+      src: 'http://static.videogular.com/assets/videos/videogular.mp4',
+      type: 'video/mp4'
+    },
+    {
+      title: 'Big Buck Bunny',
+      src: 'http://static.videogular.com/assets/videos/big_buck_bunny_720p_h264.mov',
+      type: 'video/mp4'
+    },
+    {
+      title: 'Elephants Dream',
+      src: 'http://static.videogular.com/assets/videos/elephants-dream.mp4',
+      type: 'video/mp4'
+    }
+  ];
+
 
   headingSize = 4;
+  video = 'assets/videos/campaign-video.mp4';
+  currentIndex = 0;
+  api: VgApiService;
+  currentItem: IMedia = this.playlist[this.currentIndex];
 
   constructor() {
     this.getScreenSize();
@@ -19,7 +43,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.participatingCountries();
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -44,6 +68,43 @@ export class HomeComponent implements OnInit {
 
   }
 
+  onPlayerReady(api: VgApiService) {
+    this.api = api;
+    this.api.getDefaultMedia().subscriptions
+      .loadedMetadata.subscribe(this.playVideo.bind(this));
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
+  }
+
+  nextVideo() {
+    this.currentIndex++;
+
+    if (this.currentIndex === this.playlist.length) {
+      this.currentIndex = 0;
+    }
+
+    this.currentItem = this.playlist[this.currentIndex];
+  }
+
+  playVideo() {
+    this.api.play();
+  }
+
+  onClickPlaylistItem(item: IMedia, index: number) {
+    this.currentIndex = index;
+    this.currentItem = item;
+  }
+
+  onMouseOver(): void {
+    this.api.play();
+   
+  }
+
+  onMouseOut(): void {
+    this.api.pause();
+  }
+
+
+
   getScreenSize() {
     let width = window.innerWidth;
     if (width < 800) {
@@ -63,49 +124,4 @@ export class HomeComponent implements OnInit {
       this.headingSize = 4;
     }
   }
-
-
-  participatingCountries() {
-    this.countries = [
-      {
-        id:1,
-        flag:'assets/images/flags/kenya-flag-xl.png',
-        name: 'Kenya'
-      },
-      {
-        id:2,
-        flag:'assets/images/flags/rwanda-flag-xl.png',
-        name: 'Rwanda'
-
-      },
-      {
-        id:3,
-        flag:'assets/images/flags/senegal-flag-xl.png',
-        name: 'Senegal'
-
-      },
-      {
-        id:4,
-        flag:'assets/images/flags/ghana-flag-xl.png',
-        name: 'Ghana'
-
-      },
-      {
-        id:5,
-        flag:'assets/images/flags/uganda-flag-xl.png',
-        name: 'Uganda'
-      },
-      {
-        id:6,
-        flag:'assets/images/flags/nigeria-flag-xl.png',
-        name: 'Nigeria'
-      },
-      {
-        id:7,
-        flag:'assets/images/flags/ethiopia-flag-xl.png',
-        name: 'Ethiopia'
-      }
-    ]
-  }
- 
 }
