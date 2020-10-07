@@ -55,12 +55,13 @@
   <div class="covid-hq">
     <div class="container">
       <div class="covid-hq-info py-5">
-        <h4 class="join"><span class="because">Because</span> <strong class="hashtag"> #ItsUpToUs. </strong>Be part of</h4>
-      <div class="covid-hq">
-        <a href="http://www.covidhqafrica.com/">
-          <img src="assets/images/covidhqlogo.png" alt="">
-        </a>
-      </div>
+        <h4 class="join"><span class="because">Because</span> <strong class="hashtag"> #ItsUpToUs. </strong>Be part of
+        </h4>
+        <div class="covid-hq">
+          <a href="http://www.covidhqafrica.com/">
+            <img src="assets/images/covidhqlogo.png" alt="">
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -81,7 +82,8 @@
             <li><strong>Categories: </strong> Photography and Videography</li>
             <li><strong>Participating Countries:</strong> Africa telling her stories of resilience during the pandemic
             </li>
-            <li><strong>Recognition:</strong> USD $100 for every selected image/video</li>
+            <li><strong>Recognition:</strong> USD $100 for every selected image/video, USD $200 for every selected video
+            </li>
             <li><strong>Organisation:</strong> Bobby Pall Photography in partnership with Mastercard Foundation </li>
           </ul>
         </div>
@@ -110,8 +112,8 @@
               <vg-volume></vg-volume>
               <vg-fullscreen></vg-fullscreen>
             </vg-controls>
-            <video #media [vgMedia]="media" [src]="video" id="singleVideo"
-             (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" preload="auto" crossorigin>
+            <video #media [vgMedia]="media" [src]="video" id="singleVideo" (mouseover)="onMouseOver()"
+              (mouseout)="onMouseOut()" preload="auto" crossorigin>
             </video>
           </vg-player>
         </div>
