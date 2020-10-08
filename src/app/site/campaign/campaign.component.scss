@@ -120,9 +120,14 @@
   }
 
   .stories {
-    .story-img {
-      img {
-        width: 100%;
+    background-color: whitesmoke;
+    .story {
+      background-color: white;
+      height: 100%;
+      .story-img {
+        img {
+          width: 100%;
+        }
       }
     }
     .tell {

@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
   }
 
   playVideo() {
-    this.api.play();
+    this.api.pause();
   }
 
   onClickPlaylistItem(item: IMedia, index: number) {
