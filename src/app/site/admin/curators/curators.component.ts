@@ -53,7 +53,8 @@ export class CuratorsComponent implements OnInit {
             const data = e.data();
             const id = e.id;
             let user = {...data } as User;
-            if (user.role === 'admin') {
+            let roles = user.role;
+            if (roles.includes('admin')) {
               this.router.navigateByUrl('/site/admin')
             }else {
               this.router.navigateByUrl('/site/add-artworks')

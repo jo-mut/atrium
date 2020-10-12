@@ -20,7 +20,6 @@ export class ArtworksComponent implements OnInit {
   loading = false;
 
   currentUser: string = '';
-  role: string = '';
 
   constructor(
     public ngZone: NgZone,
@@ -60,8 +59,8 @@ export class ArtworksComponent implements OnInit {
 
 
   // Get a list of archived artwork
-  getArchivedArtWorks(role: string) {
-    if (role === 'moderator') {
+  getArchivedArtWorks(roles: any[]) {
+    if (roles.includes('moderator')) {
       this.dbOperations.artworksCollection()
         .snapshotChanges().subscribe(d => {
           this.artworks = d.map(e => {
@@ -72,7 +71,7 @@ export class ArtworksComponent implements OnInit {
           });
         });
 
-    } else if (role === 'admin') {
+    } else if (roles.includes('admin')) {
       this.dbOperations.artworksCollection()
         .ref.where('status', '==', 'approved')
         .onSnapshot(data => {
@@ -89,9 +88,9 @@ export class ArtworksComponent implements OnInit {
           data.forEach(e => {
             const data = e.data();
             const id = e.id;
-            let work = {id, ...data} as ArtWork;
+            let work = { id, ...data } as ArtWork;
             this.artworks.push(work);
-        })
+          })
         })
     }
   }
@@ -132,8 +131,9 @@ export class ArtworksComponent implements OnInit {
             const id = e.id;
             let user = { ...data } as User;
             console.log(user.role);
+            let roles = user.role;
             this.ngZone.run(() => {
-              if (user.role === 'artist') {
+              if(roles.includes('artist')){
                 this.router.navigateByUrl('/project/admin/artworks/' + artworkId);
               } else {
                 this.router.navigateByUrl('/project/admin/scores/' + artworkId);
@@ -151,15 +151,9 @@ export class ArtworksComponent implements OnInit {
           const id = d.id;
           const u = d.data() as User;
           console.log("sign in trial " + u.userId);
+          let roles = u.role;
           this.ngZone.run(() => {
-            if (u.role === 'moderator') {
-              this.role = 'moderator'
-            } else if (u.role === 'admin') {
-              this.role = 'admin'
-            } else {
-              this.role = 'artist'
-            }
-            this.getArchivedArtWorks(this.role);
+            this.getArchivedArtWorks(roles);
           })
         })
       })

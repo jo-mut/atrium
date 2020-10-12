@@ -10,6 +10,8 @@ import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { finalize, tap, mapTo } from 'rxjs/operators';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { async } from '@angular/core/testing';
+import { MatStepper } from '@angular/material/stepper';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,7 @@ export class AuthService {
   downloadUrl: any = null;
   private authState: Observable<firebase.User>;
   emailSent = false;
-
+  currentUser = '';
 
   constructor(
     private storage: AngularFireStorage,
@@ -29,13 +31,11 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    
+
   }
 
-
-  // Sign in with email/password
-  signIn(email, password) {
-    return this.afAuth.signInWithEmailAndPassword(email, password)
+  async signIn(user: User) {
+    return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         this.ngZone.run(() => {
           console.log('signed in')
@@ -44,14 +44,104 @@ export class AuthService {
         window.alert(error.message)
       })
 
+  }
 
+  checkIfUserExists(user: User, stepper: MatStepper) {
+    return new Promise((res, rej) => {
+      this.dbOperations.usersCollection().get().subscribe(data => {
+        if (!data.empty) {
+          console.log('not null')
+          this.dbOperations.usersCollection()
+            .ref.where('email', '==', user.email).get().then((data) => {
+              if (!data.empty) {
+                data.forEach(d => {
+                  if (d.exists) {
+                    const id = d.id;
+                    const existingUser = d.data() as User;
+                    this.signIn(existingUser)
+                      .then((res) => {
+                        let roles = existingUser.role;
+                        this.ngZone.run(() => {
+                          if (roles.includes('admin')) {
+                            this.router.navigateByUrl('/project/admin/artworks')
+                          } else if (roles.includes('moderator')) {
+                            this.router.navigateByUrl('/project/admin')
+                          } else if (roles.includes('artist')) {
+                            this.router.navigateByUrl('/project/add-artworks')
+                          } else {
+                            stepper.next();
+                          }
+                        })
+
+                      }).catch((rej) => {
+
+                      })
+
+                  }
+                })
+              } else {
+                this.register(user, stepper);
+                console.log('resgiter')
+              }
+            }).catch((reject) => {
+
+            })
+
+        } else {
+          this.register(user, stepper);
+          console.log('resgiter')
+        }
+      })
+
+    })
+  }
+
+  async register(user: User, stepper: MatStepper) {
+    var result = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+    if (result != null) {
+      // this.sendEmailVerification();
+      this.signIn(user)
+        .then((res) => {
+          user.userId = result.user.uid;
+          console.log(user.userId)
+          const userRef = this.dbOperations
+            .usersCollection().doc(user.userId);
+          const param = JSON.parse(JSON.stringify(user));
+          return userRef.set(param)
+            .then((result) => {
+              stepper.next();
+              // sign in user after profile has been saved
+            }).catch((error) => {
+              window.alert(error.message);
+            })
+
+        }).catch((rej) => {
+
+        })
+
+    }
+  }
+
+  async sendEmailVerification() {
+    // await this.afAuth.currentUser.sendEmailVerification()
+    // this.router.navigate(['admin/verify-email']);
+  }
+
+  async sendPasswordResetEmail(passwordResetEmail: string) {
+    return await this.afAuth.sendPasswordResetEmail(passwordResetEmail);
+  }
+
+  async logout() {
+    await this.afAuth.signOut();
+    // localStorage.removeItem('user');
+    // this.router.navigate(['admin/']);
   }
 
   async signInAnonymously(user: User) {
     await this.afAuth.signInAnonymously().then((res) => {
       console.log(res.user.uid);
       user.userId = res.user.uid;
-      user.role = "artist"
+      user.role.push('artist')
       console.log(user.userId)
       const userRef = this.dbOperations
         .usersCollection().doc(user.userId);
@@ -99,17 +189,20 @@ export class AuthService {
     this.authState.subscribe(currentUser => {
       if (currentUser.uid) {
         user.userId = currentUser.uid;
-        user.role = "artist"
-        const userRef = this.dbOperations
-          .usersCollection().doc(user.userId);
+        user.role.push('artist')
+        user.code = Date.now() + '';
+        // const userRef = this.dbOperations
+        //   .usersCollection().doc(user.userId);
         const param = JSON.parse(JSON.stringify(user));
-        return userRef.set(param)
-          .then((result) => {
-            this.getUserProfileInfo(user);
-            // sign in user after profile has been saved
-          }).catch((error) => {
-            window.alert(error.message);
-          })
+        this.dbOperations.getCurrentUser().subscribe(u => {
+          this.dbOperations.usersCollection().doc(u.uid)
+            .update(param).then((resolve) => {
+              this.getUserProfileInfo(user);
+            }).catch((error) => {
+              window.alert(error.message);
+
+            })
+        })
       }
     },
       err => {
@@ -132,20 +225,28 @@ export class AuthService {
 
   getUserProfileInfo(user: User) {
     this.dbOperations.usersCollection()
-      .ref.where('userId', '==', user.userId).onSnapshot(data => {
+      .ref.where('userId', '==', user.userId).get().then((data) => {
         data.docs.forEach(d => {
           const id = d.id;
           const u = d.data() as User;
           console.log("sign in trial " + u.userId);
-
+          let roles = u.role;
           this.ngZone.run(() => {
-            if (u.role === 'admin') {
+            if (roles.includes('admin')) {
+              this.router.navigateByUrl('/project/admin/artworks')
+            }
+            if (roles.includes('moderator')) {
               this.router.navigateByUrl('/project/admin')
-            } else {
+            }
+            if (roles.includes('artist')) {
               this.router.navigateByUrl('/project/add-artworks')
             }
+
+
           })
         })
+      }).catch((reject) => {
+
       })
   }
 

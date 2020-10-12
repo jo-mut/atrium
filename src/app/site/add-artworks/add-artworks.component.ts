@@ -9,6 +9,9 @@ import { ExtraDetails } from 'src/app/models/extraDetails';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UploadModalComponent } from './upload-modal/upload-modal.component';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize, tap, mapTo } from 'rxjs/operators';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-add-artworks',
@@ -24,22 +27,27 @@ export class AddArtworksComponent implements OnInit {
   submittedWorks: ArtWork[] = [];
   files: any[] = [];
   file: File;
+  pdfs: any[] = [];
+  subjectConsentForm: File;
+  artistConsentForm: File;
+  uploadedDocuments: number = 0;
   private authState: Observable<firebase.User>;
+  // maxDate = new Date(2002, 11, 31);
+  // minDate = new Date(1, 0, 1);
 
   checkedTerms = false
   checkedPrivacy = false
   formWidth = 100;
-
   answered = false;
-
   currentUser = '';
+  isLinear = true;
 
 
   constructor(
     private matDialog: MatDialog,
     private fauth: AngularFireAuth,
+    private storage: AngularFireStorage,
     private dbOperations: DbOperationsService) {
-    this.getScreenSize();
   }
 
 
@@ -50,7 +58,7 @@ export class AddArtworksComponent implements OnInit {
     dialogConfig.id = "modal-component";
     dialogConfig.width = '300px';
     dialogConfig.height = '30px';
-    dialogConfig.data = { 'progress': artwork.percentage}
+    dialogConfig.data = { 'progress': artwork.percentage }
 
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(UploadModalComponent, dialogConfig);
@@ -91,8 +99,17 @@ export class AddArtworksComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getScreenSize();
     this.getCurrentUser();
 
+  }
+
+  goBack(stepper: MatStepper) {
+    stepper.previous();
+  }
+
+  goForward(stepper: MatStepper) {
+    stepper.next();
   }
 
   checkReadTermsValue() {
@@ -146,9 +163,9 @@ export class AddArtworksComponent implements OnInit {
 
   getArtistInterview(id: string) {
     this.dbOperations.interviewssCollection()
-    .ref.where('userId', '==', id)
+      .ref.where('userId', '==', id)
       .onSnapshot(data => {
-        if(data != null) {
+        if (data != null) {
           this.answered = true;
         }
       })
@@ -166,38 +183,184 @@ export class AddArtworksComponent implements OnInit {
     }
   }
 
+  onSubjectConsentSelected(event) {
+    this.subjectConsentForm = event.target.files[0];
+    console.log(this.subjectConsentForm + 'sibject form')
+
+  }
+
+  onArtistConsentSelected(event) {
+    this.artistConsentForm = event.target.files[0];
+    console.log(this.artistConsentForm + 'artist form')
+
+  }
+
+
+  downloadSubjectConsentForm() {
+    const storageRef = this.storage.ref('consent/subjectConsentForm.pdf')
+    storageRef.getDownloadURL().subscribe(data => {
+      console.log(data)
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function (event) {
+        var blob = xhr.response;
+      };
+      xhr.open('GET', data);
+      xhr.send();
+    })
+  }
+
+  downloadArtistCOnsentForm() {
+    const storageRef = this.storage.ref('consent/artistConsentForm.pdf')
+    storageRef.getDownloadURL().subscribe(data => {
+      console.log(data)
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function (event) {
+        var blob = xhr.response;
+      };
+      xhr.open('GET', data);
+      xhr.send();
+    })
+  }
+
   public OnDateChange(event): void {
     this.artwork.shotDate = event;
   }
 
-  onSubmit(form) {
-    if (this.submittedWorks.length <= 2) {
-      console.log(this.artwork.shotDate);
-      if (this.checkedPrivacy && this.checkReadTermsValue) {
 
-        if (this.file != null) {
-          let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
-          if (this.file.type.includes('image') || this.file.type.includes('video')) {
-            // this.lauchUploadProgressDialog(this.artwork)
-            this.artwork.userId = this.currentUser;
-            this.extraDetails.userId = this.currentUser;
+  uploadSubjectConsentForm() {
+    if (this.subjectConsentForm != null) {
+      let ext = this.subjectConsentForm.name.substring(this.subjectConsentForm.name.lastIndexOf('.') + 1);
+      if (ext === 'pdf') {
+        this.artwork.userId = this.currentUser;
+        this.extraDetails.userId = this.currentUser;
+        const path = `artworks/documents/${Date.now() + ''}_${this.subjectConsentForm.name}`;
+        // Reference to storage bucket
+        const ref = this.storage.ref(path);
+        // The main task
+        const task = this.storage.upload(path, this.subjectConsentForm);
+        // Progress monitoring
+        let percentage = task.percentageChanges();
+        const snapshot = task.snapshotChanges().pipe(finalize(async () => {
+          let downloadUrl = await ref.getDownloadURL().toPromise();
+
+          this.artwork.subjectConsentForm = downloadUrl;
+
+        })
+        ).subscribe(data => {
+          if (data.bytesTransferred == data.totalBytes) {
             this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
               .then((res) => {
                 console.log(this.artwork.percentage)
-                form.reset;
               }).catch((rej) => {
-                window.alert('Upload failed')
+                window.alert(rej.message)
               })
             console.log('on dropped' + this.submittedWorks.length);
             const works = this.dbOperations.latestArtWorks;
-
-            console.log('on dropped' + { ...works });
-          } else {
-            window.alert('Please upload either jpg, .png, .mov or .mp4 file')
           }
-        } else {
-          window.alert('Please upload profile picture')
+        });
+        return percentage
+
+      }
+    }
+
+
+  }
+
+  uploadArtistConsentForm() {
+    if (this.artistConsentForm != null) {
+      let ext = this.artistConsentForm.name.substring(this.artistConsentForm.name.lastIndexOf('.') + 1);
+      if (ext === 'pdf') {
+        console.log(this.artistConsentForm)
+        this.artwork.userId = this.currentUser;
+        this.extraDetails.userId = this.currentUser;
+        const path = `artworks/documents/${Date.now() + ''}_${this.artistConsentForm.name}`;
+        // Reference to storage bucket
+        const ref = this.storage.ref(path);
+        // The main task
+        const task = this.storage.upload(path, this.artistConsentForm);
+        // Progress monitoring
+        let percentage = task.percentageChanges();
+        const snapshot = task.snapshotChanges().pipe(finalize(async () => {
+          let downloadUrl = await ref.getDownloadURL().toPromise();
+
+          this.artwork.artistConsentForm = downloadUrl;
+
+
+        })
+        ).subscribe(data => {
+          if (data.bytesTransferred == data.totalBytes) {
+            this.uploadSubjectConsentForm()
+          }
+        })
+
+        return percentage
+
+      }
+    }
+
+  }
+
+
+  uploadConsentForms() {
+    var promise = new Promise((resolve, reject) => {
+      for (let pdf of this.pdfs) {
+        if (pdf.name === 'subjectConsent') {
+          let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
+          this.artwork.userId = this.currentUser;
+          this.extraDetails.userId = this.currentUser;
+          const path = `artworks/documents/${Date.now() + ''}_${pdf.file.name}`;
+          // Reference to storage bucket
+          const ref = this.storage.ref(path);
+          // The main task
+          const task = this.storage.upload(path, pdf.file);
+          // Progress monitoring
+          let percentage = task.percentageChanges();
+          const snapshot = task.snapshotChanges().pipe(finalize(async () => {
+            let downloadUrl = await ref.getDownloadURL().toPromise();
+
+            this.artwork.subjectConsentForm = downloadUrl;
+
+          })
+          ).subscribe();
+          return percentage
         }
+
+        if (pdf.name === 'artistConsent') {
+          let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
+          this.artwork.userId = this.currentUser;
+          this.extraDetails.userId = this.currentUser;
+          const path = `artworks/documents/${Date.now() + ''}_${pdf.file.name}`;
+          // Reference to storage bucket
+          const ref = this.storage.ref(path);
+          // The main task
+          const task = this.storage.upload(path, pdf.file);
+          // Progress monitoring
+          let percentage = task.percentageChanges();
+          const snapshot = task.snapshotChanges().pipe(finalize(async () => {
+            let downloadUrl = await ref.getDownloadURL().toPromise();
+
+            this.artwork.artistConsentForm = downloadUrl;
+
+
+          })
+          ).subscribe();
+          return percentage
+        }
+
+      }
+    });
+
+    return promise;
+  }
+
+  onSubmit() {
+    if (this.submittedWorks.length <= 2) {
+      console.log(this.artwork.shotDate);
+      console.log(this.artistConsentForm)
+      if (this.checkedPrivacy && this.checkReadTermsValue) {
+        this.uploadArtistConsentForm();
 
         // if (this.file != null) {
         //   let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
@@ -227,7 +390,7 @@ export class AddArtworksComponent implements OnInit {
 
     }
   }
-  
+
   /**
    * on file drop handler
    */
@@ -263,7 +426,7 @@ export class AddArtworksComponent implements OnInit {
       return;
     } else {
 
-      this.dbOperations.uploadImages(this.file, this.artwork);
+      // this.dbOperations.uploadImages(this.file, this.artwork);
       console.log('on dropped' + this.submittedWorks.length);
       const works = this.dbOperations.latestArtWorks;
       this.artworks = works;

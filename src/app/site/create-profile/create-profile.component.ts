@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { User } from "../../models/user";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
@@ -7,6 +7,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TermModalComponent } from './term-modal/term-modal.component';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-profile',
@@ -16,20 +18,28 @@ import { TermModalComponent } from './term-modal/term-modal.component';
 export class CreateProfileComponent implements OnInit {
 
   user: User = new User();
+  submissionUser = new User();
   file: File;
   private authState: Observable<firebase.User>;
-  genders: string[] = ['Male', 'Female'];
+  maxDate = new Date(2002, 11, 31);
+  minDate = new Date(1995, 0, 1);
+  isLinear = true;
+
+
+  genders: string[] = ['Male', 'Female', 'Other', 'Prefer not to say'];
   facebook: string;
   youtube: string;
   instagram: string;
   others: string;
   social: string[] = [];
 
+
   formWidth: any = 100;
   headingSize = '2.0em';
   disableProfileCreate = true;
 
   constructor(private authService: AuthService,
+    public ngZone: NgZone,
     private matDialog: MatDialog,
     private dbOperations: DbOperationsService,
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -37,7 +47,8 @@ export class CreateProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.getScreenSize();
+    this.getScreenSize();
+
   }
 
   onFileSelected(event) {
@@ -46,29 +57,65 @@ export class CreateProfileComponent implements OnInit {
   }
 
   public OnDateChange(event): void {
-    this.user.birthDate = event;
+    let timeDiff = Math.abs(Date.now() - event.getTime());
+    let age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+
+    if(age < 18) {
+      this.user.birthDate = null;
+      window.alert('Sorry! The minimum age to participate is 18yrs old')
+    }else {
+      this.user.birthDate = event;
+    }
   }
 
   selectOption(event) {
+    console.log(event);
     this.user.gender = event;
   }
 
-  onSubmit(form) {
-    this.user.code = Date.now() + '';
+  goBack(stepper: MatStepper) {
+    stepper.previous();
+  }
+
+  goForward(stepper: MatStepper) {
+    stepper.next();
+
+  }
+
+  creatAcountAndGoForward(stepper: MatStepper) {
+    console.log('clicked')
+    this.authService.checkIfUserExists(this.user, stepper).then(() => {
+      this.ngZone.run(() => {
+        stepper.next();
+      })
+    })   
+  }
+
+
+  onSubmit() {
     this.social.push(this.facebook);
     this.social.push(this.instagram);
     this.social.push(this.others);
     this.social.push(this.youtube);
     this.user.socialMedia = this.social;
-    this.signUp(this.user, this.file);
-    // form.reset();
+    console.log(this.user)
+    this.authService.saveUserProfileInfo(this.user);
   }
 
-  signUp(user: User, file) {
-    // console.log(user)
-    // this.disableProfileCreate = true;
-    this.authService.signInAnonymously(user);
+
+
+  nextStep(user) {
+    console.log('user ' + user);
   }
+
+  // signUp(user: User) {
+  //   var promise = new Promise((resolve, reject) => {
+  //     console.log(user)
+  //   // this.disableProfileCreate = true;
+  
+  
+  //   return promise;
+  // }
 
   lauchCuratorModal() {
     const dialogConfig = new MatDialogConfig();
@@ -86,12 +133,12 @@ export class CreateProfileComponent implements OnInit {
     let width = event.target.innerWidth;
     if (width > 800) {
       this.formWidth = 80;
-    } 
+    }
 
-    if(width > 1000) {
+    if (width > 1000) {
       this.formWidth = 70;
 
-    } 
+    }
 
     if (width > 1200) {
       this.formWidth = 60;
@@ -103,12 +150,12 @@ export class CreateProfileComponent implements OnInit {
     let width = window.innerWidth;
     if (width > 800) {
       this.formWidth = 80;
-    } 
+    }
 
-    if(width > 1000) {
+    if (width > 1000) {
       this.formWidth = 70;
 
-    } 
+    }
 
     if (width > 1200) {
       this.formWidth = 60;

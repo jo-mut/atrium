@@ -11,7 +11,13 @@
   }
 
   li a:hover {
-    color: orange;
+    color: teal;
+  }
+
+  li a:active{
+    background-color: teal;
+    color: white;
+    height: 100%;
   }
 
   #main-nav button {
@@ -22,7 +28,7 @@
   }
 
   img {
-    width: 150px;
+    width: 200px;
   }
 
 }

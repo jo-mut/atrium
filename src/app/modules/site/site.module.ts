@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule  } from '@angular/forms';
 import { HomeComponent } from 'src/app/site/home/home.component';
 import { SiteComponent } from './site.component';
 import { VrGalleryComponent } from '../vr-gallery/vr-gallery.component';
@@ -50,12 +50,14 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { TabsetComponent } from 'src/app/site/tabset/tabset.component';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import {MatStepperModule} from '@angular/material/stepper';
+// import { ToastrModule } from 'ngx-toastr';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'stories', component: CampaignComponent },
-  { path: 'about', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'team', component: TeamComponent },
   { path: 'successful', component: SuccessfulComponent },
   { path: 'guidelines', component: CallComponent },
@@ -113,8 +115,9 @@ const routes: Routes = [
     // TabsModule
     MatExpansionModule,
    LoadingBarRouterModule,
-   LoadingBarModule
-   
+   LoadingBarModule,
+   MatStepperModule,
+  //  ToastrModule.forRoot()   
 
   ],
   declarations: [

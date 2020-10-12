@@ -64,6 +64,13 @@
 
   .rules {
     background-color: whitesmoke;
+    .pdf-consent {
+      color: teal;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 
   .selection {
@@ -89,7 +96,7 @@
       font-size: 1em;
       line-height: 1.75em;
       border-top: 3px solid;
-      border-image: linear-gradient(to right, #743ad5 0%, #d53a9d 100%);
+      border-image: linear-gradient(to right, #0077b5 0%, teal 100%);
       border-image-slice: 1;
       border-width: 3px;
       margin: 0;
@@ -212,7 +219,7 @@ mat-accordion {
   border: 3px solid;
   text-align: center;
   button:hover {
-    background-color: orange;
+    background-color: teal;
     color: white;
     font-weight: bolder;
     height: 100%;

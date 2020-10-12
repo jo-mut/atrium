@@ -2,59 +2,94 @@
   <div class="artwork-bg">
     <div class="container-fluid py-5" [style.width.%]="formWidth">
       <div class="artwork-form py-5">
-        <div class="card text-center mt-3">
-          <div class="profile-form-title">
-            <h2>Select your artwork for submission</h2>
-            <p>Please note that you are only allowed to submit only two photos and/or one video of 60 seconds</p>
-          </div>
-        </div>
-        <form #artworkForm="ngForm" (ngSubmit)="artworkForm.form.valid && onSubmit(artworkForm)">
-          <div class="artwork-type">
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <label>Browse a photograph or video to submit</label>
-                <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
-                  name="image" autocomplete="off" />
-                <small class="help-text">Select a photo or video from your device</small>
-              </div>
-            </div>
+        <ngx-loading-bar ref="http" [includeSpinner]="false"></ngx-loading-bar>
 
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <div>
-                  <label>Date Shot</label>
-                </div>
-                <mat-form-field>
-                  <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
-                  <mat-datepicker-toggle matSuffix [for]="picker">
-                  </mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div>
-                <small class="help-text">Which date did you shoot this? </small>
-              </div>
-            </div>
-
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <label>Town/Country</label>
-                <input type="text" name="place" #place="ngModel" class="form-control" [(ngModel)]="artwork.place"
-                  [ngClass]="{ 'is-invalid': artworkForm.submitted && place.invalid }" required>
-                <div *ngIf="artworkForm.submitted && place.invalid" class="invalid-feedback">
-                  <div *ngIf="place.errors.required">Please describe to us your normal routine prior to Covid - 19
+        <mat-horizontal-stepper #stepper [linear]="isLinear">
+          <form #firstForm="ngForm">
+            <mat-step label="Upload files" [stepControl]="firstForm">
+              <div class="artwork-type">
+                <div class="card p-3 mt-3">
+                  <div class="form-group">
+                    <label>Browse a photograph or video to submit</label>
+                    <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
+                      name="image" autocomplete="off" />
+                    <small class="help-text">Select a photo or video from your device</small>
                   </div>
-                  <small class="help-text">Tell us your country</small>
                 </div>
               </div>
-            </div>
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <input type="file" id="file" class="form-control" #userPhoto (change)="onSubjectConsentSelected($event)"
+                    name="image" autocomplete="off" />
+                  <small class="help-text">Please download, fill and upload the consent form</small>
+                  <div class="pdf-consent p-2 mt-3 d-flex" (click)="downloadSubjectConsentForm()">
+                    <img src="assets/images/pdf.png" alt="">
+                    <p class="m-2">Download the  subject(s) and release form</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <input type="file" id="file" class="form-control" #userPhoto (change)="onArtistConsentSelected($event)"
+                    name="image" autocomplete="off" />
+                  <small class="help-text">Please download, fill and upload the consent form</small>
+                  <div class="pdf-consent p-2 mt-3 d-flex" (click)="downloadArtistCOnsentForm()">
+                    <img src="assets/images/pdf.png" alt="">
+                    <p class="m-2">Download the photographer/videographer consent form</p>
+                  </div>
+                </div>
+              </div>
+              <div class="move">
+                <div class="row">
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goBack(stepper)">Back</button>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goForward(stepper)">Next</button>
+                  </div>
+                </div>
+              </div>
+            </mat-step>
+          </form>
+          <form #secondForm="ngForm">
+            <mat-step label="Artwork Info" [stepControl]="secondForm">
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <div>
+                    <label>Date Shot</label>
+                  </div>
+                  <mat-form-field>
+                    <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <small class="help-text">Which date did you shoot this? </small>
+                </div>
+              </div>
+
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Town/Country</label>
+                  <input type="text" name="place" #place="ngModel" class="form-control" [(ngModel)]="artwork.place"
+                    [ngClass]="{ 'is-invalid': secondForm.submitted && place.invalid }" required>
+                  <div *ngIf="secondForm.submitted && place.invalid" class="invalid-feedback">
+                    <div *ngIf="place.errors.required">Please tell us your country
+                    </div>
+                    <small class="help-text">Tell us your country</small>
+                  </div>
+                </div>
+              </div>
               <div class="card p-3 mt-3">
                 <div class="form-group">
                   <label>Title</label>
                   <input type="text" name="title" #title="ngModel" class="form-control" [(ngModel)]="artwork.title"
-                    [ngClass]="{ 'is-invalid': artworkForm.submitted && title.invalid }" required>
-                  <div *ngIf="artworkForm.submitted && title.invalid" class="invalid-feedback">
-                    <div *ngIf="title.errors.required">Please describe to us your normal routine prior to Covid - 19
+                    [ngClass]="{ 'is-invalid': secondForm.submitted && title.invalid }" required>
+                  <div *ngIf="secondForm.submitted && title.invalid" class="invalid-feedback">
+                    <div *ngIf="title.errors.required">Add a title to your submission
                     </div>
                     <small class="help-text">What is the title of this submission?</small>
                   </div>
@@ -64,67 +99,74 @@
               <div class="card p-3 mt-3">
                 <div class="form-group">
                   <label>Description</label>
-                  <input type="text" name="description" #description="ngModel" class="form-control" [(ngModel)]="artwork.description"
-                    maxlength="150" required [ngClass]="{ 'is-invalid': artworkForm.submitted && description.invalid }">
-                  <div *ngIf="artworkForm.submitted && description.invalid" class="invalid-feedback">
-                    <div *ngIf="description.errors.required">Please describe to us your normal routine prior to Covid
-                      - 19
+                  <input type="text" name="description" #description="ngModel" class="form-control"
+                    [(ngModel)]="artwork.description" maxlength="150" required
+                    [ngClass]="{ 'is-invalid': secondForm.submitted && description.invalid }">
+                  <div *ngIf="secondForm.submitted && description.invalid" class="invalid-feedback">
+                    <div *ngIf="description.errors.required">Add a description to your submission
                     </div>
                     <small class="help-text">Describe your submission in 150 words</small>
                   </div>
                 </div>
               </div>
+              <div class="move">
+                <div class="row">
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goBack(stepper)">Back</button>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goForward(stepper)">Next</button>
+                  </div>
+                </div>
+              </div>
+            </mat-step>
+          </form>
 
-              <div class="challenges" *ngIf="answered">
-                <div class="card text-center p-3 mt-3">
-                  <h3>Please tell us a bit about your work</h3>
-                </div>
-                <div class="card p-3 mt-3">
-                  <div class="form-group">
-                    <label>Challenges</label>
-                    <textarea [(ngModel)]="extraDetails.challenges" #challenges="ngModel" maxlength="150" required class="form-control"
-                      name="challenges" id="challenges" rows="3"
-                      [ngClass]="{ 'is-invalid': artworkForm.submitted && challenges.invalid }"></textarea>
-                    <div *ngIf="artworkForm.submitted && challenges.invalid" class="invalid-feedback">
-                      <div *ngIf="challenges.errors.required">Please describe to us your normal routine prior to Covid -
-                        19
-                      </div>
-                      <small class="help-text">What are some of the challenges you encountered
-                        in the process of taking the photo(s)/video?</small>
+          <form #thirdForm="ngForm">
+            <mat-step label="Interview Questions" [stepControl]="thirdForm">
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Challenges</label>
+                  <textarea [(ngModel)]="extraDetails.challenges" #challenges="ngModel" maxlength="150" required
+                    class="form-control" name="challenges" id="challenges" rows="3"
+                    [ngClass]="{ 'is-invalid': thirdForm.submitted && challenges.invalid }"></textarea>
+                  <div *ngIf="thirdForm.submitted && challenges.invalid" class="invalid-feedback">
+                    <div *ngIf="challenges.errors.required">Tell us challenges encountered in the process of taking this video/photo
                     </div>
+                    <small class="help-text">What are some of the challenges you encountered
+                      in the process of taking the photo(s)/video?</small>
                   </div>
                 </div>
-  
-                <div class="card p-3 mt-3">
-                  <div class="form-group">
-                    <label>Experience</label>
-                    <textarea [(ngModel)]="extraDetails.experience" #experience="ngModel" maxlength="150" required class="form-control"
-                      name="experience" id="experience" rows="3"
-                      [ngClass]="{ 'is-invalid': artworkForm.submitted && experience.invalid }"></textarea>
-                    <div *ngIf="artworkForm.submitted && experience.invalid" class="invalid-feedback">
-                      <div *ngIf="experience.errors.required">Please describe to us your normal routine prior to Covid
-                        - 19
-                      </div>
-                      <small class="help-text">Describe your experience</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="card p-3 mt-3">
-                  <div class="form-group">
-                    <label>Prior to Covid - 19</label>
-                    <textarea [(ngModel)]="extraDetails.lifeBefore" #lifeBefore="ngModel" maxlength="150" required class="form-control"
-                      name="lifeBefore" id="lifeBefore" rows="3"
-                      [ngClass]="{ 'is-invalid': artworkForm.submitted && lifeBefore.invalid }"></textarea>
-                    <div *ngIf="artworkForm.submitted && lifeBefore.invalid" class="invalid-feedback">
-                      <div *ngIf="lifeBefore.errors.required">Please describe to us your normal routine prior to
-                        Covid - 19
-                      </div>
-                    </div>
-                    <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
-                  </div>
-                </div>
-              </div>              
+              </div>
 
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Experience</label>
+                  <textarea [(ngModel)]="extraDetails.experience" #experience="ngModel" maxlength="150" required
+                    class="form-control" name="experience" id="experience" rows="3"
+                    [ngClass]="{ 'is-invalid': thirdForm.submitted && experience.invalid }"></textarea>
+                  <div *ngIf="thirdForm.submitted && experience.invalid" class="invalid-feedback">
+                    <div *ngIf="experience.errors.required">Tell us your experience in the process of taking this video/photo
+                    </div>
+                    <small class="help-text">Describe your experience</small>
+                  </div>
+                </div>
+              </div>
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Prior to Covid - 19</label>
+                  <textarea [(ngModel)]="extraDetails.lifeBefore" #lifeBefore="ngModel" maxlength="150" required
+                    class="form-control" name="lifeBefore" id="lifeBefore" rows="3"
+                    [ngClass]="{ 'is-invalid': thirdForm.submitted && lifeBefore.invalid }"></textarea>
+                  <div *ngIf="thirdForm.submitted && lifeBefore.invalid" class="invalid-feedback">
+                    <div *ngIf="lifeBefore.errors.required">Please describe to us your normal routine prior to
+                      Covid - 19
+                    </div>
+                  </div>
+                  <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
+                </div>
+              </div>
+             
               <div class="confirm-terms mt-3">
                 <div class="container-fluid ">
                   <div class="form-check">
@@ -150,17 +192,233 @@
                   </div>
                 </div>
               </div>
-
-              <div class="next mt-5">
-                <div class="form-group mb-0">
-                  <button type="submit" class="btn btn-light">Submit</button>
+              <div class="next">
+                <div class="form-group mt-3">
+                  <button (click)="onSubmit()" class="btn btn-primary">Proceed
+                    to submit</button>
                 </div>
               </div>
-            </div>
+            </mat-step>
+          </form>
 
-        </form>
+        </mat-horizontal-stepper>
+
       </div>
     </div>
   </div>
-  <ngx-loading-bar ref="http" [includeSpinner]="false" ></ngx-loading-bar>
 </div>
+
+
+
+<!-- 
+ <div class="add-artwork" (window:resize)="onResize($event)">
+  <div class="artwork-bg">
+    <div class="container-fluid py-5" [style.width.%]="formWidth">
+      <div class="artwork-form py-5">
+        <ngx-loading-bar ref="http" [includeSpinner]="false"></ngx-loading-bar>
+        <form #artworkForm="ngForm" (ngSubmit)="artworkForm.form.valid && onSubmit(artworkForm)">
+
+          <mat-horizontal-stepper #stepper [linear]="isLinear">
+            <mat-step label="Profile Info" [stepControl]="firstForm">
+              <div class="artwork-type">
+                <div class="card p-3 mt-3">
+                  <div class="form-group">
+                    <label>Browse a photograph or video to submit</label>
+                    <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
+                      name="image" autocomplete="off" />
+                    <small class="help-text">Select a photo or video from your device</small>
+                  </div>
+                </div>
+              </div>
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <input type="file" id="file" class="form-control" #userPhoto (change)="onConsentSelected($event)"
+                    name="image" autocomplete="off" />
+                  <small class="help-text">Please download, fill and upload the consent form</small>
+                  <div class="pdf-consent p-2 mt-3 d-flex" (click)="downloadConsentForm()">
+                    <img src="assets/images/pdf.png" alt="">
+                    <p class="m-2">Download consent form</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <input type="file" id="file" class="form-control" #userPhoto (change)="onConsentSelected($event)"
+                    name="image" autocomplete="off" />
+                  <small class="help-text">Please download, fill and upload the consent form</small>
+                  <div class="pdf-consent p-2 mt-3 d-flex" (click)="downloadConsentForm()">
+                    <img src="assets/images/pdf.png" alt="">
+                    <p class="m-2">Download consent form</p>
+                  </div>
+                </div>
+              </div>
+              <div class="move">
+                <div class="row">
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goBack(stepper)">Back</button>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goForward(stepper)">Next</button>
+                  </div>
+                </div>
+              </div>
+            </mat-step>
+            <mat-step label="Contact Info" [stepControl]="secondForm">
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <div>
+                    <label>Date Shot</label>
+                  </div>
+                  <mat-form-field>
+                    <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <small class="help-text">Which date did you shoot this? </small>
+                </div>
+              </div>
+  
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Town/Country</label>
+                  <input type="text" name="place" #place="ngModel" class="form-control" [(ngModel)]="artwork.place"
+                    [ngClass]="{ 'is-invalid': artworkForm.submitted && place.invalid }" required>
+                  <div *ngIf="artworkForm.submitted && place.invalid" class="invalid-feedback">
+                    <div *ngIf="place.errors.required">Please describe to us your normal routine prior to Covid - 19
+                    </div>
+                    <small class="help-text">Tell us your country</small>
+                  </div>
+                </div>
+              </div>
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" name="title" #title="ngModel" class="form-control" [(ngModel)]="artwork.title"
+                    [ngClass]="{ 'is-invalid': artworkForm.submitted && title.invalid }" required>
+                  <div *ngIf="artworkForm.submitted && title.invalid" class="invalid-feedback">
+                    <div *ngIf="title.errors.required">Please describe to us your normal routine prior to Covid - 19
+                    </div>
+                    <small class="help-text">What is the title of this submission?</small>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" name="description" #description="ngModel" class="form-control"
+                    [(ngModel)]="artwork.description" maxlength="150" required
+                    [ngClass]="{ 'is-invalid': artworkForm.submitted && description.invalid }">
+                  <div *ngIf="artworkForm.submitted && description.invalid" class="invalid-feedback">
+                    <div *ngIf="description.errors.required">Please describe to us your normal routine prior to Covid
+                      - 19
+                    </div>
+                    <small class="help-text">Describe your submission in 150 words</small>
+                  </div>
+                </div>
+              </div>
+              <div class="move">
+                <div class="row">
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goBack(stepper)">Back</button>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <button class="btn" mat-button (click)="goForward(stepper)">Next</button>
+                  </div>
+                </div>
+              </div>
+            </mat-step>
+            <mat-step label="Interview Questions" [stepControl]="thirdForm">
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Challenges</label>
+                  <textarea [(ngModel)]="extraDetails.challenges" #challenges="ngModel" maxlength="150" required
+                    class="form-control" name="challenges" id="challenges" rows="3"
+                    [ngClass]="{ 'is-invalid': artworkForm.submitted && challenges.invalid }"></textarea>
+                  <div *ngIf="artworkForm.submitted && challenges.invalid" class="invalid-feedback">
+                    <div *ngIf="challenges.errors.required">Please describe to us your normal routine prior to Covid -
+                      19
+                    </div>
+                    <small class="help-text">What are some of the challenges you encountered
+                      in the process of taking the photo(s)/video?</small>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Experience</label>
+                  <textarea [(ngModel)]="extraDetails.experience" #experience="ngModel" maxlength="150" required
+                    class="form-control" name="experience" id="experience" rows="3"
+                    [ngClass]="{ 'is-invalid': artworkForm.submitted && experience.invalid }"></textarea>
+                  <div *ngIf="artworkForm.submitted && experience.invalid" class="invalid-feedback">
+                    <div *ngIf="experience.errors.required">Please describe to us your normal routine prior to Covid
+                      - 19
+                    </div>
+                    <small class="help-text">Describe your experience</small>
+                  </div>
+                </div>
+              </div>
+              <div class="card p-3 mt-3">
+                <div class="form-group">
+                  <label>Prior to Covid - 19</label>
+                  <textarea [(ngModel)]="extraDetails.lifeBefore" #lifeBefore="ngModel" maxlength="150" required
+                    class="form-control" name="lifeBefore" id="lifeBefore" rows="3"
+                    [ngClass]="{ 'is-invalid': artworkForm.submitted && lifeBefore.invalid }"></textarea>
+                  <div *ngIf="artworkForm.submitted && lifeBefore.invalid" class="invalid-feedback">
+                    <div *ngIf="lifeBefore.errors.required">Please describe to us your normal routine prior to
+                      Covid - 19
+                    </div>
+                  </div>
+                  <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
+                </div>
+              </div>
+              <div class="challenges" *ngIf="answered">
+                <div class="card text-center p-3 mt-3">
+                  <h3>Please tell us a bit about your work</h3>
+                </div>
+              </div>
+              <div class="confirm-terms mt-3">
+                <div class="container-fluid ">
+                  <div class="form-check">
+                    <p>Please check the boxes below:</p>
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="read" (change)="checkReadTermsValue()"
+                        value="checked">
+                      <p>I have read the Submission Guidelines and Rules (including the copyright conditions)
+                        below and
+                        agree to
+                        the terms and conditions of the photo(s) and video call for submission.</p>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="terms" (change)="checkReadPrivacy()"
+                        value="checked">
+                      <p>I have read the Submission Guidelines and Rules (including the copyright conditions)
+                        below and
+                        agree to
+                        the terms and conditions of the photo(s) and video call for submission.</p>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="next">
+                <div class="form-group mt-3">
+                  <button (click)="onSubmit()" class="btn btn-primary">Proceed
+                    to submit</button>
+                </div>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div> -->

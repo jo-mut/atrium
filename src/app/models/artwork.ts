@@ -1,12 +1,14 @@
 import {Upload} from "../interfaces/upload";
 
 export class ArtWork implements Upload {
-  id: string = null;
+  id: string = Date.now() + '';
   artworkId: any = null;
   type: string = null;
   title: string = null;
   description: string = null;
   url: string = null;
+  subjectConsentForm: string = null;
+  artistConsentForm: string = null;
   status: string = null;
   userId: string = null;
   place: string = null;

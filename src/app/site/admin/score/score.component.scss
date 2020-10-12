@@ -1,6 +1,7 @@
 .score {
   min-height: 100vh;
-
+  color: black;
+  
   .artwork {
     height: 100%;
 
@@ -10,6 +11,24 @@
 
         img {
           width: 100%;
+        }
+      }
+    }
+
+    .artwork-info {
+      .card-body {
+        background-color: white;
+        p {
+          font-style: italic;
+        }
+      }
+    }
+
+    .artwork-interview { 
+      .card-body {
+        background-color: white;
+        p {
+          font-style: italic;
         }
       }
     }
@@ -23,7 +42,7 @@
   }
 
   button:hover {
-    background-color: orange;
+    background-color: teal;
     color: white;
     text-align: center;
     width: 100%;

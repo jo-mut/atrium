@@ -52,7 +52,7 @@
     </div>
   </div>
 
-  <div class="covid-hq">
+  <!-- <div class="covid-hq">
     <div class="container">
       <div class="covid-hq-info py-5">
         <h4 class="join"><span class="because">Because</span> <strong class="hashtag"> #ItsUpToUs. </strong>Be part of
@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="submission p-5">
     <div class="container">
@@ -97,10 +97,10 @@
       <div class="campaign-video">
         <h3 class="mb-5 text-center">The Spotlight</h3>
         <div class="spotlight-video">
-          <vg-player (onPlayerReady)="onPlayerReady($event)">
-            <vg-buffering></vg-buffering>
+          <vg-player (onPlayerReady)="onPlayerReady($event)" vg-theme="controller.config.theme.url">
+            <vg-buffering></vg-buffering>         
             <vg-controls>
-              <vg-play-pause></vg-play-pause>
+              <vg-play-pause>Play</vg-play-pause>
               <vg-playback-button></vg-playback-button>
               <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
               <vg-scrub-bar>
@@ -116,6 +116,7 @@
               (mouseout)="onMouseOut()" preload="auto" crossorigin>
             </video>
           </vg-player>
+
         </div>
       </div>
     </div>

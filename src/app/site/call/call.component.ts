@@ -5,6 +5,8 @@ import { HostProfileModalComponent } from '../admin/host-profile-modal/host-prof
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TabsetComponent } from '../tabset/tabset.component';
 import { MatAccordion } from '@angular/material/expansion';
+import { AngularFireStorage } from '@angular/fire/storage';
+import {saveAs as FileSaver} from "file-saver";
 
 
 @Component({
@@ -20,7 +22,7 @@ export class CallComponent implements OnInit {
   mobileWidthThreshold: number = 640;
   landingImages = [];
 
-  covidPhotos: any[]= [];
+  covidPhotos: any[] = [];
   purpose: string;
   headingSize = 4;
 
@@ -35,7 +37,7 @@ export class CallComponent implements OnInit {
     navText: ['<', '>'],
     responsive: {
       0: {
-        items: 1 
+        items: 1
       },
       400: {
         items: 2
@@ -51,9 +53,10 @@ export class CallComponent implements OnInit {
   }
 
   constructor(
+    private storage: AngularFireStorage,
     private matDialog: MatDialog,
     private config: NgbCarouselConfig
-  ) { 
+  ) {
     this.getScreenSize();
     this.getLandinPageImages();
     this.carouselConfig();
@@ -73,12 +76,12 @@ export class CallComponent implements OnInit {
     let width = event.target.innerWidth;
     if (width < 800) {
       this.headingSize = 1.5;
-    } 
+    }
 
-    if(width > 800) {
+    if (width > 800) {
       this.headingSize = 2.5;
 
-    } 
+    }
 
     if (width > 1000) {
       this.headingSize = 3;
@@ -93,12 +96,12 @@ export class CallComponent implements OnInit {
     let width = window.innerWidth;
     if (width < 800) {
       this.headingSize = 1.5;
-    } 
+    }
 
-    if(width > 800) {
+    if (width > 800) {
       this.headingSize = 2.5;
 
-    } 
+    }
 
     if (width > 1000) {
       this.headingSize = 3;
@@ -109,41 +112,72 @@ export class CallComponent implements OnInit {
     }
   }
 
+  downloadSubjectConsentForm() {
+    const storageRef = this.storage.ref('consent/subjectConsentForm.pdf')
+    storageRef.getDownloadURL().subscribe(data => {
+      console.log(data)
+      FileSaver(data, "subject-consent-form.pdf")
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function (event) {
+        var blob = xhr.response;
+        FileSaver(blob, "subject-consent-form.pdf");
 
-
-  getLandinPageImages() {
-    this.landingImages =  [
-      'assets/images/gallery/sample/poster1.png',
-      'assets/images/gallery/sample/poster2.png',
-      'assets/images/gallery/sample/poster3.png',
-      'assets/images/gallery/sample/poster4.png',
-      'assets/images/gallery/sample/poster5.png',     
- 
-    ]
+      };
+      // xhr.open('GET', data);
+      // xhr.send();
+    })
   }
 
-  carouselConfig() {
-    this.config.interval = 4000;
-    this.config.wrap = false;
-    this.config.keyboard = false;
-    this.config.pauseOnHover = false;
-    this.config.wrap = false;
-  }
+downloadArtistCOnsentForm() {
+  const storageRef = this.storage.ref('consent/artistConsentForm.pdf')
+  storageRef.getDownloadURL().subscribe(data => {
+    console.log(data)
+    FileSaver(data, "subject-consent-form.pdf");
 
-  lauchMoreInfoModal(info) {
-    const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = false;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "60%";
-    dialogConfig.width = "60%";
-    dialogConfig.data = { 'info': info }
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
-  }
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = function (event) {
+      var blob = xhr.response;
 
-  purposeOfCompetion() {
-    this.purpose = `As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public
+    };
+    // xhr.open('GET', data);
+    // xhr.send();
+  })
+}
+getLandinPageImages() {
+  this.landingImages = [
+    'assets/images/gallery/sample/poster1.png',
+    'assets/images/gallery/sample/poster2.png',
+    'assets/images/gallery/sample/poster3.png',
+    'assets/images/gallery/sample/poster4.png',
+    'assets/images/gallery/sample/poster5.png',
+
+  ]
+}
+
+carouselConfig() {
+  this.config.interval = 4000;
+  this.config.wrap = false;
+  this.config.keyboard = false;
+  this.config.pauseOnHover = false;
+  this.config.wrap = false;
+}
+
+lauchMoreInfoModal(info) {
+  const dialogConfig = new MatDialogConfig();
+  // The user can't close the dialog by clicking outside its body
+  dialogConfig.disableClose = false;
+  dialogConfig.id = "modal-component";
+  dialogConfig.height = "60%";
+  dialogConfig.width = "60%";
+  dialogConfig.data = { 'info': info }
+  // https://material.angular.io/components/dialog/overview
+  const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
+}
+
+purposeOfCompetion() {
+  this.purpose = `As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public
     awareness campaign to share timely, accurate information about the coronavirus, how it is spread, and how
     young people are adapting to their new reality. The Campaign seeks to enhance dissemination, understanding
     and uptake of public health information as a key outcome. The Campaign targets to reach the majority of
@@ -160,15 +194,15 @@ export class CallComponent implements OnInit {
     photography and videography campaign is: ‘African Resilience in the Wake of a Pandemic’.
     Please read the guidelines and rules carefully before submitting your entry`;
 
-    // if(this.showPurpose) {
-    //   this.showPurpose = false;
-    //   this.purpose;
-    // }else{
-    //   this.showPurpose = true;
-    //   this.purpose.substring(0, 600);
-    // }
+  // if(this.showPurpose) {
+  //   this.showPurpose = false;
+  //   this.purpose;
+  // }else{
+  //   this.showPurpose = true;
+  //   this.purpose.substring(0, 600);
+  // }
 
-    return this.purpose.substring(0, 600);
-  }
+  return this.purpose.substring(0, 600);
+}
 
 }

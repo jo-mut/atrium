@@ -33,7 +33,6 @@ export class SignUpComponent implements OnInit {
 
 
   navigateToGallery() {
-    this.router.navigateByUrl('/main/exhibitions')
   }
 
 

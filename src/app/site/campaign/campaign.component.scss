@@ -8,21 +8,28 @@
     background-size: cover;
     min-height: 90vh;
     background-color: black;
-    color: orange;
+    color: teal;
     padding-top: 150px;
 
     .call-theme {
-      text-align: center;
       background-color: rgba(0, 0, 0, 0.6);
       margin: 0 auto;
 
-      h3, h4 {
-        text-align: left;
+      h3,
+      h4 {
         word-wrap: break-word;
       }
 
+      .title {
+        color: white;
+      }
+
+      .sub-title {
+        color: teal;
+      }
+
       .because {
-        color: orangered;
+        color: teal;
       }
 
       .hashtag {
@@ -119,17 +126,20 @@
 
   }
 
-  .stories {
+  .stories-bg {
     background-color: whitesmoke;
+
     .story {
       background-color: white;
       height: 100%;
+
       .story-img {
         img {
           width: 100%;
         }
       }
     }
+
     .tell {
       text-align: center;
 
@@ -139,10 +149,10 @@
         height: 60px;
         border: 3px solid;
         background-color: transparent;
-        color: orange;
+        color: teal;
         font-weight: bolder;
         border-image-slice: 1;
-        border-image-source: linear-gradient(to right, orangered 0%, orange 100%);
+        border-image-source: linear-gradient(to right, teal 0%, #006464 100%);
 
       }
 
@@ -165,6 +175,7 @@
 
   .sample-images {
     text-align: center;
+
     .artistic-images {
       .card {
         border: none;

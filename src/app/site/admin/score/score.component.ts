@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { ArtWork } from 'src/app/models/artwork';
-import { VScore, Points, Score} from 'src/app/models/score';
+import { VScore, Points, Score } from 'src/app/models/score';
 import { User } from 'src/app/models/user';
 import { IMedia } from 'src/app/interfaces/imedia';
+// import { ToastrService } from 'ngx-toastr';
+import { ExtraDetails } from 'src/app/models/extraDetails';
 
 @Component({
   selector: 'app-score',
@@ -18,6 +20,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
 
 
   work: ArtWork = new ArtWork();
+  interview: ExtraDetails = new ExtraDetails();
   score: Score = new Score();
   vScore: VScore = new VScore();
 
@@ -57,7 +60,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
   artworkId: string;
   userCode: string;
 
- 
+
   video = "assets/videos/resilience.mp4";
   id: number = 1601554584181;
   templateChecked = true;
@@ -88,10 +91,12 @@ export class ScoreComponent implements OnInit, AfterViewInit {
 
 
   constructor(
+    // private toaster: ToastrService,
     public ngZone: NgZone,
+    private router: Router,
     private route: ActivatedRoute,
     private dbOperations: DbOperationsService) {
-     
+
   }
 
   ngOnInit(): void {
@@ -111,7 +116,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
 
   onSubmit(form) {
     if (form.valid) {
-      if(this.work.type === 'video') {
+      if (this.work.type === 'video') {
         this.vScore.artworkId = this.id.toString();
         this.vScore.vTechnical.composition = this.composition;
         this.vScore.vTechnical.stability = this.stability;
@@ -154,7 +159,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         form.reset();
       }
     }
- 
+
   }
 
   onItemChange(value) {
@@ -195,7 +200,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
           const work = d.data() as ArtWork;
           this.video = work.url;
           this.work = work;
-
+          this.getArtworkInterview(work.userId);
         })
       })
 
@@ -203,45 +208,98 @@ export class ScoreComponent implements OnInit, AfterViewInit {
 
   approveArtwork() {
     this.dbOperations.artworksCollection().doc(this.work.artworkId)
-    .update({'status': 'approved'});
+      .update({
+        'status': 'approved',
+        'reviewedBy': this.currentUser,
+        'updatedAt': new Date().getTime() + '',
+      }).then(res => {
+        // this.toaster.success('Filtering successful');
+        this.router.navigateByUrl("project/admin/artworks")
+      }).catch(err => {
+        // this.toaster.success('Filtering failed');
+
+      })
   }
 
   declineArtwork() {
     this.dbOperations.artworksCollection().doc(this.work.artworkId)
-    .update({'status': 'declined'});
+      .update(
+        {
+          'status': 'declined',
+          'reviewedBy': this.currentUser,
+          'updatedAt': new Date().getTime() + '',
+        }).then(res => {
+          // this.toaster.success('Filtering successful');
+          this.router.navigateByUrl("project/admin/artworks")
+        }).catch(err => {
+          // this.toaster.success('Filtering failed');
+        })
   }
 
   featureArtwork() {
     this.dbOperations.artworksCollection().doc(this.work.artworkId)
-    .update({'status': 'feature'});
+      .update(
+        {
+          'status': 'feature',
+          'reviewedBy': this.currentUser,
+          'updatedAt': new Date().getTime() + '',
+        }).then(res => {
+          // this.toaster.success('Filtering successful');
+          this.router.navigateByUrl("project/admin/artworks")
+
+        }).catch(err => {
+          // this.toaster.success('Filtering failed');
+        })
   }
 
   exhibitArtwork() {
     this.dbOperations.artworksCollection().doc(this.work.artworkId)
-    .update({'status': 'exhibit'});
+      .update({
+        'status': 'exhibit',
+        'reviewedBy': this.currentUser,
+        'updatedAt': new Date().getTime() + '',
+      }).then(res => {
+        // this.toaster.success('Filtering successful');
+        this.router.navigateByUrl("project/admin/artworks")
+
+      }).catch(err => {
+        // this.toaster.success('Filtering failed');
+      })
   }
 
+  getArtworkInterview(userId: string) {
+    this.dbOperations.interviewssCollection()
+    .ref.where('userId', '==', userId).onSnapshot(data => {
+      if(!data.empty) {
+        data.forEach(d => {
+          this.interview = d.data() as ExtraDetails
+        })
+      }
+    })
+  }
 
   getAdminRole() {
     this.dbOperations.usersCollection()
-    .ref.where('userId', '==', this.currentUser).onSnapshot(data => {
-      data.docs.forEach(d => {
-        const id = d.id;
-        const u = d.data() as User;
-        console.log("sign in trial " + u.userId);
-        this.ngZone.run(() => {
-          if (u.role === 'moderator') {
-            this.role = 'moderator'
-          }else if(u.role = 'admin') {
-            this.role = 'admin'
-          }else {
-            this.role = 'artist'
-          }
-          console.log("role " + this.role);
+      .ref.where('userId', '==', this.currentUser).onSnapshot(data => {
+        data.docs.forEach(d => {
+          const id = d.id;
+          const u = d.data() as User;
+          console.log("sign in trial " + u.userId);
+          let roles = u.role;
+          this.ngZone.run(() => {
+            if (roles.includes('moderator')) {
+              this.role = 'moderator'
+            }
+            if (roles.includes('admin')) {
+              this.role = 'admin'
+            }
+            if (roles.includes('artist')) {
+              this.role = 'artist'
+            }
+            console.log("role " + this.role);
+          })
         })
-      })
-    })
-  
+      });
   }
 
 }

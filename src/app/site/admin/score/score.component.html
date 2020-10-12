@@ -27,6 +27,51 @@
                 </video>
               </vg-player>
             </div>
+            <div class="artwork-info mt-3">
+              <div class="row">
+                <div class="col-xs-12 col-12-sm col-md-6">
+                  <div class="card p-3">
+                    <div class="artwork-title">
+                      <h5><strong>Title</strong></h5>
+                      <p>{{work.title}}</p>
+                    </div>
+                    <div class="artwork-description">
+                      <h5><strong>Decription</strong></h5>
+                      <p>{{work.description}}</p>
+                    </div>
+                    <div class="artwork-description">
+                      <h5> <strong>Date Shot</strong></h5>
+                      <p>{{work.shotDate}}</p>
+                    </div>
+                    <div class="artwork-description">
+                      <h5><strong>Place</strong></h5>
+                      <p> {{work.place}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </div>
+            <div class="artwork-interview mt-3">
+              <div class="row">
+                <div class="col-xs-12 col-12-sm col-md-6">
+                  <div class="card p-3">
+                    <div class="challanges">
+                      <h5><strong>Challenges</strong> </h5>
+                      <p>{{interview.challenges}}</p>
+                    </div>                
+                    <div class="experience">
+                      <h5><strong>Experience </strong></h5>
+                      <p>{{interview.experience}}</p>
+                    </div>
+                    <div class="life-before">
+                      <h5><strong>Routine prior to
+                        Covid - 19</strong></h5>
+                      <p>{{interview.lifeBefore}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </div>
           </div>
         </div>
       </div>
@@ -36,12 +81,12 @@
             <div class="row">
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
                 <div class="approve-btn">
-                  <button  (click)="declineArtwork()" class="btn">Approve</button>
+                  <button (click)="approveArtwork()" class="btn">Approve</button>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
                 <div class="decline-btn">
-                  <button (click)="approveArtwork()" class="btn">Decline</button>
+                  <button (click)="declineArtwork()" class="btn">Decline</button>
                 </div>
               </div>
             </div>
@@ -50,7 +95,7 @@
             <div class="row">
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
                 <div class="approve-btn">
-                  <button  (click)="featureArtwork()" class="btn">Feature</button>
+                  <button (click)="featureArtwork()" class="btn">Feature</button>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
@@ -60,9 +105,9 @@
               </div>
             </div>
           </div>
-         
+
         </div>
-        <div class="score-forms" *ngIf="role =='admin'" >
+        <div class="score-forms" *ngIf="role =='admin'">
           <div class="photo-score-form" *ngIf="work.type == 'image'">
             <form class="form-group" #photoScoresForm="ngForm" (ngSubmit)="onSubmit(photoScoresForm)" novalidate>
               <div class="card p-3">
@@ -389,8 +434,9 @@
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="pictureClarity.fair"
-                        [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="fair" name="composition"
+                        [(ngModel)]="pictureClarity.fair" [value]="fair" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="composition"
@@ -398,8 +444,9 @@
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="pictureClarity.good"
-                        [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="good" name="composition"
+                        [(ngModel)]="pictureClarity.good" [value]="good" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="composition"
@@ -414,8 +461,9 @@
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="audioClarity.fair"
-                        [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="fair" name="composition"
+                        [(ngModel)]="audioClarity.fair" [value]="fair" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="composition"
@@ -423,8 +471,9 @@
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="audioClarity.good"
-                        [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="good" name="composition"
+                        [(ngModel)]="audioClarity.good" [value]="good" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="composition"
@@ -483,7 +532,7 @@
                     </td>
                   </tr>
                 </table>
-              </div>     
+              </div>
               <div class="card p-3">
                 <h3 class="p-3">Edit</h3>
                 <table>
@@ -544,9 +593,9 @@
                         [(ngModel)]="execution.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
-                  </tr>                             
+                  </tr>
                 </table>
-              </div>  
+              </div>
               <div class="card p-3">
                 <h3 class="p-3">CREATIVITY</h3>
                 <table>
@@ -565,8 +614,9 @@
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="useOfEquipments.fair"
-                        [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="fair" name="composition"
+                        [(ngModel)]="useOfEquipments.fair" [value]="fair" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="composition"
@@ -574,8 +624,9 @@
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="useOfEquipments.good"
-                        [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="good" name="composition"
+                        [(ngModel)]="useOfEquipments.good" [value]="good" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="composition"
@@ -590,8 +641,9 @@
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="useOfTechniques.fair"
-                        [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="fair" name="composition"
+                        [(ngModel)]="useOfTechniques.fair" [value]="fair" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="composition"
@@ -599,17 +651,18 @@
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="useOfTechniques.good"
-                        [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" id="good" name="composition"
+                        [(ngModel)]="useOfTechniques.good" [value]="good" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="composition"
                         [(ngModel)]="useOfTechniques.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
-                  </tr>                             
+                  </tr>
                 </table>
-              </div>  
+              </div>
               <div class="card p-3">
                 <h3 class="p-3">STORY</h3>
                 <table>
@@ -645,9 +698,9 @@
                         [(ngModel)]="vMessage.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
-                  </tr>                                           
+                  </tr>
                 </table>
-              </div>       
+              </div>
               <div class="mt-5">
                 <div class="next">
                   <div class="form-group mb-0">
@@ -655,7 +708,7 @@
                     </button>
                   </div>
                 </div>
-              </div>       
+              </div>
             </form>
           </div>
         </div>

@@ -1,4 +1,5 @@
 .artwork-detail {
+    min-height: 100vh;
     h3 {
         font-size: 1.5em;
         font-weight: bold;
@@ -6,6 +7,24 @@
     img {
         width: 100%;
     }
+
+    .artwork-info {
+        .card-body {
+          background-color: white;
+          p {
+            font-style: italic;
+          }
+        }
+      }
+  
+      .artwork-interview { 
+        .card-body {
+          background-color: white;
+          p {
+            font-style: italic;
+          }
+        }
+      }
 }
 
 

@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
- 
+
   goToSubmitArtworks() {
     this.authState.subscribe(user => {
       this.ngZone.run(() => {
@@ -60,18 +60,25 @@ export class NavbarComponent implements OnInit {
 
   checkIfUserIsAdmin(userId: string) {
     this.dbOperations.usersCollectionById(userId)
-      .onSnapshot(data => {
-        if (data != null) {
+      .get().then(data => {
+        if (!data.empty) {
           data.forEach(e => {
             console.log('AUTHSTATE USER', e.data);
             const data = e.data();
             const id = e.id;
             let user = { ...data } as User;
-            if (user.role === 'admin') {
+            let roles = user.role;
+            if (roles.includes('moderator')) {
               this.role = 'admin';
               console.log('AUTHSTATE USER', 'admin');
               this.router.navigateByUrl('/project/admin')
-            } else {
+            }
+
+            if (roles.includes('admin')) {
+              this.router.navigateByUrl('/project/admin/artworks')
+            }
+
+            if (roles.includes('artist')) {
               this.router.navigateByUrl('/project/add-artworks')
               console.log('AUTHSTATE USER', 'artist');
             }
