@@ -1,5 +1,7 @@
 <div class="home" (window:resize)="onResize($event)">
-  <div class="home-bg">
+  <div class="home-bg" [ngStyle]="{'background-image':'url('+backgroundImage+')', 
+  'background-repeat': 'no-repeat', 'background-attachment': 'fixed', 
+  'background-size': 'cover'}">
     <div class="home-landing">
       <div class="container-fluid p-0">
         <div class="home-heading">
@@ -112,7 +114,7 @@
               <vg-volume></vg-volume>
               <vg-fullscreen></vg-fullscreen>
             </vg-controls>
-            <video #media [vgMedia]="media" [src]="video" id="singleVideo"  preload="auto" crossorigin>
+            <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
             </video>
           </vg-player>
 

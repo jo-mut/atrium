@@ -9,6 +9,11 @@ import { ArtWork } from 'src/app/models/artwork';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { HostProfileModalComponent } from '../admin/host-profile-modal/host-profile-modal.component';
 
+class StoriesData {
+  images: any[];
+  backgroundImage: string;
+}
+
 @Component({
   selector: 'app-campaign',
   templateUrl: './campaign.component.html',

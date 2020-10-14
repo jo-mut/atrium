@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { HostProfileModalComponent } from '../admin/host-profile-modal/host-profile-modal.component';
+
+export interface TeamData {
+  images: any[];
+  backgroundImage: string;
+}
 
 @Component({
   selector: 'app-team',
@@ -10,7 +16,12 @@ import { HostProfileModalComponent } from '../admin/host-profile-modal/host-prof
 export class TeamComponent implements OnInit {
 
   hosts: any[] = [];
-  constructor(private matDialog: MatDialog) { }
+  images: any[];
+  backgroundImage: string;
+
+  constructor(
+    private dbOperations: DbOperationsService,
+    private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.projectHost();
@@ -101,5 +112,14 @@ export class TeamComponent implements OnInit {
     ]
   }
 
+  // getTeamProfileImages() {
+  //   this.dbOperations.getTeamProfileImage().snapshotChanges()
+  //   .subscribe(data => {
+  //     data.map(e => {
+  //       this.backgroundImage = e.payload.doc.data().backgroundImage;
+  //       this.images = e.payload.doc.data().images
+  //     })
+  //   })
+  // }
 
 }

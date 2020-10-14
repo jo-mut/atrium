@@ -1,6 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import { IMedia } from 'src/app/interfaces/imedia';
+import { DbOperationsService } from 'src/app/services/db-operations.service';
+import { Observable, of, Subject } from 'rxjs';
+
+export interface HomeData {
+  video: string;
+  backgroundImage: string;
+}
 
 
 @Component({
@@ -31,19 +38,22 @@ export class HomeComponent implements OnInit {
 
 
   headingSize = 4;
-  video = 'assets/videos/campaign-video.mp4';
+  video = '';
+  backgroundImage = '';
   currentIndex = 0;
   api: VgApiService;
   currentItem: IMedia = this.playlist[this.currentIndex];
 
-  constructor() {
+  constructor(
+    private dbOperations: DbOperationsService,
+  ) {
     this.getScreenSize();
 
   }
 
 
   ngOnInit(): void {
-
+    this.getHomeData();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -51,12 +61,12 @@ export class HomeComponent implements OnInit {
     let width = event.target.innerWidth;
     if (width < 800) {
       this.headingSize = 1.5;
-    } 
+    }
 
-    if(width > 800) {
+    if (width > 800) {
       this.headingSize = 2.5;
 
-    } 
+    }
 
     if (width > 1000) {
       this.headingSize = 3;
@@ -96,7 +106,7 @@ export class HomeComponent implements OnInit {
 
   onMouseOver(): void {
     this.api.play();
-   
+
   }
 
   onMouseOut(): void {
@@ -109,12 +119,12 @@ export class HomeComponent implements OnInit {
     let width = window.innerWidth;
     if (width < 800) {
       this.headingSize = 1.5;
-    } 
+    }
 
-    if(width > 800) {
+    if (width > 800) {
       this.headingSize = 2.5;
 
-    } 
+    }
 
     if (width > 1000) {
       this.headingSize = 3;
@@ -123,5 +133,14 @@ export class HomeComponent implements OnInit {
     if (width > 1200) {
       this.headingSize = 4;
     }
+  }
+
+  getHomeData() {
+    this.dbOperations.getHomePageData().snapshotChanges()
+    .subscribe(e => {
+      let homeData = e.payload.data() as HomeData;
+      this.video = homeData.video;
+      this.backgroundImage = homeData.backgroundImage;
+    })
   }
 }

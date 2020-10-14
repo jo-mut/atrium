@@ -10,6 +10,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Curator } from '../models/curator';
 import { ExtraDetails } from '../models/extraDetails';
 import { Score } from '../models/score';
+import { TeamData } from '../site/team/team.component';
+import { HomeData } from '../site/home/home.component';
 
 
 @Injectable({
@@ -66,6 +68,24 @@ export class DbOperationsService {
     let featuredRef = this.artworksCollection();
     return featuredRef.ref.where('status', '==', 'featured')
   }
+
+  getTeamProfileImage() {
+    return this.firestore.collection<TeamData>('site').doc('team')
+  }
+
+  getHomePageData() {
+    return this.firestore.collection<HomeData>('site').doc('home')
+  }
+
+  getGuidelinesData() {
+    return this.firestore.collection<HomeData>('site').doc('guidelines');
+
+  }
+
+  getCampaignData() {
+    return this.firestore.collection<HomeData>('site').doc('campaign');
+  }
+
 
   getArtworkReviewedBy(userId: string) {
     let reviewedRef = this.artworksCollection();
