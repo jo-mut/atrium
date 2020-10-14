@@ -84,9 +84,20 @@ export class CreateProfileComponent implements OnInit {
 
   creatAcountAndGoForward(stepper: MatStepper) {
     console.log('clicked')
-    this.authService.checkIfUserExists(this.user, stepper).then(() => {
-      this.ngZone.run(() => {
-        stepper.next();
+    this.authService.register(this.user, stepper).then(() => {
+      this.authService.checkIfUserExists(this.user, stepper).then(() => {
+        this.ngZone.run(() => {
+          stepper.next();
+        })
+      })
+    }).catch((error) => {
+      console.log(error['code'])
+      this.authService.signIn(this.user).then(() => {
+        this.authService.checkIfUserExists(this.user, stepper).then(() => {
+          this.ngZone.run(() => {
+            stepper.next();
+          })
+        })
       })
     })   
   }

@@ -7,7 +7,7 @@ import { User } from '../models/user';
 import { SignUpComponent } from '../auth/sign-up/sign-up.component';
 import { DbOperationsService } from './db-operations.service';
 import { Observable, from } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, window } from 'rxjs/operators';
 import { finalize, tap, mapTo } from 'rxjs/operators';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { async } from '@angular/core/testing';
@@ -41,13 +41,13 @@ export class AuthService {
           console.log('signed in')
         });
       }).catch((error) => {
-        window.alert(error.message)
+
       })
 
   }
 
   checkIfUserExists(user: User, stepper: MatStepper) {
-    return new Promise((res, rej) => {
+    return new Promise((resolve, reject) => {
       this.dbOperations.usersCollection().get().subscribe(data => {
         if (!data.empty) {
           console.log('not null')
@@ -58,29 +58,24 @@ export class AuthService {
                   if (d.exists) {
                     const id = d.id;
                     const existingUser = d.data() as User;
-                    this.signIn(existingUser)
-                      .then((res) => {
-                        let roles = existingUser.role;
-                        this.ngZone.run(() => {
-                          if (roles.includes('admin')) {
-                            this.router.navigateByUrl('/project/admin/artworks')
-                          } else if (roles.includes('moderator')) {
-                            this.router.navigateByUrl('/project/admin')
-                          } else if (roles.includes('artist')) {
-                            this.router.navigateByUrl('/project/add-artworks')
-                          } else {
-                            stepper.next();
-                          }
-                        })
-
-                      }).catch((rej) => {
-
-                      })
+                    let roles = existingUser.role;
+                    this.ngZone.run(() => {
+                      if (roles.includes('admin')) {
+                        this.router.navigateByUrl('/project/admin/artworks')
+                      } else if (roles.includes('moderator')) {
+                        this.router.navigateByUrl('/project/admin')
+                      } else if (roles.includes('artist')) {
+                        this.router.navigateByUrl('/project/add-artworks')
+                      } else {
+                        stepper.next();
+                      }
+                    })
 
                   }
                 })
               } else {
-                this.register(user, stepper);
+                stepper.next();
+                // this.register(user, stepper);
                 console.log('resgiter')
               }
             }).catch((reject) => {
@@ -88,12 +83,35 @@ export class AuthService {
             })
 
         } else {
-          this.register(user, stepper);
-          console.log('resgiter')
+          stepper.next();
+          // this.register(user, stepper);
         }
       })
-
     })
+      
+  }
+
+  convertErrorMessage(code: string): string {
+    switch (code) {
+      case 'auth/user-disabled': {
+        return 'Sorry your user is disabled.';
+      }
+      case 'auth/user-not-found': {
+        return 'Sorry user not found.';
+      }
+
+      case 'auth/invalid-user-token': {
+        return 'Could you please login in again'
+      }
+
+      case 'auth/email-already-in-use': {
+        return 'Email already in use. Please enter your password to log in'
+      }
+
+      default: {
+        return 'Login error try again later.';
+      }
+    }
   }
 
   async register(user: User, stepper: MatStepper) {
@@ -103,6 +121,7 @@ export class AuthService {
       this.signIn(user)
         .then((res) => {
           user.userId = result.user.uid;
+          user.password = '';
           console.log(user.userId)
           const userRef = this.dbOperations
             .usersCollection().doc(user.userId);
@@ -112,7 +131,7 @@ export class AuthService {
               stepper.next();
               // sign in user after profile has been saved
             }).catch((error) => {
-              window.alert(error.message);
+              // window.alert(error.message);
             })
 
         }).catch((rej) => {
@@ -142,6 +161,7 @@ export class AuthService {
       console.log(res.user.uid);
       user.userId = res.user.uid;
       user.role.push('artist')
+      user.password = '';
       console.log(user.userId)
       const userRef = this.dbOperations
         .usersCollection().doc(user.userId);
@@ -151,7 +171,7 @@ export class AuthService {
           this.getUserProfileInfo(user);
           // sign in user after profile has been saved
         }).catch((error) => {
-          window.alert(error.message);
+          // window.alert(error.message);
         })
 
     }).catch((err) => {
@@ -171,9 +191,9 @@ export class AuthService {
   forgotPassword(passwordResetEmail) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        // window.alert('Password reset email sent, check your inbox.');
       }).catch((error) => {
-        window.alert(error)
+        // window.alert(error)
       })
   }
 
@@ -190,6 +210,7 @@ export class AuthService {
       if (currentUser.uid) {
         user.userId = currentUser.uid;
         user.role.push('artist')
+        user.password = '';
         user.code = Date.now() + '';
         // const userRef = this.dbOperations
         //   .usersCollection().doc(user.userId);
@@ -199,7 +220,7 @@ export class AuthService {
             .update(param).then((resolve) => {
               this.getUserProfileInfo(user);
             }).catch((error) => {
-              window.alert(error.message);
+              // window.alert(error.message);
 
             })
         })

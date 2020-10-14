@@ -8,9 +8,10 @@ export class Score {
     vEdit: VEdit = new VEdit();
     vTechnical: VTechnical = new VTechnical();
     scoredBy: string;
-    artworkId: string;
     scoredDate: string;
     scoredTime: string;
+    scoreId: string
+    type: string;
 
     constructor() {
         
@@ -26,9 +27,10 @@ export class VScore {
     meanScore: number;
     totalScore: number;
     scoredBy: string;
-    artworkId: string;
+    scoreId: string;
     scoredDate: string;
     scoredTime: string;
+    type: string;
 
     constructor() {
         
@@ -118,9 +120,6 @@ export class Points {
     good: number;
     excellent: number;
    
-    constructor() {
-        
-    }
 }
 
 

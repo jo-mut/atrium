@@ -41,8 +41,8 @@ export class AdminComponent implements OnInit {
   }
 
   
-  navigateToAllArtists() {
-    this.router.navigateByUrl("project/admin/artists")
+  navigateToScoredArtworks() {
+    this.router.navigateByUrl("project/admin/scored-artworks")
   }
 
   

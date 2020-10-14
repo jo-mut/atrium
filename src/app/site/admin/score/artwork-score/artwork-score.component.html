@@ -1,0 +1,66 @@
+<div class="artwork-score pt-3 pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+        <div class="artwork">
+          <div class="artwork-media">
+            <div class="card" *ngIf="work.type == 'image'">
+              <img class="img-fluid" src="{{work.url}}" alt="">
+            </div>
+            <div class="card" *ngIf="work.type == 'video'">
+              <vg-player (onPlayerReady)="onPlayerReady($event)">
+                <vg-buffering></vg-buffering>
+                <vg-controls>
+                  <vg-play-pause></vg-play-pause>
+                  <vg-playback-button></vg-playback-button>
+                  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                  <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                  </vg-scrub-bar>
+                  <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                  <vg-mute></vg-mute>
+                  <vg-volume></vg-volume>
+                  <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+                <video #media [vgMedia]="media" [src]="video" id="singleVideo" preload="auto" crossorigin>
+                </video>
+              </vg-player>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+        <div class="scores" *ngIf="score">
+          <div *ngIf="score.type == 'image'">
+            <p><strong>Composition:</strong> {{score.technique.composition}} </p>
+            <p><strong>Clarity:</strong> {{score.technique.clarity}} </p>
+            <p><strong>Lighting:</strong> {{score.technique.lighting}} </p>
+            <p><strong>Message:</strong> {{score.creativity.message}} </p>
+            <p><strong>Theme:</strong> {{score.creativity.theme}} </p>
+            <p><strong>Uniqueness:</strong> {{score.creativity.uniquness}} </p>
+            <p><strong>Impression:</strong> {{score.creativity.impression}} </p>
+            <p><strong>Details:</strong> {{score.wowFactor.details}} </p>
+            <p><strong>Impact:</strong> {{score.wowFactor.impact}} </p>
+            <p><strong>Inspirational:</strong> {{score.wowFactor.inspirational}} </p>
+            <h4><strong>Total Score:</strong> {{totalScore}} </h4>
+
+          </div>
+          <div *ngIf="score.type == 'video'">
+            <p><strong>Composition:</strong> {{score.vTechnical.composition}} </p>
+            <p><strong>Stability:</strong> {{score.vTechnical.stability}} </p>
+            <p><strong>Picture Clarity:</strong> {{score.vTechnical.pcitureClarity}} </p>
+            <p><strong>Lighting:</strong> {{score.vTechnical.lighting}} </p>
+            <p><strong>Audio Clarity:</strong> {{score.vTechnical.audioClarity}} </p>
+            <p><strong>Scene:</strong> {{score.vEdit.scene}} </p>
+            <p><strong>Execution:</strong> {{score.vEdit.execution}} </p>
+            <p><strong>Message:</strong> {{score.vStory.message}} </p>
+            <p><strong>Use of Techniques:</strong> {{score.vCreativity.useoftechniques}} </p>
+            <p><strong>Use of Equipments:</strong> {{score.vCreativity.useofequipments}} </p>
+            <h4><strong>Total Score:</strong> {{totalScore}} </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

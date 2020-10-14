@@ -117,45 +117,57 @@ export class ScoreComponent implements OnInit, AfterViewInit {
   onSubmit(form) {
     if (form.valid) {
       if (this.work.type === 'video') {
-        this.vScore.artworkId = this.id.toString();
-        this.vScore.vTechnical.composition = this.composition;
-        this.vScore.vTechnical.stability = this.stability;
-        this.vScore.vTechnical.pcitureClarity = this.pictureClarity;
-        this.vScore.vTechnical.lighting = this.lighting;
-        this.vScore.vTechnical.audioClarity = this.audioClarity;
-        this.vScore.vEdit.scene = this.scene;
-        this.vScore.vEdit.execution = this.execution;
-        this.vScore.vStory.message = this.message;
-        this.vScore.vCreativity.useoftechniques = this.impact;
-        this.vScore.vCreativity.useofequipments = this.inspirational;
+        this.vScore.scoreId = this.id.toString();
+        this.vScore.vTechnical.composition = form.value.composition;
+        this.vScore.vTechnical.stability = form.value.stability;
+        this.vScore.vTechnical.pcitureClarity = form.value.pcitureClarity;
+        this.vScore.vTechnical.lighting = form.value.lighting;
+        this.vScore.vTechnical.audioClarity = form.value.audioClarity;
+        this.vScore.vEdit.scene = form.value.scene;
+        this.vScore.vEdit.execution = form.value.execution;
+        this.vScore.vStory.message = form.value.message;
+        this.vScore.vCreativity.useoftechniques = form.value.useoftechniques;
+        this.vScore.vCreativity.useofequipments = form.value.useofequipments;
         this.vScore.scoredDate = new Date().getDate().toString();
         this.vScore.scoredTime = new Date().getTime().toString();
         this.vScore.scoredBy = this.currentUser;
+        this.vScore.type = 'video';
 
         console.log('score' + this.score);
         console.log(JSON.stringify(form.value))
-        const param = JSON.stringify(this.score);
-        this.dbOperations.scoresCollections().doc(this.score.artworkId).set(param);
+        const param = JSON.parse(JSON.stringify(this.score));
+        this.dbOperations.scoresCollections().doc(this.score.scoreId).set(param).then(() => {
+          this.router.navigateByUrl('project/admin/artwork-score/' + this.work.id)
+        }).catch(() => {
+          window.alert('Failed to save the score')
+        })
         form.reset();
       } else {
-        this.score.artworkId = this.id.toString();
-        this.score.technique.composition = this.composition;
-        this.score.technique.clarity = this.clarity;
-        this.score.technique.lighting = this.lighting;
-        this.score.creativity.message = this.message;
-        this.score.creativity.theme = this.theme;
-        this.score.creativity.uniquness = this.uniqueness;
-        this.score.creativity.impression = this.impression;
-        this.score.wowFactor.details = this.details;
-        this.score.wowFactor.impact = this.impact;
-        this.score.wowFactor.inspirational = this.inspirational;
+        this.score.scoreId = this.id.toString();
+        this.score.technique.composition = form.value.composition;
+        this.score.technique.clarity = form.value.clarity;
+        this.score.technique.lighting = form.value.lighting;
+        this.score.creativity.message = form.value.message
+        this.score.creativity.theme = form.value.theme;
+        this.score.creativity.uniquness = form.value.uniquness;
+        this.score.creativity.impression = form.value.impression;
+        this.score.wowFactor.details = form.value.details;
+        this.score.wowFactor.impact = form.value.impact;
+        this.score.wowFactor.inspirational = form.value.inspirational;
         this.score.scoredDate = new Date().getDate().toString();
         this.score.scoredTime = new Date().getTime().toString();
         this.score.scoredBy = this.currentUser;
-        console.log('score' + this.score);
-        console.log(JSON.stringify(form.value))
-        const param = JSON.stringify(this.score);
-        this.dbOperations.scoresCollections().doc(this.score.artworkId).set(param);
+        this.score.type = 'image';
+
+        console.log('score ' + {...this.score});
+        console.log(JSON.stringify(form.value.composition))
+        const param = JSON.parse(JSON.stringify(this.score))
+        this.dbOperations.scoresCollections().doc(this.score.scoreId).set(param).then(() => {
+          this.router.navigateByUrl('project/admin/artwork-score/' + this.work.id)
+        }).catch(() => {
+          window.alert('Failed to save the score')
+        })
+
         form.reset();
       }
     }
@@ -170,22 +182,13 @@ export class ScoreComponent implements OnInit, AfterViewInit {
     this.api = api;
     this.api.getDefaultMedia().subscriptions
       .loadedMetadata.subscribe(this.playVideo.bind(this));
-    this.api.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
   }
 
   playVideo() {
     this.api.play();
   }
 
-  nextVideo() {
-    this.currentIndex++;
 
-    if (this.currentIndex === this.playlist.length) {
-      this.currentIndex = 0;
-    }
-
-    this.currentItem = this.playlist[this.currentIndex];
-  }
 
   onClickPlaylistItem(item: IMedia, index: number) {
     this.currentIndex = index;
@@ -214,7 +217,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         'updatedAt': new Date().getTime() + '',
       }).then(res => {
         // this.toaster.success('Filtering successful');
-        this.router.navigateByUrl("project/admin/artworks")
+        this.router.navigateByUrl('project/admin/artwork-score/' + this.work.id)
       }).catch(err => {
         // this.toaster.success('Filtering failed');
 

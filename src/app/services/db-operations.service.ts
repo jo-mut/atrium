@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Curator } from '../models/curator';
 import { ExtraDetails } from '../models/extraDetails';
+import { Score } from '../models/score';
 
 
 @Injectable({
@@ -97,7 +98,7 @@ export class DbOperationsService {
   }
 
   scoresCollections() {
-    return this.firestore.collection('scores');
+    return this.firestore.collection<Score>('scores');
   }
 
   createCurator(curator: Curator, file?: File) {

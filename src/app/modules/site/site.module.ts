@@ -51,6 +51,9 @@ import { TabsetComponent } from 'src/app/site/tabset/tabset.component';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import {MatStepperModule} from '@angular/material/stepper';
+import { ScoredArtworksComponent } from 'src/app/site/admin/score/scored-artworks/scored-artworks.component';
+import { ArtworkScoreComponent } from 'src/app/site/admin/score/artwork-score/artwork-score.component';
+import { ScoredItemComponent } from 'src/app/site/admin/scored-item/scored-item.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 
@@ -70,7 +73,9 @@ const routes: Routes = [
   { path: 'tips', component: TipsComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'admin/scored-artworks', component: ScoredArtworksComponent },
   { path: 'admin/scores/:id', component: ScoreComponent },
+  { path: 'admin/artwork-score/:id', component: ArtworkScoreComponent },
   { path: 'admin/artworks', component: ArtworksComponent },
   { path: 'admin/artworks/:id', component: ArtworksDetailComponent },
   { path: 'admin/artists', component: ArtistsComponent },
@@ -149,6 +154,9 @@ const routes: Routes = [
     CampaignComponent,
     SuccessfulComponent,
     TabsetComponent,
+    ScoredArtworksComponent,
+    ArtworkScoreComponent,
+    ScoredItemComponent
 
 
 
@@ -182,6 +190,9 @@ const routes: Routes = [
     CampaignComponent,
     SuccessfulComponent,
     TabsetComponent,
+    ScoredArtworksComponent,
+    ScoredItemComponent
+
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

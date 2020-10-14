@@ -80,9 +80,10 @@
             <li><strong>Theme:</strong> African Resilience in the Wake of a Pandemic</li>
             <li><strong>Eligibility:</strong> 18 – 35 years</li>
             <li><strong>Categories: </strong> Photography and Videography</li>
-            <li><strong>Participating Countries:</strong> Africa telling her stories of resilience during the pandemic
+            <li><strong>Participating Countries:</strong> Submissions are welcome from individuals based anywhere on the
+              African continent and should reflect realities on the continent
             </li>
-            <li><strong>Recognition:</strong> USD $100 for every selected image and USD 200 for every selected video
+            <li><strong>Recognition:</strong> USD 100 for every selected image and USD 200 for every selected video
             </li>
             <li><strong>Organisation:</strong> Bobby Pall Photography in partnership with Mastercard Foundation </li>
           </ul>
@@ -98,10 +99,9 @@
         <h3 class="mb-5 text-center">The Spotlight</h3>
         <div class="spotlight-video">
           <vg-player (onPlayerReady)="onPlayerReady($event)" vg-theme="controller.config.theme.url">
-            <vg-buffering></vg-buffering>         
+            <vg-buffering></vg-buffering>
             <vg-controls>
               <vg-play-pause>Play</vg-play-pause>
-              <vg-playback-button></vg-playback-button>
               <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
               <vg-scrub-bar>
                 <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
@@ -112,8 +112,7 @@
               <vg-volume></vg-volume>
               <vg-fullscreen></vg-fullscreen>
             </vg-controls>
-            <video #media [vgMedia]="media" [src]="video" id="singleVideo" (mouseover)="onMouseOver()"
-              (mouseout)="onMouseOut()" preload="auto" crossorigin>
+            <video #media [vgMedia]="media" [src]="video" id="singleVideo"  preload="auto" crossorigin>
             </video>
           </vg-player>
 

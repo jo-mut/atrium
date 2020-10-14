@@ -1,0 +1,36 @@
+<div class="scored-artworks">
+  <div class="scored-item">
+    <div class="table-responsive" *ngIf="scoredItem">
+      <table class="table">
+        <tr>
+          <th align="center">No.</th>
+          <th align="center">Date</th>
+          <th align="center">Name</th>
+          <th align="center">Country</th>
+          <th align="center">Category</th>
+          <th align="center">Score</th>
+        </tr>
+        <tr>
+          <td>
+            <!-- <p>{{number + 1}}</p> -->
+          </td>
+          <td>
+            <p>{{scoredItem.name}}</p>
+          </td>
+          <td>
+            <p>{{scoredItem.date}}</p>
+          </td>
+          <td>
+            <p>{{scoredItem.country}}</p>
+          </td>
+          <td>
+            <p>{{scoredItem.category}}</p>
+          </td>
+          <td>
+            <!-- <p>{{totalScore}}</p> -->
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

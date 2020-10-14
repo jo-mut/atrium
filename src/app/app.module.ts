@@ -27,6 +27,7 @@ import { UploadModalComponent } from './site/add-artworks/upload-modal/upload-mo
     AppComponent,
     DndDirective,
     UploadModalComponent,
+   
 
   ],
   imports: [
@@ -47,8 +48,6 @@ import { UploadModalComponent } from './site/add-artworks/upload-modal/upload-mo
     MatDialogModule,
     MatProgressBarModule,
     MatRadioModule,
-
-
   ],
   providers: [DbOperationsService, AuthService],
   bootstrap: [AppComponent],
