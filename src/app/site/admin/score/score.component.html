@@ -91,23 +91,8 @@
               </div>
             </div>
           </div>
-          <div class="container-fluid p-0">
-            <div class="row">
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
-                <div class="approve-btn">
-                  <button (click)="featureArtwork()" class="btn">Feature</button>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
-                <div class="decline-btn">
-                  <button (click)="exhibitArtwork()" class="btn">Exhibit</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
-        <div class="score-forms" *ngIf="role =='admin'">
+        <div class="score-forms">
           <div class="photo-score-form" *ngIf="work.type == 'image'">
             <form class="form-group" #photoScoresForm="ngForm" (ngSubmit)="onSubmit(photoScoresForm)" novalidate>
               <div class="card p-3">

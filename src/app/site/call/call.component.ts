@@ -6,8 +6,17 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TabsetComponent } from '../tabset/tabset.component';
 import { MatAccordion } from '@angular/material/expansion';
 import { AngularFireStorage } from '@angular/fire/storage';
-import {saveAs as FileSaver} from "file-saver";
+import { saveAs as FileSaver } from "file-saver";
+import { DbOperationsService } from 'src/app/services/db-operations.service';
 
+export interface Guidelines {
+  backgroundImage: string;
+  submissionFormat: string;
+  submissionProcess: string;
+  participate: string;
+  timeline: string;
+  copyright: string;
+}
 
 @Component({
   selector: 'app-call',
@@ -26,6 +35,12 @@ export class CallComponent implements OnInit {
   purpose: string;
   headingSize = 4;
 
+  backgroundImage: string;
+  submissionFormat: string;
+  submissionProcess: string;
+  participate: string;
+  timeline: string;
+  copyright: string;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -53,6 +68,7 @@ export class CallComponent implements OnInit {
   }
 
   constructor(
+    private dbOperations: DbOperationsService,
     private storage: AngularFireStorage,
     private matDialog: MatDialog,
     private config: NgbCarouselConfig
@@ -65,6 +81,7 @@ export class CallComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getGuidelinesData();
   }
 
   onExpand(event) {
@@ -129,55 +146,55 @@ export class CallComponent implements OnInit {
     })
   }
 
-downloadArtistCOnsentForm() {
-  const storageRef = this.storage.ref('consent/artistConsentForm.pdf')
-  storageRef.getDownloadURL().subscribe(data => {
-    console.log(data)
-    FileSaver(data, "subject-consent-form.pdf");
+  downloadArtistCOnsentForm() {
+    const storageRef = this.storage.ref('consent/artistConsentForm.pdf')
+    storageRef.getDownloadURL().subscribe(data => {
+      console.log(data)
+      FileSaver(data, "subject-consent-form.pdf");
 
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = function (event) {
-      var blob = xhr.response;
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function (event) {
+        var blob = xhr.response;
 
-    };
-    // xhr.open('GET', data);
-    // xhr.send();
-  })
-}
-getLandinPageImages() {
-  this.landingImages = [
-    'assets/images/gallery/sample/poster1.png',
-    'assets/images/gallery/sample/poster2.png',
-    'assets/images/gallery/sample/poster3.png',
-    'assets/images/gallery/sample/poster4.png',
-    'assets/images/gallery/sample/poster5.png',
+      };
+      // xhr.open('GET', data);
+      // xhr.send();
+    })
+  }
+  getLandinPageImages() {
+    this.landingImages = [
+      'assets/images/gallery/sample/poster1.png',
+      'assets/images/gallery/sample/poster2.png',
+      'assets/images/gallery/sample/poster3.png',
+      'assets/images/gallery/sample/poster4.png',
+      'assets/images/gallery/sample/poster5.png',
 
-  ]
-}
+    ]
+  }
 
-carouselConfig() {
-  this.config.interval = 4000;
-  this.config.wrap = false;
-  this.config.keyboard = false;
-  this.config.pauseOnHover = false;
-  this.config.wrap = false;
-}
+  carouselConfig() {
+    this.config.interval = 4000;
+    this.config.wrap = false;
+    this.config.keyboard = false;
+    this.config.pauseOnHover = false;
+    this.config.wrap = false;
+  }
 
-lauchMoreInfoModal(info) {
-  const dialogConfig = new MatDialogConfig();
-  // The user can't close the dialog by clicking outside its body
-  dialogConfig.disableClose = false;
-  dialogConfig.id = "modal-component";
-  dialogConfig.height = "60%";
-  dialogConfig.width = "60%";
-  dialogConfig.data = { 'info': info }
-  // https://material.angular.io/components/dialog/overview
-  const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
-}
+  lauchMoreInfoModal(info) {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "60%";
+    dialogConfig.width = "60%";
+    dialogConfig.data = { 'info': info }
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
+  }
 
-purposeOfCompetion() {
-  this.purpose = `As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public
+  purposeOfCompetion() {
+    this.purpose = `As part of the COVID-19 Recovery and Resilience Program, Mastercard Foundation is running a public
     awareness campaign to share timely, accurate information about the coronavirus, how it is spread, and how
     young people are adapting to their new reality. The Campaign seeks to enhance dissemination, understanding
     and uptake of public health information as a key outcome. The Campaign targets to reach the majority of
@@ -194,15 +211,28 @@ purposeOfCompetion() {
     photography and videography campaign is: ‘African Resilience in the Wake of a Pandemic’.
     Please read the guidelines and rules carefully before submitting your entry`;
 
-  // if(this.showPurpose) {
-  //   this.showPurpose = false;
-  //   this.purpose;
-  // }else{
-  //   this.showPurpose = true;
-  //   this.purpose.substring(0, 600);
-  // }
+    // if(this.showPurpose) {
+    //   this.showPurpose = false;
+    //   this.purpose;
+    // }else{
+    //   this.showPurpose = true;
+    //   this.purpose.substring(0, 600);
+    // }
 
-  return this.purpose.substring(0, 600);
-}
+    return this.purpose.substring(0, 600);
+  }
+
+  getGuidelinesData() {
+    this.dbOperations.getGuidelinesData().snapshotChanges()
+      .subscribe(e => {
+        let guidelines = e.payload.data() as Guidelines;
+        this.backgroundImage = guidelines.backgroundImage;
+        this.submissionFormat = guidelines.submissionFormat
+        this.submissionProcess = guidelines.submissionProcess
+        this.copyright = guidelines.copyright
+        this.timeline = guidelines.timeline
+        this.participate = guidelines.participate
+      })
+  }
 
 }

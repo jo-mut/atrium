@@ -15,6 +15,10 @@ export class NavbarComponent implements OnInit {
   private authState: Observable<firebase.User>;
   checked = 0;
   role: string;
+  action: string;
+
+  currentUser: string;
+  user: User = new User();
 
   constructor(private router: Router,
     public ngZone: NgZone,
@@ -23,6 +27,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authState = this.fauth.authState;
+    this.authState.subscribe(u => {
+      if(u != null) {
+        this.getUserRole(u.uid);
+      }
+    }) 
   }
 
   ngDoCheck() {
@@ -58,7 +67,7 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  checkIfUserIsAdmin(userId: string) {
+  getUserRole(userId: string) {
     this.dbOperations.usersCollectionById(userId)
       .get().then(data => {
         if (!data.empty) {
@@ -66,25 +75,63 @@ export class NavbarComponent implements OnInit {
             console.log('AUTHSTATE USER', e.data);
             const data = e.data();
             const id = e.id;
-            let user = { ...data } as User;
-            let roles = user.role;
+            let u = { ...data } as User;
+            this.user = u;
+            let roles = this.user.role;
+            
+            console.log(roles)
             if (roles.includes('moderator')) {
-              this.role = 'admin';
+              this.action = 'Console'              
               console.log('AUTHSTATE USER', 'admin');
-              this.router.navigateByUrl('/project/admin')
             }
 
-            if (roles.includes('admin')) {
-              this.router.navigateByUrl('/project/admin/artworks')
+            if (roles.includes('scoring')) {
+              this.action = "Score"
+            }
+
+            if (roles.includes('selection')) {
+              this.action = "Select"
+            }
+
+            if (roles.includes('filtering')) {
+              this.action = "Filter"
             }
 
             if (roles.includes('artist')) {
-              this.router.navigateByUrl('/project/add-artworks')
               console.log('AUTHSTATE USER', 'artist');
             }
           })
         }
       })
+  };
+
+  checkIfUserIsAdmin(userId: string) {
+    if (this.user.role.includes('moderator')) {
+      this.action = 'Console'              
+      console.log('AUTHSTATE USER', 'admin');
+      this.router.navigateByUrl('/project/admin')
+    }
+
+    if (this.user.role.includes('scoring')) {
+      this.action = "Score"
+      this.router.navigateByUrl('/project/admin/score')
+    }
+
+    if (this.user.role.includes('selection')) {
+      this.action = "Select"
+      this.router.navigateByUrl('/project/admin/select-artworks')
+    }
+
+    if (this.user.role.includes('filtering')) {
+      this.action = "Filter"
+      this.router.navigateByUrl('/project/admin/filter-artworks')
+    }
+
+    if (this.user.role.includes('artist')) {
+      this.action = "Submit"
+      this.router.navigateByUrl('/project/add-artworks')
+      console.log('AUTHSTATE USER', 'artist');
+    }
   };
 
 

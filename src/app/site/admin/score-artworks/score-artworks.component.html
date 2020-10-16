@@ -1,0 +1,13 @@
+<div class="score-artworks">
+    <div class="container-fluid ">
+      <div class="score-item">
+        <div class="row">
+            <!-- <mat-progress-bar *ngIf="loading" color="accent" diameter="100" mode="indeterminate"></mat-progress-bar> -->
+            <app-artwork-item class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3" *ngFor="let work of artworks"
+              [work]="work" [routerLink]="['/project/admin/score/', work.id]">
+            </app-artwork-item>
+          </div>
+      </div>
+    </div>
+  </div>
+  

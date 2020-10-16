@@ -51,11 +51,16 @@ import { TabsetComponent } from 'src/app/site/tabset/tabset.component';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import {MatStepperModule} from '@angular/material/stepper';
-import { ScoredArtworksComponent } from 'src/app/site/admin/score/scored-artworks/scored-artworks.component';
 import { ArtworkScoreComponent } from 'src/app/site/admin/score/artwork-score/artwork-score.component';
 import { ScoredItemComponent } from 'src/app/site/admin/scored-item/scored-item.component';
+import { SelectArtworksComponent } from 'src/app/site/admin/select-artworks/select-artworks.component';
+import { ScoreArtworksComponent } from 'src/app/site/admin/score-artworks/score-artworks.component';
+import { FilterArtworksComponent } from 'src/app/site/admin/filter-artworks/filter-artworks.component';
+import { UploadModalComponent } from 'src/app/site/add-artworks/upload-modal/upload-modal.component';
+import { ScoredArtworksComponent } from 'src/app/site/admin/scored-artworks/scored-artworks.component';
+import { SelectItemComponent } from 'src/app/site/admin/select-artworks/select-item/select-item.component';
+import { FilterItemComponent } from 'src/app/site/admin/filter-artworks/filter-item/filter-item.component';
 // import { ToastrModule } from 'ngx-toastr';
-
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -71,18 +76,21 @@ const routes: Routes = [
   { path: 'create-profile', component: CreateProfileComponent },
   { path: 'add-artworks', component: AddArtworksComponent },
   { path: 'tips', component: TipsComponent },
-  { path: 'profile/:id', component: ProfileComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'admin/scored-artworks', component: ScoredArtworksComponent },
-  { path: 'admin/scores/:id', component: ScoreComponent },
-  { path: 'admin/artwork-score/:id', component: ArtworkScoreComponent },
   { path: 'admin/artworks', component: ArtworksComponent },
+  { path: 'admin/score', component: ScoreArtworksComponent },
+  { path: 'admin/scored-artworks', component: ScoredArtworksComponent },
+  { path: 'admin/select-artworks', component: SelectArtworksComponent },
+  { path: 'admin/filter-artworks', component: FilterArtworksComponent },
+  { path: 'admin/categories/photos', component: CategoriesComponent },
+  { path: 'admin/categories/videos', component: CategoriesComponent },
+  { path: 'profile/:id', component: ProfileComponent },  
+  // { path: 'admin/scores/:id', component: ScoreComponent },
+  { path: 'admin/score/:id', component:   ScoreComponent},
+  { path: 'admin/artwork-score/:id', component: ArtworkScoreComponent },
   { path: 'admin/artworks/:id', component: ArtworksDetailComponent },
   { path: 'admin/artists', component: ArtistsComponent },
   { path: 'admin/artists/:id', component: ProfileComponent },
-  { path: 'admin/categories/photos', component: CategoriesComponent },
-  { path: 'admin/categories/videos', component: CategoriesComponent },
-  { path: 'admin/team', component: CuratorsComponent },
   { path: 'admin/team/profile/:id', component: ProfileComponent },
 
   {
@@ -156,7 +164,13 @@ const routes: Routes = [
     TabsetComponent,
     ScoredArtworksComponent,
     ArtworkScoreComponent,
-    ScoredItemComponent
+    ScoredItemComponent,
+    UploadModalComponent,
+    FilterArtworksComponent,
+    ScoreArtworksComponent,
+    SelectArtworksComponent,
+    FilterItemComponent,
+    SelectItemComponent 
 
 
 
@@ -191,9 +205,13 @@ const routes: Routes = [
     SuccessfulComponent,
     TabsetComponent,
     ScoredArtworksComponent,
-    ScoredItemComponent
-
-
+    ScoredItemComponent,
+    UploadModalComponent,
+    FilterArtworksComponent,
+    ScoreArtworksComponent,
+    SelectArtworksComponent,
+    FilterItemComponent,
+    SelectItemComponent 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

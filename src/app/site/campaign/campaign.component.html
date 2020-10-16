@@ -1,9 +1,11 @@
 <div class="project" (window:resize)="onResize($event)">
-  <div class="campaign-landing">
+  <div class="campaign-landing" [ngStyle]="{'background-image':'url('+backgroundImage+')', 
+  'background-repeat': 'no-repeat', 'background-attachment': 'fixed', 
+  'background-size': 'cover'}" >
     <div class="campaign-image">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-7">
+          <div class="col-xs-12 col-sm-12 col-md-7"  >
 
           </div>
           <div class="col-xs-12 col-sm-12 col-md-5">
@@ -29,7 +31,8 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="story-img">
-                      <img src="assets/images/gallery/sample/story1.png" />
+                      <img src="{{storyOne}}" alt="">
+                      <!-- <img src="assets/images/gallery/sample/story1.png" /> -->
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
@@ -55,7 +58,8 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="story-img">
-                      <img src="assets/images/gallery/sample/story2.jpg" />
+                      <img src="{{storyTwo}}" alt="">
+                      <!-- <img src="assets/images/gallery/sample/story2.jpg" /> -->
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
@@ -86,25 +90,28 @@
     <div class="artistic-images">
       <h3 class="mt-5">FEATURED PHOTOS</h3>
       <hr class="hr-rule mt-1">
-      <div class="container">
+      <div class="container" *ngIf="images" >
         <div class="row pr-3">
           <div class="col-xs-12 col-sm-12 col-md-8 pr-0 mt-3">
             <div class="card">
-              <img src="assets/images/gallery/sample/picture18.JPG" alt="">
+              <img src="{{bigPhoto}}" alt="">
+              <!-- <img src="assets/images/gallery/sample/picture18.JPG" alt=""> -->
             </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-4 pr-0">
             <div class="row">
               <div class="col-12 mt-3">
                 <div class="card">
-                  <img src="assets/images/gallery/sample/picture16.JPG" alt="">
+                  <img src="{{images[0]}}" alt="">
+                  <!-- <img src="assets/images/gallery/sample/picture16.JPG" alt=""> -->
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-12 mt-3">
                 <div class="card">
-                  <img src="assets/images/gallery/sample/4c.png" alt="">
+                  <img src="{{images[4]}}" alt="">
+                  <!-- <img src="assets/images/gallery/sample/4c.png" alt=""> -->
                 </div>
               </div>
             </div>
@@ -113,32 +120,38 @@
         <div class="row pr-3">
           <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2 pr-0 mt-3">
             <div class="card">
-              <img src="assets/images/gallery/sample/picture8.png" alt="">
+              <img src="{{images[2]}}" alt="">
+              <!-- <img src="assets/images/gallery/sample/picture8.png" alt=""> -->
             </div>
           </div>
           <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2 pr-0 mt-3">
             <div class="card">
-              <img src="assets/images/gallery/sample/poster7.jpg" alt="">
+              <img src="{{images[3]}}" alt="">
+              <!-- <img src="assets/images/gallery/sample/poster7.jpg" alt=""> -->
             </div>
           </div>
           <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2 pr-0 mt-3">
             <div class="card">
-              <img src="assets/images/gallery/sample/picture14.jpg" alt="">
+              <img src="{{images[1]}}" alt="">
+              <!-- <img src="assets/images/gallery/sample/picture14.jpg" alt=""> -->
             </div>
           </div>
           <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2 pr-0 mt-3">
             <div class="card">
-              <img src="assets/images/gallery/sample/picture13.jpg" alt="">
+              <img src="{{images[5]}}" alt="">
+              <!-- <img src="assets/images/gallery/sample/picture13.jpg" alt=""> -->
             </div>
           </div>
           <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2 pr-0 mt-3">
             <div class="card">
-              <img src="assets/images/gallery/sample/picture3.png">
+              <img src="{{images[6]}}" alt="">
+              <!-- <img src="assets/images/gallery/sample/picture3.png"> -->
             </div>
           </div>
           <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2 pr-0 mt-3">
             <div class="card">
-              <img src="assets/images/gallery/sample/picture10.png">
+              <img src="{{images[7]}}" alt="">
+              <!-- <img src="assets/images/gallery/sample/picture10.png"> -->
             </div>
           </div>
         </div>

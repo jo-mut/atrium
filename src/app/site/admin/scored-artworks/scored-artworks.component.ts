@@ -36,6 +36,4 @@ export class ScoredArtworksComponent implements OnInit {
       });
     });
   }
-
-
 }

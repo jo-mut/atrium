@@ -110,7 +110,6 @@ export class ScoreComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dbOperations.getCurrentUser().subscribe(user => {
       this.currentUser = user.uid;
-      this.getAdminRole();
     })
   }
 
@@ -217,7 +216,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         'updatedAt': new Date().getTime() + '',
       }).then(res => {
         // this.toaster.success('Filtering successful');
-        this.router.navigateByUrl('project/admin/artwork-score/' + this.work.id)
+        this.router.navigateByUrl('project/admin/filter-artworks/' + this.work.id)
       }).catch(err => {
         // this.toaster.success('Filtering failed');
 
@@ -233,7 +232,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
           'updatedAt': new Date().getTime() + '',
         }).then(res => {
           // this.toaster.success('Filtering successful');
-          this.router.navigateByUrl("project/admin/artworks")
+          this.router.navigateByUrl("project/admin/filter-artworks")
         }).catch(err => {
           // this.toaster.success('Filtering failed');
         })
@@ -279,30 +278,6 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         })
       }
     })
-  }
-
-  getAdminRole() {
-    this.dbOperations.usersCollection()
-      .ref.where('userId', '==', this.currentUser).onSnapshot(data => {
-        data.docs.forEach(d => {
-          const id = d.id;
-          const u = d.data() as User;
-          console.log("sign in trial " + u.userId);
-          let roles = u.role;
-          this.ngZone.run(() => {
-            if (roles.includes('moderator')) {
-              this.role = 'moderator'
-            }
-            if (roles.includes('admin')) {
-              this.role = 'admin'
-            }
-            if (roles.includes('artist')) {
-              this.role = 'artist'
-            }
-            console.log("role " + this.role);
-          })
-        })
-      });
   }
 
 }

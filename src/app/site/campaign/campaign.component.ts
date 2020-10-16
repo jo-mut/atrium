@@ -9,9 +9,12 @@ import { ArtWork } from 'src/app/models/artwork';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { HostProfileModalComponent } from '../admin/host-profile-modal/host-profile-modal.component';
 
-class StoriesData {
+export interface StoriesData {
   images: any[];
   backgroundImage: string;
+  bigPhoto: string;
+  storyOne: string;
+  storyTwo: string;
 }
 
 @Component({
@@ -43,6 +46,12 @@ export class CampaignComponent implements OnInit {
   headingSize = 2;
   id = 1597836027860;
 
+  images: any[];
+  backgroundImage: string;
+  bigPhoto: string;
+  storyOne: string;
+  storyTwo: string;
+
 
   constructor(
     private config: NgbCarouselConfig,
@@ -58,6 +67,7 @@ export class CampaignComponent implements OnInit {
   ngOnInit(): void {
     // this.getSampleArtworks();
     this.getArtWorkDetails(this.id.toString());
+    this.getStoriesData();
   }
 
   carouselConfig() {
@@ -226,5 +236,18 @@ export class CampaignComponent implements OnInit {
     const modalDialog = this.matDialog.open(HostProfileModalComponent, dialogConfig);
   }
 
+  
+  getStoriesData() {
+    this.dbOperations.getStoriesData().snapshotChanges()
+    .subscribe(e => {
+      let storiesData = e.payload.data() as StoriesData;
+      console.log(storiesData)
+      this.backgroundImage = storiesData.backgroundImage;
+      this.images = storiesData.images;
+      this.bigPhoto = storiesData.bigPhoto;
+      this.storyOne = storiesData.storyOne;
+      this.storyTwo = storiesData.storyTwo;
+    })
+  }
 
 }

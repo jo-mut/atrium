@@ -10,6 +10,7 @@ export class ArtWork implements Upload {
   subjectConsentForm: string = null;
   artistConsentForm: string = null;
   status: string = null;
+  scored: string = null;
   userId: string = null;
   place: string = null;
   shotDate: string = null;

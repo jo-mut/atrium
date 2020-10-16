@@ -28,25 +28,7 @@ export class ArtworksComponent implements OnInit {
     public dbOperations: DbOperationsService) { }
 
   ngOnInit(): void {
-    this.router.events.subscribe((event: Event) => {
-      switch (true) {
-        case event instanceof NavigationStart: {
-          this.loading = true;
-          console.log(this.loading);
-          break;
-        }
-
-        case event instanceof NavigationEnd:
-        case event instanceof NavigationCancel:
-        case event instanceof NavigationError: {
-          this.loading = false;
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-    });
+    
   }
 
   ngAfterViewInit() {
@@ -74,6 +56,7 @@ export class ArtworksComponent implements OnInit {
     } else if (roles.includes('admin')) {
       this.dbOperations.artworksCollection()
         .ref.where('status', '==', 'approved')
+        .where('scored', '==', 'scored')
         .onSnapshot(data => {
           data.docs.forEach(d => {
             const id = d.id;
@@ -93,19 +76,6 @@ export class ArtworksComponent implements OnInit {
           })
         })
     }
-  }
-
-
-  // Get a list of archived artwork
-  private getFeaturedArtworks() {
-    this.dbOperations.getFeaturedArtworks()
-      .onSnapshot(data => {
-        data.docs.forEach(d => {
-          const id = d.id;
-          const work = d.data() as ArtWork;
-          this.artworks.push(work);
-        })
-      })
   }
 
   getCurrentUserUID(artworkId: number) {

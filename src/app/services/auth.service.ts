@@ -60,13 +60,17 @@ export class AuthService {
                     const existingUser = d.data() as User;
                     let roles = existingUser.role;
                     this.ngZone.run(() => {
-                      if (roles.includes('admin')) {
-                        this.router.navigateByUrl('/project/admin/artworks')
+                      if (roles.includes('filtering')) {
+                        this.router.navigateByUrl('/project/admin/filter-artworks')
                       } else if (roles.includes('moderator')) {
                         this.router.navigateByUrl('/project/admin')
                       } else if (roles.includes('artist')) {
                         this.router.navigateByUrl('/project/add-artworks')
-                      } else {
+                      }  else if (roles.includes('scoring')) {
+                        this.router.navigateByUrl('/project/admin/score')
+                      }  else if (roles.includes('selection')) {
+                        this.router.navigateByUrl('/project/admin/select-artworks')
+                      } else  {
                         stepper.next();
                       }
                     })
@@ -253,17 +257,25 @@ export class AuthService {
           console.log("sign in trial " + u.userId);
           let roles = u.role;
           this.ngZone.run(() => {
-            if (roles.includes('admin')) {
-              this.router.navigateByUrl('/project/admin/artworks')
+            if (roles.includes('filtering')) {
+              this.router.navigateByUrl('/project/admin/filter-artworks')
             }
+            
             if (roles.includes('moderator')) {
               this.router.navigateByUrl('/project/admin')
             }
+            
             if (roles.includes('artist')) {
               this.router.navigateByUrl('/project/add-artworks')
             }
-
-
+            
+            if (roles.includes('scoring')) {
+              this.router.navigateByUrl('/project/admin/score')
+            } 
+            
+            if (roles.includes('selection')) {
+              this.router.navigateByUrl('/project/admin/select-artworks')
+            } 
           })
         })
       }).catch((reject) => {

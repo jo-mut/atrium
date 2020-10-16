@@ -9,29 +9,29 @@
         </div>
         <div class="description p-3">
           <p class="description-tag" > Filter submitted artworks</p>
-          <button class="btn px-5 btn-primary" (click)="navigateToAllArtworks()">View</button>
+          <button class="btn px-5 btn-primary" (click)="navigateToFilterArtworks()">View</button>
         </div>
       </div>
       <div class="col-md-4 mt-3">
         <div class="card p-3">
           <div>
-            <h3 class="title" >Scored</h3>
+            <h3 class="title" >Scoring</h3>
           </div>
         </div>
         <div class="description p-3">
-          <p class ="description-tag" > View all scored artworks</p>
+          <p class ="description-tag" > View artworks still to score</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToScoringArtworks()">View</button>
+        </div>
+      </div>
+      <div class="col-md-4 mt-3">
+        <div class="card p-3">
+          <div>
+            <h3 class="title">Scored</h3>
+          </div>
+        </div>
+        <div class="description p-3">
+          <p class="description-tag"> View all the scored artworks</p>
           <button class="btn px-5 btn-primary" (click)="navigateToScoredArtworks()">View</button>
-        </div>
-      </div>
-      <div class="col-md-4 mt-3">
-        <div class="card p-3">
-          <div>
-            <h3 class="title" >Team</h3>
-          </div>
-        </div>
-        <div class="description p-3">
-          <p class="description-tag"> View the profiles of the panel team</p>
-          <button class="btn px-5 btn-primary" (click)="navigateToAllTeam()">View</button>
         </div>
       </div>
     </div>

@@ -36,13 +36,13 @@ export class AdminComponent implements OnInit {
 
   }
 
-  navigateToAllArtworks() {
-    this.router.navigateByUrl("project/admin/artworks")
+  navigateToFilterArtworks() {
+    this.router.navigateByUrl("project/admin/filter-artworks")
   }
 
   
-  navigateToScoredArtworks() {
-    this.router.navigateByUrl("project/admin/scored-artworks")
+  navigateToScoringArtworks() {
+    this.router.navigateByUrl("project/admin/score")
   }
 
   
@@ -51,7 +51,7 @@ export class AdminComponent implements OnInit {
   }
 
   
-  navigateToAllTeam() {
-    this.router.navigateByUrl("project/admin/team")
+  navigateToScoredArtworks() {
+    this.router.navigateByUrl("project/admin/scored-artworks")
   }
 }

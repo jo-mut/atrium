@@ -12,6 +12,8 @@ import { ExtraDetails } from '../models/extraDetails';
 import { Score } from '../models/score';
 import { TeamData } from '../site/team/team.component';
 import { HomeData } from '../site/home/home.component';
+import { StoriesData } from '../site/campaign/campaign.component';
+import { Guidelines } from '../site/call/call.component';
 
 
 @Injectable({
@@ -78,12 +80,12 @@ export class DbOperationsService {
   }
 
   getGuidelinesData() {
-    return this.firestore.collection<HomeData>('site').doc('guidelines');
+    return this.firestore.collection<Guidelines>('site').doc('guidelines');
 
   }
 
-  getCampaignData() {
-    return this.firestore.collection<HomeData>('site').doc('campaign');
+  getStoriesData() {
+    return this.firestore.collection<StoriesData>('site').doc('stories');
   }
 
 
@@ -179,7 +181,7 @@ export class DbOperationsService {
           artwork.artworkId = this.generatePushId();
           artwork.id = this.docId;
           artwork.url = downloadUrl;
-          artwork.status = 'created';
+          artwork.status = 'filtering';
           artwork.createdAt = new Date().toISOString();
           artwork.updatedAt = '';
           console.log(JSON.parse(JSON.stringify(artwork)))
