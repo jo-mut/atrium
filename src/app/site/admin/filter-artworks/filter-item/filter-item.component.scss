@@ -1,0 +1,20 @@
+
+.filter-artworks {
+    text-align: center;
+    .filtering-image {
+        text-align: center;
+        img {
+            width: 150px;
+            margin: 0 auto;
+        }
+        
+    }
+
+    button {
+        text-align: center;
+        color: white;
+        border-radius: 0.5em;
+        background-color: teal;
+    }
+    
+}
