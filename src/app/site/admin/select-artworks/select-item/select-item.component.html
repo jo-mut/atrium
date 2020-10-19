@@ -1,1 +1,49 @@
-<p>select-item works!</p>
+<div class="select-artworks">
+  <div class="select-item">
+    <div class="table-responsive" *ngIf="scoredItem">
+      <table class="table">
+        <tr>
+          <th align="center">No.</th>
+          <th align="center">Artwork</th>
+          <th align="center">Date</th>
+          <th align="center">Name</th>
+          <th align="center">Country</th>
+          <th align="center">Category</th>
+          <th align="center">Score</th>
+          <th align="center">Action</th>
+        </tr>
+        <tr>
+          <td>
+            <!-- <p>{{number + 1}}</p> -->
+          </td>
+          <td>
+            <div class="filtering-image">
+              <img src="{{scoredItem.url}}" alt="">
+            </div>
+          </td>
+          <td>
+            <p>{{scoredItem.date}}</p>
+          </td>
+          <td>
+            <p>{{scoredItem.name}}</p>
+          </td>
+          <td>
+            <p>{{scoredItem.country}}</p>
+          </td>
+          <td>
+            <p>{{scoredItem.category}}</p>
+          </td>
+          <td>
+            <!-- <p>{{totalScore}}</p> -->
+          </td>
+          <td>
+            <div class="d-flex">
+              <button class="btn mx-1" (click)="selectToSpotlight()">Spotlight</button>
+              <button class="btn mx-1" (click)="exhibitArtwork()">Exhibit</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

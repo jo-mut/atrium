@@ -1,5 +1,8 @@
 <div class="filter-artworks">
   <div class="filter-tables">
       <app-filter-item *ngFor="let artwork of artworks; let no=index" [artwork]="artwork"></app-filter-item>
+      <div class="empty-message text-center">
+        <p class="message display-4 pt-5 mt-5">{{message}}</p>
+      </div>
   </div>
 </div>

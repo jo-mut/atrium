@@ -40,6 +40,10 @@ export class DbOperationsService {
     return this.authState
   }
 
+  getFirestore() {
+    return this.firestore;
+  }
+
   generatePushId(): string {
     return this.firebase.createPushId();
   }

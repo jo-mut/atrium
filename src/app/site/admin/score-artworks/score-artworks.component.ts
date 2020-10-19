@@ -13,6 +13,7 @@ export class ScoreArtworksComponent implements OnInit {
   artworks: ArtWork[] = [];
   id: number;
   loading = false;
+  message: string;
 
   currentUser: string = '';
 
@@ -31,15 +32,20 @@ export class ScoreArtworksComponent implements OnInit {
 
   // Get a list of archived artwork
   getArtWorks() {
+    this.artworks = [];
     this.dbOperations.artworksCollection()
     .ref.where('status', '==', 'approved')
     .onSnapshot(data => {
-      data.forEach(e => {
-        const data = e.data();
-        const id = e.id;
-        let work = { id, ...data } as ArtWork;
-        this.artworks.push(work);
-      })
+      if(data.empty) {
+        this.message = 'There are no artworks to score'
+      } else {
+        data.forEach(e => {
+          const data = e.data();
+          const id = e.id;
+          let work = { id, ...data } as ArtWork;
+          this.artworks.push(work);
+        })
+      }
     })
   }
 }

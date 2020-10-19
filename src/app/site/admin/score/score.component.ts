@@ -136,11 +136,20 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         console.log(JSON.stringify(form.value))
         const param = JSON.parse(JSON.stringify(this.score));
         this.dbOperations.scoresCollections().doc(this.score.scoreId).set(param).then(() => {
-          this.router.navigateByUrl('project/admin/artwork-score/' + this.work.id)
+          this.dbOperations.artworksCollection().doc(this.work.artworkId)
+          .update(
+            {
+              'status': 'scored',
+              'updatedAt': new Date().getDate() + '',
+            }).then(res => {
+              form.reset();
+              this.router.navigateByUrl('project/admin/score')
+            }).catch(err => {
+              // this.toaster.success('Filtering failed');
+            })
         }).catch(() => {
           window.alert('Failed to save the score')
         })
-        form.reset();
       } else {
         this.score.scoreId = this.id.toString();
         this.score.technique.composition = form.value.composition;
@@ -162,12 +171,20 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         console.log(JSON.stringify(form.value.composition))
         const param = JSON.parse(JSON.stringify(this.score))
         this.dbOperations.scoresCollections().doc(this.score.scoreId).set(param).then(() => {
-          this.router.navigateByUrl('project/admin/artwork-score/' + this.work.id)
+          this.dbOperations.artworksCollection().doc(this.work.artworkId)
+          .update(
+            {
+              'status': 'scored',
+              'updatedAt': new Date().getDate() + '',
+            }).then(res => {
+              form.reset();
+              this.router.navigateByUrl('project/admin/score')
+            }).catch(err => {
+              // this.toaster.success('Filtering failed');
+            })
         }).catch(() => {
           window.alert('Failed to save the score')
         })
-
-        form.reset();
       }
     }
 
@@ -206,67 +223,6 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         })
       })
 
-  }
-
-  approveArtwork() {
-    this.dbOperations.artworksCollection().doc(this.work.artworkId)
-      .update({
-        'status': 'approved',
-        'reviewedBy': this.currentUser,
-        'updatedAt': new Date().getTime() + '',
-      }).then(res => {
-        // this.toaster.success('Filtering successful');
-        this.router.navigateByUrl('project/admin/filter-artworks/' + this.work.id)
-      }).catch(err => {
-        // this.toaster.success('Filtering failed');
-
-      })
-  }
-
-  declineArtwork() {
-    this.dbOperations.artworksCollection().doc(this.work.artworkId)
-      .update(
-        {
-          'status': 'declined',
-          'reviewedBy': this.currentUser,
-          'updatedAt': new Date().getTime() + '',
-        }).then(res => {
-          // this.toaster.success('Filtering successful');
-          this.router.navigateByUrl("project/admin/filter-artworks")
-        }).catch(err => {
-          // this.toaster.success('Filtering failed');
-        })
-  }
-
-  featureArtwork() {
-    this.dbOperations.artworksCollection().doc(this.work.artworkId)
-      .update(
-        {
-          'status': 'feature',
-          'reviewedBy': this.currentUser,
-          'updatedAt': new Date().getTime() + '',
-        }).then(res => {
-          // this.toaster.success('Filtering successful');
-          this.router.navigateByUrl("project/admin/artworks")
-
-        }).catch(err => {
-          // this.toaster.success('Filtering failed');
-        })
-  }
-
-  exhibitArtwork() {
-    this.dbOperations.artworksCollection().doc(this.work.artworkId)
-      .update({
-        'status': 'exhibit',
-        'reviewedBy': this.currentUser,
-        'updatedAt': new Date().getTime() + '',
-      }).then(res => {
-        // this.toaster.success('Filtering successful');
-        this.router.navigateByUrl("project/admin/artworks")
-
-      }).catch(err => {
-        // this.toaster.success('Filtering failed');
-      })
   }
 
   getArtworkInterview(userId: string) {

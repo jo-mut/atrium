@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   private authState: Observable<firebase.User>;
   checked = 0;
   role: string;
-  action: string;
+  action: string = 'Submit';
 
   currentUser: string;
   user: User = new User();
@@ -83,22 +83,16 @@ export class NavbarComponent implements OnInit {
             if (roles.includes('moderator')) {
               this.action = 'Console'              
               console.log('AUTHSTATE USER', 'admin');
-            }
-
-            if (roles.includes('scoring')) {
+            } else if (roles.includes('scoring')) {
               this.action = "Score"
-            }
-
-            if (roles.includes('selection')) {
+            } else if (roles.includes('selection')) {
               this.action = "Select"
-            }
-
-            if (roles.includes('filtering')) {
+            } else if (roles.includes('filtering')) {
               this.action = "Filter"
-            }
-
-            if (roles.includes('artist')) {
+            } else if (roles.includes('artist')) {
               console.log('AUTHSTATE USER', 'artist');
+            } else {
+              this.action = "Submit"
             }
           })
         }
@@ -110,27 +104,21 @@ export class NavbarComponent implements OnInit {
       this.action = 'Console'              
       console.log('AUTHSTATE USER', 'admin');
       this.router.navigateByUrl('/project/admin')
-    }
-
-    if (this.user.role.includes('scoring')) {
+    }else if (this.user.role.includes('scoring')) {
       this.action = "Score"
-      this.router.navigateByUrl('/project/admin/score')
-    }
-
-    if (this.user.role.includes('selection')) {
-      this.action = "Select"
       this.router.navigateByUrl('/project/admin/select-artworks')
-    }
-
-    if (this.user.role.includes('filtering')) {
+    } else if (this.user.role.includes('selection')) {
+      this.action = "Select"
+      this.router.navigateByUrl('/project/admin/score')
+    } else if (this.user.role.includes('filtering')) {
       this.action = "Filter"
       this.router.navigateByUrl('/project/admin/filter-artworks')
-    }
-
-    if (this.user.role.includes('artist')) {
+    } else if (this.user.role.includes('artist')) {
       this.action = "Submit"
       this.router.navigateByUrl('/project/add-artworks')
       console.log('AUTHSTATE USER', 'artist');
+    } else {
+      this.action = "Submit"
     }
   };
 

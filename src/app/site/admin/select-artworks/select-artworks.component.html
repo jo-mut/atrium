@@ -1,5 +1,8 @@
 <div class="select-artworks">
   <div class="select-tables">
-      <app-scored-item *ngFor="let score of scores; let no=index" [score]="score"></app-scored-item>
+      <app-select-item *ngFor="let artwork of scored; let no=index" [artwork]="artwork"></app-select-item>
+  </div>
+  <div class="empty-message text-center">
+    <p class="message display-4 pt-5 mt-5">{{message}}</p>
   </div>
 </div>

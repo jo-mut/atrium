@@ -76,27 +76,12 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
-        <div class="approve" *ngIf="role =='moderator'">
-          <div class="container-fluid p-0">
-            <div class="row">
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
-                <div class="approve-btn">
-                  <button (click)="approveArtwork()" class="btn">Approve</button>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 px-3 mt-3">
-                <div class="decline-btn">
-                  <button (click)="declineArtwork()" class="btn">Decline</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
         <div class="score-forms">
           <div class="photo-score-form" *ngIf="work.type == 'image'">
             <form class="form-group" #photoScoresForm="ngForm" (ngSubmit)="onSubmit(photoScoresForm)" novalidate>
               <div class="card p-3">
-                <h3 class="p-3">TECHNIQUE</h3>
+                <h3>TECHNIQUE</h3>
                 <table>
                   <tr>
                     <th></th>
@@ -118,7 +103,7 @@
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="satisfactory"
                         [(ngModel)]="composition.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -186,8 +171,8 @@
                 </table>
               </div>
 
-              <div class="card p-3 mt-3">
-                <h3 class="p-5">CREATIVITY</h3>
+              <div class="card p-3">
+                <h3>CREATIVITY</h3>
                 <table>
                   <tr>
                     <th></th>
@@ -299,8 +284,8 @@
                 </table>
               </div>
 
-              <div class="card p-3 mt-5">
-                <h3 class="p-3">WOW FACTOR</h3>
+              <div class="card p-3">
+                <h3>WOW FACTOR</h3>
                 <table>
                   <tr>
                     <th></th>
@@ -322,8 +307,8 @@
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
-                        [(ngModel)]="composition.satisfactory" [value]="satisfactory" [checked]="false"
+                      <input type="radio" class="form-control" id="satisfactory" name="inspirational"
+                        [(ngModel)]="inspirational.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
@@ -402,7 +387,7 @@
           <div class="video-score-form" *ngIf="work.type == 'video'">
             <form class="form-group" #videoScoresForm="ngForm" (ngSubmit)="onSubmit(videoScoresForm)" novalidate>
               <div class="card p-3">
-                <h3 class="p-3">TECHNICAL</h3>
+                <h3>TECHNICAL</h3>
                 <table>
                   <tr>
                     <th></th>
@@ -582,7 +567,7 @@
                 </table>
               </div>
               <div class="card p-3">
-                <h3 class="p-3">CREATIVITY</h3>
+                <h3>CREATIVITY</h3>
                 <table>
                   <tr>
                     <th></th>
@@ -649,7 +634,7 @@
                 </table>
               </div>
               <div class="card p-3">
-                <h3 class="p-3">STORY</h3>
+                <h3>STORY</h3>
                 <table>
                   <tr>
                     <th></th>

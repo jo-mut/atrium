@@ -26,6 +26,7 @@ export class ScoredArtworksComponent implements OnInit {
   }
 
   getScoredArtworks() {
+    this.scores = [];
     this.dbOperations.scoresCollections()
     .snapshotChanges().subscribe(d => {
       this.scores = d.map(e => {

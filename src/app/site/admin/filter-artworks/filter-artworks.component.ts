@@ -7,6 +7,9 @@ import {
   NavigationStart, Router, Event
 } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { flatMap } from 'rxjs/operators';
+import { async } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-filter-artworks',
@@ -18,7 +21,8 @@ export class FilterArtworksComponent implements OnInit {
   artworks: ArtWork[] = [];
   id: number;
   loading = false;
-
+  message: string; 
+  
   currentUser: string = '';
 
   constructor(
@@ -28,45 +32,33 @@ export class FilterArtworksComponent implements OnInit {
     public dbOperations: DbOperationsService) { }
 
   ngOnInit(): void {
-    this.router.events.subscribe((event: Event) => {
-      switch (true) {
-        case event instanceof NavigationStart: {
-          this.loading = true;
-          console.log(this.loading);
-          break;
-        }
-
-        case event instanceof NavigationEnd:
-        case event instanceof NavigationCancel:
-        case event instanceof NavigationError: {
-          this.loading = false;
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-    });
-  }
-
-  ngAfterViewInit() {
     this.getArtWorks();
   }
 
+  ngAfterViewInit() {
+  }
 
-    // Get a list of archived artwork
-    getArtWorks() {
-      this.dbOperations.artworksCollection()
+
+  // Get a list of archived artwork
+  getArtWorks() {
+    this.artworks = [];
+    this.dbOperations.artworksCollection()
       .ref.where('status', '==', 'filter')
       .onSnapshot(data => {
-        data.forEach(e => {
-          const data = e.data();
-          const id = e.id;
-          let work = { id, ...data } as ArtWork;
-          this.artworks.push(work);
-          console.log(work)
-        })
+       if(data.empty) {
+         this.message = 'There are no artworks to filter'
+       } else {
+        data.forEach(doc => {
+          this.dbOperations.getFirestore().doc(doc.ref)
+          .snapshotChanges().subscribe(artwork => {
+           const data = artwork.payload.data() as ArtWork;        
+           let work = { ...data };
+           this.artworks.push(work);
+           console.log(work)
+          })
+         })
+       }
       })
-    }
+  }
 
 }

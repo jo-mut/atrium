@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td>
-          <p>{{i}}</p>
+          <!-- <p>{{i}}</p> -->
         </td>
         <td>
          <div class="filtering-image">
@@ -23,15 +23,15 @@
           <p>{{date}}</p>
         </td>
         <td>
-          <p>{{category}}</p>
-        </td>
-        <td>
           <p>{{country}}</p>
         </td>
         <td>
+          <p>{{category}}</p>
+        </td>
+        <td>
           <div class="d-flex">
-            <button class="btn mx-1">Spotlight</button>
-            <button class="btn mx-1">Exhibit</button>
+            <button class="btn mx-1" (click)="approveArtwork()" >Approve</button>
+            <button class="btn mx-1" (click)="declineArtwork()" >Decline</button>
           </div>
         </td>
       </tr>

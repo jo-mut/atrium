@@ -16,7 +16,8 @@ import { Score } from 'src/app/models/score';
 })
 export class SelectArtworksComponent implements OnInit {
 
-  scores: Score[] = [];
+  scored: ArtWork[] = [];
+  message: string;
  
   constructor(
     public ngZone: NgZone,
@@ -29,14 +30,23 @@ export class SelectArtworksComponent implements OnInit {
   }
 
   getScoredArtworks() {
-    this.dbOperations.scoresCollections()
-    .snapshotChanges().subscribe(d => {
-      this.scores = d.map(e => {
-        const data = e.payload.doc.data();
-        const id = e.payload.doc.id;
-        console.log({ ...data })
-        return { ...data } as Score;
-      });
-    });
+    this.scored = [];
+    this.dbOperations.artworksCollection()
+    .ref.where('status', '==', 'scored')
+    .onSnapshot(data => {
+     if(data.empty) {
+       this.message = 'There are no scored to select'
+     } else {
+      data.forEach(doc => {
+        this.dbOperations.getFirestore().doc(doc.ref)
+        .snapshotChanges().subscribe(artwork => {
+         const data = artwork.payload.data() as ArtWork;        
+         let work = { ...data };
+         this.scored.push(work);
+         console.log(work)
+        })
+       })
+     }
+    })
   }
 }
