@@ -10,11 +10,17 @@
 
         vg-player {
             width: 150px;
-          
+            margin: 0 auto;
+
             video {
               width: 100%;
               margin: 0 auto;
             }
+          }
+
+          pdf-viewer {
+            display: block;
+            width: 100%;
           }
         
         

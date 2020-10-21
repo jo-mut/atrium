@@ -61,6 +61,8 @@ import { ScoredArtworksComponent } from 'src/app/site/admin/scored-artworks/scor
 import { SelectItemComponent } from 'src/app/site/admin/select-artworks/select-item/select-item.component';
 import { FilterItemComponent } from 'src/app/site/admin/filter-artworks/filter-item/filter-item.component';
 // import { ToastrModule } from 'ngx-toastr';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -130,6 +132,7 @@ const routes: Routes = [
    LoadingBarRouterModule,
    LoadingBarModule,
    MatStepperModule,
+   PdfViewerModule 
   //  ToastrModule.forRoot()   
 
   ],

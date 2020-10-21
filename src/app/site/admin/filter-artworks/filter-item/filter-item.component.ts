@@ -17,6 +17,8 @@ export class FilterItemComponent implements OnInit {
   url: string;
   date: string;
   country: string;
+  subjectConsent: string;
+  artistConsent: string;
 
   api: VgApiService;
 
@@ -27,12 +29,20 @@ export class FilterItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.artwork.type === 'image') {
+    if (this.artwork.type === 'image') {
       this.category = 'Photography'
     }
 
-    if(this.artwork.type === 'video') {
+    if (this.artwork.type === 'video') {
       this.category = 'Videography'
+    }
+
+    if (this.artwork.subjectConsentForm != null) {
+      this.subjectConsent = this.artwork.subjectConsentForm;
+    }
+
+    if (this.artwork.artistConsentForm != null) {
+      this.artistConsent = this.artwork.artistConsentForm
     }
 
     this.url = this.artwork.url;
@@ -76,7 +86,7 @@ export class FilterItemComponent implements OnInit {
   }
 
   playVideo() {
-    this.api.play();
+    this.api.pause();
   }
 
 

@@ -5,6 +5,8 @@
         <tr>
           <th align="center">No.</th>
           <th align="center">Artwork</th>
+          <th align="center">Subject Consent</th>
+          <th align="center">Artist Consent</th>
           <th align="center">Date</th>
           <th align="center">Country</th>
           <th align="center">Category</th>
@@ -21,12 +23,23 @@
               </div>
               <div *ngIf="artwork.type == 'video'">
                 <vg-player (onPlayerReady)="onPlayerReady($event)">
-                  <vg-buffering></vg-buffering>                
+                  <vg-buffering></vg-buffering>
+                  <vg-controls>
+                    <vg-play-pause></vg-play-pause>                    
+                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                    <vg-fullscreen></vg-fullscreen>
+                  </vg-controls>
                   <video #media [vgMedia]="media" [src]="url" id="singleVideo" preload="auto" crossorigin>
                   </video>
                 </vg-player>
               </div>
             </div>
+          </td>
+          <td>
+            <pdf-viewer [src]="subjectConsent" [original-size]="false"></pdf-viewer>
+          </td>
+          <td>
+            <pdf-viewer [src]="artistConsent" [original-size]="false"></pdf-viewer>
           </td>
           <td>
             <p>{{date}}</p>
