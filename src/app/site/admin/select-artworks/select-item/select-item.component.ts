@@ -5,6 +5,7 @@ import { Score } from 'src/app/models/score';
 import { ArtWork } from 'src/app/models/artwork';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { VgApiService } from '@videogular/ngx-videogular/core';
 
 class ScoredItem {
   name: string
@@ -28,6 +29,8 @@ export class SelectItemComponent implements OnInit {
   score: Score = new Score();
   scoredItem: ScoredItem = new ScoredItem();
   message: string;
+
+  api: VgApiService;
 
   constructor(
     private router: Router,
@@ -83,6 +86,7 @@ export class SelectItemComponent implements OnInit {
          const data = s.payload.data() as Score;        
          let score = { ...data };
          this.score = score;
+         this.scoredItem.totalScore = score.totalScore.toString();
          console.log(score)
         })
        })
@@ -150,5 +154,16 @@ export class SelectItemComponent implements OnInit {
         // this.toaster.success('Filtering failed');
       })
   }
+
+  onPlayerReady(api: VgApiService) {
+    this.api = api;
+    this.api.getDefaultMedia().subscriptions
+      .loadedMetadata.subscribe(this.playVideo.bind(this));
+  }
+
+  playVideo() {
+    this.api.play();
+  }
+
 
 }

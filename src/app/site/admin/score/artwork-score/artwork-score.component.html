@@ -38,18 +38,18 @@
             <p><strong>Lighting:</strong> {{score.technique.lighting}} </p>
             <p><strong>Message:</strong> {{score.creativity.message}} </p>
             <p><strong>Theme:</strong> {{score.creativity.theme}} </p>
-            <p><strong>Uniqueness:</strong> {{score.creativity.uniquness}} </p>
+            <p><strong>Uniqueness:</strong> {{score.creativity.uniqueness}} </p>
             <p><strong>Impression:</strong> {{score.creativity.impression}} </p>
             <p><strong>Details:</strong> {{score.wowFactor.details}} </p>
             <p><strong>Impact:</strong> {{score.wowFactor.impact}} </p>
             <p><strong>Inspirational:</strong> {{score.wowFactor.inspirational}} </p>
-            <h4><strong>Total Score:</strong> {{totalScore}} </h4>
+            <h4><strong>Total Score:</strong> {{score.totalScore}} </h4>
 
           </div>
           <div *ngIf="score.type == 'video'">
             <p><strong>Composition:</strong> {{score.vTechnical.composition}} </p>
             <p><strong>Stability:</strong> {{score.vTechnical.stability}} </p>
-            <p><strong>Picture Clarity:</strong> {{score.vTechnical.pcitureClarity}} </p>
+            <p><strong>Picture Clarity:</strong> {{score.vTechnical.pictureClarity}} </p>
             <p><strong>Lighting:</strong> {{score.vTechnical.lighting}} </p>
             <p><strong>Audio Clarity:</strong> {{score.vTechnical.audioClarity}} </p>
             <p><strong>Scene:</strong> {{score.vEdit.scene}} </p>
@@ -57,7 +57,7 @@
             <p><strong>Message:</strong> {{score.vStory.message}} </p>
             <p><strong>Use of Techniques:</strong> {{score.vCreativity.useoftechniques}} </p>
             <p><strong>Use of Equipments:</strong> {{score.vCreativity.useofequipments}} </p>
-            <h4><strong>Total Score:</strong> {{totalScore}} </h4>
+            <h4><strong>Total Score:</strong> {{score.totalScore}} </h4>
           </div>
         </div>
       </div>

@@ -103,7 +103,7 @@
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="satisfactory"
+                      <input type="radio" class="form-control" id="satisfactory" name="composition"
                         [(ngModel)]="composition.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -211,24 +211,22 @@
                     <td align="center">
                       <input type="radio" class="form-control" name="uniqueness" [(ngModel)]="uniqueness.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
-                    </td>
+                    </td>                
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="uniqueness" [(ngModel)]="uniqueness.fair"
+                      <input type="radio" class="form-control" name="uniqueness" [(ngModel)]="uniqueness.fair"
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="uniqueness"
-                        [(ngModel)]="uniqueness.satisfactory" [value]="satisfactory" [checked]="false"
-                        (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" name="uniqueness" [(ngModel)]="uniqueness.satisfactory"
+                       [value]="satisfactory" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="uniqueness" [(ngModel)]="uniqueness.good"
+                      <input type="radio" class="form-control" name="uniqueness" [(ngModel)]="uniqueness.good"
                         [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="uniqueness"
-                        [(ngModel)]="uniqueness.excellent" [value]="excellent" [checked]="false"
-                        (change)="onItemChange($event.target.value)">
+                      <input type="radio" class="form-control" name="uniqueness" [(ngModel)]="uniqueness.excellent" 
+                      [value]="excellent" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                   </tr>
                   <tr>
@@ -242,8 +240,7 @@
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="message"
-                        ng-model="message.satisfactory" [value]="satisfactory" [checked]="false"
+                      <input type="radio" class="form-control" id="satisfactory" name="message" [(ngModel)]="message.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
@@ -267,8 +264,7 @@
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="impression"
-                        ng-model="impression.satisfactory" [value]="satisfactory" [checked]="false"
+                      <input type="radio" class="form-control" id="satisfactory" name="impression" [(ngModel)]="impression.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
@@ -400,26 +396,53 @@
                   <tr>
                     <td>Picture Clarity</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="pictureClarity.poor"
+                      <input type="radio" class="form-control" name="composition" [(ngModel)]="composition.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="fair" name="composition"
-                        [(ngModel)]="pictureClarity.fair" [value]="fair" [checked]="false"
+                        [(ngModel)]="composition.fair" [value]="fair" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="satisfactory" name="composition"
-                        [(ngModel)]="pictureClarity.satisfactory" [value]="satisfactory" [checked]="false"
+                        [(ngModel)]="composition.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="good" name="composition"
-                        [(ngModel)]="pictureClarity.good" [value]="good" [checked]="false"
+                        [(ngModel)]="composition.good" [value]="good" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
                       <input type="radio" class="form-control" id="excellent" name="composition"
+                        [(ngModel)]="composition.excellent" [value]="excellent" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Picture Clarity</td>
+                    <td align="center">
+                      <input type="radio" class="form-control" name="pictureClarity" [(ngModel)]="pictureClarity.poor"
+                        [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="fair" name="pictureClarity"
+                        [(ngModel)]="pictureClarity.fair" [value]="fair" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="satisfactory" name="pictureClarity"
+                        [(ngModel)]="pictureClarity.satisfactory" [value]="satisfactory" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="good" name="pictureClarity"
+                        [(ngModel)]="pictureClarity.good" [value]="good" [checked]="false"
+                        (change)="onItemChange($event.target.value)">
+                    </td>
+                    <td align="center">
+                      <input type="radio" class="form-control" id="excellent" name="pictureClarity"
                         [(ngModel)]="pictureClarity.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -427,26 +450,26 @@
                   <tr>
                     <td>Audio Clarity</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="audioClarity.poor"
+                      <input type="radio" class="form-control" name="audioClarity" [(ngModel)]="audioClarity.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition"
+                      <input type="radio" class="form-control" id="fair" name="audioClarity"
                         [(ngModel)]="audioClarity.fair" [value]="fair" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="audioClarity"
                         [(ngModel)]="audioClarity.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition"
+                      <input type="radio" class="form-control" id="good" name="audioClarity"
                         [(ngModel)]="audioClarity.good" [value]="good" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="audioClarity"
                         [(ngModel)]="audioClarity.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -454,24 +477,24 @@
                   <tr>
                     <td>Stability</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="stability.poor"
+                      <input type="radio" class="form-control" name="stability" [(ngModel)]="stability.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="stability.fair"
+                      <input type="radio" class="form-control" id="fair" name="stability" [(ngModel)]="stability.fair"
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="stability"
                         [(ngModel)]="stability.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="stability.good"
+                      <input type="radio" class="form-control" id="good" name="stability" [(ngModel)]="stability.good"
                         [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="stability"
                         [(ngModel)]="stability.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -479,24 +502,24 @@
                   <tr>
                     <td>Lighting</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="lighting.poor"
+                      <input type="radio" class="form-control" name="lighting" [(ngModel)]="lighting.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="lighting.fair"
+                      <input type="radio" class="form-control" id="fair" name="lighting" [(ngModel)]="lighting.fair"
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="lighting"
                         [(ngModel)]="lighting.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="lighting.good"
+                      <input type="radio" class="form-control" id="good" name="lighting" [(ngModel)]="lighting.good"
                         [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="lighting"
                         [(ngModel)]="lighting.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -517,24 +540,24 @@
                   <tr>
                     <td>Scene</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="scene.poor"
+                      <input type="radio" class="form-control" name="scene" [(ngModel)]="scene.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="scene.fair"
+                      <input type="radio" class="form-control" id="fair" name="scene" [(ngModel)]="scene.fair"
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="scene"
                         [(ngModel)]="scene.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="scene.good"
+                      <input type="radio" class="form-control" id="good" name="scene" [(ngModel)]="scene.good"
                         [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="scene"
                         [(ngModel)]="scene.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -542,24 +565,24 @@
                   <tr>
                     <td>Execution</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="execution.poor"
+                      <input type="radio" class="form-control" name="execution" [(ngModel)]="execution.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="execution.fair"
+                      <input type="radio" class="form-control" id="fair" name="execution" [(ngModel)]="execution.fair"
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="execution"
                         [(ngModel)]="execution.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="execution.good"
+                      <input type="radio" class="form-control" id="good" name="execution" [(ngModel)]="execution.good"
                         [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="execution"
                         [(ngModel)]="execution.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -580,26 +603,26 @@
                   <tr>
                     <td>Use of Equipment</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="useOfEquipments.poor"
+                      <input type="radio" class="form-control" name="useOfEquipments" [(ngModel)]="useOfEquipments.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition"
+                      <input type="radio" class="form-control" id="fair" name="useOfEquipments"
                         [(ngModel)]="useOfEquipments.fair" [value]="fair" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="useOfEquipments"
                         [(ngModel)]="useOfEquipments.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition"
+                      <input type="radio" class="form-control" id="good" name="useOfEquipments"
                         [(ngModel)]="useOfEquipments.good" [value]="good" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="useOfEquipments"
                         [(ngModel)]="useOfEquipments.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -607,26 +630,26 @@
                   <tr>
                     <td>Use of Tecnique</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="useOfTechniques.poor"
+                      <input type="radio" class="form-control" name="useOfTechniques" [(ngModel)]="useOfTechniques.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition"
+                      <input type="radio" class="form-control" id="fair" name="useOfTechniques"
                         [(ngModel)]="useOfTechniques.fair" [value]="fair" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="useOfTechniques"
                         [(ngModel)]="useOfTechniques.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition"
+                      <input type="radio" class="form-control" id="good" name="useOfTechniques"
                         [(ngModel)]="useOfTechniques.good" [value]="good" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="useOfTechniques"
                         [(ngModel)]="useOfTechniques.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
@@ -647,24 +670,24 @@
                   <tr>
                     <td>Overall Message</td>
                     <td align="center">
-                      <input type="radio" class="form-control" name="composition" [(ngModel)]="vMessage.poor"
+                      <input type="radio" class="form-control" name="vMessage" [(ngModel)]="vMessage.poor"
                         [value]="poor" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="fair" name="composition" [(ngModel)]="vMessage.fair"
+                      <input type="radio" class="form-control" id="fair" name="vMessage" [(ngModel)]="vMessage.fair"
                         [value]="fair" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="satisfactory" name="composition"
+                      <input type="radio" class="form-control" id="satisfactory" name="vMessage"
                         [(ngModel)]="vMessage.satisfactory" [value]="satisfactory" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="good" name="composition" [(ngModel)]="vMessage.good"
+                      <input type="radio" class="form-control" id="good" name="vMessage" [(ngModel)]="vMessage.good"
                         [value]="good" [checked]="false" (change)="onItemChange($event.target.value)">
                     </td>
                     <td align="center">
-                      <input type="radio" class="form-control" id="excellent" name="composition"
+                      <input type="radio" class="form-control" id="excellent" name="vMessage"
                         [(ngModel)]="vMessage.excellent" [value]="excellent" [checked]="false"
                         (change)="onItemChange($event.target.value)">
                     </td>

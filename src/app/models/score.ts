@@ -12,6 +12,7 @@ export class Score {
     scoredTime: string;
     scoreId: string
     type: string;
+    totalScore: number;
 
     constructor() {
         
@@ -50,7 +51,7 @@ export class Technique {
 
 export class Creativity {
     theme: Points = new Points();
-    uniquness: Points = new Points();
+    uniqueness: Points = new Points();
     message: Points = new Points();
     impression: Points = new Points();
   
@@ -86,7 +87,7 @@ export class VTechnical  {
     stability: Points = new Points();
     lighting: Points = new Points();
     audioClarity: Points = new Points();
-    pcitureClarity: Points = new Points();
+    pictureClarity: Points = new Points();
    
     constructor() {
         

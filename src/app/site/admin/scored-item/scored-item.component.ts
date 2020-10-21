@@ -25,6 +25,7 @@ export class ScoredItemComponent implements OnInit {
   artwork: ArtWork = new ArtWork();
   user: User = new User();
   scoredItem: ScoredItem = new ScoredItem();
+  no: number;
 
   constructor(
     public ngZone: NgZone,

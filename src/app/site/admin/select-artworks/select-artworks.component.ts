@@ -34,18 +34,18 @@ export class SelectArtworksComponent implements OnInit {
     this.dbOperations.artworksCollection()
     .ref.where('status', '==', 'scored')
     .onSnapshot(data => {
-     if(data.empty) {
-       this.message = 'There are no scored to select'
-     } else {
-      data.forEach(doc => {
-        this.dbOperations.getFirestore().doc(doc.ref)
-        .snapshotChanges().subscribe(artwork => {
-         const data = artwork.payload.data() as ArtWork;        
-         let work = { ...data };
-         this.scored.push(work);
-         console.log(work)
+     let changes = data.docChanges();
+     if(changes) {
+      if(data.empty) {
+        this.message = 'There are no scored to select'
+      } else {
+        changes.forEach(artwork => {
+          const data = artwork.doc.data() as ArtWork;        
+          let work = { ...data };
+          this.scored.push(work);
+          console.log(work)
         })
-       })
+      }
      }
     })
   }

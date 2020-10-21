@@ -185,7 +185,7 @@ export class DbOperationsService {
           artwork.artworkId = this.generatePushId();
           artwork.id = this.docId;
           artwork.url = downloadUrl;
-          artwork.status = 'filtering';
+          artwork.status = 'filter';
           artwork.createdAt = new Date().toISOString();
           artwork.updatedAt = '';
           console.log(JSON.parse(JSON.stringify(artwork)))

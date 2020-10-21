@@ -1,4 +1,3 @@
-
 .select-artworks {
     text-align: center;
     .select-item {
@@ -7,6 +6,15 @@
             width: 150px;
             margin: 0 auto;
         }
+
+        vg-player {
+            width: 150px;
+          
+            video {
+              width: 100%;
+              margin: 0 auto;
+            }
+          }
         
     }
 

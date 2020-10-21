@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -22,6 +22,7 @@ export class AuthService {
   private authState: Observable<firebase.User>;
   emailSent = false;
   currentUser = '';
+  @Output() emittedUser = new EventEmitter();
 
   constructor(
     private storage: AngularFireStorage,
@@ -31,6 +32,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
+ 
 
   }
 
@@ -38,7 +40,9 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         this.ngZone.run(() => {
-          console.log('signed in')
+          this.currentUser = result.user.uid;
+          this.emittedUser.emit(user.userId);
+          console.log(this.currentUser)
         });
       }).catch((error) => {
 
@@ -132,6 +136,7 @@ export class AuthService {
           const param = JSON.parse(JSON.stringify(user));
           return userRef.set(param)
             .then((result) => {
+              this.emittedUser.emit(user.userId);
               stepper.next();
               // sign in user after profile has been saved
             }).catch((error) => {
@@ -257,7 +262,7 @@ export class AuthService {
           console.log("sign in trial " + u.userId);
           let roles = u.role;
           this.ngZone.run(() => {
-            if (roles.includes('filtering')) {
+            if (roles.includes('filtering')) {             
               this.router.navigateByUrl('/project/admin/filter-artworks')
             }
             
@@ -285,10 +290,10 @@ export class AuthService {
 
   // Sign out 
   signOut() {
-    return this.afAuth.signOut().then(() => {
+    // return this.afAuth.signOut().then(() => {
       // localStorage.removeItem('user');
-      this.router.navigate(['/sign-in']);
-    })
+      // this.router.navigate(['/sign-in']);
+    // })
   }
 
 }

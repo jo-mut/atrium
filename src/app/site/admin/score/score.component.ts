@@ -119,23 +119,40 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         this.vScore.scoreId = this.id.toString();
         this.vScore.vTechnical.composition = form.value.composition;
         this.vScore.vTechnical.stability = form.value.stability;
-        this.vScore.vTechnical.pcitureClarity = form.value.pcitureClarity;
+        this.vScore.vTechnical.pictureClarity = form.value.pictureClarity;
         this.vScore.vTechnical.lighting = form.value.lighting;
         this.vScore.vTechnical.audioClarity = form.value.audioClarity;
         this.vScore.vEdit.scene = form.value.scene;
         this.vScore.vEdit.execution = form.value.execution;
-        this.vScore.vStory.message = form.value.message;
-        this.vScore.vCreativity.useoftechniques = form.value.useoftechniques;
-        this.vScore.vCreativity.useofequipments = form.value.useofequipments;
+        this.vScore.vStory.message = form.value.vMessage;
+        this.vScore.vCreativity.useoftechniques = form.value.useOfTechniques;
+        this.vScore.vCreativity.useofequipments = form.value.useOfEquipments;
         this.vScore.scoredDate = new Date().getDate().toString();
         this.vScore.scoredTime = new Date().getTime().toString();
         this.vScore.scoredBy = this.currentUser;
         this.vScore.type = 'video';
 
+        let totalTechnique = form.value.pictureClarity + form.value.lighting + form.value.stability
+        + form.value.audioClarity + form.value.composition; 
+
+        let totalCreativity = form.value.useoftechniques + 
+        form.value.useofequipments;
+
+        let totalEdit = form.value.execution + form.value.scene;
+        let totalStory = form.value.vMessage;
+
+        let totalScore = totalCreativity + totalTechnique 
+        + totalStory + totalEdit;
+
+        this.vScore.totalScore = totalScore;
+
+
         console.log('score' + this.score);
         console.log(JSON.stringify(form.value))
-        const param = JSON.parse(JSON.stringify(this.score));
-        this.dbOperations.scoresCollections().doc(this.score.scoreId).set(param).then(() => {
+        console.log(totalTechnique);
+
+        const param = JSON.parse(JSON.stringify(this.vScore));
+        this.dbOperations.scoresCollections().doc(this.vScore.scoreId).set(param).then(() => {
           this.dbOperations.artworksCollection().doc(this.work.artworkId)
           .update(
             {
@@ -157,7 +174,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         this.score.technique.lighting = form.value.lighting;
         this.score.creativity.message = form.value.message
         this.score.creativity.theme = form.value.theme;
-        this.score.creativity.uniquness = form.value.uniquness;
+        this.score.creativity.uniqueness = form.value.uniqueness;
         this.score.creativity.impression = form.value.impression;
         this.score.wowFactor.details = form.value.details;
         this.score.wowFactor.impact = form.value.impact;
@@ -167,8 +184,30 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         this.score.scoredBy = this.currentUser;
         this.score.type = 'image';
 
+        let totalTechnique = form.value.composition + 
+        form.value.clarity + form.value.lighting;
+
+        let totalCreativity = form.value.message + 
+        form.value.theme + form.value.uniqueness + form.value.impression;
+        console.log(JSON.stringify(form.value.message));
+
+        console.log(JSON.stringify(form.value.theme));
+        console.log(JSON.stringify(form.value.uniqueness));
+        console.log(JSON.stringify(form.value.impression));
+
+
+        let totalWowFactor = form.value.details + 
+        form.value.impact + form.value.inspirational;
+
+        let totalScore = totalCreativity + totalTechnique + totalWowFactor;
+
+        this.score.totalScore = totalScore;
+
+
         console.log('score ' + {...this.score});
         console.log(JSON.stringify(form.value.composition))
+        console.log(JSON.stringify(totalScore));
+
         const param = JSON.parse(JSON.stringify(this.score))
         this.dbOperations.scoresCollections().doc(this.score.scoreId).set(param).then(() => {
           this.dbOperations.artworksCollection().doc(this.work.artworkId)

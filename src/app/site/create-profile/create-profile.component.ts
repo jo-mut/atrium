@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TermModalComponent } from './term-modal/term-modal.component';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-create-profile',
@@ -32,7 +33,7 @@ export class CreateProfileComponent implements OnInit {
   instagram: string;
   others: string;
   social: string[] = [];
-
+  currentUser: any;
 
   formWidth: any = 100;
   headingSize = '2.0em';
@@ -48,6 +49,9 @@ export class CreateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getScreenSize();
+    this.afAuth.authState.subscribe(user => {
+      this.currentUser = user;
+    })
 
   }
 
@@ -60,10 +64,10 @@ export class CreateProfileComponent implements OnInit {
     let timeDiff = Math.abs(Date.now() - event.getTime());
     let age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
 
-    if(age < 18) {
+    if (age < 18) {
       this.user.birthDate = null;
       window.alert('Sorry! The minimum age to participate is 18yrs old')
-    }else {
+    } else {
       this.user.birthDate = event;
     }
   }
@@ -83,7 +87,6 @@ export class CreateProfileComponent implements OnInit {
   }
 
   creatAcountAndGoForward(stepper: MatStepper) {
-    console.log('clicked')
     this.authService.register(this.user, stepper).then(() => {
       this.authService.checkIfUserExists(this.user, stepper).then(() => {
         this.ngZone.run(() => {
@@ -99,7 +102,7 @@ export class CreateProfileComponent implements OnInit {
           })
         })
       })
-    })   
+    })
   }
 
 
@@ -123,8 +126,8 @@ export class CreateProfileComponent implements OnInit {
   //   var promise = new Promise((resolve, reject) => {
   //     console.log(user)
   //   // this.disableProfileCreate = true;
-  
-  
+
+
   //   return promise;
   // }
 

@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArtWork } from 'src/app/models/artwork';
-import { Score } from 'src/app/models/score';
+import { Score, VScore } from 'src/app/models/score';
 import { User } from 'src/app/models/user';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 
@@ -33,6 +33,7 @@ export class ScoredArtworksComponent implements OnInit {
         const data = e.payload.doc.data();
         const id = e.payload.doc.id;
         console.log({ ...data })
+        
         return { ...data } as Score;
       });
     });

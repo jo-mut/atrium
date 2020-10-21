@@ -21,8 +21,8 @@ export class FilterArtworksComponent implements OnInit {
   artworks: ArtWork[] = [];
   id: number;
   loading = false;
-  message: string; 
-  
+  message: string;
+
   currentUser: string = '';
 
   constructor(
@@ -41,23 +41,23 @@ export class FilterArtworksComponent implements OnInit {
 
   // Get a list of archived artwork
   getArtWorks() {
-    this.artworks = [];
     this.dbOperations.artworksCollection()
       .ref.where('status', '==', 'filter')
       .onSnapshot(data => {
-       if(data.empty) {
-         this.message = 'There are no artworks to filter'
-       } else {
-        data.forEach(doc => {
-          this.dbOperations.getFirestore().doc(doc.ref)
-          .snapshotChanges().subscribe(artwork => {
-           const data = artwork.payload.data() as ArtWork;        
-           let work = { ...data };
-           this.artworks.push(work);
-           console.log(work)
-          })
-         })
-       }
+        if (data.empty) {
+          this.message = 'There are no artworks to filter'
+        } else {
+          let changes = data.docChanges();
+          if (changes) {
+            this.artworks = [];
+            changes.forEach(artwork => {
+              const data = artwork.doc.data() as ArtWork;
+              let work = { ...data };
+              this.artworks.push(work);
+              console.log(work)
+            })
+          }
+        }
       })
   }
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { VgApiService } from '@videogular/ngx-videogular/core';
 import { ArtWork } from 'src/app/models/artwork';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
 
@@ -16,7 +17,9 @@ export class FilterItemComponent implements OnInit {
   url: string;
   date: string;
   country: string;
-  
+
+  api: VgApiService;
+
 
   constructor(
     private router: Router,
@@ -65,5 +68,16 @@ export class FilterItemComponent implements OnInit {
           // this.toaster.success('Filtering failed');
         })
   }
+
+  onPlayerReady(api: VgApiService) {
+    this.api = api;
+    this.api.getDefaultMedia().subscriptions
+      .loadedMetadata.subscribe(this.playVideo.bind(this));
+  }
+
+  playVideo() {
+    this.api.play();
+  }
+
 
 }
