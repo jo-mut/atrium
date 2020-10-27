@@ -60,7 +60,7 @@
                     <label>Date Shot</label>
                   </div>
                   <mat-form-field>
-                    <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
+                    <input class="p-3" (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>

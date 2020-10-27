@@ -197,7 +197,7 @@ export class AddArtworksComponent implements OnInit {
 
 
   downloadSubjectConsentForm() {
-    const storageRef = this.storage.ref('consent/subjectConsentForm.pdf')
+    const storageRef = this.storage.ref('consent/Subject Consent Form.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
       var xhr = new XMLHttpRequest();
@@ -211,7 +211,7 @@ export class AddArtworksComponent implements OnInit {
   }
 
   downloadArtistCOnsentForm() {
-    const storageRef = this.storage.ref('consent/artistConsentForm.pdf')
+    const storageRef = this.storage.ref('consent/Artist Consent Form.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
       var xhr = new XMLHttpRequest();

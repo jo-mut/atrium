@@ -19,10 +19,10 @@
           <td>
             <div class="filtering-image">
               <div *ngIf="artwork.type == 'image'">
-                <img src="{{url}}" alt="">
+                <img  (click)="lauchDialog(artwork, 'image')" src="{{url}}" alt="">
               </div>
               <div *ngIf="artwork.type == 'video'">
-                <vg-player (onPlayerReady)="onPlayerReady($event)">
+                <vg-player (click)="lauchDialog(artwork, 'video')" (onPlayerReady)="onPlayerReady($event)">
                   <vg-buffering></vg-buffering>
                   <vg-controls>
                     <vg-play-pause></vg-play-pause>                    
@@ -36,10 +36,10 @@
             </div>
           </td>
           <td>
-            <pdf-viewer [src]="subjectConsent" [original-size]="false"></pdf-viewer>
+            <pdf-viewer [src]="subjectConsent" (click)="lauchDialog(artwork, 'subject')" [original-size]="false"></pdf-viewer>
           </td>
           <td>
-            <pdf-viewer [src]="artistConsent" [original-size]="false"></pdf-viewer>
+            <pdf-viewer [src]="artistConsent" (click)="lauchDialog(artwork, 'artist')" [original-size]="false"></pdf-viewer>
           </td>
           <td>
             <p>{{date}}</p>

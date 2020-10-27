@@ -7,6 +7,7 @@ import { Observable, of, Subject } from 'rxjs';
 export interface HomeData {
   video: string;
   backgroundImage: string;
+  call: string;
 }
 
 
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
   headingSize = 4;
   video = '';
   backgroundImage = '';
+  callImage = '';
   currentIndex = 0;
   api: VgApiService;
   currentItem: IMedia = this.playlist[this.currentIndex];
@@ -141,6 +143,7 @@ export class HomeComponent implements OnInit {
       let homeData = e.payload.data() as HomeData;
       this.video = homeData.video;
       this.backgroundImage = homeData.backgroundImage;
+      this.callImage = homeData.call;
     })
   }
 }

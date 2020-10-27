@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule  } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from 'src/app/site/home/home.component';
 import { SiteComponent } from './site.component';
 import { VrGalleryComponent } from '../vr-gallery/vr-gallery.component';
@@ -20,7 +20,6 @@ import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { MglTimelineModule } from 'angular-mgl-timeline';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { CreateProfileComponent } from 'src/app/site/create-profile/create-profile.component';
 import { AddArtworksComponent } from 'src/app/site/add-artworks/add-artworks.component';
 import { AdminComponent } from "../../site/admin/admin.component";
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -39,18 +38,17 @@ import { ArtworksDetailComponent } from 'src/app/site/artworks/artworks-detail/a
 import { TermModalComponent } from 'src/app/site/create-profile/term-modal/term-modal.component';
 import { HostProfileModalComponent } from 'src/app/site/admin/host-profile-modal/host-profile-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper';
 import { CampaignComponent } from 'src/app/site/campaign/campaign.component';
 import { TeamComponent } from 'src/app/site/team/team.component';
 import { GuidelinesComponent } from 'src/app/site/guidelines/guidelines.component';
 import { SuccessfulComponent } from 'src/app/site/successful/successful.component';
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { TabsetComponent } from 'src/app/site/tabset/tabset.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
-import {MatStepperModule} from '@angular/material/stepper';
 import { ArtworkScoreComponent } from 'src/app/site/admin/score/artwork-score/artwork-score.component';
 import { ScoredItemComponent } from 'src/app/site/admin/scored-item/scored-item.component';
 import { SelectArtworksComponent } from 'src/app/site/admin/select-artworks/select-artworks.component';
@@ -62,6 +60,9 @@ import { SelectItemComponent } from 'src/app/site/admin/select-artworks/select-i
 import { FilterItemComponent } from 'src/app/site/admin/filter-artworks/filter-item/filter-item.component';
 // import { ToastrModule } from 'ngx-toastr';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SignInComponent } from 'src/app/site/sign-in/sign-in.component';
+import { MatInputModule } from '@angular/material/input';
+import { ArtworkModalComponent } from 'src/app/site/admin/filter-artworks/artwork-modal/artwork-modal.component';
 
 
 const routes: Routes = [
@@ -74,8 +75,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoriesComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'artists', component: ArtistsComponent },
-  { path: 'gallery', component: ArtworksComponent },
-  { path: 'create-profile', component: CreateProfileComponent },
+  // { path: 'gallery', component: ArtworksComponent },
   { path: 'add-artworks', component: AddArtworksComponent },
   { path: 'tips', component: TipsComponent },
   { path: 'admin', component: AdminComponent },
@@ -86,9 +86,9 @@ const routes: Routes = [
   { path: 'admin/filter-artworks', component: FilterArtworksComponent },
   { path: 'admin/categories/photos', component: CategoriesComponent },
   { path: 'admin/categories/videos', component: CategoriesComponent },
-  { path: 'profile/:id', component: ProfileComponent },  
+  { path: 'profile/:id', component: ProfileComponent },
   // { path: 'admin/scores/:id', component: ScoreComponent },
-  { path: 'admin/score/:id', component:   ScoreComponent},
+  { path: 'admin/score/:id', component: ScoreComponent },
   { path: 'admin/artwork-score/:id', component: ArtworkScoreComponent },
   { path: 'admin/artworks/:id', component: ArtworksDetailComponent },
   { path: 'admin/artists', component: ArtistsComponent },
@@ -96,7 +96,7 @@ const routes: Routes = [
   { path: 'admin/team/profile/:id', component: ProfileComponent },
 
   {
-    path: 'vr-gallery', component: VrGalleryComponent, children: [
+    path: 'gallery', component: VrGalleryComponent, children: [
       {
         path: '',
         loadChildren: () => VrGalleryModule
@@ -122,22 +122,23 @@ const routes: Routes = [
     MatToolbarModule,
     MatGridListModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     NgbModule,
     MatDatepickerModule,
-    MatNativeDateModule, 
+    MatNativeDateModule,
     NgxNavbarModule,
-    // TabsModule
     MatExpansionModule,
-   LoadingBarRouterModule,
-   LoadingBarModule,
-   MatStepperModule,
-   PdfViewerModule 
-  //  ToastrModule.forRoot()   
+    LoadingBarRouterModule,
+    LoadingBarModule,
+    MatStepperModule,
+    PdfViewerModule
+    //  ToastrModule.forRoot()   
 
   ],
   declarations: [
-    CreateProfileComponent,
+    // CreateProfileComponent,
+    ArtworkModalComponent,
     AddArtworksComponent,
     VrGalleryComponent,
     HomeComponent,
@@ -164,7 +165,6 @@ const routes: Routes = [
     GuidelinesComponent,
     CampaignComponent,
     SuccessfulComponent,
-    TabsetComponent,
     ScoredArtworksComponent,
     ArtworkScoreComponent,
     ScoredItemComponent,
@@ -173,20 +173,22 @@ const routes: Routes = [
     ScoreArtworksComponent,
     SelectArtworksComponent,
     FilterItemComponent,
-    SelectItemComponent 
+    SelectItemComponent,
+    SignInComponent
 
 
 
   ],
   exports: [
     AdminComponent,
-    CreateProfileComponent,
+    // CreateProfileComponent,
     AddArtworksComponent,
     VrGalleryComponent,
     SidebarComponent,
     NavbarComponent,
     SiteComponent,
     HomeComponent,
+    ArtworkModalComponent,
     CategoriesComponent,
     ArtistsComponent,
     ProgressComponent,
@@ -206,7 +208,6 @@ const routes: Routes = [
     GuidelinesComponent,
     CampaignComponent,
     SuccessfulComponent,
-    TabsetComponent,
     ScoredArtworksComponent,
     ScoredItemComponent,
     UploadModalComponent,
@@ -214,7 +215,9 @@ const routes: Routes = [
     ScoreArtworksComponent,
     SelectArtworksComponent,
     FilterItemComponent,
-    SelectItemComponent 
+    SelectItemComponent,
+    SignInComponent
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

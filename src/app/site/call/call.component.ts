@@ -35,12 +35,12 @@ export class CallComponent implements OnInit {
   purpose: string;
   headingSize = 4;
 
-  backgroundImage: string;
-  submissionFormat: string;
-  submissionProcess: string;
-  participate: string;
-  timeline: string;
-  copyright: string;
+  backgroundImage: string = ''
+  submissionFormat: string = ''
+  submissionProcess: string = ''
+  participate: string = ''
+  copyright: string = ''
+  timelinePhoto: string = '';
 
   customOptions: OwlOptions = {
     loop: true,
@@ -130,7 +130,7 @@ export class CallComponent implements OnInit {
   }
 
   downloadSubjectConsentForm() {
-    const storageRef = this.storage.ref('consent/subjectConsentForm.pdf')
+    const storageRef = this.storage.ref('consent/Subject Consent Form.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
       FileSaver(data, "subject-consent-form.pdf")
@@ -147,7 +147,7 @@ export class CallComponent implements OnInit {
   }
 
   downloadArtistCOnsentForm() {
-    const storageRef = this.storage.ref('consent/artistConsentForm.pdf')
+    const storageRef = this.storage.ref('consent/Artist Consent Form.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
       FileSaver(data, "subject-consent-form.pdf");
@@ -230,7 +230,7 @@ export class CallComponent implements OnInit {
         this.submissionFormat = guidelines.submissionFormat
         this.submissionProcess = guidelines.submissionProcess
         this.copyright = guidelines.copyright
-        this.timeline = guidelines.timeline
+        this.timelinePhoto = guidelines.timeline
         this.participate = guidelines.participate
       })
   }

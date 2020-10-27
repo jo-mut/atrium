@@ -1,6 +1,7 @@
 <div class="custom-navbar">
   <nav ngxNavbarDynamicExpand class="navbar-light bg-light">
-    <img src="assets/images/logo.png" alt="">
+    <img src="assets/images/african art in context.png" alt="photos and video submissions during pandemic" title="logo
+      African art in context">
     <button class="navbar-toggler" type="button" (click)="collapse.toggle()" aria-controls="main-nav"
       aria-expanded="false" aria-label="Navigáció kapcsoló">
       <span class="navbar-toggler-icon d-flex align-items-center justify-content-center">
@@ -9,26 +10,34 @@
     <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/project/home']"[routerLinkActive]="'active'">Home</a>
+          <a class="nav-link" [routerLink]="['/project/home']" [routerLinkActive]="'active'">Home</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/guidelines']" [routerLinkActive]="'active'">Participation Guidelines</a>
+          <a class="nav-link" [routerLink]="['/project/guidelines']" [routerLinkActive]="'active'">Participation
+            Guidelines</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link" [routerLink]="['/project/stories']" [routerLinkActive]="'active'">Spotlight Stories</a>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/project/gallery']"   [routerLinkActive]="'active'" 
           [routerLinkActiveOptions]="{exact:true}">Gallery</a>
-        </li> -->
+        </li>
         <li class="nav-item ">
           <a class="nav-link mr-3" [routerLink]="['/project/team']" [routerLinkActive]="'active'">The Team</a>
         </li>
-        <button class=" btn btn-primary nav-item " (click)="goToSubmitArtworks()">
-          {{action}}
-        </button>
+        <div class="submit-btn mx-1" *ngIf="showSubmit">
+          <button class="btn btn-primary nav-item " (click)="goToSubmitArtworks()">
+            {{action}}
+          </button>
+        </div>
+        <div class="auth-btn mx-1" *ngIf="showAuthButton">
+          <button class="btn nav-item" (click)="logOut()">
+            {{login}}
+          </button>
+        </div>
       </ul>
     </ngx-navbar-collapse>
   </nav>
-  <ngx-loading-bar ref="router" [includeSpinner]="false" ></ngx-loading-bar>
+  <ngx-loading-bar ref="router" [includeSpinner]="false"></ngx-loading-bar>
 </div>

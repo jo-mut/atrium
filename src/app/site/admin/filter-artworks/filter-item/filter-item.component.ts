@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import { ArtWork } from 'src/app/models/artwork';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
+import { ArtworkModalComponent } from '../artwork-modal/artwork-modal.component';
 
 @Component({
   selector: 'app-filter-item',
@@ -24,6 +26,7 @@ export class FilterItemComponent implements OnInit {
 
 
   constructor(
+    private matDialog: MatDialog,
     private router: Router,
     private dbOperations: DbOperationsService
   ) { }
@@ -87,6 +90,18 @@ export class FilterItemComponent implements OnInit {
 
   playVideo() {
     this.api.pause();
+  }
+
+  lauchDialog(artwork: ArtWork, type: string) {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { 'artwork': artwork, 'modalType': type}
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(ArtworkModalComponent, dialogConfig);
   }
 
 

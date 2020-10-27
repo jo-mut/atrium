@@ -28,15 +28,12 @@ export class ArtworksComponent implements OnInit {
     public dbOperations: DbOperationsService) { }
 
   ngOnInit(): void {
-    
+    this.currentUser = localStorage.getItem('currentUser');
   }
 
   ngAfterViewInit() {
-    this.dbOperations.getCurrentUser().subscribe(user => {
-      this.currentUser = user.uid;
-      this.getAdminRole();
+    this.getAdminRole();
 
-    })
   }
 
 

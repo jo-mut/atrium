@@ -53,6 +53,7 @@ export class CampaignComponent implements OnInit {
   storyTwo: string;
 
 
+
   constructor(
     private config: NgbCarouselConfig,
     private matDialog: MatDialog,
@@ -247,6 +248,7 @@ export class CampaignComponent implements OnInit {
       this.bigPhoto = storiesData.bigPhoto;
       this.storyOne = storiesData.storyOne;
       this.storyTwo = storiesData.storyTwo;
+ 
     })
   }
 

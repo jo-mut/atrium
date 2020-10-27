@@ -14,7 +14,7 @@
     color: teal;
   }
 
-  li a:active{
+  li a:active {
     background-color: teal;
     color: white;
     height: 100%;
@@ -29,6 +29,13 @@
 
   img {
     width: 200px;
+  }
+
+  .auth-btn {
+    button {
+      color: white;
+      background-color: teal;
+    }
   }
 
 }

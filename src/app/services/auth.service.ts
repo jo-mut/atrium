@@ -6,12 +6,14 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore/public_api';
 import { User } from '../models/user';
 import { SignUpComponent } from '../auth/sign-up/sign-up.component';
 import { DbOperationsService } from './db-operations.service';
-import { Observable, from } from 'rxjs';
 import { switchMap, window } from 'rxjs/operators';
 import { finalize, tap, mapTo } from 'rxjs/operators';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { async } from '@angular/core/testing';
+import { Observable, of } from 'rxjs';
 import { MatStepper } from '@angular/material/stepper';
+import { auth, analytics } from 'firebase/app';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +23,7 @@ export class AuthService {
   downloadUrl: any = null;
   private authState: Observable<firebase.User>;
   emailSent = false;
-  currentUser = '';
-  @Output() emittedUser = new EventEmitter();
+  currentUser: string;
 
   constructor(
     private storage: AngularFireStorage,
@@ -37,16 +38,32 @@ export class AuthService {
   }
 
   async signIn(user: User) {
-    return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.currentUser = result.user.uid;
-          this.emittedUser.emit(user.userId);
-          console.log(this.currentUser)
-        });
-      }).catch((error) => {
+    this.afAuth.setPersistence(auth.Auth.Persistence.SESSION)
+      .then((res) => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+          .then((result) => {
+            this.ngZone.run(() => {
+              of(result.user.uid).subscribe(type => {
+                this.currentUser = type;
+                localStorage.setItem('currentUser', this.currentUser);
+              })
+            });
+          }).catch((error) => {
 
-      })
+          })
+
+      }).catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+
+
 
   }
 
@@ -63,6 +80,11 @@ export class AuthService {
                     const id = d.id;
                     const existingUser = d.data() as User;
                     let roles = existingUser.role;
+                    of(existingUser.userId).subscribe(type => {
+                      this.currentUser = type;
+                      localStorage.setItem('currentUser', this.currentUser);
+                    })
+                    console.log(this.currentUser + ' current user')
                     this.ngZone.run(() => {
                       if (roles.includes('filtering')) {
                         this.router.navigateByUrl('/project/admin/filter-artworks')
@@ -70,11 +92,11 @@ export class AuthService {
                         this.router.navigateByUrl('/project/admin')
                       } else if (roles.includes('artist')) {
                         this.router.navigateByUrl('/project/add-artworks')
-                      }  else if (roles.includes('scoring')) {
+                      } else if (roles.includes('scoring')) {
                         this.router.navigateByUrl('/project/admin/score')
-                      }  else if (roles.includes('selection')) {
+                      } else if (roles.includes('selection')) {
                         this.router.navigateByUrl('/project/admin/select-artworks')
-                      } else  {
+                      } else {
                         stepper.next();
                       }
                     })
@@ -96,7 +118,7 @@ export class AuthService {
         }
       })
     })
-      
+
   }
 
   convertErrorMessage(code: string): string {
@@ -130,13 +152,14 @@ export class AuthService {
         .then((res) => {
           user.userId = result.user.uid;
           user.password = '';
-          console.log(user.userId)
+          this.currentUser = result.user.uid;
+          user.role.push('artist')
+          console.log(user.userId + ' user uid')
           const userRef = this.dbOperations
             .usersCollection().doc(user.userId);
           const param = JSON.parse(JSON.stringify(user));
           return userRef.set(param)
             .then((result) => {
-              this.emittedUser.emit(user.userId);
               stepper.next();
               // sign in user after profile has been saved
             }).catch((error) => {
@@ -161,8 +184,7 @@ export class AuthService {
 
   async logout() {
     await this.afAuth.signOut();
-    // localStorage.removeItem('user');
-    // this.router.navigate(['admin/']);
+    localStorage.removeItem('currentUser');
   }
 
   async signInAnonymously(user: User) {
@@ -187,6 +209,7 @@ export class AuthService {
 
     })
   }
+
 
   // Send email verfificaiton when new user sign up
   sendVerificationMail() {
@@ -262,25 +285,25 @@ export class AuthService {
           console.log("sign in trial " + u.userId);
           let roles = u.role;
           this.ngZone.run(() => {
-            if (roles.includes('filtering')) {             
+            if (roles.includes('filtering')) {
               this.router.navigateByUrl('/project/admin/filter-artworks')
             }
-            
+
             if (roles.includes('moderator')) {
               this.router.navigateByUrl('/project/admin')
             }
-            
+
             if (roles.includes('artist')) {
               this.router.navigateByUrl('/project/add-artworks')
             }
-            
+
             if (roles.includes('scoring')) {
               this.router.navigateByUrl('/project/admin/score')
-            } 
-            
+            }
+
             if (roles.includes('selection')) {
               this.router.navigateByUrl('/project/admin/select-artworks')
-            } 
+            }
           })
         })
       }).catch((reject) => {
@@ -291,8 +314,8 @@ export class AuthService {
   // Sign out 
   signOut() {
     // return this.afAuth.signOut().then(() => {
-      // localStorage.removeItem('user');
-      // this.router.navigate(['/sign-in']);
+    // localStorage.removeItem('user');
+    // this.router.navigate(['/sign-in']);
     // })
   }
 

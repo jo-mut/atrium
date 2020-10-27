@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-3" *ngFor="let host of hosts">
             <div class="p-5">
-              <img class="img-fluid" [src]="host.img">
+              <img class="img-fluid" [src]="host.img" alt="host.alt" title="host.name">
             </div>
             <div class="host-info">
               <div class="card">
@@ -34,11 +34,12 @@
         <div class="row">
           <div class="col-md-6">
             <div class="bobby-pall mt-5">
-              <img [routerLink]="['/project/home']"  src="assets/images/gallery/bobby-logo.png">
+              <img [routerLink]="['/project/home']" src="assets/images/gallery/bobby-logo.png"
+                alt="African art in context photographer and project manager" title="Bobby Pall">
             </div>
           </div>
           <div class="col-md-6">
-            <div [routerLink]="['/project/home']"  class="mcf_logo">
+            <div [routerLink]="['/project/home']" class="mcf_logo">
               <img src="assets/images/mcf_logo.png" alt="">
             </div>
           </div>

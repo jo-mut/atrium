@@ -18,7 +18,4 @@ export class UploadModalComponent implements OnInit {
     this.uploadProgress = this.data.progress;
   }
 
- 
-
-
 }
