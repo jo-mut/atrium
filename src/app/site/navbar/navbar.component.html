@@ -9,29 +9,32 @@
     </button>
     <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/project/home']" [routerLinkActive]="'active'">Home</a>
+        <li class="nav-item hand active">
+          <a class="nav-link" [routerLink]="['/project/home']" routerLinkActive="activeLink">Home</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/guidelines']" [routerLinkActive]="'active'">Participation
+        <li class="nav-item hand ">
+          <a class="nav-link" [routerLink]="['/project/guidelines']" routerLinkActive="activeLink">Participation
             Guidelines</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/project/stories']" [routerLinkActive]="'active'">Spotlight Stories</a>
+        <li class="nav-item hand ">
+          <a class="nav-link" [routerLink]="['/project/stories']" routerLinkActive="activeLink">Spotlight Stories</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/project/gallery']"   [routerLinkActive]="'active'" 
+        <li class="nav-item hand">
+          <a class="nav-link" [routerLink]="['/project/gallery']"   routerLinkActive="activeLink" 
           [routerLinkActiveOptions]="{exact:true}">Gallery</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link mr-3" [routerLink]="['/project/team']" [routerLinkActive]="'active'">The Team</a>
+        <li class="nav-item hand ">
+          <a class="nav-link" [routerLink]="['/project/team']" routerLinkActive="activeLink">The Team</a>
         </li>
-        <div class="submit-btn mx-1" *ngIf="showSubmit">
+        <li class="nav-item hand ">
+          <a class="nav-link mr-5" [routerLink]="['/project/contact']" routerLinkActive="activeLink">Contact Us</a>
+        </li>
+        <div class="submit-btn hand" *ngIf="showSubmit">
           <button class="btn btn-primary nav-item " (click)="goToSubmitArtworks()">
             {{action}}
           </button>
         </div>
-        <div class="auth-btn mx-1" *ngIf="showAuthButton">
+        <div class="auth-btn mx-1 hand" *ngIf="showAuthButton">
           <button class="btn nav-item" (click)="logOut()">
             {{login}}
           </button>

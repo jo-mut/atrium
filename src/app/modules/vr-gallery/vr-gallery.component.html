@@ -1,26 +1,6 @@
 <div class="vr-gallery">
-  <a-scene fog="type: linear; color: #000; far: 16; near: 7">
+  <a-scene>
 
-    <!-- lights-->
-    <!-- Lighting -->
-    <a-light type="ambient" color="#ffffff"></a-light>
-
-    <a-entity light="type:ambient;color:#999999;intensity:10" position="0 0 0"></a-entity>
-
-    <!-- pathway lights-->
-    <a-entity light="type:spot;intensity:10;distance:7.5;decay:0.5;color:#ffffff;angle:360;castShadow:false"
-      position="-1.8 6 9.38"></a-entity>
-
-    <a-entity light="type:point;intensity:10;distance:8.5;decay:0.5;color:#ffffff;angle:360;castShadow:false"
-      position="-1.72 6.08 -1"></a-entity>
-
-    <!-- sports light-->
-    <a-entity id="sports-light"
-      light="type:spot;intensity:20;distance:8;decay:0.5;color:#cccccc;angle:360;castShadow:false"
-      position="-10.38 3.96 -4.76" id="sports-light"></a-entity>
-
-    <a-entity light="type:point;intensity:1.5;distance:12;decay:0.5;color:#0b57df;angle:360;castShadow:false"
-      position="-13 2.81 -2.85"></a-entity>
 
     <!-- Load Assets -->
     <a-assets>
@@ -31,6 +11,8 @@
       <img id="wall-brick" src="assets/images/other/brick.jpg">
       <img id="room-sign-1" src="assets/images/other/room-sign-1.png">
       <img id="room-sign-2" src="assets/images/other/room-sign-2.png">
+      <img id="sky" src="assets/images/other/wall-concrete.jpg">
+
 
       <!-- team -->
       <img id="team-poster" src="assets/images/team/poster.png">
@@ -277,11 +259,16 @@
       <a-plane position="0 6 0" rotation="90 0 0" height="9" width="9" color="black"></a-plane>
     </a-entity>
 
-    <!-- Ground -->    
-    <a-grid id="ground"  static-body material="src: #floor; repeat: 15 15" rotation="-90 0 0"></a-grid>
+    <!-- Ground -->
+    <a-grid id="ground" static-body material="src: #floor; repeat: 15 15" rotation="-90 0 0"></a-grid>
     <!-- Walls (used by map.js -->)
     <a-entity id="walls"></a-entity>
-    <!-- Sky -->
-    <a-sky id="sky" color="#000000"></a-sky>
+
+    <a-sky color="#ffffff"></a-sky>
+    <!-- sky -->
+    <!-- ground -->
+    <!-- <a-plane class="hasEvent" position="0 0 0" rotation="-90 0 0" geometry="width:200; height:200;"
+      material="src:#grass; repeat:111 111;"></a-plane> -->
+
   </a-scene>
 </div>

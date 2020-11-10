@@ -33,7 +33,6 @@ import {MatStepperModule} from '@angular/material/stepper';
     AppComponent,
     CreateProfileComponent,
     DndDirective,
-
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

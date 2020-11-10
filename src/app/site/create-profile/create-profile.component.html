@@ -37,7 +37,7 @@
                   <button class="btn" mat-button (click)="goBack(stepper)">Back</button>
                 </div>
                 <div class="col-6 mt-3">
-                  <button class="btn" mat-button (click)="creatAcountAndGoForward(stepper)">Next</button>
+                  <button class="btn" mat-button  (click)="creatAcountAndGoForward(stepper)">Next</button>
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div>
                   <mat-form-field>
-                    <input (dateInput)="OnDateChange($event.value)" [(ngModel)]="user.birthDate" name="birthDate"
+                    <input class="form-control"(dateInput)="OnDateChange($event.value)" [(ngModel)]="user.birthDate" name="birthDate"
                       #birthDate="ngModel" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="picker" />
                     <div *ngIf="firstForm.submitted && birthDate.invalid" class="invalid-feedback">
                       <div *ngIf="birthDate.errors.required">

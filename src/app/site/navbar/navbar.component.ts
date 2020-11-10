@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   userId: string = '';
   showSubmit: boolean = false;
   showAuthButton: boolean = true;
+  // activeLink: any;
   private authState: Observable<firebase.User>;
 
   constructor(private router: Router,
@@ -33,10 +34,13 @@ export class NavbarComponent implements OnInit {
     this.userId = localStorage.getItem('currentUser');
     console.log('current user ' + this.userId);
     console.log('current user ' + this.role);
-
-
+    // this.activeLink = {
+    //   "color": "teal"
+    // }
 
   }
+
+
 
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.

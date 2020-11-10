@@ -1,13 +1,19 @@
 <div class="artists">
-    <div class="conatainer-fluid p-0">
-        <div class="row">
-            <div class="col-md-4" *ngFor="let artist of artists">
-                <div class="artist">
-                    <div class="card">
-                        <img class="img-fluid" src="{{artist.profileImage}}" alt="">
-                    </div>
-                </div>
-            </div>
+  <div class="conatainer-fluid p-0">
+    <div class="row">
+      <div class="col-md-3 mt-3" *ngFor="let artist of artists">
+        <div class="card p-3">
+          <div class="artist">
+            <p class="mb-0"><strong>Name: </strong>{{artist.firstName + ' ' + artist.lastName}}</p>
+            <p class="mb-0"><strong>Email: </strong>{{artist.email}}</p>
+            <p class="mb-0"><strong>Phone Number: </strong>{{artist.phoneNumber}}</p>
+            <p class="mb-0"><strong>Place: </strong>{{artist.country}}</p>
+            <p class="mb-0"><strong>Nationality: </strong>{{artist.nationality}}</p>
+            <p class="mb-0"><strong>Birth Date: </strong>{{artist.birthDate}}</p>
+            <p class="mb-0"><strong>Address: </strong>{{artist.address}}</p>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -28,7 +28,7 @@
     "@ngx-loading-bar/router": "^5.1.0",
     "@types/file-saver": "^2.0.1",
     "@videogular/ngx-videogular": "^2.0.0",
-    "aframe": "^1.0.4",
+    "aframe": "^1.0.3",
     "angular-mgl-timeline": "^0.3.3",
     "bootstrap": "^4.4.1",
     "file-saver": "^2.0.2",
@@ -43,6 +43,7 @@
     "ngx-toastr": "^13.1.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
+    "sweetalert2": "^10.9.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

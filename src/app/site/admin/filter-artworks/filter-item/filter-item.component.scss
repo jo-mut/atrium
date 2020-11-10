@@ -18,10 +18,13 @@
             }
           }
 
-          pdf-viewer {
-            display: block;
-            width: 250px;
-          }
+       .pdf {
+        width: 250px;
+        pdf-viewer {
+          display: block;
+          width: 250px;
+        }
+       }
         
         
     }

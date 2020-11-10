@@ -153,7 +153,6 @@ export class AuthService {
           user.userId = result.user.uid;
           user.password = '';
           this.currentUser = result.user.uid;
-          user.role.push('artist')
           console.log(user.userId + ' user uid')
           const userRef = this.dbOperations
             .usersCollection().doc(user.userId);
@@ -183,15 +182,17 @@ export class AuthService {
   }
 
   async logout() {
-    await this.afAuth.signOut();
-    localStorage.removeItem('currentUser');
+    await this.afAuth.signOut().then(res => {
+      localStorage.removeItem('currentUser');
+    }).catch((err => {
+      
+    }))
   }
 
   async signInAnonymously(user: User) {
     await this.afAuth.signInAnonymously().then((res) => {
       console.log(res.user.uid);
       user.userId = res.user.uid;
-      user.role.push('artist')
       user.password = '';
       console.log(user.userId)
       const userRef = this.dbOperations

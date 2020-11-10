@@ -27,7 +27,19 @@
         
 
       }
-      mat-form-field,
+
+      mat-form-field {
+        width: 100%;
+        input {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 0.5em;
+            border-color: teal;
+            color: white;
+        }
+    }
+
+
       input,
       select,
       option {
@@ -45,7 +57,7 @@
 
 
       button {
-        background-color: black;
+        background-color: teal;
         color: white;
         border: none;
         width: 100%;

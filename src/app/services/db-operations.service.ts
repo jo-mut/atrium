@@ -14,6 +14,8 @@ import { TeamData } from '../site/team/team.component';
 import { HomeData } from '../site/home/home.component';
 import { StoriesData } from '../site/campaign/campaign.component';
 import { Guidelines } from '../site/call/call.component';
+import { Contact } from '../site/contact-us/contact-us.component';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Injectable({
@@ -127,6 +129,10 @@ export class DbOperationsService {
     return this.firestore.collection<Score>('scores');
   }
 
+  messageCollections() {
+    return this.firestore.collection<Contact>('messages');
+  }
+
   createCurator(curator: Curator, file?: File) {
     let param = null;
     let percentage = null
@@ -210,5 +216,10 @@ export class DbOperationsService {
     });
     return promise;
   }
+
+  successNotification(){
+    Swal.fire('You have successfully submitted your artwork')
+  }
+
 
 }

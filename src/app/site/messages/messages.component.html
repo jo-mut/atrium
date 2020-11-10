@@ -1,0 +1,19 @@
+<div class="messages">
+  <div class="conatainer-fluid p-0">
+    <div class="row" class="col-md-12 mt-3" *ngFor="let message of messages">
+      <div class="message">
+        <div class="card p-3">
+          <p class="mb-0"><strong>Name:</strong> {{message.firstName + ' ' + message.lastName}}</p>
+          <p class="mb-0"><strong>Email:</strong> {{message.email}}</p>
+          <p class="mb-0"><strong>Phone Number:</strong> {{message.phoneNumber}}</p>
+          <div class="msg-text">
+            <p class="mb-0"><strong>Message:</strong></p>
+            <p class="msg mb-0">
+              {{message.message}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

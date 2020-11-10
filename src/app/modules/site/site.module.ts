@@ -60,9 +60,12 @@ import { SelectItemComponent } from 'src/app/site/admin/select-artworks/select-i
 import { FilterItemComponent } from 'src/app/site/admin/filter-artworks/filter-item/filter-item.component';
 // import { ToastrModule } from 'ngx-toastr';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { SignInComponent } from 'src/app/site/sign-in/sign-in.component';
 import { MatInputModule } from '@angular/material/input';
 import { ArtworkModalComponent } from 'src/app/site/admin/filter-artworks/artwork-modal/artwork-modal.component';
+import { SignInComponent } from 'src/app/site/submission/sign-in/sign-in.component';
+import { SubmitComponent } from 'src/app/site/submission/submit/submit.component';
+import { ContactUsComponent } from 'src/app/site/contact-us/contact-us.component';
+import { MessagesComponent } from 'src/app/site/messages/messages.component';
 
 
 const routes: Routes = [
@@ -74,12 +77,15 @@ const routes: Routes = [
   { path: 'guidelines', component: CallComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'artists', component: ArtistsComponent },
   // { path: 'gallery', component: ArtworksComponent },
   { path: 'add-artworks', component: AddArtworksComponent },
+  { path: 'submit', component: SubmitComponent },
+  { path: 'contact', component: ContactUsComponent },
   { path: 'tips', component: TipsComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'admin/artists', component: ArtistsComponent },
   { path: 'admin/artworks', component: ArtworksComponent },
+  { path: 'admin/messages', component: MessagesComponent },
   { path: 'admin/score', component: ScoreArtworksComponent },
   { path: 'admin/scored-artworks', component: ScoredArtworksComponent },
   { path: 'admin/select-artworks', component: SelectArtworksComponent },
@@ -138,9 +144,13 @@ const routes: Routes = [
   ],
   declarations: [
     // CreateProfileComponent,
+    MessagesComponent,
+    ContactUsComponent,
     ArtworkModalComponent,
     AddArtworksComponent,
     VrGalleryComponent,
+    SignInComponent,
+    SubmitComponent,
     HomeComponent,
     SiteComponent,
     ProgressComponent,
@@ -182,6 +192,8 @@ const routes: Routes = [
   exports: [
     AdminComponent,
     // CreateProfileComponent,
+    MessagesComponent,
+    ContactUsComponent,
     AddArtworksComponent,
     VrGalleryComponent,
     SidebarComponent,
@@ -205,6 +217,8 @@ const routes: Routes = [
     TermModalComponent,
     HostProfileModalComponent,
     TeamComponent,
+    SignInComponent,
+    SubmitComponent,
     GuidelinesComponent,
     CampaignComponent,
     SuccessfulComponent,

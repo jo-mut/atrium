@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, HostListener, Input } from '@angular/core';
 import { ArtWork } from 'src/app/models/artwork';
 import { Upload } from "../../interfaces/upload";
 import { DbOperationsService } from "../../services/db-operations.service";
@@ -12,6 +12,10 @@ import { UploadModalComponent } from './upload-modal/upload-modal.component';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, tap, mapTo } from 'rxjs/operators';
 import { MatStepper } from '@angular/material/stepper';
+import { saveAs as FileSaver } from "file-saver";
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-artworks',
@@ -20,6 +24,8 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class AddArtworksComponent implements OnInit {
   @ViewChild('fileDropRef', { static: false }) fileDropEl: ElementRef;
+  @Input() progress = 0;
+  uploadProgress: Observable<number>;
 
   artwork: ArtWork = new ArtWork();
   extraDetails: ExtraDetails = new ExtraDetails();
@@ -40,10 +46,12 @@ export class AddArtworksComponent implements OnInit {
   formWidth = 100;
   answered = false;
   currentUser = '';
+  disabled = false;
   isLinear = true;
 
 
   constructor(
+    private router: Router,
     private matDialog: MatDialog,
     private fauth: AngularFireAuth,
     private storage: AngularFireStorage,
@@ -195,18 +203,20 @@ export class AddArtworksComponent implements OnInit {
 
   }
 
-
   downloadSubjectConsentForm() {
     const storageRef = this.storage.ref('consent/Subject Consent Form.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
+      FileSaver(data, "subject-consent-form.pdf")
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';
       xhr.onload = function (event) {
         var blob = xhr.response;
+        FileSaver(blob, "subject-consent-form.pdf");
+
       };
-      xhr.open('GET', data);
-      xhr.send();
+      // xhr.open('GET', data);
+      // xhr.send();
     })
   }
 
@@ -214,16 +224,18 @@ export class AddArtworksComponent implements OnInit {
     const storageRef = this.storage.ref('consent/Artist Consent Form.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
+      FileSaver(data, "subject-consent-form.pdf");
+
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';
       xhr.onload = function (event) {
         var blob = xhr.response;
+
       };
-      xhr.open('GET', data);
-      xhr.send();
+      // xhr.open('GET', data);
+      // xhr.send();
     })
   }
-
   public OnDateChange(event): void {
     this.artwork.shotDate = event;
   }
@@ -253,11 +265,13 @@ export class AddArtworksComponent implements OnInit {
             this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
               .then((res) => {
                 console.log(this.artwork.percentage)
+                this.successNotification();
               }).catch((rej) => {
                 window.alert(rej.message)
               })
             console.log('on dropped' + this.submittedWorks.length);
             const works = this.dbOperations.latestArtWorks;
+            this.uploadProgress = this.artwork.bytes;
           }
         });
         return percentage
@@ -267,6 +281,31 @@ export class AddArtworksComponent implements OnInit {
 
 
   }
+
+  alertConfirmation(){
+    Swal.fire({
+      title: 'Artwork Submission',
+      text: 'You have successfully submitted your artwork',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, go ahead.',
+      cancelButtonText: 'No, let me think'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Submitted!',
+          'Artwork submitted successfully.',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Product still in our database.)',
+          'error'
+        )
+      }
+    })
+  }  
+
 
   uploadArtistConsentForm() {
     if (this.artistConsentForm != null) {
@@ -303,59 +342,13 @@ export class AddArtworksComponent implements OnInit {
   }
 
 
-  uploadConsentForms() {
-    var promise = new Promise((resolve, reject) => {
-      for (let pdf of this.pdfs) {
-        if (pdf.name === 'subjectConsent') {
-          let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
-          this.artwork.userId = this.currentUser;
-          this.extraDetails.userId = this.currentUser;
-          const path = `artworks/documents/${Date.now() + ''}_${pdf.file.name}`;
-          // Reference to storage bucket
-          const ref = this.storage.ref(path);
-          // The main task
-          const task = this.storage.upload(path, pdf.file);
-          // Progress monitoring
-          let percentage = task.percentageChanges();
-          const snapshot = task.snapshotChanges().pipe(finalize(async () => {
-            let downloadUrl = await ref.getDownloadURL().toPromise();
-
-            this.artwork.subjectConsentForm = downloadUrl;
-
-          })
-          ).subscribe();
-          return percentage
-        }
-
-        if (pdf.name === 'artistConsent') {
-          let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
-          this.artwork.userId = this.currentUser;
-          this.extraDetails.userId = this.currentUser;
-          const path = `artworks/documents/${Date.now() + ''}_${pdf.file.name}`;
-          // Reference to storage bucket
-          const ref = this.storage.ref(path);
-          // The main task
-          const task = this.storage.upload(path, pdf.file);
-          // Progress monitoring
-          let percentage = task.percentageChanges();
-          const snapshot = task.snapshotChanges().pipe(finalize(async () => {
-            let downloadUrl = await ref.getDownloadURL().toPromise();
-
-            this.artwork.artistConsentForm = downloadUrl;
-
-
-          })
-          ).subscribe();
-          return percentage
-        }
-
-      }
-    });
-
-    return promise;
+  successNotification(){
+    Swal.fire('You have successfully submitted your artwork')
   }
 
+
   onSubmit() {
+    this.disabled = true;
     if (this.submittedWorks.length <= 2) {
       console.log(this.artwork.shotDate);
       console.log(this.artistConsentForm)

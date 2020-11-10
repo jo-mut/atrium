@@ -1,24 +1,20 @@
 import { Component, HostListener, NgZone, OnInit } from '@angular/core';
-import { User } from "../../models/user";
-import { AuthService } from "../../services/auth.service";
-import { Router } from "@angular/router";
-import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { DbOperationsService } from 'src/app/services/db-operations.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { TermModalComponent } from './term-modal/term-modal.component';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { invalid } from '@angular/compiler/src/render3/view/util';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
-
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
+import { DbOperationsService } from 'src/app/services/db-operations.service';
+import { TermModalComponent } from '../../create-profile/term-modal/term-modal.component';
 
 @Component({
-  selector: 'app-create-profile',
-  templateUrl: './create-profile.component.html',
-  styleUrls: ['./create-profile.component.scss']
+  selector: 'app-submit',
+  templateUrl: './submit.component.html',
+  styleUrls: ['./submit.component.scss']
 })
-export class CreateProfileComponent implements OnInit {
+export class SubmitComponent implements OnInit {
 
   user: User = new User();
   submissionUser = new User();
@@ -41,6 +37,9 @@ export class CreateProfileComponent implements OnInit {
   headingSize = '2.0em';
   disableProfileCreate = true;
 
+  isValidEmail: string = '';
+  isValidPassword: string = '';
+
   constructor(private authService: AuthService,
     public ngZone: NgZone,
     private matDialog: MatDialog,
@@ -55,7 +54,6 @@ export class CreateProfileComponent implements OnInit {
       this.currentUser = user;
     })
 
-    
     let timeIn18yrs = Date.now() - 568036800000
     // get year, date, and month from timestamp;
     let d = new Date(timeIn18yrs);
@@ -64,41 +62,9 @@ export class CreateProfileComponent implements OnInit {
     let month = d.getMonth();
     this.maxDate = new Date(yr, date, month)
 
-  }
+    console.log(this.maxDate)
 
-
-  tinyAlert(){
-    Swal.fire('Hey there!');
   }
-  
-  successNotification(){
-    Swal.fire('Hi', 'We have been informed!', 'success')
-  }
-  
-  alertConfirmation(){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'This process is irreversible.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      cancelButtonText: 'No, let me think'
-    }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Removed!',
-          'Product removed successfully.',
-          'success'
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Product still in our database.)',
-          'error'
-        )
-      }
-    })
-  }  
 
   onFileSelected(event) {
     this.file = event.target.files[0];
@@ -108,6 +74,7 @@ export class CreateProfileComponent implements OnInit {
   public OnDateChange(event): void {
     let timeDiff = Math.abs(Date.now() - event.getTime());
     let age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+    console.log(timeDiff)
 
     if (age < 18) {
       // window.alert('Sorry! The minimum age to participate is 18yrs old')
@@ -136,7 +103,17 @@ export class CreateProfileComponent implements OnInit {
     this.authService.register(this.user, stepper).then(() => {
       this.authService.checkIfUserExists(this.user, stepper).then(() => {
         this.ngZone.run(() => {
-          stepper.next();
+          if (this.user.email != null && this.user.password != null) {
+            stepper.next();
+          } else if (this.user.email != null) {
+            this.isValidEmail = 'Please enter a valid email'
+          } else if (this.user.password != null) {
+            this.isValidPassword = 'Please enter a valid password'
+          } else if (this.user.password.length < 8) {
+            this.isValidPassword = 'Your password must have more than 8 characters';
+          } else {
+
+          }
         })
       })
     }).catch((error) => {
@@ -144,7 +121,17 @@ export class CreateProfileComponent implements OnInit {
       this.authService.signIn(this.user).then(() => {
         this.authService.checkIfUserExists(this.user, stepper).then(() => {
           this.ngZone.run(() => {
-            stepper.next();
+            if (this.user.email != null && this.user.password != null) {
+              stepper.next();
+            } else if (this.user.email != null) {
+              this.isValidEmail = 'Please enter a valid email'
+            } else if (this.user.password != null) {
+              this.isValidPassword = 'Please enter a valid password'
+            } else if (this.user.password.length < 8) {
+              this.isValidPassword = 'Your password must have more than 8 characters';
+            } else {
+
+            }
           })
         })
       })
@@ -159,7 +146,7 @@ export class CreateProfileComponent implements OnInit {
     this.social.push(this.youtube);
     this.user.socialMedia = this.social;
     console.log(this.user)
-    this.authService.saveUserProfileInfo(this.user)
+    this.authService.saveUserProfileInfo(this.user);
   }
 
 

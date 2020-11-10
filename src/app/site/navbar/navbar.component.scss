@@ -10,19 +10,28 @@
     font-weight: bolder;
   }
 
+  .activeLink {
+    background-color: lightgray;
+   
+  }
+
   li a:hover {
-    color: teal;
+    color: white;
+    background-color: teal;
   }
 
   li a:active {
-    background-color: teal;
     color: white;
-    height: 100%;
+  }
+
+  .hand:hover {
+    cursor: pointer;
+    cursor: hand;
   }
 
   #main-nav button {
     color: white;
-    background-color: black;
+    background-color: teal;
     border: none;
     width: 100px;
   }

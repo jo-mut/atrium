@@ -5,15 +5,18 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [ {
+    ], "rewrites": [ 
+      {
       "source": "**",
       "destination": "/index.html"
-    } ]
+      },
+      {
+        "source": "/sitemap",
+        "destination": "/sitemap.xml"
+      }
+  ]
   },
   "database": {
     "rules": "database.rules.json"
   }
 }
-
-
