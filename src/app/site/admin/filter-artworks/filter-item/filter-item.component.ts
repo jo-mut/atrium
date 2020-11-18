@@ -97,8 +97,8 @@ export class FilterItemComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.width = '80%';
-    dialogConfig.height = '80%';
+    dialogConfig.width = '70%';
+    dialogConfig.height = '90%';
     dialogConfig.data = { 'artwork': artwork, 'modalType': type}
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(ArtworkModalComponent, dialogConfig);

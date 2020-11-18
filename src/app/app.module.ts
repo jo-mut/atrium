@@ -23,10 +23,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
 import { SiteRoutingModule } from './modules/site/site.module';
 import { CreateProfileComponent } from './site/create-profile/create-profile.component';
-import { FormsModule  } from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatStepperModule} from '@angular/material/stepper';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatInputModule,
     MatStepperModule,
     MatDatepickerModule,
-    MatNativeDateModule, 
+    MatNativeDateModule,
     AngularFireAnalyticsModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,

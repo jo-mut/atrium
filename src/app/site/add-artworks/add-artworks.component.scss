@@ -1,74 +1,86 @@
 .add-artwork {
-    min-height: 100vh;
-    max-height: 100vh;
-    background-image: url('/assets/images/gallery/sample/picture7.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    overflow: auto;
-    max-height: 100vh;
-  
-    .artwork-bg {
-      background-color: rgba(0, 0, 0, 0.8);
-  
-      .container-fluid {
-        width: 100%;
-  
-        .card {
-          background-color: rgba(0, 0, 0, 0.6);
-          padding: 1em;
-          border: none;
-          color: whitesmoke;
-          border-radius: 1em;  
-         
-        }
+  min-height: 100vh;
+  max-height: 100vh;
+  background-image: url('/assets/images/gallery/sample/picture7.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: auto;
 
-        mat-form-field {
-          width: 100%;
-          input {
-              width: 100%;
-              background-color: rgba(0, 0, 0, 0.9);
-              border-radius: 0.5em;
-              border-color: teal;
-              color: white;
-          }
+  .mat-form-field {
+    margin-right: 8px;
+  }
+
+  .artwork-bg {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    min-height: 100vh;
+    .container-fluid {
+      width: 100%;
+      height: 100%;
+      .hand:hover {
+        cursor: pointer;
+        cursor: hand;
       }
 
-      
-        input,
-        select,
-        option, textarea {
+
+      .card {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 1em;
+        border: none;
+        color: whitesmoke;
+        border-radius: 1em;
+
+      }
+
+      mat-form-field {
+        width: 100%;
+
+        input {
+          width: 100%;
           background-color: rgba(0, 0, 0, 0.9);
           border-radius: 0.5em;
           border-color: teal;
           color: white;
         }
-  
-        h3 {
-          text-align: center;
-          font-size: 2.0em;
-        }
+      }
 
-        p {
-            color: whitesmoke;
-        }
-  
-        .pdf-consent {
-          background-color: teal;
-          img {
-            width: 30px;
-            height: 30px;
-          }
-        }
-  
-        button {
-          background-color: teal;
-          color: white;
-          border: none;
-          width: 100%;
+
+      input,
+      select,
+      option,
+      textarea {
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 0.5em;
+        border-color: teal;
+        color: white;
+      }
+
+      h3 {
+        text-align: center;
+        font-size: 2.0em;
+      }
+
+      p {
+        color: whitesmoke;
+      }
+
+      .pdf-consent {
+        background-color: teal;
+
+        img {
+          width: 30px;
+          height: 30px;
         }
       }
-  
+
+      button {
+        background-color: teal;
+        color: white;
+        border: none;
+        width: 100%;
+      }
     }
+
   }
-  
+}

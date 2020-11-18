@@ -13,7 +13,7 @@ export class VrGalleryComponent implements OnInit {
 
   exhibition: ArtWork = new ArtWork();
   id: number = 1595330004864;
-  image = "https://cdn.pixabay.com/photo/2015/09/16/08/55/online-942406_960_720.jpg";
+  image = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00";
 
   constructor(public dbOperations: DbOperationsService,
     public route: ActivatedRoute) {
@@ -26,7 +26,7 @@ export class VrGalleryComponent implements OnInit {
   }
 
   getExhibitionDetail(id: string) {
-    this.dbOperations.getExhibitionDetail()
+    this.dbOperations.artworksCollection()
       .ref.where('id', '==', id).onSnapshot(data => {
         data.docs.forEach(d => {
           const id = d.id;
@@ -75,12 +75,12 @@ export class VrGalleryComponent implements OnInit {
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 4, 
+   
       
-        
-
       ],
       "height": 19,
       "width": 19
@@ -90,10 +90,13 @@ export class VrGalleryComponent implements OnInit {
     document.querySelector('a-scene').addEventListener('render-target-loaded', () => {
       const WALL_SIZE = 3;
       const WALL_HEIGHT = 15;
+      const WALL_WIDTH = 10;
+
       const el = document.querySelector('#walls');
       let playerPos
 
       for (var x = 0; x < map.height; x++) {
+        console.log(x)
         for (var y = 0; y < map.width; y++) {
 
           const i = (y * map.width) + x;
@@ -105,7 +108,7 @@ export class VrGalleryComponent implements OnInit {
             el.appendChild(wall);
 
             wall.setAttribute('width', WALL_SIZE.toString());
-            wall.setAttribute('height', WALL_HEIGHT.toString());
+            wall.setAttribute('height', WALL_WIDTH.toString());
             wall.setAttribute('depth', WALL_SIZE.toString());
             wall.setAttribute('position', position);
             wall.setAttribute('color', '#fff');

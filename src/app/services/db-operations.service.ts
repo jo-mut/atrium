@@ -3,9 +3,9 @@ import { ArtWork } from '../models/artwork';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, tap, mapTo } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Curator } from '../models/curator';
 import { ExtraDetails } from '../models/extraDetails';
@@ -26,6 +26,11 @@ export class DbOperationsService {
   docId: string;
   userId: string;
   latestArtWorks: ArtWork[] = [];
+  uploadingArtwork: ArtWork = new ArtWork();
+  artwork: ArtWork = new ArtWork();
+  extraDetails: ExtraDetails = new ExtraDetails();
+  file: File = null;
+  percentage: Observable<number> = of(0)
   private authState: Observable<firebase.User>;
 
 
@@ -159,67 +164,37 @@ export class DbOperationsService {
     return percentage;
   }
 
-  uploadArtwork(file: File, artwork: ArtWork, extraDetails: ExtraDetails) {
-    var promise = new Promise((resolve, reject) => {
-      let param = null;
-      let percentage = null
-      if (file != null) {
-        let path = ''
-        this.docId = Date.now() + '';
-        if (file.type.includes('video')) {
-          artwork.type = 'video';
-          path = `artworks/videos/${Date.now() + ''}_${file.name}`;
-          console.log(path)
-        }
-
-        if (file.type.includes('image')) {
-          artwork.type = 'image';
-          path = `artworks/images/${Date.now() + ''}_${file.name}`;
-          console.log(path)
-
-        }
+  uploadSubjectConsentForm(subjectConsentForm: any, artwork: ArtWork, 
+    file: File, extraDetails: ExtraDetails) {
+    if (subjectConsentForm != null) {
+      let ext = subjectConsentForm.name.substring(subjectConsentForm.name.lastIndexOf('.') + 1);
+      if (ext === 'pdf') {
+        artwork.userId = localStorage.getItem('currentUser');
+        extraDetails.userId = localStorage.getItem('currentUser');
+        const path = `artworks/documents/${Date.now() + ''}_${subjectConsentForm.name}`;
         // Reference to storage bucket
         const ref = this.storage.ref(path);
         // The main task
-        const task = this.storage.upload(path, file);
+        const task = this.storage.upload(path, subjectConsentForm);
         // Progress monitoring
-        percentage = task.percentageChanges();
+        let percentage = task.percentageChanges();
         const snapshot = task.snapshotChanges().pipe(finalize(async () => {
           let downloadUrl = await ref.getDownloadURL().toPromise();
-
-          artwork.name = file.name;
-          artwork.artworkId = this.generatePushId();
-          artwork.id = this.docId;
-          artwork.url = downloadUrl;
-          artwork.status = 'filter';
-          artwork.createdAt = new Date().toISOString();
-          artwork.updatedAt = '';
-          console.log(JSON.parse(JSON.stringify(artwork)))
-          console.log(JSON.parse(JSON.stringify(extraDetails)))
-          const extra = JSON.parse(JSON.stringify(extraDetails));
-          const param = JSON.parse(JSON.stringify(artwork));
-
-          this.artworksCollection().doc(artwork.artworkId).set(param);
-          this.interviewssCollection().doc(artwork.artworkId).set(extra);
-          this.router.navigateByUrl('project')
+          artwork.subjectConsentForm = downloadUrl;
 
         })
-        ).subscribe();
-        artwork.name = file?.name;
-        artwork.bytes = snapshot;
-        artwork.lastModified = file?.lastModified + '';
-        artwork.percentage = percentage;
-        this.latestArtWorks.push(artwork);
+        ).subscribe(data => {
+          if (data.bytesTransferred == data.totalBytes) {
+              this.artwork = artwork;
+              this.extraDetails = extraDetails;
+              this.file = file;
+              this.router.navigateByUrl('/project/submit')
+          }
+        });
+        return percentage
+
       }
-
-      return percentage;
-    });
-    return promise;
+    }
   }
-
-  successNotification(){
-    Swal.fire('You have successfully submitted your artwork')
-  }
-
 
 }

@@ -1,178 +1,274 @@
-<div class="add-artwork" (window:resize)="onResize($event)">
-  <div class="artwork-bg">
-    <div class="container-fluid py-5" [style.width.%]="formWidth">
-      <div class="artwork-form py-5">
-        <div class="card text-center mt-3">
-          <div class="profile-form-title">
-            <h2>Select your artwork for submission</h2>
-            <p>Please note that you are only allowed to submit only two photos and/or one video of 60 seconds</p>
-          </div>
-        </div>
-        <form #artworkForm="ngForm" (ngSubmit)="artworkForm.form.valid && onSubmit(artworkForm)">
-          <div class="artwork-type">
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <label>Browse a photograph or video to submit</label>
-                <input type="file" id="file" class="form-control" #userPhoto (change)="onFileSelected($event)"
-                  name="image" autocomplete="off" />
-                <small class="help-text">Select a photo or video from your device</small>
-              </div>
-            </div>
+<div class="vr-gallery">
+  <a-scene>
 
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <input type="file" id="file" class="form-control" #userPhoto (change)="onConsentSelected($event)"
-                  name="image" autocomplete="off" />
-                <small class="help-text">Please download, fill and upload the consent form</small>
-                <div class="pdf-consent p-2 mt-3 d-flex" (click)="downloadConsentForm()">
-                  <img src="assets/images/pdf.png" alt="">
-                  <p class="m-2">Download consent form</p>
-                </div>
-              </div>
-            </div>
 
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <div>
-                  <label>Date Shot</label>
-                </div>
-                <mat-form-field>
-                  <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
-                  <mat-datepicker-toggle matSuffix [for]="picker">
-                  </mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div>
-                <small class="help-text">Which date did you shoot this? </small>
-              </div>
-            </div>
+    <!-- Load Assets -->
+    <a-assets>
+      <!-- global -->
+      <img id="floor" src="assets/images/other/floor.jpg">
+      <img id="wall" src="assets/images/other/wall-concrete.jpg">
+      <img id="wall-secret" src="assets/images/other/wall-concrete-secret.jpg">
+      <img id="wall-brick" src="assets/images/other/brick.jpg">
+      <img id="room-sign-1" src="assets/images/other/room-sign-1.png">
+      <img id="room-sign-2" src="assets/images/other/room-sign-2.png">
+      <img id="sky" src="assets/images/other/wall-concrete.jpg">
 
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <label>Town/Country</label>
-                <input type="text" name="place" #place="ngModel" class="form-control" [(ngModel)]="artwork.place"
-                  [ngClass]="{ 'is-invalid': artworkForm.submitted && place.invalid }" required>
-                <div *ngIf="artworkForm.submitted && place.invalid" class="invalid-feedback">
-                  <div *ngIf="place.errors.required">Please describe to us your normal routine prior to Covid - 19
-                  </div>
-                  <small class="help-text">Tell us your country</small>
-                </div>
-              </div>
-            </div>
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <label>Title</label>
-                <input type="text" name="title" #title="ngModel" class="form-control" [(ngModel)]="artwork.title"
-                  [ngClass]="{ 'is-invalid': artworkForm.submitted && title.invalid }" required>
-                <div *ngIf="artworkForm.submitted && title.invalid" class="invalid-feedback">
-                  <div *ngIf="title.errors.required">Please describe to us your normal routine prior to Covid - 19
-                  </div>
-                  <small class="help-text">What is the title of this submission?</small>
-                </div>
-              </div>
-            </div>
 
-            <div class="card p-3 mt-3">
-              <div class="form-group">
-                <label>Description</label>
-                <input type="text" name="description" #description="ngModel" class="form-control"
-                  [(ngModel)]="artwork.description" maxlength="150" required
-                  [ngClass]="{ 'is-invalid': artworkForm.submitted && description.invalid }">
-                <div *ngIf="artworkForm.submitted && description.invalid" class="invalid-feedback">
-                  <div *ngIf="description.errors.required">Please describe to us your normal routine prior to Covid
-                    - 19
-                  </div>
-                  <small class="help-text">Describe your submission in 150 words</small>
-                </div>
-              </div>
-            </div>
+      <!-- team -->
+      <img id="team-poster" src="{{image}}">
+      <img id="team-arcadio" src="assets/images/team/arcadio.png">
+      <img id="team-dan" src="assets/images/team/dan.png">
+      <img id="team-dustin" src="assets/images/team/dustin.png">
+      <img id="team-judy" src="assets/images/team/judy.png">
+      <img id="team-maceij" src="assets/images/team/maceij.png">
+      <img id="team-porfirio" src="{{image}}">
 
-            <div class="challenges" *ngIf="answered">
-              <div class="card text-center p-3 mt-3">
-                <h3>Please tell us a bit about your work</h3>
-              </div>
-              <div class="card p-3 mt-3">
-                <div class="form-group">
-                  <label>Challenges</label>
-                  <textarea [(ngModel)]="extraDetails.challenges" #challenges="ngModel" maxlength="150" required
-                    class="form-control" name="challenges" id="challenges" rows="3"
-                    [ngClass]="{ 'is-invalid': artworkForm.submitted && challenges.invalid }"></textarea>
-                  <div *ngIf="artworkForm.submitted && challenges.invalid" class="invalid-feedback">
-                    <div *ngIf="challenges.errors.required">Please describe to us your normal routine prior to Covid -
-                      19
-                    </div>
-                    <small class="help-text">What are some of the challenges you encountered
-                      in the process of taking the photo(s)/video?</small>
-                  </div>
-                </div>
-              </div>
+      <!-- Example Room 1-->
+      <img id="room1-example" src="assets/images/room1/example.png">
 
-              <div class="card p-3 mt-3">
-                <div class="form-group">
-                  <label>Experience</label>
-                  <textarea [(ngModel)]="extraDetails.experience" #experience="ngModel" maxlength="150" required
-                    class="form-control" name="experience" id="experience" rows="3"
-                    [ngClass]="{ 'is-invalid': artworkForm.submitted && experience.invalid }"></textarea>
-                  <div *ngIf="artworkForm.submitted && experience.invalid" class="invalid-feedback">
-                    <div *ngIf="experience.errors.required">Please describe to us your normal routine prior to Covid
-                      - 19
-                    </div>
-                    <small class="help-text">Describe your experience</small>
-                  </div>
-                </div>
-              </div>
-              <div class="card p-3 mt-3">
-                <div class="form-group">
-                  <label>Prior to Covid - 19</label>
-                  <textarea [(ngModel)]="extraDetails.lifeBefore" #lifeBefore="ngModel" maxlength="150" required
-                    class="form-control" name="lifeBefore" id="lifeBefore" rows="3"
-                    [ngClass]="{ 'is-invalid': artworkForm.submitted && lifeBefore.invalid }"></textarea>
-                  <div *ngIf="artworkForm.submitted && lifeBefore.invalid" class="invalid-feedback">
-                    <div *ngIf="lifeBefore.errors.required">Please describe to us your normal routine prior to
-                      Covid - 19
-                    </div>
-                  </div>
-                  <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
-                </div>
-              </div>
-            </div>
+      <!-- Example Room 2-->
+      <img id="room2-final1" src="assets/images/room2/final-1.png">
+      <img id="room2-final2" src="assets/images/room2/final-2.png">
+      <img id="room2-final3" src="assets/images/room2/final-3.png">
+      <img id="room2-final4" src="assets/images/room2/final-4.png">
+      <img id="room2-mock1" src="assets/images/room2/mock-1.png">
+      <img id="room2-mock2" src="assets/images/room2/mock-2.png">
+      <img id="room2-mock3" src="assets/images/room2/mock-3.png">
+      <img id="room2-mock4" src="assets/images/room2/mock-4.png">
+      <img id="room2-wire1" src="assets/images/room2/wire-1.png">
+      <img id="room2-wire2" src="assets/images/room2/wire-2.png">
+      <img id="room2-wire3" src="assets/images/room2/wire-3.png">
+      <img id="room2-wire4" src="assets/images/room2/wire-4.png">
+      <img id="room2-final-sign" src="assets/images/room2/final-sign.png">
+      <img id="room2-mock-sign" src="assets/images/room2/mock-sign.png">
+      <img id="room2-wire-sign" src="assets/images/room2/wire-sign.png">
 
-            <div class="confirm-terms mt-3">
-              <div class="container-fluid ">
-                <div class="form-check">
-                  <p>Please check the boxes below:</p>
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="read" (change)="checkReadTermsValue()"
-                      value="checked">
-                    <p>I have read the Submission Guidelines and Rules (including the copyright conditions)
-                      below and
-                      agree to
-                      the terms and conditions of the photo(s) and video call for submission.</p>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="terms" (change)="checkReadPrivacy()"
-                      value="checked">
-                    <p>I have read the Submission Guidelines and Rules (including the copyright conditions)
-                      below and
-                      agree to
-                      the terms and conditions of the photo(s) and video call for submission.</p>
-                  </label>
-                </div>
-              </div>
-            </div>
+      <!-- Example Room 3 -->
+      <img id="room3-example" src="assets/images/room3/example.png">
+      <img id="room3-example-stat" src="assets/images/room3/examplestat.png">
+      <img id="room3-example-num" src="assets/images/room3/examplenum.png">
+      <img id="room3-page-before" src="assets/images/room3/page-before.png">
+      <img id="room3-page-after" src="assets/images/room3/page-after.png">
+      <img id="room3-beforeafter" src="assets/images/room3/beforeafter.png">
 
-            <div class="next mt-5">
-              <div class="form-group mb-0">
-                <button type="submit" class="btn btn-light">Submit</button>
-              </div>
-            </div>
-          </div>
+      <!-- Example Room 4-->
+      <img id="room4-map" src="assets/images/room4/map.png" />
+      <img id="room4-photo1" src="assets/images/room4/photo1.png">
+      <img id="room4-photo2" src="assets/images/room4/photo2.png">
+      <img id="room4-photo3" src="assets/images/room4/photo3.png">
+      <img id="room4-photo4" src="assets/images/room4/photo4.png">
+      <img id="room4-photo5" src="assets/images/room4/photo5.png">
+      <img id="room4-photo6" src="assets/images/room4/photo6.png">
+      <img id="room4-sign-photos" src="assets/images/room4/sign-photos.png">
+      <img id="room4-sign-roadshow" src="assets/images/room4/sign-roadshow.png">
 
-        </form>
-      </div>
-    </div>
-  </div>
+      <!-- Example Room 5 -->
+      <img id="room5-sign-back" src="assets/images/room5/sign-back.png">
+      <img id="room5-sign-side" src="assets/images/room5/sign-side.png">
+      <img id="room5-landing" src="assets/images/room5/landing.png">
+      <img id="room5-rust" src="assets/images/room5/rust.png">
+      <img id="room5-speech" src="assets/images/room5/speech.png">
+      <img id="room5-vr" src="assets/images/room5/vr.png">
+      <img id="room5-wa" src="assets/images/room5/wa.png">
+
+      <!-- Example Theater 6-->
+      <video id="theaterVideo" autoplay loop="true" webkit-playsinline playsinline
+        src="assets/images/theater/movie.mp4"></video>
+      <img id="theater-curtains" src="assets/images/theater/curtains.png">
+      <a-asset-item id="couch-obj" src="assets/images/theater/couch/model.obj"></a-asset-item>
+      <a-asset-item id="couch-mtl" src="assets/images/theater/couch/materials.mtl"></a-asset-item>
+
+      <!-- Secret Room -->
+      <a-asset-item id="fox-obj" src="assets/images/secret/fox/model.obj"></a-asset-item>
+      <a-asset-item id="fox-mtl" src="assets/images/secret/fox/materials.mtl"></a-asset-item>
+
+    </a-assets>
+
+
+    <!-- User / Camera -->
+    <!-- movement controls-->
+    <a-entity id="rig" movement-controls position-listener listener position="0 0 0">
+      <a-entity id="player" camera="user-height: 1.5" look-controls="pointerLockEnabled: true"
+        wasd-controls="acceleration:200" position="0 9 0">
+        <a-entity cursor="fuse: true;" position="0 0 -3" material="color: black; shader: flat">
+          <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1"
+            to="0.15 0.15 0.15"></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards"
+            from="0.15 0.15 0.15" to="0.1 0.1 0.1"></a-animation>
+        </a-entity>
+      </a-entity>
+    </a-entity>
+
+
+
+    <!-- Start Room (spawn) -->
+    <a-entity position="-1.5 1.5 19.5" rotation="0 0 0">
+      <!--left wall -->
+      <a-entity rotation="0 90 0">
+        <a-image position="-15.5 1.5 19.5" src="#team-poster" height="3" width="3"></a-image>
+      </a-entity>
+    </a-entity>
+
+    <!-- hallway -->
+    <!-- right wall -->
+    <a-image position="-.1 3 3" rotation="0 -90 0" src="#team-dan" height="3" width="3"></a-image>
+    <a-image position="-.1 3 12" rotation="0 -90 0" src="#team-arcadio" height="3" width="3"></a-image>
+    <a-image position="-.1 3 -9" rotation="0 -90 0" src="#team-judy" height="3" width="3"></a-image>
+    <!-- left wall -->
+    <a-image position="-26.9 1.5 20" rotation="0 90 0" src="#team-porfirio" height="5" width="5"></a-image>
+    <a-image position="-2.9 3 -9" rotation="0 90 0" src="#team-dustin" height="3" width="3"></a-image>
+    <a-image position="-2.9 3 3" rotation="0 90 0" src="#team-maceij" height="3" width="3"></a-image>
+
+    <!-- Exampe Room 1 (Immediate right) -->
+    <a-entity position="10.5 1.5 19.5" rotation="0 -90 0">
+      <!-- Room Sign -->
+      <a-image position="-1.45 1 6.02" rotation="0 90 0" src="#room-sign-1" height="1.5" width="3"></a-image>
+      <a-image position="1.45 1 6.02" rotation="0 -90 0" src="#room-sign-2" height="1.5" width="3"></a-image>
+      <!-- Back wall -->
+      <a-image position="-2 1.5 -4.4" src="#room1-example" height="5" width="2.5"></a-image>
+      <a-image position="2 1.5 -4.4" src="#room1-example" height="5" width="2.5"></a-image>
+      <!--right wall -->
+      <a-entity rotation="0 -90 0">
+        <a-image position="-2 1.5 -4.4" src="#room1-example" height="5" width="2.5"></a-image>
+        <a-image position="2 1.5 -4.4" src="#room1-example" height="5" width="2.5"></a-image>
+      </a-entity>
+      <!--left wall -->
+      <a-entity rotation="0 90 0">
+        <a-image position="-2 1.5 -4.4" src="#room1-example" height="5" width="2.5"></a-image>
+        <a-image position="2 1.5 -4.4" src="#room1-example" height="5" width="2.5"></a-image>
+      </a-entity>
+    </a-entity>
+
+    <!-- Example Room 2 (First Left) -->
+    <a-entity position="-10.5 1.5 7.5" rotation="0 90 0">
+      <!-- Room Sign -->
+      <a-image position="-1.45 1 6.02" rotation="0 90 0" src="#room-sign-1" height="1.5" width="3"></a-image>
+      <a-image position="1.45 1 6.02" rotation="0 -90 0" src="#room-sign-2" height="1.5" width="3"></a-image>
+      <!-- Back wall -->
+      <a-image position="-2 0 -4.4" src="#room2-final1" height="2.5" width="2.5"></a-image>
+      <a-image position="-2 2.4 -4.4" src="#room2-final2" height="2.5" width="2.5"></a-image>
+      <a-image position="2 0 -4.4" src="#room2-final3" height="2.5" width="2.5"></a-image>
+      <a-image position="2 2.4 -4.4" src="#room2-final4" height="2.5" width="2.5"></a-image>
+      <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room2-final-sign" height="2.5" width="5"></a-image>
+      <!--right wall -->
+      <a-entity rotation="0 -90 0">
+        <a-image position="-2 0 -4.4" src="#room2-mock1" height="2.5" width="2.5"></a-image>
+        <a-image position="-2 2.4 -4.4" src="#room2-mock2" height="2.5" width="2.5"></a-image>
+        <a-image position="2 0 -4.4" src="#room2-mock3" height="2.5" width="2.5"></a-image>
+        <a-image position="2 2.4 -4.4" src="#room2-mock4" height="2.5" width="2.5"></a-image>
+        <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room2-mock-sign" height="2.5" width="5"></a-image>
+      </a-entity>
+      <!--left wall -->
+      <a-entity rotation="0 90 0">
+        <a-image position="-2 0 -4.4" src="#room2-wire1" height="2.5" width="2.5"></a-image>
+        <a-image position="-2 2.4 -4.4" src="#room2-wire2" height="2.5" width="2.5"></a-image>
+        <a-image position="2 0 -4.4" src="#room2-wire3" height="2.5" width="2.5"></a-image>
+        <a-image position="2 2.4 -4.4" src="#room2-wire4" height="2.5" width="2.5"></a-image>
+        <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room2-wire-sign" height="2.5" width="5"></a-image>
+      </a-entity>
+    </a-entity>
+
+    <!-- Room 3 (First Right) -->
+    <a-entity position="7.5 1.5 7.5" rotation="0 -90 0">
+      <!-- Room Sign -->
+      <a-image position="-1.45 1 6.02" rotation="0 90 0" src="#room-sign-1" height="1.5" width="3"></a-image>
+      <a-image position="1.45 1 6.02" rotation="0 -90 0" src="#room-sign-2" height="1.5" width="3"></a-image>
+      <!-- Back wall -->
+      <a-image position="-2.2 1.3 -4.4" src="#room3-page-before" height="4" width="4"></a-image>
+      <a-image position="2.2 1.3 -4.4" src="#room3-page-after" height="4" width="4"></a-image>
+      <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room3-beforeafter" height="2.5" width="5"></a-image>
+      <!--right wall -->
+      <a-entity rotation="0 -90 0">
+        <a-image position="-2 1.3 -4.4" src="#room3-example" height="5" width="2.5"></a-image>
+        <a-box position="2.5 0 -3.6" color="#fb8e92" depth="1" height="3.02" width="1"></a-box>
+        <a-box position="1 -.7 -3.6" color="#b0b4e5" depth="1" height="1.53" width="1"></a-box>
+        <a-image position="1 -.5 -3.05" src="#room3-example-stat" height="1" width="1"></a-image>
+        <a-image position="2.5 -.5 -3.05" src="#room3-example-stat" height="1" width="1"></a-image>
+      </a-entity>
+      <!--left wall -->
+      <a-entity rotation="0 90 0">
+        <a-image position="1.5 1.3 -4.4" src="#room3-example" height="5" width="2.5"></a-image>
+        <a-box position="-3 -.3 -3.6" color="#b0b4e5" depth="1" height="2.27" width="1"></a-box>
+        <a-box position="-2 .85 -3.6" color="#000" depth="1" height=".23" width="1"></a-box>
+        <a-box position="-1 -.3 -3.6" color="#fb8e92" depth="1" height="2.5" width="1"></a-box>
+        <a-image position="-3 -.3 -3.05" src="#room3-example-stat" height="1" width="1"></a-image>
+        <a-image position="-2 .85 -3.05" src="#room3-example-num" height="1" width="1"></a-image>
+        <a-image position="-1 -.3 -3.05" src="#room3-example-stat" height="1" width="1"></a-image>
+      </a-entity>
+    </a-entity>
+
+    <!-- Example Room 4 (Second Left) -->
+    <a-entity position="-10.5 1.5 -4.5" rotation="0 90 0">
+      <!-- Room Sign -->
+      <a-image position="-1.45 1 6.02" rotation="0 90 0" src="#room-sign-1" height="1.5" width="3"></a-image>
+      <a-image position="1.45 1 6.02" rotation="0 -90 0" src="#room-sign-2" height="1.5" width="3"></a-image>
+      <!-- Back wall -->
+      <a-image position="0 1.5 -4.4" src="#room4-map" height="7" width="7"></a-image>
+      <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room4-sign-roadshow" height="2.5" width="5"></a-image>
+      <!--right wall -->
+      <a-entity rotation="0 -90 0">
+        <a-image position="-2 0 -4.4" src="#room4-photo1" height="2.5" width="2.5"></a-image>
+        <a-image position="0 2.4 -4.4" src="#room4-photo2" height="2" width="2"></a-image>
+        <a-image position="2 0 -4.4" src="#room4-photo3" height="2.5" width="2.5"></a-image>
+        <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room4-sign-photos" height="2.5" width="5"></a-image>
+      </a-entity>
+      <!--left wall -->
+      <a-entity rotation="0 90 0">
+        <a-image position="-2 0 -4.4" src="#room4-photo4" height="2.5" width="2.5"></a-image>
+        <a-image position="0 2.4 -4.4" src="#room4-photo5" height="2" width="2"></a-image>
+        <a-image position="2 0 -4.4" src="#room4-photo6" height="2.5" width="2.5"></a-image>
+        <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room4-sign-photos" height="2.5" width="5"></a-image>
+      </a-entity>
+    </a-entity>
+
+    <!-- Example Room 5 (Second Right) -->
+    <a-entity position="7.5 1.5 -4.5" rotation="0 -90 0">
+      <!-- Room Sign -->
+      <a-image position="-1.45 1 6.02" rotation="0 90 0" src="#room-sign-1" height="1.5" width="3"></a-image>
+      <a-image position="1.45 1 6.02" rotation="0 -90 0" src="#room-sign-2" height="1.5" width="3"></a-image>
+      <!-- Back wall -->
+      <a-image position="0 1.3 -4.4" src="#room5-landing" height="5" width="2.5"></a-image>
+      <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room5-sign-back" height="2.5" width="5"></a-image>
+      <!--right wall -->
+      <a-entity rotation="0 -90 0">
+        <a-image position="-2 1.3 -4.4" src="#room5-rust" height="5" width="2.5"></a-image>
+        <a-image position="2 1.3 -4.4" src="#room5-speech" height="5" width="2.5"></a-image>
+        <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room5-sign-side" height="2.5" width="5"></a-image>
+      </a-entity>
+      <!--left wall -->
+      <a-entity rotation="0 90 0">
+        <a-image position="-2 1.3 -4.4" src="#room5-vr" height="5" width="2.5"></a-image>
+        <a-image position="2 1.3 -4.4" src="#room5-wa" height="5" width="2.5"></a-image>
+        <a-image position="0 5.1 -4.2" rotation="15 0 0" src="#room5-sign-side" height="2.5" width="5"></a-image>
+      </a-entity>
+    </a-entity>
+
+
+    <!-- Example Room 6 (far back room ) -->
+    <a-entity position="-1.5 1.5 -22.5">
+      <!-- Room Sign -->
+      <a-image position="-1.45 1 6.02" rotation="0 90 0" src="#room-sign-1" height="1.5" width="3"></a-image>
+      <a-image position="1.45 1 6.02" rotation="0 -90 0" src="#room-sign-2" height="1.5" width="3"></a-image>
+      <!-- Back wall -->
+      <a-video src="#theaterVideo" width="7" height="5.25" position="0 1.4 -4.4"></a-video>
+      <a-image position="0 0 -4.4" src="#theater-curtains" height="12" width="9"></a-image>
+      <!-- objects -->
+      <a-entity obj-model="obj: #couch-obj; mtl: #couch-mtl" position="0 -1 1" rotation="0 0 0" scale="2 2 2">
+      </a-entity>
+      <!-- ceiling -->
+      <a-plane position="0 6 0" rotation="90 0 0" height="9" width="9" color="black"></a-plane>
+    </a-entity>
+
+    <!-- Ground -->
+    <a-grid id="ground" static-body material="src: #floor; repeat: 15 15" rotation="-90 0 0"></a-grid>
+    <!-- Walls (used by map.js -->)
+    <a-entity id="walls"></a-entity>
+
+    <a-sky color="#ffffff"></a-sky>
+    <!-- sky -->
+    <!-- ground -->
+    <!-- <a-plane class="hasEvent" position="0 0 0" rotation="-90 0 0" geometry="width:200; height:200;"
+      material="src:#grass; repeat:111 111;"></a-plane> -->
+
+  </a-scene>
 </div>

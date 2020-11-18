@@ -25,11 +25,10 @@ export class ArtworkModalComponent implements OnInit {
     this.artwork = this.data.artwork
     this.modalType = this.data.modalType;
     if(this.modalType === 'image') {
-
     }
 
     if(this.modalType === 'video') {
-      
+      this.consentForm = this.artwork.subjectConsentForm;
     }
 
     if(this.modalType === 'artist') {

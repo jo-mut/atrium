@@ -1,6 +1,6 @@
 <div class="add-artwork" (window:resize)="onResize($event)">
   <div class="artwork-bg">
-    <div class="container-fluid py-5" [style.width.%]="formWidth">
+    <div class="container-fluid" [style.width.%]="formWidth">
       <div class="artwork-form py-5">
         <ngx-loading-bar ref="http" [includeSpinner]="false"></ngx-loading-bar>
 
@@ -19,24 +19,12 @@
               </div>
               <div class="card p-3 mt-3">
                 <div class="form-group">
-                  <input type="file" id="file" class="form-control" #userPhoto (change)="onSubjectConsentSelected($event)"
-                    name="image" autocomplete="off" />
+                  <input type="file" id="file" class="form-control" #userPhoto
+                    (change)="onSubjectConsentSelected($event)" name="image" autocomplete="off" />
                   <small class="help-text">Please download, fill and upload the consent form</small>
-                  <div class="pdf-consent hand p-2 mt-3 d-flex" (click)="downloadSubjectConsentForm()">
+                  <div class="pdf-consent hand p-2 mt-3 d-flex" (click)="downloadConsentForm()">
                     <img src="assets/images/pdf.png" alt="">
-                    <p class="m-2">Download the  subject(s) and release form</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card p-3 mt-3">
-                <div class="form-group">
-                  <input type="file" id="file" class="form-control" #userPhoto (change)="onArtistConsentSelected($event)"
-                    name="image" autocomplete="off" />
-                  <small class="help-text">Please download, fill and upload the consent form</small>
-                  <div class="pdf-consent hand p-2 mt-3 d-flex" (click)="downloadArtistCOnsentForm()">
-                    <img src="assets/images/pdf.png" alt="">
-                    <p class="m-2">Download the photographer/videographer consent form</p>
+                    <p class="m-2">Download the participant consent and release form</p>
                   </div>
                 </div>
               </div>
@@ -60,7 +48,8 @@
                     <label>Date Shot</label>
                   </div>
                   <mat-form-field>
-                    <input class="form-control" (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" />
+                    <input class="form-control" (dateInput)="OnDateChange($event.value)" matInput
+                      [matDatepicker]="picker" />
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -115,7 +104,8 @@
                     <button class="btn" mat-button (click)="goBack(stepper)">Back</button>
                   </div>
                   <div class="col-6 mt-3">
-                    <button class="btn" mat-button (click)="goForward(stepper)">Next</button>
+                    <button class="btn" mat-button (click)="goForward(stepper)">{{forwardText}}</button>
+                   
                   </div>
                 </div>
               </div>
@@ -123,50 +113,55 @@
           </form>
 
           <form #thirdForm="ngForm">
-            <mat-step label="Interview Questions" [stepControl]="thirdForm">
-              <div class="card p-3 mt-3">
-                <div class="form-group">
-                  <label>Challenges</label>
-                  <textarea [(ngModel)]="extraDetails.challenges" #challenges="ngModel" maxlength="150" required
-                    class="form-control" name="challenges" id="challenges" rows="3"
-                    [ngClass]="{ 'is-invalid': thirdForm.submitted && challenges.invalid }"></textarea>
-                  <div *ngIf="thirdForm.submitted && challenges.invalid" class="invalid-feedback">
-                    <div *ngIf="challenges.errors.required">Tell us challenges encountered in the process of taking this video/photo
-                    </div>
-                    <small class="help-text">What are some of the challenges you encountered
-                      in the process of taking the photo(s)/video?</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card p-3 mt-3">
-                <div class="form-group">
-                  <label>Experience</label>
-                  <textarea [(ngModel)]="extraDetails.experience" #experience="ngModel" maxlength="150" required
-                    class="form-control" name="experience" id="experience" rows="3"
-                    [ngClass]="{ 'is-invalid': thirdForm.submitted && experience.invalid }"></textarea>
-                  <div *ngIf="thirdForm.submitted && experience.invalid" class="invalid-feedback">
-                    <div *ngIf="experience.errors.required">Tell us your experience in the process of taking this video/photo
-                    </div>
-                    <small class="help-text">Describe your experience</small>
-                  </div>
-                </div>
-              </div>
-              <div class="card p-3 mt-3">
-                <div class="form-group">
-                  <label>Prior to Covid - 19</label>
-                  <textarea [(ngModel)]="extraDetails.lifeBefore" #lifeBefore="ngModel" maxlength="150" required
-                    class="form-control" name="lifeBefore" id="lifeBefore" rows="3"
-                    [ngClass]="{ 'is-invalid': thirdForm.submitted && lifeBefore.invalid }"></textarea>
-                  <div *ngIf="thirdForm.submitted && lifeBefore.invalid" class="invalid-feedback">
-                    <div *ngIf="lifeBefore.errors.required">Please describe to us your normal routine prior to
-                      Covid - 19
-                    </div>
-                  </div>
-                  <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
-                </div>
-              </div>
+            <mat-step label="{{thirdMatStep}}" [stepControl]="thirdForm">
              
+              <div *ngIf="!answered">
+                <div class="card p-3 mt-3">
+                  <div class="form-group">
+                    <label>Challenges</label>
+                    <textarea [(ngModel)]="extraDetails.challenges" #challenges="ngModel" maxlength="150" required
+                      class="form-control" name="challenges" id="challenges" rows="3"
+                      [ngClass]="{ 'is-invalid': thirdForm.submitted && challenges.invalid }"></textarea>
+                    <div *ngIf="thirdForm.submitted && challenges.invalid" class="invalid-feedback">
+                      <div *ngIf="challenges.errors.required">Tell us challenges encountered in the process of taking
+                        this video/photo
+                      </div>
+                      <small class="help-text">What are some of the challenges you encountered
+                        in the process of taking the photo(s)/video?</small>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card p-3 mt-3">
+                  <div class="form-group">
+                    <label>Experience</label>
+                    <textarea [(ngModel)]="extraDetails.experience" #experience="ngModel" maxlength="150" required
+                      class="form-control" name="experience" id="experience" rows="3"
+                      [ngClass]="{ 'is-invalid': thirdForm.submitted && experience.invalid }"></textarea>
+                    <div *ngIf="thirdForm.submitted && experience.invalid" class="invalid-feedback">
+                      <div *ngIf="experience.errors.required">Tell us your experience in the process of taking this
+                        video/photo
+                      </div>
+                      <small class="help-text">Describe your experience</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="card p-3 mt-3">
+                  <div class="form-group">
+                    <label>Prior to Covid - 19</label>
+                    <textarea [(ngModel)]="extraDetails.lifeBefore" #lifeBefore="ngModel" maxlength="150" required
+                      class="form-control" name="lifeBefore" id="lifeBefore" rows="3"
+                      [ngClass]="{ 'is-invalid': thirdForm.submitted && lifeBefore.invalid }"></textarea>
+                    <div *ngIf="thirdForm.submitted && lifeBefore.invalid" class="invalid-feedback">
+                      <div *ngIf="lifeBefore.errors.required">Please describe to us your normal routine prior to
+                        Covid - 19
+                      </div>
+                    </div>
+                    <small class="help-text">Please describe to us your normal routine prior to Covid - 19</small>
+                  </div>
+                </div>
+              </div>
+              
               <div class="confirm-terms mt-3">
                 <div class="container-fluid ">
                   <div class="form-check">
@@ -205,6 +200,7 @@
                 </div>
               </div>
             </mat-step>
+           
           </form>
 
         </mat-horizontal-stepper>
@@ -212,4 +208,8 @@
       </div>
     </div>
   </div>
+  <mat-form-field>
+    <mat-label>Your submission is successful</mat-label>
+    <input type="number" [(ngModel)]="durationInSeconds" matInput>
+  </mat-form-field>
 </div>

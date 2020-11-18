@@ -129,16 +129,16 @@ export class CallComponent implements OnInit {
     }
   }
 
-  downloadSubjectConsentForm() {
-    const storageRef = this.storage.ref('consent/Subject Consent Form.pdf')
+  downloadConsentForm() {
+    const storageRef = this.storage.ref('consent/PARTICIPANT CONSENT AND RELEASE FORM.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
-      FileSaver(data, "subject-consent-form.pdf")
+      FileSaver(data, "PARTICIPANT CONSENT AND RELEASE FORM.pdf")
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';
       xhr.onload = function (event) {
         var blob = xhr.response;
-        FileSaver(blob, "subject-consent-form.pdf");
+        FileSaver(blob, "PARTICIPANT CONSENT AND RELEASE FORM.pdf");
 
       };
       // xhr.open('GET', data);
@@ -147,15 +147,16 @@ export class CallComponent implements OnInit {
   }
 
   downloadArtistCOnsentForm() {
-    const storageRef = this.storage.ref('consent/Artist Consent Form.pdf')
+    const storageRef = this.storage.ref('consent/PARTICIPANT CONSENT AND RELEASE FORM.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
-      FileSaver(data, "subject-consent-form.pdf");
+      FileSaver(data, "PARTICIPANT CONSENT AND RELEASE FORM.pdf");
 
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';
       xhr.onload = function (event) {
         var blob = xhr.response;
+        FileSaver(blob, "PARTICIPANT CONSENT AND RELEASE FORM.pdf");
 
       };
       // xhr.open('GET', data);

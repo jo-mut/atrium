@@ -54,7 +54,6 @@ import { ScoredItemComponent } from 'src/app/site/admin/scored-item/scored-item.
 import { SelectArtworksComponent } from 'src/app/site/admin/select-artworks/select-artworks.component';
 import { ScoreArtworksComponent } from 'src/app/site/admin/score-artworks/score-artworks.component';
 import { FilterArtworksComponent } from 'src/app/site/admin/filter-artworks/filter-artworks.component';
-import { UploadModalComponent } from 'src/app/site/add-artworks/upload-modal/upload-modal.component';
 import { ScoredArtworksComponent } from 'src/app/site/admin/scored-artworks/scored-artworks.component';
 import { SelectItemComponent } from 'src/app/site/admin/select-artworks/select-item/select-item.component';
 import { FilterItemComponent } from 'src/app/site/admin/filter-artworks/filter-item/filter-item.component';
@@ -63,9 +62,12 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatInputModule } from '@angular/material/input';
 import { ArtworkModalComponent } from 'src/app/site/admin/filter-artworks/artwork-modal/artwork-modal.component';
 import { SignInComponent } from 'src/app/site/submission/sign-in/sign-in.component';
-import { SubmitComponent } from 'src/app/site/submission/submit/submit.component';
 import { ContactUsComponent } from 'src/app/site/contact-us/contact-us.component';
 import { MessagesComponent } from 'src/app/site/messages/messages.component';
+import { SubmissionsComponent } from 'src/app/site/admin/submissions/submissions.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SubmitComponent } from 'src/app/site/add-artworks/submit/submit.component';
+import { CreateProfileComponent } from 'src/app/site/create-profile/create-profile.component';
 
 
 const routes: Routes = [
@@ -87,6 +89,7 @@ const routes: Routes = [
   { path: 'admin/artworks', component: ArtworksComponent },
   { path: 'admin/messages', component: MessagesComponent },
   { path: 'admin/score', component: ScoreArtworksComponent },
+  { path: 'admin/submissions', component: SubmissionsComponent },
   { path: 'admin/scored-artworks', component: ScoredArtworksComponent },
   { path: 'admin/select-artworks', component: SelectArtworksComponent },
   { path: 'admin/filter-artworks', component: FilterArtworksComponent },
@@ -138,12 +141,14 @@ const routes: Routes = [
     LoadingBarRouterModule,
     LoadingBarModule,
     MatStepperModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MatSnackBarModule
     //  ToastrModule.forRoot()   
 
   ],
   declarations: [
     // CreateProfileComponent,
+    SubmissionsComponent,
     MessagesComponent,
     ContactUsComponent,
     ArtworkModalComponent,
@@ -178,21 +183,19 @@ const routes: Routes = [
     ScoredArtworksComponent,
     ArtworkScoreComponent,
     ScoredItemComponent,
-    UploadModalComponent,
     FilterArtworksComponent,
     ScoreArtworksComponent,
     SelectArtworksComponent,
     FilterItemComponent,
     SelectItemComponent,
-    SignInComponent
-
-
+    SignInComponent,
 
   ],
   exports: [
     AdminComponent,
     // CreateProfileComponent,
     MessagesComponent,
+    SubmissionsComponent,
     ContactUsComponent,
     AddArtworksComponent,
     VrGalleryComponent,
@@ -224,7 +227,6 @@ const routes: Routes = [
     SuccessfulComponent,
     ScoredArtworksComponent,
     ScoredItemComponent,
-    UploadModalComponent,
     FilterArtworksComponent,
     ScoreArtworksComponent,
     SelectArtworksComponent,

@@ -5,6 +5,8 @@
         <tr>
           <th align="center">No.</th>
           <th align="center">Artwork</th>
+          <th align="center">Title</th>
+          <th align="center">Description</th>
           <th align="center">Subject Consent</th>
           <th align="center">Artist Consent</th>
           <th align="center">Date</th>
@@ -19,13 +21,13 @@
           <td>
             <div class="filtering-image">
               <div *ngIf="artwork.type == 'image'">
-                <img  (click)="lauchDialog(artwork, 'image')" src="{{url}}" alt="">
+                <img (click)="lauchDialog(artwork, 'image')" src="{{url}}" alt="">
               </div>
               <div *ngIf="artwork.type == 'video'">
                 <vg-player (click)="lauchDialog(artwork, 'video')" (onPlayerReady)="onPlayerReady($event)">
                   <vg-buffering></vg-buffering>
                   <vg-controls>
-                    <vg-play-pause></vg-play-pause>                    
+                    <vg-play-pause></vg-play-pause>
                     <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
                     <vg-fullscreen></vg-fullscreen>
                   </vg-controls>
@@ -35,11 +37,19 @@
               </div>
             </div>
           </td>
-          <td class="pdf">
-            <pdf-viewer [src]="subjectConsent" (click)="lauchDialog(artwork, 'subject')" [original-size]="false"></pdf-viewer>
+          <td>
+            <p>{{artwork.title}}</p>
+          </td>
+          <td>
+            <p>{{artwork.description}}</p>
+          </td>
+          <td class="pdf" width="20%">
+            <pdf-viewer [show-all]="false"  style="display: block; width: 200px;" [fit-to-page]="false" [src]="subjectConsent" (click)="lauchDialog(artwork, 'subject')"
+              [original-size]="false"></pdf-viewer>
           </td>
           <td class="pdf">
-            <pdf-viewer [src]="artistConsent" (click)="lauchDialog(artwork, 'artist')" [original-size]="false"></pdf-viewer>
+            <pdf-viewer [show-all]="false"  style="display: block; width: 200px;" [fit-to-page]="false" [src]="artistConsent" (click)="lauchDialog(artwork, 'artist')"
+              [original-size]="false"></pdf-viewer>
           </td>
           <td>
             <p>{{date}}</p>

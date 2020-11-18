@@ -4,12 +4,12 @@
     .filtering-image {
         text-align: center;
         img {
-            width: 250px;
+            width: 200px;
             margin: 0 auto;
         }
 
         vg-player {
-            width: 250px;
+            width: 200px;
             margin: 0 auto;
 
             video {
@@ -17,15 +17,6 @@
               margin: 0 auto;
             }
           }
-
-       .pdf {
-        width: 250px;
-        pdf-viewer {
-          display: block;
-          width: 250px;
-        }
-       }
-        
         
     }
 

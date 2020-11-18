@@ -160,7 +160,8 @@ export class NavbarComponent implements OnInit {
       console.log(this.userId)
       this.authService.logout().then((res) => {
         this.login = 'Submit'
-        this.router.navigateByUrl('/project')
+        this.router.navigateByUrl('/')
+
       }).catch((err) => {
 
       })

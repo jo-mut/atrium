@@ -1,0 +1,17 @@
+<div class="submission-progress p-5" (window:resize)="onResize($event)">
+  <div class="card m-5">
+    <div class="container-fluid">
+     <div class="submission-bg ">
+      <div *ngIf="uploadProgress | async as pct">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped" role="progressbar"
+          [ngStyle]="{'width': pct + '%'}" [attr.aria-valuenow]="pct"
+            aria-valuemin="0" aria-valuemax="100">
+          </div>
+        </div>
+        <small class="py-3 text-center">Uploading your submission {{ pct | number }}%</small>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>

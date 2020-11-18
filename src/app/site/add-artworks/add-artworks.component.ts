@@ -4,17 +4,17 @@ import { Upload } from "../../interfaces/upload";
 import { DbOperationsService } from "../../services/db-operations.service";
 import { VgApiService } from "@videogular/ngx-videogular/core";
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
 import { ExtraDetails } from 'src/app/models/extraDetails';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { UploadModalComponent } from './upload-modal/upload-modal.component';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, tap, mapTo } from 'rxjs/operators';
 import { MatStepper } from '@angular/material/stepper';
 import { saveAs as FileSaver } from "file-saver";
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, of } from 'rxjs';
 
 
 @Component({
@@ -25,8 +25,8 @@ import { Router } from '@angular/router';
 export class AddArtworksComponent implements OnInit {
   @ViewChild('fileDropRef', { static: false }) fileDropEl: ElementRef;
   @Input() progress = 0;
-  uploadProgress: Observable<number>;
-
+  percentage: Observable<number>;
+  durationInSeconds = 5;
   artwork: ArtWork = new ArtWork();
   extraDetails: ExtraDetails = new ExtraDetails();
   artworks: ArtWork[] = [];
@@ -48,9 +48,12 @@ export class AddArtworksComponent implements OnInit {
   currentUser = '';
   disabled = false;
   isLinear = true;
-
+  submit = false;
+  thirdMatStep = 'Interview';
+  forwardText = "Next";
 
   constructor(
+    private snackBar: MatSnackBar,
     private router: Router,
     private matDialog: MatDialog,
     private fauth: AngularFireAuth,
@@ -58,19 +61,6 @@ export class AddArtworksComponent implements OnInit {
     private dbOperations: DbOperationsService) {
   }
 
-
-  lauchUploadProgressDialog(artwork: ArtWork) {
-    const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = false;
-    dialogConfig.id = "modal-component";
-    dialogConfig.width = '300px';
-    dialogConfig.height = '30px';
-    dialogConfig.data = { 'progress': artwork.percentage }
-
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(UploadModalComponent, dialogConfig);
-  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -120,6 +110,7 @@ export class AddArtworksComponent implements OnInit {
     stepper.next();
   }
 
+
   checkReadTermsValue() {
     console.log(this.checkedTerms)
     if (!this.checkedTerms) {
@@ -140,20 +131,9 @@ export class AddArtworksComponent implements OnInit {
   }
 
   getCurrentUser() {
-    this.authState = this.fauth.authState;
-    this.authState.subscribe(user => {
-      if (user) {
-        this.currentUser = user.uid;
-        this.getSubmittedArtworks(this.currentUser);
-        console.log('AUTHSTATE USER', user.uid); //this works
-        this.getArtistInterview(this.currentUser);
-      } else {
-        console.log('AUTHSTATE USER EMPTY', user);
-      }
-    },
-      err => {
-        console.log('Please try again')
-      });
+    this.currentUser = localStorage.getItem('currentUser');
+    this.getSubmittedArtworks(this.currentUser);
+    this.getArtistInterview(this.currentUser);
   }
 
   getSubmittedArtworks(id: string) {
@@ -164,7 +144,6 @@ export class AddArtworksComponent implements OnInit {
           const id = e.id;
           let work = { id, ...data } as ArtWork;
           this.submittedWorks.push(work);
-          console.log(this.submittedWorks.length);
         })
       })
   }
@@ -174,7 +153,11 @@ export class AddArtworksComponent implements OnInit {
       .ref.where('userId', '==', id)
       .onSnapshot(data => {
         if (data != null) {
-          this.answered = true;
+          if(!data.empty) {
+            this.thirdMatStep = 'Confirm Submission'
+            this.answered = true;
+            this.submit = true;
+          }
         }
       })
   }
@@ -197,14 +180,9 @@ export class AddArtworksComponent implements OnInit {
 
   }
 
-  onArtistConsentSelected(event) {
-    this.artistConsentForm = event.target.files[0];
-    console.log(this.artistConsentForm + 'artist form')
 
-  }
-
-  downloadSubjectConsentForm() {
-    const storageRef = this.storage.ref('consent/Subject Consent Form.pdf')
+  downloadConsentForm() {
+    const storageRef = this.storage.ref('consent/PARTICIPANT CONSENT AND RELEASE FORM.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
       FileSaver(data, "subject-consent-form.pdf")
@@ -212,7 +190,7 @@ export class AddArtworksComponent implements OnInit {
       xhr.responseType = 'blob';
       xhr.onload = function (event) {
         var blob = xhr.response;
-        FileSaver(blob, "subject-consent-form.pdf");
+        FileSaver(blob, "PARTICIPANT CONSENT AND RELEASE FORM.pdf");
 
       };
       // xhr.open('GET', data);
@@ -221,10 +199,10 @@ export class AddArtworksComponent implements OnInit {
   }
 
   downloadArtistCOnsentForm() {
-    const storageRef = this.storage.ref('consent/Artist Consent Form.pdf')
+    const storageRef = this.storage.ref('consent/PARTICIPANT CONSENT AND RELEASE FORM.pdf')
     storageRef.getDownloadURL().subscribe(data => {
       console.log(data)
-      FileSaver(data, "subject-consent-form.pdf");
+      FileSaver(data, "PARTICIPANT CONSENT AND RELEASE FORM.pdf");
 
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';
@@ -236,151 +214,49 @@ export class AddArtworksComponent implements OnInit {
       // xhr.send();
     })
   }
+
+
   public OnDateChange(event): void {
     this.artwork.shotDate = event;
   }
 
 
-  uploadSubjectConsentForm() {
-    if (this.subjectConsentForm != null) {
-      let ext = this.subjectConsentForm.name.substring(this.subjectConsentForm.name.lastIndexOf('.') + 1);
-      if (ext === 'pdf') {
-        this.artwork.userId = this.currentUser;
-        this.extraDetails.userId = this.currentUser;
-        const path = `artworks/documents/${Date.now() + ''}_${this.subjectConsentForm.name}`;
-        // Reference to storage bucket
-        const ref = this.storage.ref(path);
-        // The main task
-        const task = this.storage.upload(path, this.subjectConsentForm);
-        // Progress monitoring
-        let percentage = task.percentageChanges();
-        const snapshot = task.snapshotChanges().pipe(finalize(async () => {
-          let downloadUrl = await ref.getDownloadURL().toPromise();
-
-          this.artwork.subjectConsentForm = downloadUrl;
-
-        })
-        ).subscribe(data => {
-          if (data.bytesTransferred == data.totalBytes) {
-            this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
-              .then((res) => {
-                console.log(this.artwork.percentage)
-                this.successNotification();
-              }).catch((rej) => {
-                window.alert(rej.message)
-              })
-            console.log('on dropped' + this.submittedWorks.length);
-            const works = this.dbOperations.latestArtWorks;
-            this.uploadProgress = this.artwork.bytes;
-          }
-        });
-        return percentage
-
-      }
-    }
-
-
-  }
-
-  alertConfirmation(){
-    Swal.fire({
-      title: 'Artwork Submission',
-      text: 'You have successfully submitted your artwork',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      cancelButtonText: 'No, let me think'
-    }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Submitted!',
-          'Artwork submitted successfully.',
-          'success'
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Product still in our database.)',
-          'error'
-        )
-      }
-    })
-  }  
-
-
-  uploadArtistConsentForm() {
-    if (this.artistConsentForm != null) {
-      let ext = this.artistConsentForm.name.substring(this.artistConsentForm.name.lastIndexOf('.') + 1);
-      if (ext === 'pdf') {
-        console.log(this.artistConsentForm)
-        this.artwork.userId = this.currentUser;
-        this.extraDetails.userId = this.currentUser;
-        const path = `artworks/documents/${Date.now() + ''}_${this.artistConsentForm.name}`;
-        // Reference to storage bucket
-        const ref = this.storage.ref(path);
-        // The main task
-        const task = this.storage.upload(path, this.artistConsentForm);
-        // Progress monitoring
-        let percentage = task.percentageChanges();
-        const snapshot = task.snapshotChanges().pipe(finalize(async () => {
-          let downloadUrl = await ref.getDownloadURL().toPromise();
-
-          this.artwork.artistConsentForm = downloadUrl;
-
-
-        })
-        ).subscribe(data => {
-          if (data.bytesTransferred == data.totalBytes) {
-            this.uploadSubjectConsentForm()
-          }
-        })
-
-        return percentage
-
-      }
-    }
-
-  }
-
-
-  successNotification(){
-    Swal.fire('You have successfully submitted your artwork')
-  }
 
 
   onSubmit() {
-    this.disabled = true;
-    if (this.submittedWorks.length <= 2) {
-      console.log(this.artwork.shotDate);
-      console.log(this.artistConsentForm)
-      if (this.checkedPrivacy && this.checkReadTermsValue) {
-        this.uploadArtistConsentForm();
-
-        // if (this.file != null) {
-        //   let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
-        //   if (ext === 'png' || ext === 'jpg' || ext === ' JPEG'
-        //     || ext === 'mp4' || ext === 'mov') {
-        //     this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
-        //       .then((res) => {
-        //         form.reset;
-        //       }).catch((rej) => {
-        //         window.alert('Upload failed')
-        //       })
-        //     console.log('on dropped' + this.submittedWorks.length);
-        //     const works = this.dbOperations.latestArtWorks;
-
-        //     console.log('on dropped' + { ...works });
-        //   } else {
-        //     window.alert('Please upload either jpg, .png, .mov or .mp4 file')
-        //   }
-        // } else {
-        //   window.alert('Please upload profile picture')
-        // }
-      } else {
-        window.alert('Confirm that you have read the Terms and Conditions')
-      }
+    if (this.submittedWorks.length == 2) {
+      window.alert('You have reached the maximum number of submissions')
     } else {
-      window.alert('You can only submit two pieces of your artwork')
+      if (this.submittedWorks.length < 2) {
+        this.disabled = true;
+        if (this.checkedPrivacy && this.checkReadTermsValue) {
+          this.dbOperations.uploadSubjectConsentForm(this.subjectConsentForm, this.artwork,
+            this.file, this.extraDetails)
 
+          // if (this.file != null) {
+          //   let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
+          //   if (ext === 'png' || ext === 'jpg' || ext === ' JPEG'
+          //     || ext === 'mp4' || ext === 'mov') {
+          //     this.dbOperations.uploadArtwork(this.file, this.artwork, this.extraDetails)
+          //       .then((res) => {
+          //         form.reset;
+          //       }).catch((rej) => {
+          //         window.alert('Upload failed')
+          //       })
+          //     console.log('on dropped' + this.submittedWorks.length);
+          //     const works = this.dbOperations.latestArtWorks;
+
+          //     console.log('on dropped' + { ...works });
+          //   } else {
+          //     window.alert('Please upload either jpg, .png, .mov or .mp4 file')
+          //   }
+          // } else {
+          //   window.alert('Please upload profile picture')
+          // }
+        } else {
+          window.alert('Confirm that you have read the Terms and Conditions')
+        }
+      }
     }
   }
 

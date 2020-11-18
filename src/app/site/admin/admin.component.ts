@@ -62,4 +62,8 @@ export class AdminComponent implements OnInit {
   navigateToMessages() {
     this.router.navigateByUrl("project/admin/messages")
   }
+
+  navigateToSubmissions() {
+    this.router.navigateByUrl("project/admin/submissions")
+  }
 }
