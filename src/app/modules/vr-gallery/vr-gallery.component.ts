@@ -15,7 +15,7 @@ export class VrGalleryComponent implements OnInit {
   splash = '';
   id: number = 1595330004864;
   image = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00";
-
+  video = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site%2FItsUpToUs%20Promo%20Final%20Cut.mp4?alt=media&token=e947661b-8e03-4548-b47c-3269d068be3b";
   constructor(public dbOperations: DbOperationsService,
     public route: ActivatedRoute) {
   }
@@ -134,7 +134,7 @@ export class VrGalleryComponent implements OnInit {
   playVideoWhenUserEntersRoom() {
     // play video when user enters room. Pause when leaving
     const videoPlayer = <any>document.getElementById('theaterVideo');
-    videoPlayer.pause();
+    videoPlayer.play();
     AFRAME.registerComponent('listener', {
       tick: function () {
         const userPosition = this.el.getAttribute('position')["z"];
@@ -144,15 +144,6 @@ export class VrGalleryComponent implements OnInit {
           this.videoPlayer.pause();
         }
       }
-    });
-
-    const enterButton = document.querySelector('.splash__button')
-    const splash = document.querySelector('.splash');
-
-    enterButton.addEventListener('click', () => {
-      videoPlayer.play();
-      videoPlayer.pause();
-      // splash.style.display = 'none';
     });
 
   }
