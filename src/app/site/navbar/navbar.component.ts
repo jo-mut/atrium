@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   action: string = 'Submit';
   login = 'Log In'
   loggedIn: boolean;
-  userId: string = '';
+  userId: string = null;
   showSubmit: boolean = false;
   showAuthButton: boolean = true;
   // activeLink: any;
@@ -32,8 +32,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authState = this.authService.afAuth.authState;
     this.userId = localStorage.getItem('currentUser');
-    console.log('current user ' + this.userId);
-    console.log('current user ' + this.role);
+
     // this.activeLink = {
     //   "color": "teal"
     // }
@@ -64,10 +63,6 @@ export class NavbarComponent implements OnInit {
       this.showSubmit = false;
       this.showAuthButton = true;
     }
-
-    console.log('current user ' + this.userId);
-    console.log(this.role)
-    console.log(this.login)
 
   }
 
@@ -159,8 +154,11 @@ export class NavbarComponent implements OnInit {
     if (this.userId != null) {
       console.log(this.userId)
       this.authService.logout().then((res) => {
+        this.userId = null;
         this.login = 'Submit'
-        this.router.navigateByUrl('/')
+        this.showSubmit = false;
+        localStorage.setItem('currentUser', '');
+        this.router.navigateByUrl('/project/home')
 
       }).catch((err) => {
 
@@ -180,8 +178,8 @@ export class NavbarComponent implements OnInit {
             console.log('AUTHSTATE USER', e.data);
             const data = e.data();
             const id = e.id;
-            let u = { ...data } as User;
-            let roles = u.role;
+            let user = { ...data } as User;
+            let roles = user.role;
 
             console.log(roles)
             if (roles.includes('moderator')) {
@@ -199,10 +197,11 @@ export class NavbarComponent implements OnInit {
               this.router.navigateByUrl('/project/admin/filter-artworks')
             } else if (roles.includes('artist')) {
               console.log('AUTHSTATE USER', 'artist');
-              this.router.navigateByUrl('/project/add-artworks')
+              this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             } else {
               this.router.navigateByUrl('/project/add-artworks')
+              this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             }
 
@@ -211,5 +210,14 @@ export class NavbarComponent implements OnInit {
       })
   };
 
+  crossCheckUserProfileSubmitedDetails(user: User) {
+    if (user.address == null && user.birthDate == null &&
+      user.country == null && user.firstName == null && user.lastName == null
+      && user.gender == null && user.nationality == null && user.phoneNumber == null) {
+      this.router.navigateByUrl('/create-profile')
+    } else {
+      this.router.navigateByUrl('/project/add-artworks')
+    }
+  }
 
 }

@@ -80,10 +80,7 @@ export class AuthService {
                     const id = d.id;
                     const existingUser = d.data() as User;
                     let roles = existingUser.role;
-                    of(existingUser.userId).subscribe(type => {
-                      this.currentUser = type;
-                      localStorage.setItem('currentUser', this.currentUser);
-                    })
+                    localStorage.setItem('currentUser', existingUser.userId);
                     console.log(this.currentUser + ' current user')
                     this.ngZone.run(() => {
                       if (roles.includes('filtering')) {
@@ -239,29 +236,24 @@ export class AuthService {
   saveUserProfileInfo(user: User) {
     console.log("set user data " + user.email);
     this.authState = this.afAuth.authState;
-    this.authState.subscribe(currentUser => {
-      if (currentUser.uid) {
-        user.userId = currentUser.uid;
-        user.role.push('artist')
-        user.password = '';
-        user.code = Date.now() + '';
-        // const userRef = this.dbOperations
-        //   .usersCollection().doc(user.userId);
-        const param = JSON.parse(JSON.stringify(user));
-        this.dbOperations.getCurrentUser().subscribe(u => {
-          this.dbOperations.usersCollection().doc(u.uid)
-            .update(param).then((resolve) => {
-              this.getUserProfileInfo(user);
-            }).catch((error) => {
-              // window.alert(error.message);
+    let userId = localStorage.getItem('currentUser');
+    console.log("set user data " + userId);
 
-            })
-        })
-      }
-    },
-      err => {
-        console.log('Please try again')
-      });
+    user.userId = userId;
+    user.role.push('artist')
+    user.password = '';
+    user.code = Date.now() + '';
+    // const userRef = this.dbOperations
+    //   .usersCollection().doc(user.userId);
+    const param = JSON.parse(JSON.stringify(user));
+    this.dbOperations.usersCollection().doc(user.userId)
+    .update(param).then((resolve) => {
+      console.log(user)
+      this.getUserProfileInfo(user);
+    }).catch((error) => {
+      // window.alert(error.message);
+
+    })
 
   }
 

@@ -55,7 +55,7 @@ export class CreateProfileComponent implements OnInit {
       this.currentUser = user;
     })
 
-    
+
     let timeIn18yrs = Date.now() - 568036800000
     // get year, date, and month from timestamp;
     let d = new Date(timeIn18yrs);
@@ -67,15 +67,15 @@ export class CreateProfileComponent implements OnInit {
   }
 
 
-  tinyAlert(){
+  tinyAlert() {
     Swal.fire('Hey there!');
   }
-  
-  successNotification(){
+
+  successNotification() {
     Swal.fire('Hi', 'We have been informed!', 'success')
   }
-  
-  alertConfirmation(){
+
+  alertConfirmation() {
     Swal.fire({
       title: 'Are you sure?',
       text: 'This process is irreversible.',
@@ -98,7 +98,7 @@ export class CreateProfileComponent implements OnInit {
         )
       }
     })
-  }  
+  }
 
   onFileSelected(event) {
     this.file = event.target.files[0];
@@ -137,6 +137,7 @@ export class CreateProfileComponent implements OnInit {
       this.authService.checkIfUserExists(this.user, stepper).then(() => {
         this.ngZone.run(() => {
           stepper.next();
+
         })
       })
     }).catch((error) => {

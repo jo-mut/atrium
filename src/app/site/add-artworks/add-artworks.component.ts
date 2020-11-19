@@ -32,10 +32,9 @@ export class AddArtworksComponent implements OnInit {
   artworks: ArtWork[] = [];
   submittedWorks: ArtWork[] = [];
   files: any[] = [];
-  file: File;
+  artworkFile: File;
   pdfs: any[] = [];
-  subjectConsentForm: File;
-  artistConsentForm: File;
+  consentForm: File;
   uploadedDocuments: number = 0;
   private authState: Observable<firebase.User>;
   // maxDate = new Date(2002, 11, 31);
@@ -104,10 +103,13 @@ export class AddArtworksComponent implements OnInit {
 
   goBack(stepper: MatStepper) {
     stepper.previous();
+
   }
 
   goForward(stepper: MatStepper) {
-    stepper.next();
+    if (this.artworkFile != null && this.consentForm != null) {
+      stepper.next();
+    }
   }
 
 
@@ -153,7 +155,7 @@ export class AddArtworksComponent implements OnInit {
       .ref.where('userId', '==', id)
       .onSnapshot(data => {
         if (data != null) {
-          if(!data.empty) {
+          if (!data.empty) {
             this.thirdMatStep = 'Confirm Submission'
             this.answered = true;
             this.submit = true;
@@ -163,20 +165,20 @@ export class AddArtworksComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    this.file = event.target.files[0];
-    if (this.file.type.includes('video')) {
-      if (this.file.type == "video") {
+    this.artworkFile = event.target.files[0];
+    if (this.artworkFile.type.includes('video')) {
+      if (this.artworkFile.type == "video") {
       }
-    } else if (this.file.type.includes('image')) {
-      this.files.push(this.file);
+    } else if (this.artworkFile.type.includes('image')) {
+      this.files.push(this.artworkFile);
     } else {
 
     }
   }
 
   onSubjectConsentSelected(event) {
-    this.subjectConsentForm = event.target.files[0];
-    console.log(this.subjectConsentForm + 'sibject form')
+    this.consentForm = event.target.files[0];
+    console.log(this.consentForm + 'subject form')
 
   }
 
@@ -230,8 +232,8 @@ export class AddArtworksComponent implements OnInit {
       if (this.submittedWorks.length < 2) {
         this.disabled = true;
         if (this.checkedPrivacy && this.checkReadTermsValue) {
-          this.dbOperations.uploadSubjectConsentForm(this.subjectConsentForm, this.artwork,
-            this.file, this.extraDetails)
+          this.dbOperations.uploadSubjectConsentForm(this.consentForm, this.artwork,
+            this.artworkFile, this.extraDetails)
 
           // if (this.file != null) {
           //   let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);

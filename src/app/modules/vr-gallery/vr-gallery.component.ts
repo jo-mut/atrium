@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class VrGalleryComponent implements OnInit {
 
   exhibition: ArtWork = new ArtWork();
+  splash = '';
   id: number = 1595330004864;
   image = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00";
 
@@ -78,9 +79,9 @@ export class VrGalleryComponent implements OnInit {
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 4, 
-   
-      
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 4,
+
+
       ],
       "height": 19,
       "width": 19
@@ -156,5 +157,8 @@ export class VrGalleryComponent implements OnInit {
 
   }
 
+  exitSplashDisplay() {
+    this.splash = 'none';
+  }
 
 }
