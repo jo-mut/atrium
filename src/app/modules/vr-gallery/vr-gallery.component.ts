@@ -11,34 +11,56 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class VrGalleryComponent implements OnInit {
 
-  exhibition: ArtWork = new ArtWork();
+  artworks: ArtWork[] = [];
   splash = '';
   id: number = 1595330004864;
   image = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00";
   video = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site%2FItsUpToUs%20Promo%20Final%20Cut.mp4?alt=media&token=e947661b-8e03-4548-b47c-3269d068be3b";
+  
+  images = [
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fchef%20covid%2019.jpg?alt=media&token=a0a473e6-3e1e-4e48-9bd0-ed67f31d2739',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsocial%20distance%20pandemic.jpg?alt=media&token=cd117c33-f18a-437e-979b-c3c86259abc5',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fmothers%20covid%2019.jpg?alt=media&token=0982d57d-6afc-4857-bb3a-76c7582cc24b',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsanitizing%20during%20pandemic.jpg?alt=media&token=962e55db-4b00-4dbc-a6ab-8793a13f12d6',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fcobbler%20pandemic.jpg?alt=media&token=67df849a-a8b9-40a0-adca-4a31ad2c9146',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Ftailor%20pandemic.jpg?alt=media&token=22f8a676-85fd-4f7a-96ed-c3624e76d6c2',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fcobbler%20pandemic.jpg?alt=media&token=67df849a-a8b9-40a0-adca-4a31ad2c9146',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fentrepreneur%20covid19.jpg?alt=media&token=32422549-f76c-4d37-828f-fa2af6b25509',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fpicture9.png?alt=media&token=f891885d-ce11-4be1-9050-67d3d3c260fd',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsanitizing%20during%20pandemic.jpg?alt=media&token=962e55db-4b00-4dbc-a6ab-8793a13f12d6',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fmwalimu.png?alt=media&token=26f2695b-6cc7-4802-93ab-7d0de530e2a9',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsocial%20distance%20pandemic.jpg?alt=media&token=cd117c33-f18a-437e-979b-c3c86259abc5',
+    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
+  ]
+
   constructor(public dbOperations: DbOperationsService,
     public route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.getExhibitionDetail(this.id.toString());
+    this.getExhibitions();
     this.generate()
     this.playVideoWhenUserEntersRoom();
   }
 
-  getExhibitionDetail(id: string) {
+  getExhibitions() {
     this.dbOperations.artworksCollection()
-      .ref.where('id', '==', id).onSnapshot(data => {
-        data.docs.forEach(d => {
-          const id = d.id;
-          const work = d.data() as ArtWork;
-          this.exhibition = work;
-          console.log(work.url);
-        })
-      })
-
+      .snapshotChanges().subscribe(d => {
+        this.artworks = d.map(e => {
+          const data = e.payload.doc.data();
+          const id = e.payload.doc.id;
+          console.log({ ...data })
+          return { id, ...data } as ArtWork;
+        });
+      });
 
   }
+
+
 
 
   generate() {
@@ -134,14 +156,16 @@ export class VrGalleryComponent implements OnInit {
   playVideoWhenUserEntersRoom() {
     // play video when user enters room. Pause when leaving
     const videoPlayer = <any>document.getElementById('theaterVideo');
-    videoPlayer.play();
+    videoPlayer.pause();
     AFRAME.registerComponent('listener', {
       tick: function () {
         const userPosition = this.el.getAttribute('position')["z"];
         if (userPosition <= -17) {
-          this.videoPlayer.play();
+          // this.videoPlayer.pause();
+        } else if (userPosition >= -17) {
+          // this.videoPlayer.pause();
         } else {
-          this.videoPlayer.pause();
+          // this.videoPlayer.pause();
         }
       }
     });

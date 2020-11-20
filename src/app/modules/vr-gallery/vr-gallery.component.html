@@ -4,8 +4,8 @@
         <!-- Splash Screen -->
         <div class="splash" [style.display]="splash" >
           <div class="splash__card p-y">
-            <h1>Presentations in VR</h1>
-            <p>You can move around with WASD keys (desktop), by tapping the screen (mobile) or with the button on your Google Cardboard.</p>
+            <h1>African Art In Context Virtual Gallery</h1>
+            <p>You can move around with W-A-S-D keys (desktop), by tapping the screen (mobile) or with the button on your Google Cardboard.</p>
             <button class="splash__button" (click)="exitSplashDisplay()" >Enter</button>
           </div>
         </div>
@@ -22,7 +22,26 @@
       <img id="room-sign-2" src="assets/images/other/room-sign-2.png">
       <img id="sky" src="assets/images/other/wall-concrete.jpg">
       <!-- team -->
-      <img id="example" src="{{image}}">
+      <div *ngIf="images">
+        <img id="example0" src="{{images[0]}}">
+        <img id="example1" src="{{images[1]}}">
+        <img id="example2" src="{{images[2]}}">
+        <img id="example3" src="{{images[3]}}">
+        <img id="example4" src="{{images[4]}}">
+        <img id="example5" src="{{images[5]}}">
+        <img id="example6" src="{{images[6]}}">
+        <img id="example7" src="{{images[7]}}">
+        <img id="example8" src="{{images[8]}}">
+        <img id="example9" src="{{images[9]}}">
+        <img id="example10" src="{{images[10]}}">
+        <img id="example11" src="{{images[11]}}">
+        <img id="example12" src="{{images[12]}}">
+        <img id="example13" src="{{images[13]}}">
+        <img id="example14" src="{{images[14]}}">
+        <img id="example15" src="{{images[15]}}">
+        <img id="example" src="{{images[16]}}">
+
+      </div>
       <video id="theaterVideo" autoplay loop="true" webkit-playsinline playsinline
         src="{{video}}"></video>
       <img id="theater-curtains" src="assets/images/theater/curtains.png">
@@ -48,12 +67,12 @@
     <a-entity id="sky" geometry="primitive: sphere; radius: 100"
       :material="src: #sky;  side:front; color:#FFF; shader:flat; npot:true'" scale="-1 1 1"></a-entity>
 
-    <a-image position="23.9 1.5 19" rotation="0 -90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="23.9 1.5 12" rotation="0 -90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="23.9 1.5 5" rotation="0 -90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="23.9 1.5 -8" rotation="0 -90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="23.9 1.5 -15" rotation="0 -90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="23.9 1.5 -22" rotation="0 -90 0" src="#example" height="5" width="5"></a-image>
+    <a-image position="23.9 1.5 19" rotation="0 -90 0" src="#example0" height="5" width="5"></a-image>
+    <a-image position="23.9 1.5 12" rotation="0 -90 0" src="#example1" height="5" width="5"></a-image>
+    <a-image position="23.9 1.5 5" rotation="0 -90 0" src="#example2" height="5" width="5"></a-image>
+    <a-image position="23.9 1.5 -8" rotation="0 -90 0" src="#example3" height="5" width="5"></a-image>
+    <a-image position="23.9 1.5 -15" rotation="0 -90 0" src="#example4" height="5" width="5"></a-image>
+    <a-image position="23.9 1.5 -22" rotation="0 -90 0" src="#example5" height="5" width="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
     text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -90 0"
@@ -75,12 +94,12 @@
     position="23.9 -1.5 -22" scale="2.2 2.2 2.2"></a-entity>
     
 
-    <a-image position="-26.9 1.5 22" rotation="0 90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="-26.9 1.5 14" rotation="0 90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="-26.9 1.5 5" rotation="0 90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="-26.9 1.5 -8" rotation="0 90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="-26.9 1.5 -15" rotation="0 90 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="-26.9 1.5 -22" rotation="0 90 0" src="#example" height="5" width="5"></a-image>
+    <a-image position="-26.9 1.5 22" rotation="0 90 0" src="#example6" height="5" width="5"></a-image>
+    <a-image position="-26.9 1.5 14" rotation="0 90 0" src="#example7" height="5" width="5"></a-image>
+    <a-image position="-26.9 1.5 5" rotation="0 90 0" src="#example8" height="5" width="5"></a-image>
+    <a-image position="-26.9 1.5 -8" rotation="0 90 0" src="#example9" height="5" width="5"></a-image>
+    <a-image position="-26.9 1.5 -15" rotation="0 90 0" src="#example10" height="5" width="5"></a-image>
+    <a-image position="-26.9 1.5 -22" rotation="0 90 0" src="#example11" height="5" width="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
     text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 90 0"
@@ -101,41 +120,85 @@
     text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 90 0"
     position="-26.9 -1.5 -22" scale="2.2 2.2 2.2"></a-entity>
 
-    <a-image position="19 1.5 0.4" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="10 1.5 0.4" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="-23 1.5 0.4" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="-14 1.5 0.4" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
+    <a-image position="19 1.5 0.4" rotation="0 -180 0" src="#example12" height="5" width="5"></a-image>
+    <a-image position="10 1.5 0.4" rotation="0 -180 0" src="#example13" height="5" width="5"></a-image>
+    <a-image position="-14 1.5 0.4" rotation="0 -180 0" src="#example14" height="5" width="5"></a-image>
+    <a-image position="-23 1.5 0.4" rotation="0 -180 0" src="#example15" height="5" width="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
     position="19 -1.5 0.4" scale="2.2 2.2 2.2"></a-entity>
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
     position="10 -1.5 0.4" scale="2.2 2.2 2.2"></a-entity>
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
-    position="-12 -1.5 0.4" scale="2.2 2.2 2.2"></a-entity>
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="-14 -1.5 0.4" scale="2.2 2.2 2.2"></a-entity>
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide."
     position="-23 -1.5 0.4" scale="2.2 2.2 2.2"></a-entity>
    
     <a-image position="19 1.5 -26.9" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
-    <a-image position="10 1.5 -26.9" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
+    <a-image position="12 1.5 -26.9" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
     <a-image position="-13 1.5 -26.9" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
     <a-image position="-22 1.5 -26.9" rotation="0 -180 0" src="#example" height="5" width="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
-    position="22 -1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 4 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 3.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 3 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 2.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 2 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 1 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 0.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 0 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 -0.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="6.5 -1 -26.9" scale="2.2 2.2 2.2"></a-entity>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide."
+    position="19 -1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide."
     position="12 -1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
-    position="-12 -1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="-13 -1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
     <a-entity geometry="primitive: plane; height: auto; width: 2;"  material="color: black" 
-    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." rotation="0 -180 0"
-    position="-16 -1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
+    text="color: white; align:  center; width: 3; value: This text will be 4 units wide." 
+    position="-22 -1.5 -26.9" scale="2.2 2.2 2.2"></a-entity>
 
     <a-entity position="-1.5 1.5 -22.5">
       <!-- Back wall -->
