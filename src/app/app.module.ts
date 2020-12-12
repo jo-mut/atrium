@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,19 +20,34 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
 import { SiteRoutingModule } from './modules/site/site.module';
 import { CreateProfileComponent } from './site/create-profile/create-profile.component';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
+import { VrGalleryModule } from './modules/vr-gallery/vr-gallery.module';
+import { VirtualGalleryComponent } from './virtual-gallery/virtual-gallery.component';
+import { ProfileInfoComponent } from './site/create-profile/profile-info/profile-info.component';
+import { SocialMediaInfoComponent } from './site/create-profile/social-media-info/social-media-info.component';
+import { ArtworkInfoComponent } from './site/add-artworks/artwork-info/artwork-info.component';
+import { ConfirmSubmissionComponent } from './site/add-artworks/confirm-submission/confirm-submission.component';
+import { UploadFilesComponent } from './site/add-artworks/upload-files/upload-files.component';
+import { VrVideoItemComponent } from './vr-video-item/vr-video-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateProfileComponent,
     DndDirective,
+    VirtualGalleryComponent,
+    ProfileInfoComponent,
+    SocialMediaInfoComponent,
+    UploadFilesComponent,
+    ArtworkInfoComponent,
+    ConfirmSubmissionComponent,
+    VrVideoItemComponent,
+
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -61,6 +76,7 @@ import { MatStepperModule } from '@angular/material/stepper';
   ],
   providers: [DbOperationsService, AuthService],
   bootstrap: [AppComponent],
-  exports: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AppModule { }

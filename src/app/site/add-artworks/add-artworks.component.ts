@@ -11,7 +11,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, tap, mapTo } from 'rxjs/operators';
 import { MatStepper } from '@angular/material/stepper';
 import { saveAs as FileSaver } from "file-saver";
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, of } from 'rxjs';

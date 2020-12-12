@@ -52,7 +52,7 @@ export class AdminComponent implements OnInit {
 
   
   navigateToScoredArtworks() {
-    this.router.navigateByUrl("project/admin/scored-artworks")
+    this.router.navigateByUrl("project/admin/select-artworks")
   }
 
   navigateToArtist() {
@@ -65,5 +65,13 @@ export class AdminComponent implements OnInit {
 
   navigateToSubmissions() {
     this.router.navigateByUrl("project/admin/submissions")
+  }
+
+  navigateToFollowUp() {
+    this.router.navigateByUrl("project/admin/follow-up")
+  }
+
+  navigateToExhibit() {
+    this.router.navigateByUrl("project/admin/exhibit")
   }
 }

@@ -17,15 +17,19 @@ export class ArtistsComponent implements OnInit {
   }
 
   getArtist() {
-
     this.dbOperations.usersCollection()
       .snapshotChanges().subscribe(d => {
         d.map(e => {
           const data = e.payload.doc.data() as User;
-          console.log(data.role)
-          if (!data.role.includes('admin')) {
+          if(data.role != null) {
+            if (!data.role.includes('admin') || data.role == null) {
+              this.artists.push(data);
+            }
+          } else {
+            console.log(d.length)
             this.artists.push(data);
           }
+         
         });
       });
   }

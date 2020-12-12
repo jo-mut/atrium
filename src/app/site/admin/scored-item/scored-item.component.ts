@@ -4,6 +4,8 @@ import { ArtWork } from 'src/app/models/artwork';
 import { Score } from 'src/app/models/score';
 import { User } from 'src/app/models/user';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
+import { DatePipe } from '@angular/common';
+
 
 class ScoredItem {
   name: string
@@ -43,7 +45,7 @@ export class ScoredItemComponent implements OnInit {
           const work = d.data() as ArtWork;
           this.ngZone.run(() => {
             of(work.shotDate).subscribe(date => {
-              this.scoredItem.date = date
+              this.scoredItem.date  = new DatePipe('en').transform(this.artwork.id, 'yyyy/MM/dd');
               console.log(this.scoredItem.date)
   
             })

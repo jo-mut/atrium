@@ -19,7 +19,6 @@ import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { MglTimelineModule } from 'angular-mgl-timeline';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { AddArtworksComponent } from 'src/app/site/add-artworks/add-artworks.component';
 import { AdminComponent } from "../../site/admin/admin.component";
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -47,8 +46,6 @@ import { GuidelinesComponent } from 'src/app/site/guidelines/guidelines.componen
 import { SuccessfulComponent } from 'src/app/site/successful/successful.component';
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
-import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ArtworkScoreComponent } from 'src/app/site/admin/score/artwork-score/artwork-score.component';
 import { ScoredItemComponent } from 'src/app/site/admin/scored-item/scored-item.component';
 import { SelectArtworksComponent } from 'src/app/site/admin/select-artworks/select-artworks.component';
@@ -68,6 +65,11 @@ import { SubmissionsComponent } from 'src/app/site/admin/submissions/submissions
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SubmitComponent } from 'src/app/site/add-artworks/submit/submit.component';
 import { CreateProfileComponent } from 'src/app/site/create-profile/create-profile.component';
+import { FollowUpComponent } from 'src/app/site/admin/follow-up/follow-up.component';
+import { StoryComponent } from 'src/app/site/campaign/story/story.component';
+import { ExhitArtworksComponent } from 'src/app/site/admin/exhit-artworks/exhit-artworks.component';
+import { ExhitItemComponent } from 'src/app/site/admin/exhit-item/exhit-item.component';
+import { FollowItemComponent } from 'src/app/site/admin/follow-item/follow-item.component';
 
 
 const routes: Routes = [
@@ -90,9 +92,11 @@ const routes: Routes = [
   { path: 'admin/messages', component: MessagesComponent },
   { path: 'admin/score', component: ScoreArtworksComponent },
   { path: 'admin/submissions', component: SubmissionsComponent },
+  { path: 'admin/exhibit', component: ExhitArtworksComponent },
   { path: 'admin/scored-artworks', component: ScoredArtworksComponent },
   { path: 'admin/select-artworks', component: SelectArtworksComponent },
   { path: 'admin/filter-artworks', component: FilterArtworksComponent },
+  { path: 'admin/follow-up', component: FollowUpComponent },
   { path: 'admin/categories/photos', component: CategoriesComponent },
   { path: 'admin/categories/videos', component: CategoriesComponent },
   { path: 'profile/:id', component: ProfileComponent },
@@ -103,7 +107,7 @@ const routes: Routes = [
   { path: 'admin/artists', component: ArtistsComponent },
   { path: 'admin/artists/:id', component: ProfileComponent },
   { path: 'admin/team/profile/:id', component: ProfileComponent },
-
+  
   {
     path: 'gallery', component: VrGalleryComponent, children: [
       {
@@ -126,7 +130,6 @@ const routes: Routes = [
     VgOverlayPlayModule,
     VgBufferingModule,
     MglTimelineModule,
-    CarouselModule,
     MatSidenavModule,
     MatToolbarModule,
     MatGridListModule,
@@ -138,8 +141,6 @@ const routes: Routes = [
     MatNativeDateModule,
     NgxNavbarModule,
     MatExpansionModule,
-    LoadingBarRouterModule,
-    LoadingBarModule,
     MatStepperModule,
     PdfViewerModule,
     MatSnackBarModule
@@ -157,7 +158,11 @@ const routes: Routes = [
     SignInComponent,
     SubmitComponent,
     HomeComponent,
+    ExhitArtworksComponent,
+    ExhitItemComponent,
+    FollowItemComponent,
     SiteComponent,
+    StoryComponent,
     ProgressComponent,
     CategoriesComponent,
     PageNotFoundComponent,
@@ -189,6 +194,7 @@ const routes: Routes = [
     FilterItemComponent,
     SelectItemComponent,
     SignInComponent,
+    FollowUpComponent
 
   ],
   exports: [
@@ -203,10 +209,14 @@ const routes: Routes = [
     NavbarComponent,
     SiteComponent,
     HomeComponent,
+    StoryComponent,
+    ExhitArtworksComponent,
+    ExhitItemComponent,
     ArtworkModalComponent,
     CategoriesComponent,
     ArtistsComponent,
     ProgressComponent,
+    FollowItemComponent,
     PageNotFoundComponent,
     DashboardComponent,
     CallComponent,
@@ -232,8 +242,8 @@ const routes: Routes = [
     SelectArtworksComponent,
     FilterItemComponent,
     SelectItemComponent,
-    SignInComponent
-
+    SignInComponent,
+    FollowUpComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

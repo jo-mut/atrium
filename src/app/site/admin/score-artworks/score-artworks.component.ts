@@ -39,11 +39,9 @@ export class ScoreArtworksComponent implements OnInit {
       if(data.empty) {
         this.message = 'There are no artworks to score'
       } else {
-        data.forEach(e => {
-          const data = e.data();
-          const id = e.id;
-          let work = { id, ...data } as ArtWork;
-          this.artworks.push(work);
+        data.docChanges().forEach(e => {
+          const data = e.doc.data() as ArtWork;
+          this.artworks.push(data);
         })
       }
     })

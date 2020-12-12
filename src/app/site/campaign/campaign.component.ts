@@ -3,7 +3,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import { firestore } from 'firebase';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 import { IMedia } from 'src/app/interfaces/imedia';
 import { ArtWork } from 'src/app/models/artwork';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
@@ -25,13 +24,13 @@ export interface StoriesData {
 export class CampaignComponent implements OnInit {
   landingImages = [];
   artworks: ArtWork[] = [];
+  stories: ArtWork[] = [];
   artwork: ArtWork = new ArtWork();
   hoveredImage: any;
   backgroundImgs = ['1.png', '2.png', '3.png'];
   chosenImage: any;
   video = '';
   mobileWidthThreshold: number = 640;
-  customOptions: OwlOptions;
   showMorePurpose = false;
   inspirationMore = false;
 
@@ -69,6 +68,7 @@ export class CampaignComponent implements OnInit {
     // this.getSampleArtworks();
     this.getArtWorkDetails(this.id.toString());
     this.getStoriesData();
+    this.getStories();
   }
 
   carouselConfig() {
@@ -78,10 +78,21 @@ export class CampaignComponent implements OnInit {
     this.config.wrap = true;
   }
 
+  getStories() {
+    this.dbOperations.artworksCollection()
+      .ref.where('status', '==', 'spotlight')
+      .onSnapshot(data => {
+        this.stories = data.docChanges().map(e => {
+          const data = e.doc.data();
+          const id = e.doc.id;
+          console.log({ ...data } + ' stories')
+          return { id, ...data } as ArtWork;
+        });
+      })
 
+  }
 
   getArtWorkDetails(id: string) {
-
     this.dbOperations.artworksCollection()
     .ref.where('id', '==', id).onSnapshot(data => {
       data.docs.forEach(d => {
@@ -187,38 +198,6 @@ export class CampaignComponent implements OnInit {
   onMouseOut(image): void {
     this.hoveredImage = null;
   }
-
-
-  getOwlOptions() {
-    this.customOptions = {
-      loop: true,
-      mouseDrag: true,
-      touchDrag: true,
-      pullDrag: true,
-      dots: true,
-      navSpeed: 700,
-      navText: ['<', '>'],
-      responsive: {
-        0: {
-          items: 1
-        },
-        400: {
-          items: 1
-        },
-        740: {
-          items: 2
-        },
-        940: {
-          items: 3
-        }
-      },
-      nav: true
-    }
-
-  }
-
-
-
 
   showHostProfile() {
 

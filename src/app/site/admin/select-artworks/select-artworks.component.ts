@@ -42,8 +42,8 @@ export class SelectArtworksComponent implements OnInit {
         changes.forEach(artwork => {
           const data = artwork.doc.data() as ArtWork;        
           let work = { ...data };
+          console.log(data)
           this.scored.push(work);
-          console.log(work)
         })
       }
      }

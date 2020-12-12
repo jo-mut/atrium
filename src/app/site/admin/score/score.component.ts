@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
@@ -8,6 +8,9 @@ import { User } from 'src/app/models/user';
 import { IMedia } from 'src/app/interfaces/imedia';
 // import { ToastrService } from 'ngx-toastr';
 import { ExtraDetails } from 'src/app/models/extraDetails';
+import { MatAccordion } from '@angular/material/expansion';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-score',
@@ -17,6 +20,7 @@ import { ExtraDetails } from 'src/app/models/extraDetails';
 export class ScoreComponent implements OnInit, AfterViewInit {
 
   photoGraphForm: any;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
 
   work: ArtWork = new ArtWork();
@@ -56,6 +60,7 @@ export class ScoreComponent implements OnInit, AfterViewInit {
   satisfactory: number = 6;
   good: number = 8;
   excellent: number = 10;
+  date: string;
 
   artworkId: string;
   userCode: string;
@@ -103,14 +108,14 @@ export class ScoreComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.getArtWorkDetails(this.id.toString());
+      this.date = new DatePipe('en').transform(this.work.shotDate, 'yyyy/MM/dd');
+
     });
 
   }
 
   ngAfterViewInit() {
-    this.dbOperations.getCurrentUser().subscribe(user => {
-      this.currentUser = user.uid;
-    })
+    this.currentUser = localStorage.getItem('currentUser')
   }
 
   onSubmit(form) {
@@ -133,18 +138,19 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         this.vScore.type = 'video';
 
         let totalTechnique = form.value.pictureClarity + form.value.lighting + form.value.stability
-        + form.value.audioClarity + form.value.composition; 
+          + form.value.audioClarity + form.value.composition;
 
-        let totalCreativity = form.value.useoftechniques + 
-        form.value.useofequipments;
+        let totalCreativity = form.value.useoftechniques +
+          form.value.useofequipments;
 
         let totalEdit = form.value.execution + form.value.scene;
         let totalStory = form.value.vMessage;
 
-        let totalScore = totalCreativity + totalTechnique 
-        + totalStory + totalEdit;
+        let totalScore = totalCreativity + totalTechnique
+          + totalStory + totalEdit;
 
         this.vScore.totalScore = totalScore;
+        console.log(this.vScore.totalScore)
 
 
         console.log('score' + this.score);
@@ -154,16 +160,16 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         const param = JSON.parse(JSON.stringify(this.vScore));
         this.dbOperations.scoresCollections().doc(this.vScore.scoreId).set(param).then(() => {
           this.dbOperations.artworksCollection().doc(this.work.artworkId)
-          .update(
-            {
-              'status': 'scored',
-              'updatedAt': new Date().getDate() + '',
-            }).then(res => {
-              form.reset();
-              this.router.navigateByUrl('project/admin/score')
-            }).catch(err => {
-              // this.toaster.success('Filtering failed');
-            })
+            .update(
+              {
+                'status': 'scored',
+                'updatedAt': new Date().getDate() + '',
+              }).then(res => {
+                form.reset();
+                this.router.navigateByUrl('project/admin/score')
+              }).catch(err => {
+                // this.toaster.success('Filtering failed');
+              })
         }).catch(() => {
           window.alert('Failed to save the score')
         })
@@ -184,11 +190,11 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         this.score.scoredBy = this.currentUser;
         this.score.type = 'image';
 
-        let totalTechnique = form.value.composition + 
-        form.value.clarity + form.value.lighting;
+        let totalTechnique = form.value.composition +
+          form.value.clarity + form.value.lighting;
 
-        let totalCreativity = form.value.message + 
-        form.value.theme + form.value.uniqueness + form.value.impression;
+        let totalCreativity = form.value.message +
+          form.value.theme + form.value.uniqueness + form.value.impression;
         console.log(JSON.stringify(form.value.message));
 
         console.log(JSON.stringify(form.value.theme));
@@ -196,31 +202,28 @@ export class ScoreComponent implements OnInit, AfterViewInit {
         console.log(JSON.stringify(form.value.impression));
 
 
-        let totalWowFactor = form.value.details + 
-        form.value.impact + form.value.inspirational;
-
+        let totalWowFactor = form.value.details +
+          form.value.impact + form.value.inspirational;
         let totalScore = totalCreativity + totalTechnique + totalWowFactor;
-
         this.score.totalScore = totalScore;
 
-
-        console.log('score ' + {...this.score});
+        console.log('score ' + { ...this.score });
         console.log(JSON.stringify(form.value.composition))
         console.log(JSON.stringify(totalScore));
 
         const param = JSON.parse(JSON.stringify(this.score))
         this.dbOperations.scoresCollections().doc(this.score.scoreId).set(param).then(() => {
           this.dbOperations.artworksCollection().doc(this.work.artworkId)
-          .update(
-            {
-              'status': 'scored',
-              'updatedAt': new Date().getDate() + '',
-            }).then(res => {
-              form.reset();
-              this.router.navigateByUrl('project/admin/score')
-            }).catch(err => {
-              // this.toaster.success('Filtering failed');
-            })
+            .update(
+              {
+                'status': 'scored',
+                'updatedAt': new Date().getDate() + '',
+              }).then(res => {
+                form.reset();
+                this.router.navigateByUrl('project/admin/score')
+              }).catch(err => {
+                // this.toaster.success('Filtering failed');
+              })
         }).catch(() => {
           window.alert('Failed to save the score')
         })
@@ -266,13 +269,13 @@ export class ScoreComponent implements OnInit, AfterViewInit {
 
   getArtworkInterview(userId: string) {
     this.dbOperations.interviewssCollection()
-    .ref.where('userId', '==', userId).onSnapshot(data => {
-      if(!data.empty) {
-        data.forEach(d => {
-          this.interview = d.data() as ExtraDetails
-        })
-      }
-    })
+      .ref.where('userId', '==', userId).onSnapshot(data => {
+        if (!data.empty) {
+          data.forEach(d => {
+            this.interview = d.data() as ExtraDetails
+          })
+        }
+      })
   }
 
 }

@@ -1,0 +1,39 @@
+<div class="story">
+  <div class="card">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="story-img">
+          <div class="media">
+            <div class="story-img" *ngIf="story.type == 'image'">
+              <img src="{{story.url}}" alt="">
+            </div>
+            <div *ngIf="story.type == 'video'">
+              <vg-player (onPlayerReady)="onPlayerReady($event)">
+                <vg-buffering></vg-buffering>
+                <vg-controls>
+                  <vg-play-pause></vg-play-pause>
+                  <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                  <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+                <video #media [vgMedia]="media" [src]="story.url" id="singleVideo" preload="auto" crossorigin>
+                </video>
+              </vg-player>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+        <div class="photo-by p-1">
+          <!-- <p><strong>Name: {{user.firstName + ' ' + user.lastName}}</strong></p> -->
+          <!-- <p class="mb-0">Location: user.place</p>
+          <p class="mb-0">Photography: Bobby Pall</p> -->
+        </div>
+        <div class="stories-info p-1">
+          <p class="mb-0"><strong>{{story.title}}</strong></p>
+          <p>{{story.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

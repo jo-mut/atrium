@@ -10,7 +10,7 @@ import { TermModalComponent } from './term-modal/term-modal.component';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { invalid } from '@angular/compiler/src/render3/view/util';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -24,21 +24,21 @@ export class CreateProfileComponent implements OnInit {
   submissionUser = new User();
   file: File;
   private authState: Observable<firebase.User>;
+ 
+  // isLinear = true;
+
   maxDate: Date = null;
   minDate = new Date(1995, 0, 1);
-  isLinear = true;
-
-
   genders: string[] = ['Male', 'Female', 'Other', 'Prefer not to say'];
+  formWidth: any = 100;
+  headingSize = '2.0em';
   facebook: string;
   youtube: string;
   instagram: string;
   others: string;
   social: string[] = [];
-  currentUser: any;
 
-  formWidth: any = 100;
-  headingSize = '2.0em';
+
   disableProfileCreate = true;
 
   constructor(private authService: AuthService,
@@ -51,12 +51,7 @@ export class CreateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getScreenSize();
-    this.afAuth.authState.subscribe(user => {
-      this.currentUser = user;
-    })
-
-
-    let timeIn18yrs = Date.now() - 568036800000
+    let timeIn18yrs = Date.now() - 1088640000000
     // get year, date, and month from timestamp;
     let d = new Date(timeIn18yrs);
     let yr = d.getFullYear();
@@ -66,56 +61,24 @@ export class CreateProfileComponent implements OnInit {
 
   }
 
-
-  tinyAlert() {
-    Swal.fire('Hey there!');
-  }
-
-  successNotification() {
-    Swal.fire('Hi', 'We have been informed!', 'success')
-  }
-
-  alertConfirmation() {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'This process is irreversible.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, go ahead.',
-      cancelButtonText: 'No, let me think'
-    }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Removed!',
-          'Product removed successfully.',
-          'success'
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Product still in our database.)',
-          'error'
-        )
-      }
-    })
-  }
-
   onFileSelected(event) {
     this.file = event.target.files[0];
     console.log(this.file);
   }
 
   public OnDateChange(event): void {
+    let date: string = new DatePipe('en').transform(event, 'yyyy/MM/dd');
+    console.log(event)
     let timeDiff = Math.abs(Date.now() - event.getTime());
     let age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
-
-    if (age < 18) {
-      // window.alert('Sorry! The minimum age to participate is 18yrs old')
-      this.user.birthDate = 'younger than 18yrs'
-    } else {
-      this.user.birthDate = event
-      console.log(this.user.birthDate)
-    }
+    this.user.birthDate = date.toString();
+    // if (age < 18) {
+    //   // window.alert('Sorry! The minimum age to participate is 18yrs old')
+    //   this.user.birthDate = 'younger than 18yrs'
+    // } else {
+   
+    //   console.log(this.user.birthDate)
+    // }
   }
 
   selectOption(event) {
@@ -123,35 +86,20 @@ export class CreateProfileComponent implements OnInit {
     this.user.gender = event;
   }
 
-  goBack(stepper: MatStepper) {
-    stepper.previous();
-  }
+  // goBack(stepper: MatStepper) {
+  //   stepper.previous();
+  // }
 
-  goForward(stepper: MatStepper) {
-    stepper.next();
+  // goForward(stepper: MatStepper) {
+  //   stepper.next()
+  //   console.log("user data", JSON.stringify(this.user));
+  // }
 
-  }
-
-  creatAcountAndGoForward(stepper: MatStepper) {
-    this.authService.register(this.user, stepper).then(() => {
-      this.authService.checkIfUserExists(this.user, stepper).then(() => {
-        this.ngZone.run(() => {
-          stepper.next();
-
-        })
-      })
-    }).catch((error) => {
-      console.log(error['code'])
-      this.authService.signIn(this.user).then(() => {
-        this.authService.checkIfUserExists(this.user, stepper).then(() => {
-          this.ngZone.run(() => {
-            stepper.next();
-          })
-        })
-      })
+  creatAcountAndGoForward() {
+    this.authService.checkIfUserExists(this.user).then(() => {
+     
     })
   }
-
 
   onSubmit() {
     this.social.push(this.facebook);
@@ -161,12 +109,6 @@ export class CreateProfileComponent implements OnInit {
     this.user.socialMedia = this.social;
     console.log(this.user)
     this.authService.saveUserProfileInfo(this.user)
-  }
-
-
-
-  nextStep(user) {
-    console.log('user ' + user);
   }
 
   // signUp(user: User) {

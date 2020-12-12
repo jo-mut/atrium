@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { HostProfileModalComponent } from '../admin/host-profile-modal/host-profile-modal.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -41,31 +40,6 @@ export class CallComponent implements OnInit {
   participate: string = ''
   copyright: string = ''
   timelinePhoto: string = '';
-
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true
-  }
 
   constructor(
     private dbOperations: DbOperationsService,

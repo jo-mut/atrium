@@ -1,0 +1,71 @@
+<div class="add-artwork" (window:resize)="onResize($event)">
+  <div class="artwork-bg">
+    <div class="container-fluid" [style.width.%]="formWidth">
+      <div class="artwork-form py-5">
+        <form #secondForm="ngForm">
+          <div class="card p-3 mt-3">
+            <div class="form-group">
+              <div>
+                <label>Date Shot</label>
+              </div>
+              <mat-form-field>
+                <input class="form-control" (dateInput)="OnDateChange($event.value)" matInput
+                  [matDatepicker]="picker" />
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div>
+              <small class="help-text">Which date did you shoot this? </small>
+            </div>
+          </div>
+
+          <div class="card p-3 mt-3">
+            <div class="form-group">
+              <label>Town/Country</label>
+              <input type="text" name="place" #place="ngModel" class="form-control" [(ngModel)]="artwork.place"
+                [ngClass]="{ 'is-invalid': secondForm.submitted && place.invalid }" required>
+              <div *ngIf="secondForm.submitted && place.invalid" class="invalid-feedback">
+                <div *ngIf="place.errors.required">Please tell us your country
+                </div>
+                <small class="help-text">Tell us your country</small>
+              </div>
+            </div>
+          </div>
+          <div class="card p-3 mt-3">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" name="title" #title="ngModel" class="form-control" [(ngModel)]="artwork.title"
+                [ngClass]="{ 'is-invalid': secondForm.submitted && title.invalid }" required>
+              <div *ngIf="secondForm.submitted && title.invalid" class="invalid-feedback">
+                <div *ngIf="title.errors.required">Add a title to your submission
+                </div>
+                <small class="help-text">What is the title of this submission?</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-3 mt-3">
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" name="description" #description="ngModel" class="form-control"
+                [(ngModel)]="artwork.description" maxlength="150" required
+                [ngClass]="{ 'is-invalid': secondForm.submitted && description.invalid }">
+              <div *ngIf="secondForm.submitted && description.invalid" class="invalid-feedback">
+                <div *ngIf="description.errors.required">Add a description to your submission
+                </div>
+                <small class="help-text">Describe your submission in 150 words</small>
+              </div>
+            </div>
+          </div>
+          <div class="move mt-3">
+            <div class="form-group">
+              <button [disabled]="disabled" (click)="goForward()" class="btn btn-primary">Next</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

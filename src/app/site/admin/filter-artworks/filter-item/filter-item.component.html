@@ -10,11 +10,12 @@
           <th align="center">Subject Consent</th>
           <th align="center">Artist Consent</th>
           <th align="center">Date</th>
+          <th align="center">Name</th>
           <th align="center">Country</th>
           <th align="center">Category</th>
           <th align="center">Action</th>
         </tr>
-        <tr>
+        <tr [ngStyle]="follow ? {'background-color': 'lightgray'} : {'background-color': 'white'}">
           <td>
             <!-- <p>{{i}}</p> -->
           </td>
@@ -55,6 +56,9 @@
             <p>{{date}}</p>
           </td>
           <td>
+            <p>{{name}}</p>
+          </td>
+          <td>
             <p>{{country}}</p>
           </td>
           <td>
@@ -64,6 +68,7 @@
             <div class="d-flex">
               <button class="btn mx-1" (click)="approveArtwork()">Approve</button>
               <button class="btn mx-1" (click)="declineArtwork()">Decline</button>
+              <button class="btn mx-1" (click)="followUpArtwork()">Follow</button>
             </div>
           </td>
         </tr>

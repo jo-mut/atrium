@@ -24,6 +24,7 @@ export class AuthService {
   private authState: Observable<firebase.User>;
   emailSent = false;
   currentUser: string;
+  user: User;
 
   constructor(
     private storage: AngularFireStorage,
@@ -33,23 +34,19 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
- 
+
 
   }
 
   async signIn(user: User) {
     this.afAuth.setPersistence(auth.Auth.Persistence.SESSION)
       .then((res) => {
-        // Existing and future Auth states are now persisted in the current
-        // session only. Closing the window would clear any existing state even
-        // if a user forgets to sign out.
-        // ...
-        // New sign-in will be persisted with session persistence.
         return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
           .then((result) => {
             this.ngZone.run(() => {
               of(result.user.uid).subscribe(type => {
                 this.currentUser = type;
+                this.router.navigateByUrl('/artist-profile')
                 localStorage.setItem('currentUser', this.currentUser);
               })
             });
@@ -67,55 +64,42 @@ export class AuthService {
 
   }
 
-  checkIfUserExists(user: User, stepper: MatStepper) {
-    return new Promise((resolve, reject) => {
-      this.dbOperations.usersCollection().get().subscribe(data => {
+  checkIfUserExists(user: User) {
+    this.user = user;
+    return this.dbOperations.usersCollection()
+      .ref.where('email', '==', user.email).get().then((data) => {
         if (!data.empty) {
-          console.log('not null')
-          this.dbOperations.usersCollection()
-            .ref.where('email', '==', user.email).get().then((data) => {
-              if (!data.empty) {
-                data.forEach(d => {
-                  if (d.exists) {
-                    const id = d.id;
-                    const existingUser = d.data() as User;
-                    let roles = existingUser.role;
-                    localStorage.setItem('currentUser', existingUser.userId);
-                    console.log(this.currentUser + ' current user')
-                    this.ngZone.run(() => {
-                      if (roles.includes('filtering')) {
-                        this.router.navigateByUrl('/project/admin/filter-artworks')
-                      } else if (roles.includes('moderator')) {
-                        this.router.navigateByUrl('/project/admin')
-                      } else if (roles.includes('artist')) {
-                        this.router.navigateByUrl('/project/add-artworks')
-                      } else if (roles.includes('scoring')) {
-                        this.router.navigateByUrl('/project/admin/score')
-                      } else if (roles.includes('selection')) {
-                        this.router.navigateByUrl('/project/admin/select-artworks')
-                      } else {
-                        stepper.next();
-                      }
-                    })
-
-                  }
-                })
-              } else {
-                stepper.next();
-                // this.register(user, stepper);
-                console.log('resgiter')
-              }
-            }).catch((reject) => {
-
-            })
-
+          data.forEach(d => {
+            if (d.exists) {
+              const id = d.id;
+              const existingUser = d.data() as User;
+              let roles = existingUser.role;
+              localStorage.setItem('currentUser', existingUser.userId);
+              console.log(existingUser.userId + ' current user')
+              this.ngZone.run(() => {
+                if (roles.includes('filtering')) {
+                  this.router.navigateByUrl('/project/admin/filter-artworks')
+                } else if (roles.includes('moderator')) {
+                  this.router.navigateByUrl('/project/admin')
+                } else if (roles.includes('artist')) {
+                  this.router.navigateByUrl('/upload-files')
+                } else if (roles.includes('scoring')) {
+                  this.router.navigateByUrl('/project/admin/score')
+                } else if (roles.includes('selection')) {
+                  this.router.navigateByUrl('/project/admin/select-artworks')
+                } else {
+                  this.router.navigateByUrl('/artist-profile')
+                }
+              })
+            }
+          })
         } else {
-          stepper.next();
-          // this.register(user, stepper);
+          console.log('resgiter')
+          this.register(user);
         }
-      })
-    })
+      }).catch((reject) => {
 
+      })
   }
 
   convertErrorMessage(code: string): string {
@@ -141,22 +125,25 @@ export class AuthService {
     }
   }
 
-  async register(user: User, stepper: MatStepper) {
-    var result = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
-    if (result != null) {
-      // this.sendEmailVerification();
-      this.signIn(user)
+  register(user: User) {
+    return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+    .then(d => {
+      return this.signIn(user)
         .then((res) => {
-          user.userId = result.user.uid;
+          // stepper.next();
+          user.userId = d.user.uid;
           user.password = '';
-          this.currentUser = result.user.uid;
+          this.currentUser = d.user.uid;
+          localStorage.setItem('currentUser', user.userId);
+
           console.log(user.userId + ' user uid')
           const userRef = this.dbOperations
             .usersCollection().doc(user.userId);
           const param = JSON.parse(JSON.stringify(user));
           return userRef.set(param)
             .then((result) => {
-              stepper.next();
+              this.router.navigateByUrl('/artist-profile')
+              console.log(user.userId + ' user uid signed in')
               // sign in user after profile has been saved
             }).catch((error) => {
               // window.alert(error.message);
@@ -165,8 +152,8 @@ export class AuthService {
         }).catch((rej) => {
 
         })
+    })
 
-    }
   }
 
   async sendEmailVerification() {
@@ -182,7 +169,7 @@ export class AuthService {
     await this.afAuth.signOut().then(res => {
       localStorage.removeItem('currentUser');
     }).catch((err => {
-      
+
     }))
   }
 
@@ -234,26 +221,41 @@ export class AuthService {
   }
 
   saveUserProfileInfo(user: User) {
+    this.user = user;
     console.log("set user data " + user.email);
     this.authState = this.afAuth.authState;
     let userId = localStorage.getItem('currentUser');
     console.log("set user data " + userId);
 
-    user.userId = userId;
-    user.role.push('artist')
-    user.password = '';
-    user.code = Date.now() + '';
+    this.user.userId = userId;
+    this.user.role.push('artist')
+    this.user.password = '';
+    this.user.code = Date.now() + '';
     // const userRef = this.dbOperations
     //   .usersCollection().doc(user.userId);
-    const param = JSON.parse(JSON.stringify(user));
-    this.dbOperations.usersCollection().doc(user.userId)
-    .update(param).then((resolve) => {
-      console.log(user)
-      this.getUserProfileInfo(user);
-    }).catch((error) => {
-      // window.alert(error.message);
+    const param = JSON.parse(JSON.stringify(this.user));
+    this.dbOperations.usersCollection().doc(this.user.userId)
+      .update(param).then((resolve) => {
+        this.router.navigateByUrl('/social-links')
+      }).catch((error) => {
+        // window.alert(error.message);
 
-    })
+      })
+
+  }
+
+  saveUserSociaMediaInfo(user: User) {
+    this.user = user  
+    // const userRef = this.dbOperations
+    //   .usersCollection().doc(user.userId);
+    const param = JSON.parse(JSON.stringify(this.user));
+    this.dbOperations.usersCollection().doc(this.user.userId)
+      .update(param).then((resolve) => {
+        this.getUserProfileInfo(this.user) 
+      }).catch((error) => {
+        // window.alert(error.message);
+
+      })
 
   }
 
@@ -287,7 +289,7 @@ export class AuthService {
             }
 
             if (roles.includes('artist')) {
-              this.router.navigateByUrl('/project/add-artworks')
+              this.router.navigateByUrl('/upload-files')
             }
 
             if (roles.includes('scoring')) {
@@ -302,6 +304,10 @@ export class AuthService {
       }).catch((reject) => {
 
       })
+  }
+
+  skipSocialMedia() {
+    this.router.navigateByUrl('/upload-files')
   }
 
   // Sign out 

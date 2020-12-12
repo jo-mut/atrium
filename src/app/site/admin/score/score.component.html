@@ -27,6 +27,76 @@
                 </video>
               </vg-player>
             </div>
+            <div class="container">
+              <div class="accordion-action-buttons my-4">
+                <button class="btn mx-3" (click)="accordion.openAll()">Expand All</button>
+                <button class="btn mx-3" (click)="accordion.closeAll()">Collapse All</button>
+              </div>
+              <mat-accordion class="accordion-headers-align" multi>
+                <mat-expansion-panel hideToggle="true" #rules>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <h4>ARTWORK DETAILS</h4>
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <div class="artwork-info mt-3">
+                    <div class="row">
+                      <div class="col-xs-12 col-12-sm col-md-6">
+                        <div class="card p-3">
+                          <div class="artwork-title">
+                            <h5><strong>Title</strong></h5>
+                            <p>{{work.title}}</p>
+                          </div>
+                          <div class="artwork-description">
+                            <h5><strong>Decription</strong></h5>
+                            <p>{{work.description}}</p>
+                          </div>
+                          <div class="artwork-description">
+                            <h5> <strong>Date Shot</strong></h5>
+                            <p>{{date}}</p>
+                          </div>
+                          <div class="artwork-description">
+                            <h5><strong>Place</strong></h5>
+                            <p> {{work.place}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel hideToggle="true" #rules>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <h4>INTERVIEW ANSWERS</h4>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="artwork-interview mt-3">
+                    <div class="row">
+                      <div class="col-xs-12 col-12-sm col-md-6">
+                        <div class="card p-3">
+                          <div class="challanges">
+                            <h5><strong>Tell us challenges encountered in the process of taking
+                                this video/photo</strong> </h5>
+                            <p>{{interview.challenges}}</p>
+                          </div>
+                          <div class="experience">
+                            <h5><strong>What are some of the challenges you encountered
+                                in the process of taking the photo(s)/video? </strong></h5>
+                            <p>{{interview.experience}}</p>
+                          </div>
+                          <div class="life-before">
+                            <h5><strong>Tell us your experience in the process of taking this
+                                video/photo</strong></h5>
+                            <p>{{interview.lifeBefore}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
             <div class="artwork-info mt-3">
               <div class="row">
                 <div class="col-xs-12 col-12-sm col-md-6">

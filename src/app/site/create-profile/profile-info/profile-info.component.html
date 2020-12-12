@@ -1,0 +1,124 @@
+<div class="create-profile" (window:resize)="onResize($event)">
+  <div class="profile-bg">
+    <div class="container-fluid  py-5" [style.width.%]="formWidth">
+      <form #secondForm="ngForm">
+        <div class="card">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="firstName" class="form-control" [(ngModel)]="user.firstName"
+                  [ngClass]="{ 'is-invalid': secondForm.submitted && firstName.invalid }" #firstName="ngModel" required>
+                <div *ngIf="secondForm.submitted && firstName.invalid" class="invalid-feedback">
+                  <div *ngIf="firstName.errors.required">
+                    Your first name cannot be empty
+                  </div>
+                </div>
+                <small class="help-text">Tell us your first name</small>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 mt-3">
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="lastName" class="form-control" [(ngModel)]="user.lastName"
+                  [ngClass]="{ 'is-invalid': secondForm.submitted && lastName.invalid }" #lastName="ngModel" required>
+                <div *ngIf="secondForm.submitted && lastName.invalid" class="invalid-feedback">
+                  <div *ngIf="lastName.errors.required">
+                    Your last name cannot be empty
+                  </div>
+                </div>
+                <small class="help-text">Tell us your last name</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="form-group">
+            <div>
+              <label>Date Of Birth </label>
+            </div>
+            <div>
+              <mat-form-field>
+                <input class="form-control" (dateInput)="OnDateChange($event.value)" name="birthDate" [min]="minDate"
+                  [max]="maxDate" matInput [matDatepicker]="picker" />
+
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <small class="help-text">Choose your date of birth</small>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="form-group">
+            <label>Gender</label>
+            <select class="form-control" (change)="selectOption($event.target.value)" [(ngModel)]="user.gender"
+              name="gender" [ngClass]="{ 'is-invalid': secondForm.submitted && gender.invalid }" #gender="ngModel"
+              required>
+              <option value="">Select an option</option>
+              <option *ngFor="let gender of genders">
+                {{gender}}
+              </option>
+            </select>
+            <div *ngIf="secondForm.submitted && gender.invalid" class="invalid-feedback">
+              <div *ngIf="gender.errors.required">
+                Please select your gender </div>
+              <small class="help-text">Select your gender</small>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="phoneNumber" #phoneNumber="ngModel" class="form-control"
+              [(ngModel)]="user.phoneNumber" [ngClass]="{ 'is-invalid': secondForm.submitted && phoneNumber.invalid }"
+              required>
+            <div *ngIf="secondForm.submitted && phoneNumber.invalid" class="invalid-feedback">
+              <div *ngIf="phoneNumber.errors.required">
+                Phone number cannot be empty </div>
+              <small class="help-text">What is your phone number?</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="address mt-3">
+          <div class="card">
+            <div class="form-group">
+              <label>Street Address 1</label>
+              <input type="text" name="firstAddress" #firstAddress="ngModel" class="form-control"
+                [(ngModel)]="user.address" required>
+              <small class="help-text">Your street address</small>
+            </div>
+            <div class="form-group">
+              <label>Country of Residence</label>
+              <input type="text" name="country" #country="ngModel" class="form-control" [(ngModel)]="user.country"
+                [ngClass]="{ 'is-invalid': secondForm.submitted && country.invalid }" required>
+              <div *ngIf="secondForm.submitted && country.invalid" class="invalid-feedback">
+                <div *ngIf="country.errors.required">
+                  Country of residence cannot be empty
+                </div>
+                <small class="help-text">Tell us the country of your residence</small>
+              </div>
+              <div class="form-group">
+                <label>Nationality</label>
+                <input type="text" name="nationality" #nationality="ngModel" class="form-control"
+                  [(ngModel)]="user.nationality"
+                  [ngClass]="{ 'is-invalid': secondForm.submitted && nationality.invalid }">
+                <div *ngIf="secondForm.submitted && nationality.invalid" class="invalid-feedback">
+                  <div *ngIf="nationality.errors.required">
+                    Nationality cannot be empty
+                  </div>
+                  <small class="help-text">Tell us your nationality</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="move mt-3">
+            <button class="btn" mat-button (click)="saveUserProfileInfo()">Submit your profile info</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

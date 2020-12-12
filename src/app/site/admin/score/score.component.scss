@@ -64,6 +64,26 @@
   }
 }
 
+mat-expansion-panel {
+  background-color: whitesmoke;
+  color: black;
+  mat-icon {
+    color: black;
+  }
+  h3 {
+    color: black;
+    font-size: 1em;
+    text-align: center;
+  }
+
+  h4 {
+    color: black;
+    font-size: 0.8em;
+  }
+
+}
+
+
 
 vg-player {
   width: 100%;

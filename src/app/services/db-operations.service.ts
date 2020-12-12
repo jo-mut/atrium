@@ -15,7 +15,6 @@ import { HomeData } from '../site/home/home.component';
 import { StoriesData } from '../site/campaign/campaign.component';
 import { Guidelines } from '../site/call/call.component';
 import { Contact } from '../site/contact-us/contact-us.component';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Injectable({
@@ -25,11 +24,13 @@ export class DbOperationsService {
   downloadURL: any;
   docId: string;
   userId: string;
+  temporaryArtwork: ArtWork;
   latestArtWorks: ArtWork[] = [];
   uploadingArtwork: ArtWork = new ArtWork();
   artwork: ArtWork = new ArtWork();
   extraDetails: ExtraDetails = new ExtraDetails();
-  file: File = null;
+  file: File;
+  consentForm: File;
   percentage: Observable<number> = of(0)
   private authState: Observable<firebase.User>;
 
@@ -166,6 +167,11 @@ export class DbOperationsService {
 
   uploadSubjectConsentForm(subjectConsentForm: any, artwork: ArtWork, 
     file: File, extraDetails: ExtraDetails) {
+      console.log(subjectConsentForm)
+      console.log(artwork)
+      console.log(extraDetails)
+      console.log(file)
+      console.log(localStorage.getItem('currentUser'))
     if (subjectConsentForm != null) {
       let ext = subjectConsentForm.name.substring(subjectConsentForm.name.lastIndexOf('.') + 1);
       if (ext === 'pdf') {

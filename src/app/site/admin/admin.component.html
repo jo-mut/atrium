@@ -1,10 +1,10 @@
 <div class="admin py-5 mt-5">
   <div class="container">
     <div class="row">
-      <div class="col-md-4 mt-3">
+      <div class="col-md-3 mt-3">
         <div class="card p-3">
           <div>
-            <h3 class="title" >Filtering</h3>
+            <h5 class="title">Filtering</h5>
           </div>
         </div>
         <div class="description p-3">
@@ -12,34 +12,56 @@
           <button class="btn px-5 btn-primary" (click)="navigateToFilterArtworks()">View</button>
         </div>
       </div>
-      <div class="col-md-4 mt-3">
+      <div class="col-md-3 mt-3">
         <div class="card p-3">
           <div>
-            <h3 class="title" >Scoring</h3>
+            <h5 class="title" >Scoring</h5>
           </div>
         </div>
         <div class="description p-3">
-          <p class ="description-tag" > View artworks still to score</p>
+          <p class ="description-tag" > Still to score</p>
           <button class="btn px-5 btn-primary" (click)="navigateToScoringArtworks()">View</button>
         </div>
       </div>
-      <div class="col-md-4 mt-3">
+      <div class="col-md-3 mt-3">
         <div class="card p-3">
           <div>
-            <h3 class="title">Scored</h3>
+            <h5 class="title">Scored</h5>
           </div>
         </div>
         <div class="description p-3">
-          <p class="description-tag"> View all the scored artworks</p>
+          <p class="description-tag"> Scored artworks</p>
           <button class="btn px-5 btn-primary" (click)="navigateToScoredArtworks()">View</button>
+        </div>
+      </div>
+      <div class="col-md-3 mt-3">
+        <div class="card p-3">
+          <div>
+            <h5 class="title">Follow Up</h5>
+          </div>
+        </div>
+        <div class="description p-3">
+          <p class="description-tag"> Follow up artworks</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToFollowUp()">View</button>
         </div>
       </div>
     </div>
     <div class="row mt-5">
-      <div class="col-md-4 mt-3">
+      <div class="col-md-3 mt-3">
         <div class="card p-3">
           <div>
-            <h3 class="title">Artist</h3>
+            <h5 class="title">Exhibit</h5>
+          </div>
+        </div>
+        <div class="description p-3">
+          <p class="description-tag">Exhibit in the Virtual Gallery</p>
+          <button class="btn px-5 btn-primary" (click)="navigateToExhibit()">View</button>
+        </div>
+      </div>
+      <div class="col-md-3 mt-3">
+        <div class="card p-3">
+          <div>
+            <h5 class="title">Artist</h5>
           </div>
         </div>
         <div class="description p-3">
@@ -47,10 +69,10 @@
           <button class="btn px-5 btn-primary" (click)="navigateToArtist()">View</button>
         </div>
       </div>
-      <div class="col-md-4 mt-3">
+      <div class="col-md-3 mt-3">
         <div class="card p-3">
           <div>
-            <h3 class="title">Messages</h3>
+            <h5 class="title">Messages</h5>
           </div>
         </div>
         <div class="description p-3">
@@ -58,39 +80,17 @@
           <button class="btn px-5 btn-primary" (click)="navigateToMessages()">View</button>
         </div>
       </div>
-      <div class="col-md-4 mt-3">
+      <div class="col-md-3 mt-3">
         <div class="card p-3">
           <div>
-            <h3 class="title">Submissions</h3>
+            <h5 class="title">Submissions</h5>
           </div>
         </div>
         <div class="description p-3">
-          <p class="description-tag"> View artists who have submitted</p>
+          <p class="description-tag"> Artists by submissions</p>
           <button class="btn px-5 btn-primary" (click)="navigateToSubmissions()">View</button>
         </div>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col-md-6 mt-3">
-        <div class="card">
-          <div></div>
-        </div>
-        <div class="description p-3">
-          <h3 class="title" >Categories</h3>
-          <p class="description-tag">View artwork by categories</p>
-          <button class="btn px-5 btn-primary" (click)="navigateToAllCurators()">View</button>
-        </div>
-      </div>
-      <div class="col-md-6 mt-3">
-        <div class="card">
-          <div></div>
-        </div>
-        <div class="description p-3">
-          <h3 class="title" >Team</h3>
-          <p class="description-tag"> View the profiles of the panel team</p>
-          <button class="btn px-5 btn-primary" (click)="navigateToAllTeam()">View</button>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>

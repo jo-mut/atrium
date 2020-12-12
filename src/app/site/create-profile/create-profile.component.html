@@ -1,6 +1,45 @@
 <div class="create-profile" (window:resize)="onResize($event)">
   <div class=" profile-bg">
     <div class="container-fluid  py-5" [style.width.%]="formWidth">
+      <form #firstForm="ngForm">
+        <div class="card mt-3">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" [(ngModel)]="user.email"
+              [ngClass]="{ 'is-invalid': firstForm.submitted && email.invalid }" #email="ngModel" required>
+            <div *ngIf="firstForm.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">
+                Your email cannot be empty
+              </div>
+            </div>
+            <small class="help-text">Enter your email</small>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" #password="ngModel" class="form-control" [(ngModel)]="user.password"
+              [ngClass]="{ 'is-invalid': firstForm.submitted && password.invalid }" required>
+            <div *ngIf="firstForm.submitted && password.invalid" class="invalid-feedback">
+              <div *ngIf="password.errors.required">
+                Your password cannot be empty
+              </div>
+              <small class="help-text">Enter a password you can remember</small>
+            </div>
+          </div>
+        </div>
+        <div class="move mt-3">
+          <button class="btn" mat-button (click)="creatAcountAndGoForward()">Next</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="create-profile" (window:resize)="onResize($event)">
+  <div class=" profile-bg">
+    <div class="container-fluid  py-5" [style.width.%]="formWidth">
       <mat-horizontal-stepper #stepper [linear]="isLinear">
         <form #firstForm="ngForm">
           <mat-step label="Create Account" [stepControl]="firstForm">
@@ -21,9 +60,9 @@
               <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" #password="ngModel" class="form-control"
-                  [(ngModel)]="user.password" [ngClass]="{ 'is-invalid': secondForm.submitted && password.invalid }"
+                  [(ngModel)]="user.password" [ngClass]="{ 'is-invalid': firstForm.submitted && password.invalid }"
                   required>
-                <div *ngIf="secondForm.submitted && password.invalid" class="invalid-feedback">
+                <div *ngIf="firstForm.submitted && password.invalid" class="invalid-feedback">
                   <div *ngIf="password.errors.required">
                     Your password cannot be empty
                   </div>
@@ -37,7 +76,7 @@
                   <button class="btn" mat-button (click)="goBack(stepper)">Back</button>
                 </div>
                 <div class="col-6 mt-3">
-                  <button class="btn" mat-button  (click)="creatAcountAndGoForward(stepper)">Next</button>
+                  <button class="btn" mat-button (click)="creatAcountAndGoForward(stepper)">Next</button>
                 </div>
               </div>
             </div>
@@ -52,9 +91,9 @@
                   <div class="form-group">
                     <label>First Name</label>
                     <input type="text" name="firstName" class="form-control" [(ngModel)]="user.firstName"
-                      [ngClass]="{ 'is-invalid': firstForm.submitted && firstName.invalid }" #firstName="ngModel"
+                      [ngClass]="{ 'is-invalid': secondForm.submitted && firstName.invalid }" #firstName="ngModel"
                       required>
-                    <div *ngIf="firstForm.submitted && firstName.invalid" class="invalid-feedback">
+                    <div *ngIf="secondForm.submitted && firstName.invalid" class="invalid-feedback">
                       <div *ngIf="firstName.errors.required">
                         Your first name cannot be empty
                       </div>
@@ -66,9 +105,9 @@
                   <div class="form-group">
                     <label>Last Name</label>
                     <input type="text" name="lastName" class="form-control" [(ngModel)]="user.lastName"
-                      [ngClass]="{ 'is-invalid': firstForm.submitted && lastName.invalid }" #lastName="ngModel"
+                      [ngClass]="{ 'is-invalid': secondForm.submitted && lastName.invalid }" #lastName="ngModel"
                       required>
-                    <div *ngIf="firstForm.submitted && lastName.invalid" class="invalid-feedback">
+                    <div *ngIf="secondForm.submitted && lastName.invalid" class="invalid-feedback">
                       <div *ngIf="lastName.errors.required">
                         Your last name cannot be empty
                       </div>
@@ -85,13 +124,10 @@
                 </div>
                 <div>
                   <mat-form-field>
-                    <input class="form-control"(dateInput)="OnDateChange($event.value)" [(ngModel)]="user.birthDate" name="birthDate"
-                      #birthDate="ngModel" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="picker" />
-                    <div *ngIf="firstForm.submitted && birthDate.invalid" class="invalid-feedback">
-                      <div *ngIf="birthDate.errors.required">
-                        Please submit a valid date
-                      </div>
-                    </div>
+                    <input class="form-control" (dateInput)="OnDateChange($event.value)"
+                      name="birthDate"  [min]="minDate" [max]="maxDate" matInput
+                      [matDatepicker]="picker" />
+                   
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -100,19 +136,18 @@
                 <small class="help-text">Choose your date of birth</small>
               </div>
             </div>
-
             <div class="card mt-3">
               <div class="form-group">
                 <label>Gender</label>
                 <select class="form-control" (change)="selectOption($event.target.value)" [(ngModel)]="user.gender"
-                  name="gender" [ngClass]="{ 'is-invalid': firstForm.submitted && gender.invalid }" #gender="ngModel"
+                  name="gender" [ngClass]="{ 'is-invalid': secondForm.submitted && gender.invalid }" #gender="ngModel"
                   required>
                   <option value="">Select an option</option>
                   <option *ngFor="let gender of genders">
                     {{gender}}
                   </option>
                 </select>
-                <div *ngIf="firstForm.submitted && gender.invalid" class="invalid-feedback">
+                <div *ngIf="secondForm.submitted && gender.invalid" class="invalid-feedback">
                   <div *ngIf="gender.errors.required">
                     Please select your gender </div>
                   <small class="help-text">Select your gender</small>
@@ -125,7 +160,7 @@
                 <input type="text" name="phoneNumber" #phoneNumber="ngModel" class="form-control"
                   [(ngModel)]="user.phoneNumber"
                   [ngClass]="{ 'is-invalid': secondForm.submitted && phoneNumber.invalid }" required>
-                <div *ngIf="thirdForm.submitted && phoneNumber.invalid" class="invalid-feedback">
+                <div *ngIf="secondForm.submitted && phoneNumber.invalid" class="invalid-feedback">
                   <div *ngIf="phoneNumber.errors.required">
                     Phone number cannot be empty </div>
                   <small class="help-text">What is your phone number?</small>
@@ -144,8 +179,8 @@
                 <div class="form-group">
                   <label>Country of Residence</label>
                   <input type="text" name="country" #country="ngModel" class="form-control" [(ngModel)]="user.country"
-                    [ngClass]="{ 'is-invalid': thirdForm.submitted && country.invalid }" required>
-                  <div *ngIf="thirdForm.submitted && country.invalid" class="invalid-feedback">
+                    [ngClass]="{ 'is-invalid': secondForm.submitted && country.invalid }" required>
+                  <div *ngIf="secondForm.submitted && country.invalid" class="invalid-feedback">
                     <div *ngIf="country.errors.required">
                       Country of residence cannot be empty
                     </div>
@@ -155,8 +190,8 @@
                     <label>Nationality</label>
                     <input type="text" name="nationality" #nationality="ngModel" class="form-control"
                       [(ngModel)]="user.nationality"
-                      [ngClass]="{ 'is-invalid': thirdForm.submitted && nationality.invalid }">
-                    <div *ngIf="thirdForm.submitted && nationality.invalid" class="invalid-feedback">
+                      [ngClass]="{ 'is-invalid': secondForm.submitted && nationality.invalid }">
+                    <div *ngIf="secondForm.submitted && nationality.invalid" class="invalid-feedback">
                       <div *ngIf="nationality.errors.required">
                         Nationality cannot be empty
                       </div>
@@ -236,4 +271,4 @@
       </mat-horizontal-stepper>
     </div>
   </div>
-</div>
+</div> -->

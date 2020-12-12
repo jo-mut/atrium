@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   userId: string = null;
   showSubmit: boolean = false;
   showAuthButton: boolean = true;
+  isCollapsed = true;
   // activeLink: any;
   private authState: Observable<firebase.User>;
 
@@ -200,7 +201,7 @@ export class NavbarComponent implements OnInit {
               this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             } else {
-              this.router.navigateByUrl('/project/add-artworks')
+              this.router.navigateByUrl('/upload-files')
               this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             }
@@ -216,7 +217,7 @@ export class NavbarComponent implements OnInit {
       && user.gender == null && user.nationality == null && user.phoneNumber == null) {
       this.router.navigateByUrl('/create-profile')
     } else {
-      this.router.navigateByUrl('/project/add-artworks')
+      this.router.navigateByUrl('/upload-files')
     }
   }
 

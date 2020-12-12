@@ -1,0 +1,72 @@
+<div class="select-artworks">
+    <div class="select-item">
+      <div class="table-responsive" *ngIf="scoredItem">
+        <table class="table">
+          <tr>
+            <th align="center">No.</th>
+            <th align="center">Artwork</th>
+            <th align="center">Date</th>
+            <th align="center">Name</th>
+            <th align="center">Country</th>
+            <th align="center">Category</th>
+            <th align="center">Score</th>
+            <th align="center">Action</th>
+          </tr>
+          <tr>
+            <td>
+              <!-- <p>{{no}}</p> -->
+            </td>
+            <td>
+              <div class="filtering-image">
+                <div *ngIf="artwork.type == 'image'">
+                  <img src="{{scoredItem.url}}" alt="">
+                </div>
+                <div  *ngIf="artwork.type == 'video'">
+                  <vg-player (onPlayerReady)="onPlayerReady($event)">
+                    <vg-buffering></vg-buffering>
+                    <vg-controls>
+                      <vg-play-pause></vg-play-pause>
+                      <vg-playback-button></vg-playback-button>
+                      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                      <vg-scrub-bar>
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                      </vg-scrub-bar>
+                      <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                      <vg-mute></vg-mute>
+                      <vg-volume></vg-volume>
+                      <vg-fullscreen></vg-fullscreen>
+                    </vg-controls>
+                    <video #media [vgMedia]="media" [src]="scoredItem.url" id="singleVideo" preload="auto" crossorigin>
+                    </video>
+                  </vg-player>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p>{{scoredItem.date}}</p>
+            </td>
+            <td>
+              <p>{{scoredItem.name}}</p>
+            </td>
+            <td>
+              <p>{{scoredItem.country}}</p>
+            </td>
+            <td>
+              <p>{{scoredItem.category}}</p>
+            </td>
+            <td>
+              <p>{{scoredItem.totalScore}}</p>
+            </td>
+            <td>
+              <div class="d-flex">
+                <button class="btn mx-1" (click)="exhibitArtwork()">{{exhibit}}</button>
+                <button class="btn mx-1" (click)="declineExhibtion()">{{decline}}</button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  
