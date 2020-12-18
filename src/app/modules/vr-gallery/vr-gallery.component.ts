@@ -177,55 +177,70 @@ export class VrGalleryComponent implements OnInit {
 
     playVideoWhenUserEntersRoom() {
     // play video when user enters room. Pause when leaving
-    const videoPlayer = <any>document.getElementById('theaterVideo');
-    videoPlayer.pause();
-
-    AFRAME.registerComponent('position-listener', {
+ 
+    const video = <any>document.getElementById('theaterVideo');
+    video.pause();
+    AFRAME.registerComponent('listener', {
       tick: function () {
-        const zPosition = this.el.getAttribute('position')["z"];
-        const xPosition = this.el.getAttribute('position')["x"];
-        const yPosition = this.el.getAttribute('position')["y"];
-
-        this.pos = 'zPosition xPosition yPosition'
-        let xPos = null;
-        let zPos = null;
-
-        if (zPosition <= 0) {
-          this.videoPlayer.play();
+        const userPosition = this.el.getAttribute('position')["z"];
+    
+        if (userPosition <= -17) {
+          video.play();
         } else {
-          this.videoPlayer.pause();
+          video.pause();
         }
-
-        if (xPosition < -48.8) {
-          xPos = -48.8;
-          this.pos = 'zPosition xPos yPosition'
-          console.log(this.pos)
-        }
-
-        if (xPosition > 0) {
-          xPos = 0;
-          this.pos = 'zPosition xPos yPosition'
-          console.log(this.pos)
-
-        }
-
-        if (zPosition > 29.5) {
-          zPos = -29.5;
-          this.pos = 'zPos xPosition yPosition'
-          console.log(this.pos)
-
-        }
-
-        if (zPosition < -34.5) {
-          zPos = -34.5;
-          this.pos = 'zPos xPosition yPosition'
-          console.log(this.pos)
-
-        }
-
-
       }
     });
+
+
+    // const videoPlayer = <any>document.getElementById('theaterVideo');
+    // videoPlayer.pause();
+    // AFRAME.registerComponent('position-listener', {
+    //   tick: function () {
+    //     const zPosition = this.el.getAttribute('position')["z"];
+    //     const xPosition = this.el.getAttribute('position')["x"];
+    //     const yPosition = this.el.getAttribute('position')["y"];
+
+    //     this.pos = 'zPosition xPosition yPosition'
+    //     let xPos = null;
+    //     let zPos = null;
+
+    //     if (zPosition <= 0) {
+    //       this.videoPlayer.play();
+    //     } else {
+    //       this.videoPlayer.pause();
+    //     }
+
+    //     if (xPosition < -48.8) {
+    //       xPos = -48.8;
+    //       this.pos = 'zPosition xPos yPosition'
+    //       console.log(this.pos)
+    //     }
+
+    //     if (xPosition > 0) {
+    //       xPos = 0;
+    //       this.pos = 'zPosition xPos yPosition'
+    //       console.log(this.pos)
+
+    //     }
+
+    //     if (zPosition > 29.5) {
+    //       zPos = -29.5;
+    //       this.pos = 'zPos xPosition yPosition'
+    //       console.log(this.pos)
+
+    //     }
+
+    //     if (zPosition < -34.5) {
+    //       zPos = -34.5;
+    //       this.pos = 'zPos xPosition yPosition'
+    //       console.log(this.pos)
+
+    //     }
+
+
+    //   }
+    // });
 
   }
 

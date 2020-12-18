@@ -57,10 +57,13 @@
  */
 
 import 'aframe';
+import 'aframe-event-set-component';
+import 'aframe-mouse-cursor-component'
+import 'aframe-extras';
 import '@angular/localize/init';
 
 /***************************************************************************************************
- * Zone JS is required by default for Angular itself.
+ * Zone JS is required by default for Angu_lar itself.
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 

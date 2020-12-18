@@ -173,33 +173,35 @@ export class DbOperationsService {
       console.log(file)
       console.log(localStorage.getItem('currentUser'))
     if (subjectConsentForm != null) {
-      let ext = subjectConsentForm.name.substring(subjectConsentForm.name.lastIndexOf('.') + 1);
-      if (ext === 'pdf') {
-        artwork.userId = localStorage.getItem('currentUser');
-        extraDetails.userId = localStorage.getItem('currentUser');
-        const path = `artworks/documents/${Date.now() + ''}_${subjectConsentForm.name}`;
-        // Reference to storage bucket
-        const ref = this.storage.ref(path);
-        // The main task
-        const task = this.storage.upload(path, subjectConsentForm);
-        // Progress monitoring
-        let percentage = task.percentageChanges();
-        const snapshot = task.snapshotChanges().pipe(finalize(async () => {
-          let downloadUrl = await ref.getDownloadURL().toPromise();
-          artwork.subjectConsentForm = downloadUrl;
+      // let ext = subjectConsentForm.name.substring(subjectConsentForm.name.lastIndexOf('.') + 1);
+      // if (ext === 'pdf') {
+       
 
-        })
-        ).subscribe(data => {
-          if (data.bytesTransferred == data.totalBytes) {
-              this.artwork = artwork;
-              this.extraDetails = extraDetails;
-              this.file = file;
-              this.router.navigateByUrl('/project/submit')
-          }
-        });
-        return percentage
+      // }
 
-      }
+      artwork.userId = localStorage.getItem('currentUser');
+      extraDetails.userId = localStorage.getItem('currentUser');
+      const path = `artworks/documents/${Date.now() + ''}_${subjectConsentForm.name}`;
+      // Reference to storage bucket
+      const ref = this.storage.ref(path);
+      // The main task
+      const task = this.storage.upload(path, subjectConsentForm);
+      // Progress monitoring
+      let percentage = task.percentageChanges();
+      const snapshot = task.snapshotChanges().pipe(finalize(async () => {
+        let downloadUrl = await ref.getDownloadURL().toPromise();
+        artwork.subjectConsentForm = downloadUrl;
+
+      })
+      ).subscribe(data => {
+        if (data.bytesTransferred == data.totalBytes) {
+            this.artwork = artwork;
+            this.extraDetails = extraDetails;
+            this.file = file;
+            this.router.navigateByUrl('/project/submit')
+        }
+      });
+      return percentage
     }
   }
 

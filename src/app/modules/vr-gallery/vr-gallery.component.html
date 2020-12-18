@@ -1,5 +1,5 @@
 <div class="vr-gallery">
-  <a-scene physics="debug: true">
+  <a-scene cursor='rayOrigin: mouse'>
 
     <!-- Splash Screen -->
     <div class="splash" [style.display]="splash">
@@ -45,7 +45,8 @@
         <img id="example" src="{{images[16]}}">
 
       </div>
-      <video id="theaterVideo" autoplay="false" loop="true" webkit-playsinline playsinline src="{{video}}"></video>
+
+      <video id="theaterVideo" autoplay loop="true" webkit-playsinline playsinline src="{{video}}"></video>
       <img id="theater-curtains" src="assets/images/theater/curtains.png">
       <a-asset-item id="couch-obj" src="assets/images/theater/couch/model.obj"></a-asset-item>
       <a-asset-item id="couch-mtl" src="assets/images/theater/couch/materials.mtl"></a-asset-item>
@@ -55,7 +56,7 @@
 
     <!-- User / Camera -->
     <a-entity id="rig" kinema-body="radius: 0.8" movement-controls position-listener listener position="0 0 0">
-      <a-entity id="player" camera="user-height: 1.5" reset-on-collision="with: .wall" look-controls="pointerLockEnabled: true"
+      <a-entity id="player" camera="user-height: 1.5" listener look-controls="pointerLockEnabled: true"
         wasd-controls="acceleration:200" position="0 9 0">
         <a-entity cursor="fuse: true;" position="0 0 -3" material="color: black; shader: flat">
           <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1"
@@ -139,6 +140,8 @@
     <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
       text="color: white; align:  center; value: This text will be 4 units wide." position="-37 -1.5 -14.9"
       scale="2.2 2.2 2.2"></a-entity>
+
+
 
     <a-entity position="-3 1.5 16.5">
       <!-- Back wall -->

@@ -92,7 +92,7 @@ export class ArtworkInfoComponent implements OnInit {
 
   goForward() {
     console.log(this.artwork)
-    console.log(this.dbOperations.consentForm)
+    console.log('consent form ' + this.dbOperations.consentForm)
     console.log(this.dbOperations.temporaryArtwork)
     console.log(this.dbOperations.file)
     this.dbOperations.temporaryArtwork = this.artwork;

@@ -12,32 +12,33 @@ import { DbOperationsService } from '../services/db-operations.service';
 })
 export class VirtualGalleryComponent implements OnInit {
 
-  artworks: ArtWork[] = [];
+  images: ArtWork[] = [];
   videoArtworks: ArtWork[] = [];
   splash = '';
   id: number = 1595330004864;
   image = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00";
   video = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site%2FItsUpToUs%20Promo%20Final%20Cut.mp4?alt=media&token=e947661b-8e03-4548-b47c-3269d068be3b";
+  videosource = <any>document.getElementById('theaterVideo');
 
-  images = [
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fchef%20covid%2019.jpg?alt=media&token=a0a473e6-3e1e-4e48-9bd0-ed67f31d2739',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsocial%20distance%20pandemic.jpg?alt=media&token=cd117c33-f18a-437e-979b-c3c86259abc5',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fmothers%20covid%2019.jpg?alt=media&token=0982d57d-6afc-4857-bb3a-76c7582cc24b',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsanitizing%20during%20pandemic.jpg?alt=media&token=962e55db-4b00-4dbc-a6ab-8793a13f12d6',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fcobbler%20pandemic.jpg?alt=media&token=67df849a-a8b9-40a0-adca-4a31ad2c9146',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Ftailor%20pandemic.jpg?alt=media&token=22f8a676-85fd-4f7a-96ed-c3624e76d6c2',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fcobbler%20pandemic.jpg?alt=media&token=67df849a-a8b9-40a0-adca-4a31ad2c9146',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fentrepreneur%20covid19.jpg?alt=media&token=32422549-f76c-4d37-828f-fa2af6b25509',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fpicture9.png?alt=media&token=f891885d-ce11-4be1-9050-67d3d3c260fd',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsanitizing%20during%20pandemic.jpg?alt=media&token=962e55db-4b00-4dbc-a6ab-8793a13f12d6',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fmwalimu.png?alt=media&token=26f2695b-6cc7-4802-93ab-7d0de530e2a9',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsocial%20distance%20pandemic.jpg?alt=media&token=cd117c33-f18a-437e-979b-c3c86259abc5',
-    'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
-  ]
+  // images = [
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fartist%20during%20covid%2019.jpg?alt=media&token=fd448fc4-e8e3-44f3-bc0b-f9a5aaebff00',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fchef%20covid%2019.jpg?alt=media&token=a0a473e6-3e1e-4e48-9bd0-ed67f31d2739',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsocial%20distance%20pandemic.jpg?alt=media&token=cd117c33-f18a-437e-979b-c3c86259abc5',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fmothers%20covid%2019.jpg?alt=media&token=0982d57d-6afc-4857-bb3a-76c7582cc24b',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsanitizing%20during%20pandemic.jpg?alt=media&token=962e55db-4b00-4dbc-a6ab-8793a13f12d6',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fcobbler%20pandemic.jpg?alt=media&token=67df849a-a8b9-40a0-adca-4a31ad2c9146',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Ftailor%20pandemic.jpg?alt=media&token=22f8a676-85fd-4f7a-96ed-c3624e76d6c2',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fcobbler%20pandemic.jpg?alt=media&token=67df849a-a8b9-40a0-adca-4a31ad2c9146',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fentrepreneur%20covid19.jpg?alt=media&token=32422549-f76c-4d37-828f-fa2af6b25509',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fpicture9.png?alt=media&token=f891885d-ce11-4be1-9050-67d3d3c260fd',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsanitizing%20during%20pandemic.jpg?alt=media&token=962e55db-4b00-4dbc-a6ab-8793a13f12d6',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fmwalimu.png?alt=media&token=26f2695b-6cc7-4802-93ab-7d0de530e2a9',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fsocial%20distance%20pandemic.jpg?alt=media&token=cd117c33-f18a-437e-979b-c3c86259abc5',
+  //   'https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site-data%2Fhome%20schoolind%20during%20pandemic.jpg?alt=media&token=58b1c390-d8c4-42e6-885d-a011474bb8ba',
+  // ]
 
   constructor(public dbOperations: DbOperationsService,
     public route: ActivatedRoute) {
@@ -55,19 +56,15 @@ export class VirtualGalleryComponent implements OnInit {
 
   }
 
-  getImage() {
-    let img = new Image()
-  }
-
   getExhibitions() {
     this.dbOperations.artworksCollection()
       .ref.where('status', '==', 'exhibit')
       .onSnapshot(data => {
-        this.artworks = data.docChanges().map(e => {
-          const data = e.doc.data();
+        this.images = data.docChanges().map(e => {
+          const data = e.doc.data() as ArtWork;
           const id = e.doc.id;
-          console.log({ ...data })
-          return { id, ...data } as ArtWork;
+
+          return { ...data }
         });
       })
 
@@ -95,7 +92,7 @@ export class VirtualGalleryComponent implements OnInit {
         this.videoArtworks = data.docChanges().map(e => {
           const data = e.doc.data();
           const id = e.doc.id;
-          console.log({ ...data })
+          console.log({ ...data } + 'videos')
           return { id, ...data } as ArtWork;
         });
       })
@@ -205,26 +202,76 @@ export class VirtualGalleryComponent implements OnInit {
       this.setAttribute('material', 'color', 'red');
       console.log('I was clicked!');
     });
-  
+
   }
 
 
   playVideoWhenUserEntersRoom() {
 
-    // let vid = <any>document.getElementById('theaterVideo');
+    // AFRAME.registerComponent('videoplayer', {
+    //   init: function () {
+    //     var sceneEl = document.querySelector('a-scene').querySelector('a-assets');
+    //     var video = sceneEl.querySelector('video');
+    //     var canvas = document.getElementsByClassName('a-canvas');
+    //     canvas[0].addEventListener('click', function () {
+    //       if (video.paused == true) {
+    //         video.play();
+    //       } else {
+    //         video.pause();
+    //       }
+    //     }, false);
+    //   }
+    // });
+
+    AFRAME.registerComponent('videoplayer', {
+      init: function () {
+        let videoplay = () => {
+          console.log('i was clicked')
+          this.videosource.play();
+
+        }
+
+        this.el.addEventListener('click', videoplay);
+
+      }
+    });
+
+    // AFRAME.registerComponent('videopause', {
+    //   init: function () {
+    //     let videopause = () => {
+    //       this.videosource.play();
+    //       console.log('i was clicked')
+    //     }
+
+    //     this.el.addEventListener('click', videopause);
+
+    //   }
+    // });
+
+
+    
+
+    //   let vid = <any>document.getElementById('theaterVideo');
     // vid.pause();
     // AFRAME.registerComponent('listener', {
-      
-    //   tick: function () {
-    //     console.log('register component')
+
+    //   init: function () {
     //     const userPosition = this.el.getAttribute('position')["z"];
+
+    //     if(userPosition <= 16) {
+    //       console.log('register component')
+
+    //       vid.play()
+    //     } else { 
+    //       vid.pause()
+    //     }
 
     //     this.el.addEventListener('mouseenter', function (evt) {
     //       vid.play();
     //     });
     //     this.el.addEventListener('mouseleave', function (evt) {
     //       console.log('mouse on video')
-  
+
     //       vid.pause();
     //     });
     //   }
@@ -232,34 +279,8 @@ export class VirtualGalleryComponent implements OnInit {
 
   }
 
-
-  playAnotherVideo(videoUrl: string, tagId: string) {
-    const anotherVideo = <any>document.getElementById(tagId);
-    this.video = videoUrl;
-
-    // AFRAME.registerComponent('change-color-on-click', {
-    //   // Could use a schem to preserve the color! then simply change it on update
-    //   // if clicked?
-    //   init: function () {
-    //     var COLORS = [
-    //       'pink',
-    //       //'blue',
-    //       'yellow',
-    //       'red',
-    //       'peachpuff',
-    //       '#2EAFAC',
-    //       '#BAE'];
-    //     this.el.addEventListener('click', function (evt) {
-    //       var randomIndex = Math.floor(Math.random() * COLORS.length);
-    //       var newColor = COLORS[randomIndex];
-    //       this.setAttribute('material', 'color', newColor);
-    //       console.log('I was clicked at: ', evt.detail.intersection.point, "and my new color is: ", newColor);
-    //     });
-    //   }
-    // });
-  }
-
   exitSplashDisplay() {
+    // this.videosource.play();
     this.splash = 'none';
   }
 

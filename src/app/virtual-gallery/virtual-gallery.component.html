@@ -1,5 +1,5 @@
 <div class="vr-gallery">
-  <a-scene cursor="rayOrigin: mouse" >
+  <a-scene cursor='rayOrigin: mouse' videoplayer>
 
     <!-- Splash Screen -->
     <div class="splash" [style.display]="splash">
@@ -24,45 +24,48 @@
       <img id="room-sign-2" src="assets/images/other/room-sign-2.png">
       <img id="sky" src="assets/images/other/wall-concrete.jpg">
       <!-- team -->
-      <div *ngIf="images">
-        <img id="example0" src="{{images[0]}}">
-        <img id="example1" src="{{images[1]}}">
-        <img id="example2" src="{{images[2]}}">
-        <img id="example3" src="{{images[3]}}">
-        <img id="example4" src="{{images[4]}}">
-        <img id="example5" src="{{images[5]}}">
-        <img id="example6" src="{{images[6]}}">
-        <img id="example7" src="{{images[7]}}">
-        <img id="example8" src="{{images[8]}}">
-        <img id="example9" src="{{images[9]}}">
-        <img id="example10" src="{{images[10]}}">
-        <img id="example11" src="{{images[11]}}">
-        <img id="example12" src="{{images[12]}}">
-        <img id="example13" src="{{images[13]}}">
-        <img id="example14" src="{{images[14]}}">
-        <img id="example15" src="{{images[15]}}">
-        <img id="example" src="{{images[16]}}">
+      <div *ngFor="let image of images">
+        <img id="example0" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example1" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example2" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example3" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example4" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example5" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example6" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example7" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example8" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example9" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example10" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example11" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example12" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example13" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example14" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example15" src="{{image.url}}" crossorigin=anonymous>
+        <img id="example" src="{{image.url}}" crossorigin=anonymous>
       </div>
-      <video id="theaterVideo" autoplay loop="true" webkit-playsinline playsinline src="{{video}}"></video>
+      <video id="theaterVideo" preload="true" loop="true" src="{{video}}" crossorigin=anonymous></video>
 
     </a-assets>
 
     <!-- User / Camera -->
-    <a-entity id="rig" movement-controls kinematic-body position="0 0 0">
-      <a-entity id="player" camera="user-height: 1.5" mouse-cursor wasd-controls="acceleration: 200"
-        look-controls="pointerLockEnabled: true" position="0 9 0" raycaster="objects: #wall; far: 5000">
-        <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500" position="0 0 -5" geometry="primitive: ring"
-          material="color: white; shader: flat">
-          <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1"
-            to="0.15 0.15 0.15"></a-animation>
-          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards"
-            from="0.15 0.15 0.15" to="0.1 0.1 0.1"></a-animation>
-        </a-entity>
+    <a-entity id="rig" position="0 0 0">
+      <a-entity id="player" camera="user-height: 1.5" wasd-controls="acceleration: 200" look-controls position="0 9 0"
+        cursor=" rayOrigin: mouse" geometry="primitive: ring; radiusInner: 0; radiusOuter: 0"
+        material="color: black; shader: flat">
+        <a-entity position="0 -0.1 0" raycaster="showLine:true; far: 1000"></a-entity>
+        <!-- <a-entity position="0 0 -5" material="color: teal; shader: flat">
+        <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1"
+        to="0.15 0.15 0.15"></a-animation>
+      <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards"
+        from="0.15 0.15 0.15" to="0.1 0.1 0.1"></a-animation>
+      </a-entity> -->
       </a-entity>
     </a-entity>
 
-    <a-entity id="sky" geometry="primitive: sphere; radius: 100"
-      :material="src: #sky;  side:front; color:#FFF; shader:flat; npot:true'" scale="-1 1 1"></a-entity>
+
+
+    <!-- <a-entity id="sky" geometry="primitive: sphere; radius: 100"
+      :material="src: #sky;  side:front; color:#FFF; shader:flat; npot:true'" scale="-1 1 1"></a-entity> -->
 
     <a-image static-body position="-41.9 1.5 30" rotation="0 90 0" src="#example6" width="5" height="5"></a-image>
     <a-image static-body position="-41.9 1.5 20" rotation="0 90 0" src="#example7" width="5" height="5"></a-image>
@@ -136,7 +139,27 @@
       scale="2.2 2.2 2.2"></a-entity>
 
 
-    <a-video src="#theaterVideo" width="10" height="8" listener position="-3 1.5 12.2"></a-video>
+
+
+    <a-video link="on: click; href: https://aframe-aincraft.glitch.me" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="-3 1.5 12.2" width="10" height="8">
+
+      <a-plane id="vidplaybox" depth=".01" scale=".3 .3 .3" position="-.35 -3.5 .01" shader="flat" width="2" height="2"
+        material="color:#191817; shader: flat" transparent="true" opacity=".9" videoplayer>
+        <a-triangle id="vidplayicon" color="white" depth=".01" scale="1 1 1" rotation="0 0 -90" position=".1 -.02 .06"
+          shader="flat" width="2" height="2" vertex-a="0 .3 0">
+        </a-triangle>
+      </a-plane>
+
+      <a-plane id="vidpausebox" scale=".3 .3 .3" position=".35 -3.5 .01" shader="flat" width="2" height="2"
+        material="color:#191817; shader: flat" transparent="true" opacity=".9" videopause>
+        <a-plane id="vidpauseiconleft" color="white" depth=".1" scale="1 1 1" position="-.4 0 .06" shader="flat"
+          width=".5" height="1"></a-plane>
+        <a-plane id="vidpauseiconright" color="white" depth=".1" scale="1 1 1" position=".4 0 .06" shader="flat"
+          width=".5" height="1"></a-plane>
+      </a-plane>
+
+    </a-video>
 
 
     <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
@@ -213,4 +236,4 @@
       material="src: #floor; repeat: 15 15">
     </a-plane>
   </a-scene>
-</div>   
+</div>

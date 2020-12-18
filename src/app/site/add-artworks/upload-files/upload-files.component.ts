@@ -175,14 +175,17 @@ export class UploadFilesComponent implements OnInit {
 
   onSubjectConsentSelected(event) {
     let selectedForm = event.target.files[0];
-
     let consentExt = selectedForm.name.substring(selectedForm.name.lastIndexOf('.') + 1);
-    if (consentExt === "pdf") {
+    this.submit = true;
+    this.consentForm = selectedForm;
+    /*if (consentExt === "pdf") {
       this.submit = true;
       this.consentForm = selectedForm;
     } else {
       window.alert('Your consent form is not a .pdf');
-    }
+    }*/
+
+
 
   }
 
