@@ -13,17 +13,21 @@ import { SocialMediaInfoComponent } from './site/create-profile/social-media-inf
 import { UploadFilesComponent } from './site/add-artworks/upload-files/upload-files.component';
 import { ArtworkInfoComponent } from './site/add-artworks/artwork-info/artwork-info.component';
 import { ConfirmSubmissionComponent } from './site/add-artworks/confirm-submission/confirm-submission.component';
+import { VrVideoComponent } from './virtual-gallery/vr-video/vr-video.component';
+import { SorryComponent } from './site/sorry/sorry.component';
 
 
 const routes: Routes = [
     { path: '', redirectTo: 'project', pathMatch: 'full' },
     { path: 'gallery', component: VirtualGalleryComponent },
+    { path: 'gallery/:id', component: VrVideoComponent },
     { path: 'create-profile', component: CreateProfileComponent },
     { path: 'artist-profile', component: ProfileInfoComponent },
     { path: 'social-links', component: SocialMediaInfoComponent },
     { path: 'confirm-submission', component: ConfirmSubmissionComponent },
     { path: 'artwork-info', component: ArtworkInfoComponent },
     { path: 'upload-files', component: UploadFilesComponent },
+    { path: 'sorry', component: SorryComponent},
 
     {
         path: 'auth', component: AuthComponent, children: [

@@ -107,7 +107,7 @@ const routes: Routes = [
   { path: 'admin/artists', component: ArtistsComponent },
   { path: 'admin/artists/:id', component: ProfileComponent },
   { path: 'admin/team/profile/:id', component: ProfileComponent },
-  
+
   {
     path: 'gallery', component: VrGalleryComponent, children: [
       {

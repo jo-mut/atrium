@@ -34,6 +34,8 @@ import { ArtworkInfoComponent } from './site/add-artworks/artwork-info/artwork-i
 import { ConfirmSubmissionComponent } from './site/add-artworks/confirm-submission/confirm-submission.component';
 import { UploadFilesComponent } from './site/add-artworks/upload-files/upload-files.component';
 import { VrVideoItemComponent } from './vr-video-item/vr-video-item.component';
+import { VrVideoComponent } from './virtual-gallery/vr-video/vr-video.component';
+import { SorryComponent } from './site/sorry/sorry.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { VrVideoItemComponent } from './vr-video-item/vr-video-item.component';
     ArtworkInfoComponent,
     ConfirmSubmissionComponent,
     VrVideoItemComponent,
+    VrVideoComponent,
+    SorryComponent
 
   ],
   imports: [

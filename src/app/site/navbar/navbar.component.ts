@@ -201,7 +201,7 @@ export class NavbarComponent implements OnInit {
               this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             } else {
-              this.router.navigateByUrl('/upload-files')
+              this.router.navigateByUrl('/sorry')
               this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             }

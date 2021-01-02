@@ -82,7 +82,7 @@ export class AuthService {
                 } else if (roles.includes('moderator')) {
                   this.router.navigateByUrl('/project/admin')
                 } else if (roles.includes('artist')) {
-                  this.router.navigateByUrl('/upload-files')
+                  this.router.navigateByUrl('/sorry')
                 } else if (roles.includes('scoring')) {
                   this.router.navigateByUrl('/project/admin/score')
                 } else if (roles.includes('selection')) {
@@ -95,7 +95,7 @@ export class AuthService {
           })
         } else {
           console.log('resgiter')
-          this.register(user);
+          // this.register(user);
         }
       }).catch((reject) => {
 

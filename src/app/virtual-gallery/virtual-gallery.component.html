@@ -16,7 +16,8 @@
     <!-- Load Assets -->
     <a-assets>
       <!-- global -->
-      <img id="floor" src="assets/images/other/tiles.png">
+      <img id="ceiling" src="assets/images/other/ceiling.jpg">
+      <img id="floor" src="assets/images/other/tiles.jpg">
       <img id="wall" src="assets/images/other/wall-concrete.jpg">
       <img id="wall-secret" src="assets/images/other/wall-concrete-secret.jpg">
       <img id="wall-brick" src="assets/images/other/brick.jpg">
@@ -24,55 +25,65 @@
       <img id="room-sign-2" src="assets/images/other/room-sign-2.png">
       <img id="sky" src="assets/images/other/wall-concrete.jpg">
       <!-- team -->
-      <div *ngFor="let image of images">
-        <img id="example0" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example1" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example2" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example3" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example4" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example5" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example6" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example7" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example8" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example9" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example10" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example11" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example12" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example13" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example14" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example15" src="{{image.url}}" crossorigin=anonymous>
-        <img id="example" src="{{image.url}}" crossorigin=anonymous>
-      </div>
-      <video id="theaterVideo" preload="true" loop="true" src="{{video}}" crossorigin=anonymous></video>
+
+
+      <img id="example0" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example1" src="{{images[1].url}}" crossorigin=anonymous>
+      <img id="example2" src="{{images[2].url}}" crossorigin=anonymous>
+      <img id="example3" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example4" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example5" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example6" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example7" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example8" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example9" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example10" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example11" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example12" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example13" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example14" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example15" src="{{images[0].url}}" crossorigin=anonymous>
+      <img id="example" src="{{images[0].url}}" crossorigin=anonymous>
+
+
+      <video id="theaterVideo" autoplay preload="true" loop="true" src="{{videos[0].url}}"
+        crossorigin=anonymous></video>
+
+
 
     </a-assets>
 
     <!-- User / Camera -->
-    <a-entity id="rig" position="0 0 0">
+    <a-entity id="player" camera="user-height: 2" wasd-controls="acceleration: 200" look-controls mouse-cursor listener
+      position="0 9 0"></a-entity>
+
+
+    <!-- User / Camera -->
+    <!-- <a-entity id="rig" position="0 0 0">
       <a-entity id="player" camera="user-height: 1.5" wasd-controls="acceleration: 200" look-controls position="0 9 0"
-        cursor=" rayOrigin: mouse" geometry="primitive: ring; radiusInner: 0; radiusOuter: 0"
+        cursor=" rayOrigin: mouse" geometry="primitive: ring; radiusInner: 1; radiusOuter: 1.2"
         material="color: black; shader: flat">
-        <a-entity position="0 -0.1 0" raycaster="showLine:true; far: 1000"></a-entity>
-        <!-- <a-entity position="0 0 -5" material="color: teal; shader: flat">
-        <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1"
-        to="0.15 0.15 0.15"></a-animation>
-      <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards"
-        from="0.15 0.15 0.15" to="0.1 0.1 0.1"></a-animation>
-      </a-entity> -->
-      </a-entity>
-    </a-entity>
+        <a-entity position="0 -0.1 0" raycaster="showLine:true; far: 10"></a-entity>
+        <a-entity position="0 0 -5" material="color: teal; shader: flat">
+          <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1"
+            to="0.15 0.15 0.15"></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards"
+            from="0.15 0.15 0.15" to="0.1 0.1 0.1"></a-animation>
+        </a-entity>
+      </a-entity> 
+    </a-entity> -->
 
 
 
     <!-- <a-entity id="sky" geometry="primitive: sphere; radius: 100"
       :material="src: #sky;  side:front; color:#FFF; shader:flat; npot:true'" scale="-1 1 1"></a-entity> -->
 
-    <a-image static-body position="-41.9 1.5 30" rotation="0 90 0" src="#example6" width="5" height="5"></a-image>
-    <a-image static-body position="-41.9 1.5 20" rotation="0 90 0" src="#example7" width="5" height="5"></a-image>
-    <a-image static-body position="-41.9 1.5 3" rotation="0 90 0" src="#example8" width="5" height="5"></a-image>
-    <a-image static-body position="-41.9 1.5 -10" rotation="0 90 0" src="#example9" width="5" height="5"></a-image>
-    <a-image static-body position="-41.9 1.5 -25" rotation="0 90 0" src="#example10" width="5" height="5"></a-image>
-    <a-image static-body position="-41.9 1.5 -35" rotation="0 90 0" src="#example11" width="5" height="5"></a-image>
+    <a-image static-body position="-41.9 3 30" rotation="0 90 0" src="#example0" width="5" height="5"></a-image>
+    <a-image static-body position="-41.9 3 20" rotation="0 90 0" src="#example7" width="5" height="5"></a-image>
+    <a-image static-body position="-41.9 3 3" rotation="0 90 0" src="#example8" width="5" height="5"></a-image>
+    <a-image static-body position="-41.9 3 -10" rotation="0 90 0" src="#example9" width="5" height="5"></a-image>
+    <a-image static-body position="-41.9 3 -25" rotation="0 90 0" src="#example10" width="5" height="5"></a-image>
+    <a-image static-body position="-41.9 3 -35" rotation="0 90 0" src="#example11" width="5" height="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
       text="color: white; align:  center; value: This text will be 4 units wide." rotation="0 90 0"
@@ -93,12 +104,12 @@
       text="color: white; align:  center; value: This text will be 4 units wide." rotation="0 90 0"
       position="-41.9 -1.5 -35" scale="2.2 2.2 2.2"></a-entity>
 
-    <a-image static-body position="38.9 1.5 30" rotation="0 -90 0" src="#example0" width="5" height="5"></a-image>
-    <a-image static-body position="38.9 1.5 20" rotation="0 -90 0" src="#example1" width="5" height="5"></a-image>
-    <a-image static-body position="38.9 1.5 3" rotation="0 -90 0" src="#example2" width="5" height="5"></a-image>
-    <a-image static-body position="38.9 1.5 -10" rotation="0 -90 0" src="#example3" width="5" height="5"></a-image>
-    <a-image static-body position="38.9 1.5 -25" rotation="0 -90 0" src="#example4" width="5" height="5"></a-image>
-    <a-image static-body position="38.9 1.5 -35" rotation="0 -90 0" src="#example5" width="5" height="5"></a-image>
+    <a-image static-body position="38.9 3 4" rotation="0 -90 0" src="#example2" width="5" height="5"></a-image>
+    <a-image static-body position="38.9 3 -3" rotation="0 -90 0" src="#example2" width="5" height="5"></a-image>
+    <a-image static-body position="38.9 3 -10" rotation="0 -90 0" src="#example2" width="5" height="5"></a-image>
+    <a-image static-body position="38.9 3 -23" rotation="0 -90 0" src="#example3" width="5" height="5"></a-image>
+    <a-image static-body position="38.9 3 -30" rotation="0 -90 0" src="#example4" width="5" height="5"></a-image>
+    <a-image static-body position="38.9 3 -37" rotation="0 -90 0" src="#example5" width="5" height="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
       text="color: white; align:  center; value: This text will be 4 units wide." rotation="0 -90 0"
@@ -120,10 +131,69 @@
       position="38.9 -1.5 -35" scale="2.2 2.2 2.2"></a-entity>
 
 
-    <a-image position="37 1.5 -14.9" rotation="0 -180 0" src="#example12" width="5" height="5"></a-image>
-    <a-image position="20 1.5 -14.9" rotation="0 -180 0" src="#example13" width="5" height="5"></a-image>
-    <a-image position="-30 1.5 -14.9" rotation="0 -180 0" src="#example14" width="5" height="5"></a-image>
-    <a-image position="-37 1.5 -14.9" rotation="0 -180 0" src="#example15" width="5" height="5"></a-image>
+    <a-image position="35 3 -14.9" rotation="0 -180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="27 3 -14.9" rotation="0 -180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="20 3 -14.9" rotation="0 -180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="13 3 -14.9" rotation="0 -180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="6 3 -14.9" rotation="0 -180 0" src="#example13" width="5" height="5"></a-image>
+    <a-image position="-1 3 -14.9" rotation="0 -180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="-30 3 -14.9" rotation="0 -180 0" src="#example14" width="5" height="5"></a-image>
+    <a-image position="-37 3 -14.9" rotation="0 -180 0" src="#example15" width="5" height="5"></a-image>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="37 -1.5 -14.9"
+      scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="20 -1.5 -14.9"
+      scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="-30 -1.5 -14.9"
+      scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="-37 -1.5 -14.9"
+      scale="2.2 2.2 2.2"></a-entity>
+
+    <a-image position="35 3 -18.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="27 3 -18.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="20 3 -18.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="13 3 -18.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="6 3 -18.8" rotation="0 180 0" src="#example13" width="5" height="5"></a-image>
+    <a-image position="-1 3 -18.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="-30 3 -18.8" rotation="0 180 0" src="#example14" width="5" height="5"></a-image>
+    <a-image position="-37 3 -18.8" rotation="0 180 0" src="#example15" width="5" height="5"></a-image>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="37 -1.5 -18.8"
+      scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="20 -1.5 -18.8"
+      scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="-30 -1.5 -18.8"
+      scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="-37 -1.5 -18.8"
+      scale="2.2 2.2 2.2"></a-entity>
+
+
+    <a-image position="-30 3 12.2" rotation="0 -180 0" src="#example14" width="5" height="5"></a-image>
+    <a-image position="-37 3 12.2" rotation="0 -180 0" src="#example15" width="5" height="5"></a-image>
+
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="37 1.5 12.2"
+      scale="2.2 2.2 2.2"></a-entity>
+    <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
+      text="color: white; align:  center; value: This text will be 4 units wide." position="20 1.5 12.2"
+      scale="2.2 2.2 2.2"></a-entity>
+
+    <a-image position="35 3 8.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="27 3 8.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="20 3 8.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="13 3 8.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="6 3 8.8" rotation="0 180 0" src="#example13" width="5" height="5"></a-image>
+    <a-image position="-1 3 8.8" rotation="0 180 0" src="#example12" width="5" height="5"></a-image>
+    <a-image position="-30 3 8.8" rotation="0 180 0" src="#example14" width="5" height="5"></a-image>
+    <a-image position="-37 3 8.8" rotation="0 180 0" src="#example15" width="5" height="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
       text="color: white; align:  center; value: This text will be 4 units wide." position="37 -1.5 -14.9"
@@ -139,78 +209,56 @@
       scale="2.2 2.2 2.2"></a-entity>
 
 
+    <a-image position="-30 3 8.8" rotation="0 180 0" src="#example14" width="5" height="5"></a-image>
+    <a-image position="-37 3 8.8" rotation="0 180 0" src="#example15" width="5" height="5"></a-image>
 
 
-    <a-video link="on: click; href: https://aframe-aincraft.glitch.me" src="#theaterVideo" videoplayer visible="true"
-      autoplay="true" webkit-playsinline playsinline position="-3 1.5 12.2" width="10" height="8">
 
-      <a-plane id="vidplaybox" depth=".01" scale=".3 .3 .3" position="-.35 -3.5 .01" shader="flat" width="2" height="2"
-        material="color:#191817; shader: flat" transparent="true" opacity=".9" videoplayer>
-        <a-triangle id="vidplayicon" color="white" depth=".01" scale="1 1 1" rotation="0 0 -90" position=".1 -.02 .06"
-          shader="flat" width="2" height="2" vertex-a="0 .3 0">
-        </a-triangle>
-      </a-plane>
 
-      <a-plane id="vidpausebox" scale=".3 .3 .3" position=".35 -3.5 .01" shader="flat" width="2" height="2"
-        material="color:#191817; shader: flat" transparent="true" opacity=".9" videopause>
-        <a-plane id="vidpauseiconleft" color="white" depth=".1" scale="1 1 1" position="-.4 0 .06" shader="flat"
-          width=".5" height="1"></a-plane>
-        <a-plane id="vidpauseiconright" color="white" depth=".1" scale="1 1 1" position=".4 0 .06" shader="flat"
-          width=".5" height="1"></a-plane>
-      </a-plane>
-
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="0 3 12.2" width="10" height="8">
     </a-video>
 
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="15 3 12.2" width="10" height="8">
+    </a-video>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide" position="4.5 4 12.2"
-      scale="2.2 2.2 2.2">
-    </a-entity>
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="30 3 12.2" width="10" height="8">
+    </a-video>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 3.5 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="38.9 3 30" width="10" height="8" rotation="0 -90 0">
+    </a-video>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 3 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="38.9 3 18" width="10" height="8" rotation="0 -90 0">
+    </a-video>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 2.5 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="30 3 35.8" width="10" height="8" rotation="0 -180 0">
+    </a-video>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 2 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="0 3 35.8" width="10" height="8" rotation="0 -180 0">
+    </a-video>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 1.5 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
+    <a-video link="on: click; href: gallery/1595330004864" src="#theaterVideo" videoplayer visible="true"
+      autoplay="true" webkit-playsinline playsinline position="15 3 35.8" width="10" height="8" rotation="0 -180 0">
+    </a-video>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 1 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
+    <a-image position="34 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="27 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="20 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="13 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="6 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="-1 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="-8 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="-15 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="-22 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="-29 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
+    <a-image position="-36 3 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
 
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 0.5 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
-
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 0 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
-
-    <a-entity data-clickable geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 -0.5 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
-
-    <a-entity id="last" geometry="primitive: plane; height: auto; width: 2;" material="color: black"
-      text="color: white; align:  center; value: This text will be 4 units wide." position="4.5 -1 12.2"
-      scale="2.2 2.2 2.2"></a-entity>
-
-    <a-image position="37 1.5 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
-    <a-image position="20 1.5 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
-    <a-image position="-30 1.5 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
-    <a-image position="-37 1.5 -41.9" rotation="0 -180 0" src="#example" width="5" height="5"></a-image>
 
     <a-entity geometry="primitive: plane; height: auto; width: 2;" material="color: black"
       text="color: white; align:  center; value: This text will be 4 units wide." position="37 -1.5 -41.9"
@@ -226,14 +274,14 @@
       scale="2.2 2.2 2.2"></a-entity>
 
     <!-- Ground -->
-    <a-plane id="ground" position="-1 -4 -1" static-body material="src: #floor; repeat: 15 15" height="84" width="84"
+    <a-plane id="ground" position="-2 -11 -1" static-body material="src: #floor; repeat: 30 30" height="85" width="85"
       rotation="-90 0 0">
     </a-plane>
     <!-- Walls (used by map.js -->)
     <a-entity id="walls"></a-entity>
-    <!-- <a-sky color="#ffffff"></a-sky> -->
-    <a-plane position="0 6.5 0" rotation="90 0 0" height="84" width="84" static-body
-      material="src: #floor; repeat: 15 15">
+    <!-- Ceiling     -->
+    <a-plane position="-2 14.5 -1" rotation="90 0 0" height="85" width="85" static-body
+      material="src: #ceiling; repeat: 10 10">
     </a-plane>
   </a-scene>
 </div>
