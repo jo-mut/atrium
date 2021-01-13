@@ -17,6 +17,8 @@ class ScoredItem {
   totalScore: string;
   number: string;
   url: string;
+  title: string;
+  description: string;
 }
 
 @Component({
@@ -47,6 +49,7 @@ export class ExhitItemComponent implements OnInit {
     this.getArtWorkDetails()
     this.getArtworkScore();
     this.getUserProfile(this.artwork.userId);
+    this.getExhibitedWorks(this.artwork.artworkId);
   }
 
   getArtWorkDetails() {
@@ -58,6 +61,16 @@ export class ExhitItemComponent implements OnInit {
 
       of(this.artwork.url).subscribe(url => {
         this.scoredItem.url = url
+
+      })
+
+      of(this.artwork.title).subscribe(title => {
+        this.scoredItem.title = title
+
+      })
+
+      of(this.artwork.description).subscribe(description => {
+        this.scoredItem.description = description
 
       })
 
@@ -87,6 +100,21 @@ export class ExhitItemComponent implements OnInit {
 
   }
 
+  getExhibitedWorks(id: string) {
+    this.dbOperations.artworksCollection()
+    .ref.where('artworkId', '==', id)
+    .onSnapshot(data => {
+      console.log(data.size + ' exhibited')
+      data.docChanges().map(e => {
+        const data = e.doc.data() as ArtWork
+        const id = e.doc.id;
+        console.log({ ...data } + 'videos')
+        if(data.status === 'exhibited') {
+          this.exhibit = 'Exhibited'
+        }
+      });
+    })
+  }
 
   getArtworkScore() {
     console.log("scoring")
@@ -95,13 +123,13 @@ export class ExhitItemComponent implements OnInit {
     .onSnapshot(data => {
 
      if(data.empty) {
+
        this.message = 'There are no scored to select'
      } else {
        data.forEach(d => {
         const score = d.data() as Score;
         this.score = score;
         this.scoredItem.totalScore = score.totalScore.toString();
-        console.log(score + " score")
       })     
      }
     })
@@ -160,6 +188,7 @@ export class ExhitItemComponent implements OnInit {
         'status': 'exhibited',
         'updatedAt': new Date().getTime() + '',
       }).then(res => {
+        this.exhibit = 'Exhibited'
         // this.toaster.success('Filtering successful');
         // this.router.navigateByUrl("project/admin/artworks")
 

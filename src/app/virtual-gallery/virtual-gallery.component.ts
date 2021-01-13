@@ -3,6 +3,8 @@ import { AFRAME } from 'aframe';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ArtWork } from '../models/artwork';
 import { DbOperationsService } from '../services/db-operations.service';
+import { User } from '../models/user';
+import * as THREE from 'three';
 
 
 @Component({
@@ -14,10 +16,11 @@ export class VirtualGalleryComponent implements OnInit {
 
   images: ArtWork[] = [];
   videos: ArtWork[] = [];
+  imageUsers: string[] = [];
+  videoUsers: string[] = [];
+
   splash = '';
   id: number = 1595330004864;
-  // video = "https://firebasestorage.googleapis.com/v0/b/atrium-870a8.appspot.com/o/site%2FItsUpToUs%20Promo%20Final%20Cut.mp4?alt=media&token=e947661b-8e03-4548-b47c-3269d068be3b";
-  videosource = <any>document.getElementById('theaterVideo');
 
 
   constructor(public dbOperations: DbOperationsService,
@@ -32,20 +35,21 @@ export class VirtualGalleryComponent implements OnInit {
     let scene = <any>document.querySelector('a-scene');
     if (scene && scene.hasLoaded) {
       // scene is loaded
-      this.playVideoWhenUserEntersRoom()
+      this.playVideoWhenUserEntersRoom();
+
     }
 
   }
 
   getExhibitions() {
     this.dbOperations.artworksCollection()
-      .ref.where('status', '==', 'exhibit')
+      .ref.where('status', '==', 'exhibited')
       .onSnapshot(data => {
-        this.images = data.docChanges().map(e => {
-          const data = e.doc.data() as ArtWork;
+        data.docChanges().map(e => {
+          const artwork = e.doc.data() as ArtWork;
           const id = e.doc.id;
 
-          return { ...data }
+          return { ...artwork }
         });
       })
 
@@ -59,26 +63,69 @@ export class VirtualGalleryComponent implements OnInit {
 
   getImages() {
     this.dbOperations.artworksCollection()
-      .ref.where('type', '==', 'image').where('status', '==', 'exhibit')
+      .ref.where('type', '==', 'image').where('status', '==', 'exhibited')
       .onSnapshot(data => {
         this.images = data.docChanges().map(e => {
-          const data = e.doc.data();
+          const artwork = e.doc.data() as ArtWork;
           const id = e.doc.id;
-          return { id, ...data } as ArtWork;
+          console.log(artwork.id + 'images id')
+          this.getExhibitingImageProfiles(artwork.userId)
+          return artwork;
         });
-        console.log(this.images.length + ' videos')
+        console.log(this.images.length + ' images')
       })
   }
 
   getVideos() {
     this.dbOperations.artworksCollection()
-      .ref.where('type', '==', 'video').where('status', '==', 'exhibit')
+      .ref.where('type', '==', 'video').where('status', '==', 'exhibited')
       .onSnapshot(data => {
         this.videos = data.docChanges().map(e => {
-          const data = e.doc.data();
+          const artwork = e.doc.data() as ArtWork;
           const id = e.doc.id;
-          console.log({ ...data } + 'videos')
-          return { id, ...data } as ArtWork;
+          console.log(artwork.id + ' video id')
+          this.getExhibitingVideoProfiles(artwork.userId)
+          return artwork;
+
+        });
+        console.log(this.videos.length + ' videos')
+      })
+  }
+
+  getExhibitingVideoProfiles(userId: string) {
+    this.dbOperations.usersCollection()
+      .ref.where('userId', '==', userId)
+      .onSnapshot(data => {
+        data.docChanges().map(e => {
+          const user = e.doc.data() as User;
+          const id = e.doc.id;
+          console.log(user.code + ' user code')
+          let firstName =  user.firstName;
+          let lastName = user.lastName;
+          let fullname = firstName + ' ' + lastName
+          this.videoUsers.push(fullname)
+          return user;
+
+        });
+        console.log(this.videos.length + ' users')
+      })
+  }
+
+
+  getExhibitingImageProfiles(userId: string) {
+    this.dbOperations.usersCollection()
+      .ref.where('userId', '==', userId)
+      .onSnapshot(data => {
+        data.docChanges().map(e => {
+          const user = e.doc.data() as User;
+          const id = e.doc.id;
+          let firstName =  user.firstName;
+          let lastName = user.lastName;
+          let fullname = firstName + ' ' + lastName
+          this.imageUsers.push(fullname)
+          console.log(user.code + ' user code')
+          return user;
+
         });
       })
   }
@@ -203,18 +250,18 @@ export class VirtualGalleryComponent implements OnInit {
     //   }
     // });
 
-    AFRAME.registerComponent('videoplayer', {
-      init: function () {
-        let videoplay = () => {
-          console.log('i was clicked')
-          this.videosource.play();
+    // AFRAME.registerComponent('videoplayer', {
+    //   init: function () {
+    //     let videoplay = () => {
+    //       console.log('i was clicked')
+    //       this.videosource.play();
 
-        }
+    //     }
 
-        this.el.addEventListener('click', videoplay);
+    //     this.el.addEventListener('click', videoplay);
 
-      }
-    });
+    //   }
+    // });
 
     // AFRAME.registerComponent('videopause', {
     //   init: function () {
@@ -229,20 +276,44 @@ export class VirtualGalleryComponent implements OnInit {
     // });
 
 
-    
 
-    //   let vid = <any>document.getElementById('theaterVideo');
-    // vid.pause();
+
+    let vid1 = <any>document.getElementById('theaterVideo1');
+    let vid2 = <any>document.getElementById('theaterVideo2');
+    let vid3 = <any>document.getElementById('theaterVideo3');
+    let vid4 = <any>document.getElementById('theaterVideo4');
+    let vid5 = <any>document.getElementById('theaterVideo5');
+    let vid6 = <any>document.getElementById('theaterVideo6');
+    let vid7 = <any>document.getElementById('theaterVideo7');
+    let vid8 = <any>document.getElementById('theaterVideo8');
+    let vid9 = <any>document.getElementById('theaterVideo9');
+    let vid10 = <any>document.getElementById('theaterVideo10');
+    let vid11 = <any>document.getElementById('theaterVideo11');
+    let vid12 = <any>document.getElementById('theaterVideo12');
+
+
+    vid1.pause();
+    vid2.pause();
+    vid3.pause();
+    vid4.pause();
+    vid5.pause();
+    vid6.pause();
+    vid7.pause();
+    vid8.pause();
+    vid9.pause();
+    vid10.pause();
+    vid11.pause();
+    vid12.pause();
     // AFRAME.registerComponent('listener', {
 
     //   init: function () {
     //     const userPosition = this.el.getAttribute('position')["z"];
 
-    //     if(userPosition <= 16) {
+    //     if (userPosition <= 16) {
     //       console.log('register component')
 
     //       vid.play()
-    //     } else { 
+    //     } else {
     //       vid.pause()
     //     }
 

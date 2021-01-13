@@ -5,6 +5,8 @@
           <tr>
             <th align="center">No.</th>
             <th align="center">Artwork</th>
+            <th align="center">Title</th>
+            <th align="center">Description</th>
             <th align="center">Date</th>
             <th align="center">Name</th>
             <th align="center">Country</th>
@@ -44,6 +46,12 @@
               </div>
             </td>
             <td>
+              <p>{{scoredItem.title}}</p>
+            </td>
+            <td>
+              <p>{{scoredItem.description}}</p>
+            </td>
+            <td>
               <p>{{scoredItem.date}}</p>
             </td>
             <td>
@@ -61,7 +69,7 @@
             <td>
               <div class="d-flex">
                 <button class="btn mx-1" (click)="exhibitArtwork()">{{exhibit}}</button>
-                <button class="btn mx-1" (click)="declineExhibtion()">{{decline}}</button>
+                <!-- <button class="btn mx-1" (click)="declineExhibtion()">{{decline}}</button> -->
               </div>
             </td>
           </tr>

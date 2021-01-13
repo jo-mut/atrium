@@ -57,9 +57,8 @@
  */
 
 import 'aframe';
-import 'aframe-event-set-component';
-import 'aframe-mouse-cursor-component'
-import 'aframe-sticky-cursor-component';
+import 'aframe-mobile-controls';
+import 'aframe-touch-rotation-controls';
 import 'aframe-extras';
 import '@angular/localize/init';
 

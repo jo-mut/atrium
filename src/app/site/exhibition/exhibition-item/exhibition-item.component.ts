@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ArtWork } from 'src/app/models/artwork';
 import { DbOperationsService } from 'src/app/services/db-operations.service';
-import { MatVideoComponent } from 'mat-video/lib/video.component';
 import { Router } from '@angular/router';
 
 @Component({

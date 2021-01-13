@@ -156,7 +156,7 @@ export class NavbarComponent implements OnInit {
       console.log(this.userId)
       this.authService.logout().then((res) => {
         this.userId = null;
-        this.login = 'Submit'
+        this.login = 'Login'
         this.showSubmit = false;
         localStorage.setItem('currentUser', '');
         this.router.navigateByUrl('/project/home')
@@ -166,7 +166,7 @@ export class NavbarComponent implements OnInit {
       })
 
     } else {
-      this.login = 'Submit'
+      this.login = 'Login'
       this.router.navigateByUrl('/create-profile')
     }
   }
@@ -198,11 +198,11 @@ export class NavbarComponent implements OnInit {
               this.router.navigateByUrl('/project/admin/filter-artworks')
             } else if (roles.includes('artist')) {
               console.log('AUTHSTATE USER', 'artist');
-              this.crossCheckUserProfileSubmitedDetails(user)
+              // this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             } else {
               this.router.navigateByUrl('/sorry')
-              this.crossCheckUserProfileSubmitedDetails(user)
+              // this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             }
 

@@ -27,7 +27,7 @@ export class ExhitArtworksComponent implements OnInit {
   getScoredArtworks() {
     this.scored = [];
     this.dbOperations.artworksCollection()
-    .ref.where('status', '==', 'scored')
+    .ref.where('status', '==', 'exhibited')
     .onSnapshot(data => {
      let changes = data.docChanges();
      if(changes) {
