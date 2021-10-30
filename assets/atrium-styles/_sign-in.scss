@@ -1,0 +1,58 @@
+.sign-in {
+    color: white;
+    min-height: 100vh;
+    max-height: 100vh;
+    height: 100%;
+    background-image: url('assets/images/photo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    .arts-diplay {
+        min-height: 100vh;
+        max-height: 100vh;
+        img {
+            min-height: 100vh;
+            width: 100%;
+
+        }
+    }
+    .authblock {
+        height: 100%;
+        width: 100%;
+        min-height: 100vh;
+       .sign-in-form{
+        padding-left:10%;
+        padding-right: 10%;
+        padding-top: 30%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(transparent, black);
+
+        button {
+            border: solid 2px whitesmoke;
+            background: transparent;
+            color: whitesmoke;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 1em;
+            padding-right: 1em;
+            border-radius: 1.5em;
+            width: 100%;
+        }
+        input {
+            width: 100%;
+            padding: 0.5em;
+            border-radius: 1.5em;
+        }
+
+        a{
+            color: #0047b5;
+        }
+
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+       }
+    }
+}

@@ -1,0 +1,21 @@
+.dashboard {
+    color: black;
+    .card {
+        border-radius: 1em;
+        color: black;
+        width: 100%;
+        height: 300px;
+    }
+
+    .module-desc {
+        color: black;
+        .module-title {
+            font-size: 2em;
+        }
+    }
+
+    button {
+        background-color: teal;
+        color: black;
+    }
+}

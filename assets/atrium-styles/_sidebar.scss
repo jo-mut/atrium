@@ -1,0 +1,15 @@
+#sidebar {
+    color: white
+    a {
+        color: teal;
+    }
+    li a:hover {
+        color: teal;
+    }
+    li:hover {
+        background: teal;
+    }
+    .sidebar-title {
+        height: 4em;
+    }
+}

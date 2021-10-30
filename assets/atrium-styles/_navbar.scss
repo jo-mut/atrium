@@ -1,0 +1,23 @@
+.custom-navbar {
+    background-color: transparent;
+    size: 2.5em;
+    #navbar {
+        background-color: transparent;
+        color: white;
+        font-weight: bolder;    
+        li a {
+            color: white;
+            font-weight: bolder;    
+        }
+        li a:hover {
+            color: teal;
+        }
+
+        button {
+            color: white;
+            background-color: teal;
+            border: none;
+        }
+    }
+}
+

@@ -1,0 +1,21 @@
+.score {
+  .artwork{
+    height: 100%;
+    .artwork-media {
+      .card {
+        border: none;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .score-forms {
+    overflow-y:hidden;
+    .card {
+      border: none;
+      border-radius: 1em;
+    }   
+  }
+}
