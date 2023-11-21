@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
       }
 
     } else {
-      this.login = 'Submit'
+      this.login = 'Login'
       this.showSubmit = false;
       this.showAuthButton = true;
     }
@@ -198,11 +198,11 @@ export class NavbarComponent implements OnInit {
               this.router.navigateByUrl('/project/admin/filter-artworks')
             } else if (roles.includes('artist')) {
               console.log('AUTHSTATE USER', 'artist');
-              // this.crossCheckUserProfileSubmitedDetails(user)
+              this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             } else {
-              this.router.navigateByUrl('/sorry')
-              // this.crossCheckUserProfileSubmitedDetails(user)
+              this.router.navigateByUrl('/artist')
+              this.crossCheckUserProfileSubmitedDetails(user)
               this.action = "Submit"
             }
 

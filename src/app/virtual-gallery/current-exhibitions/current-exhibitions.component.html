@@ -1,0 +1,98 @@
+<div class="vr-gallery">
+    <a-scene>
+  
+      <!-- Load Assets -->
+      <a-assets>
+        <!-- global -->
+        <img id="ceiling" src="assets/images/other/ceiling.jpg">
+        <img id="floor" src="assets/images/other/floor.jpg">
+        <img id="wall" src="assets/images/other/wall-concrete.jpg">
+        <img id="wall-secret" src="assets/images/other/wall-concrete-secret.jpg">
+        <img id="wall-brick" src="assets/images/other/brick.jpg">
+        <img id="room-sign-1" src="assets/images/other/room-sign-1.png">
+        <img id="room-sign-2" src="assets/images/other/room-sign-2.png">
+        <img id="sky" src="assets/images/other/wall-concrete.jpg">
+        <!-- team -->
+  
+  
+        <img id="example0" src="{{images[0].url}}" crossorigin=anonymous>
+        <img id="example1" src="{{images[1].url}}" crossorigin=anonymous>
+        <img id="example2" src="{{images[2].url}}" crossorigin=anonymous>
+        <img id="example3" src="{{images[3].url}}" crossorigin=anonymous>
+        <img id="example4" src="{{images[4].url}}" crossorigin=anonymous>
+        <img id="example5" src="{{images[5].url}}" crossorigin=anonymous>
+        <img id="example6" src="{{images[6].url}}" crossorigin=anonymous>
+        <img id="example7" src="{{images[7].url}}" crossorigin=anonymous>
+        <img id="example8" src="{{images[8].url}}" crossorigin=anonymous>
+        <img id="example9" src="{{images[9].url}}" crossorigin=anonymous>
+        <img id="example10" src="{{images[10].url}}" crossorigin=anonymous>
+        <img id="example11" src="{{images[11].url}}" crossorigin=anonymous>
+        <img id="example12" src="{{images[12].url}}" crossorigin=anonymous>
+        <img id="example13" src="{{images[13].url}}" crossorigin=anonymous>
+        <img id="example14" src="{{images[14].url}}" crossorigin=anonymous>
+        <img id="example15" src="{{images[15].url}}" crossorigin=anonymous>
+        <img id="example16" src="{{images[16].url}}" crossorigin=anonymous>
+        <img id="example17" src="{{images[17].url}}" crossorigin=anonymous>
+        <img id="example18" src="{{images[18].url}}" crossorigin=anonymous>
+        <img id="example19" src="{{images[19].url}}" crossorigin=anonymous>
+        <img id="example20" src="{{images[20].url}}" crossorigin=anonymous>
+  
+      </a-assets>
+  
+      <!-- User / Camera -->
+    
+       <a-entity id="rig" movement-controls="fly: true"  >
+        <a-entity camera id="player" look-controls >
+          <a-entity cursor=" rayOrigin: mouse" geometry="primitive: ring; radiusInner: 1; radiusOuter: 1.2"
+          material="color: black; shader: flat"></a-entity>
+  
+          <a-entity position="0 0 -5" material="color: teal; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1"
+              to="0.15 0.15 0.15"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards"
+              from="0.15 0.15 0.15" to="0.1 0.1 0.1"></a-animation>
+          </a-entity>
+  
+        </a-entity>
+       </a-entity>
+  
+  
+      <a-image static-body position="-41.9 2 30" rotation="0 90 0" src="#example0" width="5" height="5"></a-image>
+      <a-image static-body position="-41.9 2 20" rotation="0 90 0" src="#example1" width="5" height="5"></a-image>
+      <a-image static-body position="-41.9 2 10" rotation="0 90 0" src="#example2" width="5" height="5"></a-image>
+      <a-image static-body position="-41.9 2 0" rotation="0 90 0" src="#example3" width="5" height="5"></a-image>
+      <a-image static-body position="-41.9 2 -10" rotation="0 90 0" src="#example4" width="5" height="5"></a-image>
+      <a-image static-body position="-41.9 2 -20" rotation="0 90 0" src="#example5" width="5" height="5"></a-image>
+      <a-image static-body position="-41.9 2 -30" rotation="0 90 0" src="#example6" width="5" height="5"></a-image>
+
+
+      <a-image static-body position="38.9 2 30" rotation="0 -90 0" src="#example7" width="5" height="5"></a-image>
+      <a-image static-body position="38.9 2 20" rotation="0 -90 0" src="#example8" width="5" height="5"></a-image>
+      <a-image static-body position="38.9 2 10" rotation="0 -90 0" src="#example9" width="5" height="5"></a-image>
+      <a-image static-body position="38.9 2 0" rotation="0 -90 0" src="#example10" width="5" height="5"></a-image>
+      <a-image static-body position="38.9 2 -10" rotation="0 -90 0" src="#example11" width="5" height="5"></a-image>
+      <a-image static-body position="38.9 2 -20" rotation="0 -90 0" src="#example12" width="5" height="5"></a-image>
+      <a-image static-body position="38.9 2 -30" rotation="0 -90 0" src="#example13" width="5" height="5"></a-image>
+  
+  
+      <a-image position="30 2 -41.9" rotation="0 -180 0" src="#example14" width="5" height="5"></a-image>
+      <a-image position="20 2 -41.9" rotation="0 -180 0" src="#example15" width="5" height="5"></a-image>
+      <a-image position="10 2 -41.9" rotation="0 -180 0" src="#example16" width="5" height="5"></a-image>
+      <a-image position="0 2 -41.9" rotation="0 -180 0" src="#example17" width="5" height="5"></a-image>
+      <a-image position="-10 2 -41.9" rotation="0 -180 0" src="#example18" width="5" height="5"></a-image>
+      <a-image position="-20 2 -41.9" rotation="0 -180 0" src="#example19" width="5" height="5"></a-image>
+      <a-image position="-30 2 -41.9" rotation="0 -180 0" src="#example20" width="5" height="5"></a-image>
+  
+  
+      <!-- Ground -->
+      <a-plane id="ground" position="-2 -11 -1" static-body material="src: #floor; repeat: 10 10" height="85" width="85"
+        rotation="-90 0 0">
+      </a-plane>
+      <!-- Walls (used by map.js -->)
+      <a-entity id="walls"></a-entity>
+      <!-- Ceiling     -->
+      <a-plane position="-2 14 -1" rotation="90 0 0" height="85" width="85" static-body
+        material="src: #ceiling; repeat: 1000 1000">
+      </a-plane>
+    </a-scene>
+  </div>

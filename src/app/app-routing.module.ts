@@ -15,12 +15,15 @@ import { ArtworkInfoComponent } from './site/add-artworks/artwork-info/artwork-i
 import { ConfirmSubmissionComponent } from './site/add-artworks/confirm-submission/confirm-submission.component';
 import { VrVideoComponent } from './virtual-gallery/vr-video/vr-video.component';
 import { SorryComponent } from './site/sorry/sorry.component';
+import { CurrentExhibitionsComponent } from './virtual-gallery/current-exhibitions/current-exhibitions.component';
 
 
 const routes: Routes = [
     { path: '', redirectTo: 'project', pathMatch: 'full' },
-    { path: 'gallery', component: VirtualGalleryComponent },
-    { path: 'gallery/:id', component: VrVideoComponent },
+    { path: 'previous-exhibitions', component: VirtualGalleryComponent },
+    { path: 'previous-exhibitions/:id', component: VirtualGalleryComponent },
+    { path: 'exhibitions', component: CurrentExhibitionsComponent },
+    { path: 'exhibitions/:id', component: VrVideoComponent },
     { path: 'create-profile', component: CreateProfileComponent },
     { path: 'artist-profile', component: ProfileInfoComponent },
     { path: 'social-links', component: SocialMediaInfoComponent },

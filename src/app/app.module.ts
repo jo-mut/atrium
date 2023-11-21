@@ -37,6 +37,7 @@ import { VrVideoItemComponent } from './vr-video-item/vr-video-item.component';
 import { VrVideoComponent } from './virtual-gallery/vr-video/vr-video.component';
 import { SorryComponent } from './site/sorry/sorry.component';
 import { ArtistProfileComponent } from './site/artist-profile/artist-profile.component';
+import { CurrentExhibitionsComponent } from './virtual-gallery/current-exhibitions/current-exhibitions.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ArtistProfileComponent } from './site/artist-profile/artist-profile.com
     VrVideoItemComponent,
     VrVideoComponent,
     SorryComponent,
-    ArtistProfileComponent
+    ArtistProfileComponent,
+    CurrentExhibitionsComponent
 
   ],
   imports: [
